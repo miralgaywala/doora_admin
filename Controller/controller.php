@@ -19,7 +19,7 @@ class controller {
     }
     public function dashboard()
     {
-        include_once("dashboard.php");
+        include_once("addcategory.php");
     }
     public function invoke()
     {
