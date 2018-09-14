@@ -1,5 +1,5 @@
-<?php include("View/header.php");
- include("View/sidemenu.php");
+<?php include("View/header/header.php");
+ include("View/header/sidemenu.php");
  ?>
 <!--Main Content -->
     <section class="content">
@@ -47,7 +47,7 @@
        
     </section>
 </div>
- <?php include("View/footer.php");?> 
+ <?php include("View/header/footer.php");?> 
  <script type="text/javascript">
          function validate() {
             if (document.getElementById('is_super_market').checked) {
@@ -69,7 +69,7 @@
              if (UploadFile) { 
                 ReaderObj.readAsDataURL(UploadFile);
               } else { 
-                 PreviewIMG.style.backgroundImage  = "";
+                 PreviewIMG.style.backgroundcolor  = "";
               } 
             }
 </script>
@@ -81,17 +81,32 @@
                                   $target = "images/".$imagename;
                                  
                                   move_uploaded_file($source, $target);
-
                                   $imagepath = $imagename;
                                   $save = "images/" . $imagepath; //This is the new file you saving
                                   $file = "images/" . $imagepath; //This is the original file
 
-                                  list($width, $height) = getimagesize($file) ;                    
-                                  $modwidth = 1185; 
+                                  list($width, $height) = getimagesize($file) ;  
 
+                                  if($width <= 1185)
+                                  {
+                                    echo "<script>console.log(".$width.");</script>";
+                                    echo "<script>alert('your image size is not proper');</script>";
+                                  }
+                                  else
+                                  {
+                                     $modwidth = 1185; 
+                                  }
+                                  $modwidth=1185;
                                   $diff = $width / $modwidth;
-
+                                  if($height <= 510)
+                                  {
+                                    echo "<script>console.log(".$height.");</script>";
+                                  }
+                                  else
+                                  {
                                   $modheight = 510; 
+                                  }
+                                  $modheight = 510;
                                   $tn = imagecreatetruecolor($modwidth, $modheight) ; 
                                   $image = imagecreatefromjpeg($file) ; 
                                   imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
