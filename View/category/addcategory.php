@@ -1,6 +1,15 @@
-<?php include("View/header/header.php");
- include("View/header/sidemenu.php");
+<?php //include("View/header.php");
+include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
+ //include("View/sidemenu.php");
+include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
+ 
+ <?php 
+        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
+        $controller=new category_controller();
+        $controller->add_category();       
+        ?>
+       
 <!--Main Content -->
     <section class="content">
         <div class="row">
@@ -20,7 +29,7 @@
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                     <!--    <input type="hidden" id="image" name="category_image" value="" />-->
-                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview()" >
+                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();" >
                                         <div id="PreviewPicture" style="margin:10px 0 0 0" ></div>
                                         <!--<div id="preview_div" style="margin:10px 0 0 0">
                                             <img id="preview_img" src="thumbnail.png" data-src="" height="150" class="img-responsive img-thumbnail lazy">
@@ -47,7 +56,9 @@
        
     </section>
 </div>
- <?php include("View/header/footer.php");?> 
+
+ <?php //include("View/footer.php");
+ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
          function validate() {
             if (document.getElementById('is_super_market').checked) {
@@ -73,47 +84,41 @@
               } 
             }
 </script>
-                       <?php 
-                            if($_POST){
-                              if (isset ($_FILES['category_image'])){
+ <?php 
+                            if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
+                                  $category_name =$_POST['category_name'];
+            
+                                  //echo $category_name;
+
                                   $imagename = $_FILES['category_image']['name'];
                                   $source = $_FILES['category_image']['tmp_name'];
-                                  $target = "images/".$imagename;
+                                  
+                                  $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagename; 
                                  
                                   move_uploaded_file($source, $target);
                                   $imagepath = $imagename;
-                                  $save = "images/" . $imagepath; //This is the new file you saving
-                                  $file = "images/" . $imagepath; //This is the original file
-
+                                 
+                                  $path="/doora/images/category/" . $imagepath; 
+                                  $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
+                                  $_POST['category_image']="/doora/images/category/" . $imagepath;
+                                  $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
+                                  //echo $_POST['category_image'];
                                   list($width, $height) = getimagesize($file) ;  
 
-                                  if($width <= 1185)
-                                  {
-                                    echo "<script>console.log(".$width.");</script>";
-                                    echo "<script>alert('your image size is not proper');</script>";
-                                  }
-                                  else
-                                  {
-                                     $modwidth = 1185; 
-                                  }
-                                  $modwidth=1185;
+                                  
+                                  $modwidth=394;
                                   $diff = $width / $modwidth;
-                                  if($height <= 510)
-                                  {
-                                    echo "<script>console.log(".$height.");</script>";
-                                  }
-                                  else
-                                  {
-                                  $modheight = 510; 
-                                  }
-                                  $modheight = 510;
+                                  
+                                  $modheight = 170;
                                   $tn = imagecreatetruecolor($modwidth, $modheight) ; 
                                   $image = imagecreatefromjpeg($file) ; 
                                   imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
 
                                   imagejpeg($tn, $save, 90) ; 
-                                  return $save;
+                                  return $save; 
+
+                                 
                               }
-                            } 
-                            ?>
+                            ?>       
+                       
  

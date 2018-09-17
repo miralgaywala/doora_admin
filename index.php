@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php
         include 'Controller/category/category_controller.php';
         $controller=new category_controller();
-        $controller->add_category();
+        $controller->dashboard();
         ?>
     </body>
 </html>
