@@ -26,72 +26,40 @@
 			                <tr>
 			                  <th style="text-align:center;">#</th>
 			                  <th style="text-align:center;" width="10%">Id</th>
-			                  <th style="text-align:center;" width="20%">Image</th>
+			                  <th style="text-align:center;" width="25%">Image</th>
 			                  <th style="text-align:center;">Category Name</th>
 			                  <th style="text-align:center;" width="10%">Is_Delete</th>
-			                  <th style="text-align:center;">Action</th>
+			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>
-                             <tr>
+              
+                <?php
+                foreach ($displaycategory as $key => $data) 
+                {
+                  ?> <tr>
                                 <td style="text-align:center;"></td>
-                                <td style="text-align:center;">1</td>
-                                <td style="text-align:center;"><img src="/doora/images/category/1.jpg" id="Picture"/></td>
-                                <td style="text-align:center;">Electronics</td>
-                                <td style="text-align:center;">1</td>
+                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/category/".$data[2];?> id="Picture"/></td>
+                                <td style="text-align:center;"><?php echo $data[1]; ?></td>
+                                <td style="text-align:center;"><?php echo $data[3]; ?></td>
                                 <td style="text-align:center;">
+                          
                                     <div >
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-edit"></span>
+                                        <a <?php echo "href=/doora/adminpanel/Controller/category/editcategory_controller.php?id=".$data[0]; ?> title="Edit" >
+                                          <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-trash"></span>
+                                        <a <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data[0]; ?>  title="Delete" onclick="return confirm('Are you sure delete the category?')">
+                                        <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-eye-open"></span>
+                                        <a href="#" title="View all detail">
+                                          <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
                                 </td>
-                             </tr>
-                             <tr>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;">2</td>
-                                <td style="text-align:center;"><img src="/doora/images/category/2.jpg" id="Picture"/></td>
-                                <td style="text-align:center;">Fashion</td>
-                                <td style="text-align:center;">0</td>
-                                <td style="text-align:center;">
-                                    <div >
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-eye-open"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                             </tr>
-                             <tr>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;">3</td>
-                                <td style="text-align:center;"><img src="/doora/images/category/1.jpg" id="Picture"/></td>
-                                <td style="text-align:center;">Food & drink</td>
-                                <td style="text-align:center;">1</td>
-                                <td style="text-align:center;">
-                                    <div >
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                        <a href="#">
-                                          <span class="glyphicon glyphicon-eye-open"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                             </tr>
+                                 </tr>
+                           <?php    } ?>
+                            
+                             
                          </table>
         			</div>
         		</div>

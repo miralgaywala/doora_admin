@@ -5,11 +5,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
  
  <?php 
+ 
+                foreach ($editcategorylist as $key => $data) 
+                {
+               
+                 
+     
+        ?>
+       <?php
         include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
         $controller=new category_controller();
-        $controller->add_category();       
-        ?>
-       
+        $controller->editcategory_data();      
+         ?>
 <!--Main Content -->
     <section class="content">
         <div class="row">
@@ -22,15 +29,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control" required="" />
+                                    <input name="category_name" type="text" id="category_name" class="form-control" required="" value='<?php echo $data[1];?>' />
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                     <!--    <input type="hidden" id="image" name="category_image" value="" />-->
-                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();" required="">
-                                        <div id="PreviewPicture" style="margin:10px 0 0 0" ></div>
+                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();" required="" >
+
+                                        <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;" >
+                                          
+                                        </div>
                                         <!--<div id="preview_div" style="margin:10px 0 0 0">
                                             <img id="preview_img" src="thumbnail.png" data-src="" height="150" class="img-responsive img-thumbnail lazy">
                                         </div>-->
@@ -49,7 +59,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <button class="btn btn-default pull-right">Cancel</button>
                             </div>                         
                     </div>
-                         </form>
+                         </form> <?php } ?>
         			</div>
         		</div>
         	</div>	
@@ -85,7 +95,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
             }
 </script>
  <?php 
-                            if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
+                         if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
                                   $category_name =$_POST['category_name'];
             
                                   //echo $category_name;
