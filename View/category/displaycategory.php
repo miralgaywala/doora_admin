@@ -3,29 +3,37 @@
  ?>
 <!--Main Content -->
 
+   <!-- <section class="row">
+        <h3 class="column-left">Category List</h3>
+        <div class="column-right">
+            <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>
+        </div>
+    </section>-->
     <section class="content">
     	<div class="row">
-    		<div class="col-md-10"></div>
-    		<div class="col-md-2">
-    			<button type="button" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php';"><b>+ Add Category</b></button>
-    		</div>
+    		<div class="col-md-10"> <h2>Category List</h2></div>
+    		<div class="col-md-2" style="padding-left: 55px; padding-bottom: 10px;">
+                <br/>   
+    		<button type="button" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php';">+ Add Category</button>
 
+           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+    		</div>
     	</div> 
-        <div class="row" >
+        <div class="row">
         	<div class="col-xs-12">
-        		<br/>
+        	
         		<div class="box">
-        			<br>
+        			
         			<!-- box-header -->
-			        	<div class="box-header">
-			                <h1 class="box-title"><b>Category List</b></h1>
-			            </div>
+			        	
+
+			          
         				<div class="box-body">
         				<table id="example1" class="table table-bordered table-hover">
 			                <thead>
 			                <tr>
-			                  <th style="text-align:center;">#</th>
-			                  <th style="text-align:center;" width="10%">Id</th>
+			                  <th style="text-align:center;" width="5%">#</th>
+			                  <th style="text-align:center;" width="5%">Id</th>
 			                  <th style="text-align:center;" width="25%">Image</th>
 			                  <th style="text-align:center;">Category Name</th>
 			                  <th style="text-align:center;" width="10%">Is_Delete</th>
@@ -48,10 +56,10 @@
                                         <a <?php echo "href=/doora/adminpanel/Controller/category/editcategory_controller.php?id=".$data[0]; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data[0]; ?>  title="Delete" onclick="return confirm('Are you sure delete the category?')">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data[0]; ?>  title="Delete">
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a href="#" title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/category/viewcategory_controller.php?id=".$data[0]; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

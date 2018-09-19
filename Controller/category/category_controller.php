@@ -19,7 +19,17 @@ class category_controller{
 			//echo $category_name;
 			$category_image=$_FILES['category_image']['name'];
 			//echo $category_image;
-			$add_category=$this->cat_model->addcategory_data($category_name,$category_image);
+			if(isset($_POST['is_super_market']))
+                                  {
+                                    $_POST['is_super_market']=1;
+                                  }
+                                  else
+                                  {
+                                    $_POST['is_super_market']=0;
+                                  }
+                 $is_super_market=$_POST['is_super_market'];
+
+			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
 		}
 	}
 	public function display_category()
@@ -44,17 +54,39 @@ class category_controller{
 
 		if(isset($_POST['category_submit']) && !empty($_POST['category_submit']))
 		{
-			
+			$category_id=$_POST['category_id'];
+			//echo $category_id;
 			$category_name=$_POST['category_name'];
-			echo $category_name;
+			//echo $category_name;
 			$category_image=$_FILES['category_image']['name'];
-			echo $category_image;
-			$edit_categorydata=$this->cat_model->editcategorydata($category_name,$category_image);
+			//echo $category_image;
+			if(isset($_POST['is_super_market']))
+                                  {
+                                    $_POST['is_super_market']=1;
+                                  }
+                                  else
+                                  {
+                                    $_POST['is_super_market']=0;
+                                  }
+                 $is_super_market=$_POST['is_super_market'];
+			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
 		}
 	}
 	public function delete_category($category_id)
 	{
-		$delete_category=$this->cat_model->deletecategory($category_id);
+		$this->cat_model->deletecategory($category_id);
+
+	}
+	public function view_category($category_id)
+	{
+		$view_category=$this->cat_model->viewcategory($category_id);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/viewcategory.php');
+		return $view_category;
+	}
+	public function is_supermarket()
+	{
+		$supermarket=$this->cat_model->issupermarket();
+		return $supermarket;
 	}
 }
 ?>
