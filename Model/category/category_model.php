@@ -65,9 +65,11 @@ class category_model{
     }
     public function issupermarket()
     {
+
         $con=$this->db->connection();
-        $issupermarket=$con->query("select count(*) from category where is_super_market=1");
-        return $issupermarket;
+        $issupermarket=$con->query("select count(*) from category where 'is_super_market'=1");   
+        $count=$issupermarket->num_rows;
+        return $count;
     }
 }
 ?>

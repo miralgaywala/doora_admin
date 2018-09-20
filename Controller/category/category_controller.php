@@ -85,6 +85,7 @@ class category_controller{
 	}
 	public function is_supermarket()
 	{
+
 		$supermarket=$this->cat_model->issupermarket();
 		return $supermarket;
 	}

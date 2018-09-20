@@ -9,7 +9,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         $controller=new category_controller();
         $controller->add_category();       
         ?>
-       
+
 <!--Main Content -->
     <section class="content">
       <div class="row">
@@ -59,7 +59,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="category_submit" value="Submit" id="category_submit" class="btn btn-primary"  />
                                     <button class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php'">Cancel</button>
-                            </div>                         
+                            </div>  
+                            <?php
+                            
+                            ?>                       
                     </div>
                          </form>
                          <script type="text/javascript">
@@ -87,7 +90,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   function check()
                                   {
                                     //alert("hii");
-                                    window.open($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/issupermarketcontroller.php");
+                                    //window.open($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/issupermarketcontroller.php");
+                                    window.location.href="/doora/adminpanel/controller/category/issupermarketcontroller.php";
                                   }
          /*function validate() {
             if (document.getElementById('is_super_market').checked) {
@@ -120,6 +124,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   //echo $category_name;
                                   if(isset($_POST['is_super_market']))
                                   {
+                                  	
                                     $_POST['is_super_market']=1;
                                     echo "<script>confirm('are you sure you want to is_super_market?');</script>";
                                   }

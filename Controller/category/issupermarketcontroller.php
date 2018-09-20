@@ -5,7 +5,7 @@
     </head>
     <body>
         <?php
-        require_once("category_controller.php");
+       require_once("category_controller.php");
         $controller=new category_controller();
         $controller->is_supermarket();
         ?>

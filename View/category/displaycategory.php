@@ -42,10 +42,12 @@
 							 </thead>
               
                 <?php
+                $i=0;
                 foreach ($displaycategory as $key => $data) 
                 {
+                    
                   ?> <tr>
-                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><img <?php echo "src=/doora/images/category/".$data[2];?> id="Picture"/></td>
                                 <td style="text-align:center;"><?php echo $data[1]; ?></td>

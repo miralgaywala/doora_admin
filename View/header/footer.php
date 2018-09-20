@@ -29,15 +29,8 @@
     }).draw();
 	});*/
   $(document).ready(function() {
-    var t = $('#example1').DataTable( {
+   $('#example1').DataTable( {
             "order": [[ 1, 'asc' ]]
-    } );
-                 
-    t.on( 'draw.dt search.dt order.dt', function () {
-    var PageInfo = $('#example1').DataTable().page.info();
-         t.column(0, {order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i + 1;
-        } );
     } );
 } );
 </script>
