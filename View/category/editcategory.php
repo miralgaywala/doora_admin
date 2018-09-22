@@ -1,33 +1,23 @@
-<?php //include("View/header.php");
+<?php 
 include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
 include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+?> 
+ <?php
+    foreach ($editcategorylist as $key => $data) 
+    {
  ?>
- 
- <?php 
- 
-
-                foreach ($editcategorylist as $key => $data) 
-                {
-               
-                 
-     
-        ?>
-       <?php
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
-        $controller=new category_controller();
-        $controller->editcategory_data();      
-         ?>
+  <?php
+      include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
+      $controller=new category_controller();
+      $controller->editcategory_data();      
+  ?>
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10"> <h2>Category</h2></div>
-        <div class="col-md-2" style="padding-left: 100px;padding-bottom: 10px;">
-                <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+        <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>
+        <div class="col-md-2">
+            <br/>   
+            <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
         </div>
       </div> 
         <div class="row">
@@ -41,7 +31,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control" value='<?php echo $data[1];?>' />
+                                    <input name="category_name" type="text" id="category_name" class="form-control" value='<?php echo $data[1];?>'/>
                                      <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
@@ -50,7 +40,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <div class="col-sm-8">
                                     <!--    <input type="hidden" id="image" name="category_image" value="" />-->
                                         <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();" >
-
                                         <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;background-color: none;" >
                                           
                                         </div><br/>
@@ -65,7 +54,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[6] == 1) echo 'checked="checked"';?> >
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[6] == 1) echo 'checked="checked"';?>>
                                     </div>
                              </div>    
                              <div class="box-footer  notranslate">
@@ -81,17 +70,21 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
+ <?php 
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
                           function validateForm() {
-                                    var x = document.forms["addcategory"]["category_name"].value;
-                                    var y = document.getElementById("category_image").files.length;
-                                    if (x == "" || y == 0 ) {
+                                    var categoryname = document.forms["addcategory"]["category_name"].value;
+                                    var categoryimage = document.getElementById("category_image").value;
+                                    if (categoryname == "") {
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
+                                        return false;
+                                      }
+                                    if(categoryimage == "")
+                                      {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;
-                                    }
+                                      }
                                   }
          function validate() {
             if (document.getElementById('is_super_market').checked) {

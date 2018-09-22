@@ -8,20 +8,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10"> <h2>View Category</h2></div>
-        <div class="col-md-2" style="padding-left: 100px;padding-bottom: 10px;">
+        <div class="col-md-10" style="float: left;"> <h2>View Category</h2></div>
+        <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-
+               <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
         <div class="row">
         	<div class="col-xs-12">
-        		<div class="box">
-        			
-              
+        		<div class="box">            
         			<div class="box-body">
         				<table width="50%" style="font-size: 15px;">
                   <?php

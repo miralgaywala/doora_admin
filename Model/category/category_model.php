@@ -13,21 +13,21 @@ class category_model{
     	$con= $this->db->connection();
     	$dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
-        $is_delete=0;
+        //$is_delete=0;
         /*if($is_super_market==1)
         {
             echo "update category set is_super_market=0";
         }*/
-      //$add_category=$con->query("insert into category (category_name,category_image,is_deleted,created_at,is_super_market) values('".$category_name."','".$category_image."',".$is_delete.",'".$date."',".$is_super_market.")"); 
+      $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        
-       echo "insert into category (category_name,category_image,is_delete,created_at,is_super_market) values('".$category_name."','".$category_image."',".$is_delete.",'".$date."',".$is_super_market.")";    
+       echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
        //echo $add_category;      
-        //return $add_category;
+        return $add_category;
     }
     public function getcategorylist()
     {
         $con=$this->db->connection();
-        $getcategory=$con->query("select * from category");
+        $getcategory=$con->query("select * from category where NOT is_deleted=1");
 
         $category=$getcategory->fetch_all();
         return $category;
@@ -42,9 +42,11 @@ class category_model{
     public function deletecategory($category_id)
     {
         $con=$this->db->connection();
-        $con->query("delete from category where category_id=".$category_id);
-        //echo "delete * from category where category_id=".$category_id;
-       
+        $dt = new DateTime();
+        $date= $dt->format('Y-m-d H:i:s');
+        $con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
+        //echo "update category SET is_deleted=1 where category_id=".$category_id;
+       // echo "delete * from category where category_id=".$category_id;      
     }
     public function editcategorydata($category_id,$category_name,$category_image,$is_super_market)
     {

@@ -30,11 +30,11 @@ class category_controller{
                  $is_super_market=$_POST['is_super_market'];
 
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
+			return $add_category;
 		}
 	}
 	public function display_category()
 	{
-		
 		//echo $_SERVER['DOCUMENT_ROOT'];
 		$displaycategory=$this->cat_model->getcategorylist();
 		//print_r($displaycategory);
@@ -51,7 +51,6 @@ class category_controller{
 	}
 	public function editcategory_data()
 	{
-
 		if(isset($_POST['category_submit']) && !empty($_POST['category_submit']))
 		{
 			$category_id=$_POST['category_id'];
@@ -75,7 +74,6 @@ class category_controller{
 	public function delete_category($category_id)
 	{
 		$this->cat_model->deletecategory($category_id);
-
 	}
 	public function view_category($category_id)
 	{
@@ -84,10 +82,15 @@ class category_controller{
 		return $view_category;
 	}
 	public function is_supermarket()
-	{
-
+	{		
 		$supermarket=$this->cat_model->issupermarket();
-		return $supermarket;
+		echo $supermarket;
+		if($supermarket > 0)
+		{
+			echo "<script>alert('you have already selected is super market');</script>";
+			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/addcategory.php');
+			return $supermarket;
+		}
 	}
 }
 ?>
