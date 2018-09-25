@@ -21,8 +21,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
-      </div> 
-     
+      </div>      
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">
@@ -40,20 +39,15 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <div class="form-group notranslate">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                    <!--    <input type="hidden" id="image" name="category_image" value="" />-->
                                         <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();">
                                         <div id="PreviewPicture" style="margin:10px 0 0 0" ></div><br>
-                                        <span id="category_imageerror" class="show_required"></span>
-                                        <!--<div id="preview_div" style="margin:10px 0 0 0">
-                                            <img id="preview_img" src="thumbnail.png" data-src="" height="150" class="img-responsive img-thumbnail lazy">
-                                        </div>-->
-                                            
+                                        <span id="category_imageerror" class="show_required"></span>                                           
                                    </div>
                              </div>                             
                              <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="check();validate();"/>
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="return validate();"/>
                                     </div>
                              </div>    
                              <div class="box-footer  notranslate">
@@ -62,9 +56,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             </div>  
                            </div>
                          </form>
-                         <script type="text/javascript">
-                           
-                         </script>
         			</div>
         		</div>
         	</div>	
@@ -90,13 +81,19 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   }
                                   function check()
                                   {
-                                    //alert("hii");
-                                    //window.open($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/issupermarketcontroller.php");
-                                    window.location.href="/doora/adminpanel/controller/category/issupermarketcontroller.php";
+                                      window.location.href="/doora/adminpanel/controller/category/issupermarketcontroller.php";
                                   }
          function validate() {
             if (document.getElementById('is_super_market').checked) {
-                    confirm("are you sure you want to checked it?");
+                  if(confirm("are you sure you want to checked it?") == true )
+                  {
+                    check();
+                  }
+                  else
+                  {
+                    return false;
+                  }
+
             } 
         }
          //document.getElementById('is_super_market').addEventListener('change', validate);

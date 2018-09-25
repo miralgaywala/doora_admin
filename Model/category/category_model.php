@@ -14,15 +14,16 @@ class category_model{
     	$dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
         //$is_delete=0;
-        /*if($is_super_market==1)
+        if($is_super_market==1)
         {
-            echo "update category set is_super_market=0";
-        }*/
-      $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
+            $con->query("update category set is_super_market=0");
+        }
+      //$add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        
        echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
+       echo "<script>window.alert('Data Inserted')</script>";
        //echo $add_category;      
-        return $add_category;
+        //return $add_category;
     }
     public function getcategorylist()
     {
@@ -54,8 +55,12 @@ class category_model{
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
         //echo $date;
+        if($is_super_market == 1)
+        {
+            $con->query("update category set is_super_market=0");
+        }
         $edit_category=$con->query("update category SET category_name='".$category_name."' , category_image='".$category_image."' , updated_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id); 
-        return $edit_category;
+         return $edit_category;
         //echo "update category SET category_name='".$category_name."' , category_image='".$category_image."' , upadted_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id;
     }
     public function viewcategory($category_id)

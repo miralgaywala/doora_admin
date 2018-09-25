@@ -5,6 +5,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php
     foreach ($editcategorylist as $key => $data) 
     {
+      $image=$data[2];
  ?>
   <?php
       include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
@@ -14,7 +15,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>
+        <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>    
         <div class="col-md-2">
             <br/>   
             <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
@@ -39,25 +40,24 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                     <!--    <input type="hidden" id="image" name="category_image" value="" />-->
-                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();" >
-                                        <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;background-color: none;" >
-                                          
+                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();">
+                                        <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;background-color: none;">
                                         </div><br/>
                                         <span id="category_imageerror" class="show_required"></span>
                                         <!--<div id="preview_div" style="margin:10px 0 0 0">
                                             <img id="preview_img" src="thumbnail.png" data-src="" height="150" class="img-responsive img-thumbnail lazy">
                                         </div>-->
-                                            <p id="alert_image" class="show_required" style = "display:none">Please choose only image </p>
-                                            <p id="alert_image_any" class="show_required" style = "display:none">Please choose any image </p>
+                                            <!--<p id="alert_image" class="show_required" style = "display:none">Please choose only image </p>
+                                            <p id="alert_image_any" class="show_required" style = "display:none">Please choose any image </p>-->
                                    </div>
                              </div>                             
                              <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[6] == 1) echo 'checked="checked"';?>>
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[6] == 1) echo 'checked="checked"';?>/>
                                     </div>
                              </div>    
-                             <div class="box-footer  notranslate">
+                             <div class="box-footer notranslate">
                                     <input type="submit" name="category_submit" value="Submit" id="category_submit" class="btn btn-primary" />
                                     <button class="btn btn-default pull-right" onclick="history.go(0);">Cancel</button>
                             </div>                         
@@ -65,11 +65,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                          </form> <?php } ?>
         			</div>
         		</div>
-        	</div>	
-       
+        	</div>	      
     </section>
 </div>
-
  <?php 
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
@@ -80,7 +78,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
                                         return false;
                                       }
-                                    if(categoryimage == "")
+                                      if(categoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;
@@ -95,7 +93,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 }
         }
          document.getElementById('is_super_market').addEventListener('change', validate);
-
          function ImagePreview() { 
              var PreviewIMG = document.getElementById('PreviewPicture'); 
              var UploadFile    =  document.getElementById('category_image').files[0]; 
@@ -112,10 +109,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </script>
  <?php 
                          if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
-                                  $category_name =$_POST['category_name'];
-            
-                                  //echo $category_name;
-                                  
+                                  $category_name =$_POST['category_name'];            
+                                  //echo $category_name;                                  
                                   $category_id=$_POST['category_id'];
                                   //echo $category_id;
                                   if(isset($_POST['is_super_market']))
@@ -128,35 +123,28 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   }
                                   $_POST['is_super_market'];
                                   $imagename = $_FILES['category_image']['name'];
-                                  $source = $_FILES['category_image']['tmp_name'];
-                                  
+                                  $source = $_FILES['category_image']['tmp_name']; 
+                                  //$imagename=$image;
                                   $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagename; 
-                                 
                                   move_uploaded_file($source, $target);
-                                  $imagepath = $imagename;
-                                 
+                                    
+                                  $imagepath = $imagename;                                 
                                   $path="/doora/images/category/" . $imagepath; 
                                   $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
                                   $_FILES['category_image']= $imagepath;
-
+                                  //echo $_FILES['category_image'] == $image;
+                                     
                                   $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
                                   //echo $_POST['category_image'];
-                                  list($width, $height) = getimagesize($file) ;  
-
-                                  
+                                                                    
+                                  list($width, $height) = getimagesize($file);  
                                   $modwidth=394;
                                   $diff = $width / $modwidth;
-                                  
                                   $modheight = 170;
                                   $tn = imagecreatetruecolor($modwidth, $modheight) ; 
                                   $image = imagecreatefromjpeg($file) ; 
                                   imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
-
-                                  imagejpeg($tn, $save, 90) ; 
+                                  imagejpeg($tn, $save, 90); 
                                   return $save; 
-
-                                 
-                              }
-                            ?>       
-                       
- 
+                                  }
+                                ?>       

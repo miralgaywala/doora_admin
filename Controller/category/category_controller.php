@@ -84,13 +84,28 @@ class category_controller{
 	public function is_supermarket()
 	{		
 		$supermarket=$this->cat_model->issupermarket();
-		echo $supermarket;
-		if($supermarket > 0)
+		if($supermarket > 1)
 		{
-			echo "<script>alert('you have already selected is super market');</script>";
-			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/addcategory.php');
-			return $supermarket;
+			//echo "<script>alert('you have already select the super market.');</script>";
+			echo "<script>check();</script>";
+		}
+		else
+		{
+			echo "<script>window.history.back();</script>";
 		}
 	}
 }
 ?>
+<script type="text/javascript">
+	function check()
+	{
+		if(confirm('you have already check super market. Do you want super market?') == true)
+		{
+			window.history.back();
+		}
+		else
+		{
+			window.location.href="/doora/adminpanel/View/category/addcategory.php";			
+		}
+	}
+</script>
