@@ -1,7 +1,7 @@
 
 
  <?php include("header.php");
- include("sidemenu.php");
+ //include("sidemenu.php");
  ?>
 
     <section class="content">

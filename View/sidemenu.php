@@ -20,7 +20,7 @@
           </ul>
         </li>
        <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php">
             <i class="fa fa-minus-square"></i> <span>Sub category</span>
             <span class="pull-right-container">
             </span>

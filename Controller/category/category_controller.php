@@ -5,11 +5,7 @@ class category_controller{
 	{
 		$this->cat_model=new category_model();
 	}
-	public function dashboard()
-	{
-		//include_once('View/category/addcategory.php');
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/dashboard.php');
-	}
+	
 	public function add_category()
 	{
 		if(isset($_POST['category_submit']) && !empty($_POST['category_submit']))
@@ -84,7 +80,7 @@ class category_controller{
 	public function is_supermarket()
 	{		
 		$supermarket=$this->cat_model->issupermarket();
-		if($supermarket > 1)
+		if($supermarket > 0)
 		{
 			//echo "<script>alert('you have already select the super market.');</script>";
 			echo "<script>check();</script>";

@@ -53,6 +53,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     <td>is_super_market</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
+
+
+
+
                 <?php } ?>
                 </table>
         			</div>

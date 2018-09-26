@@ -18,12 +18,12 @@ class category_model{
         {
             $con->query("update category set is_super_market=0");
         }
-      //$add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
+      $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        
-       echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
+       //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
        echo "<script>window.alert('Data Inserted')</script>";
        //echo $add_category;      
-        //return $add_category;
+        return $add_category;
     }
     public function getcategorylist()
     {

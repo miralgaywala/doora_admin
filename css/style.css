@@ -18,10 +18,12 @@
         #Picture{
                     width: 150px;
                     height: 65px;
-                    background-position: right;
-                    background-size: cover;
-                    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
-                    display: inline-block;
-                    object-fit: cover;
         }
+       
+         #Sicture
+        {
+                    width: 62px;
+                    height: 62px;
+        }
+
     </style>

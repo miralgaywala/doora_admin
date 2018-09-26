@@ -41,8 +41,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <div class="col-sm-8">
                                     <!--    <input type="hidden" id="image" name="category_image" value="" />-->
                                         <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();">
-                                        <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;background-color: none;">
-                                        </div><br/>
+                                       <div id="PreviewPicture" style="background-image: url(http://localhost/doora/images/category/<?php echo $data[2];?>);margin:10px 0 0 0;background-color: none;">
+                                          <!--<div id="PreviewPicture" style="margin:10px 0 0 0;background-color: none;"> -->
+                                          </div><br/>
                                         <span id="category_imageerror" class="show_required"></span>
                                         <!--<div id="preview_div" style="margin:10px 0 0 0">
                                             <img id="preview_img" src="thumbnail.png" data-src="" height="150" class="img-responsive img-thumbnail lazy">

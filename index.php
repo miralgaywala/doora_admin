@@ -11,8 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        include 'Controller/category/category_controller.php';
-        $controller=new category_controller();
+        include 'Controller/category/dashboard_controller.php';
+        $controller=new dashboard_controller();
         $controller->dashboard();
         ?>
     </body>
