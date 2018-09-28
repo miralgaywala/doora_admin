@@ -13,6 +13,24 @@ class subcategory_model
         $subcategory=$getsubcategory->fetch_all();   
         return $subcategory;
     }
+    public function getcategorylist()
+    {
+                        if($_POST['category_name'])
+                        {
+                         $con=$this->db->connection();
+                         $getcategory=$con->query("select * from sub_category where category_id=1");
+                         $subcategory=$getcategory->fetch_all(); 
+                         return $category;
+                        }
+                        else
+                        {
+                        $con=$this->db->connection();
+                        $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
+                        $subcategory=$getsubcategory->fetch_all(); 
+                        //print_r($subcategory);  
+                        return $subcategory;
+                       }
+    }
     public function getsubcategorydetail($subcategory_id)
     {
         $con=$this->db->connection();
@@ -49,7 +67,7 @@ class subcategory_model
         //$editdata=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
         $editdata=$con->query("select cat.category_name,sc.* from category as cat, sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
         $geteditdata=$editdata->fetch_all();
-        //print_r($getcategoryeditdata);
+        //  print_r($geteditdata);
         return $geteditdata;
     }
     public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)

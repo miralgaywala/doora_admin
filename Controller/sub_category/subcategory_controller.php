@@ -11,6 +11,11 @@ class subcategory_controller{
 		$displaysubcategory=$this->subcat_model->getsubcategorylist();
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/sub-category/displaysubcategory.php');
 	}
+	public function display_subcategorydata()
+	{
+		$displaysubcategory=$this->subcat_model->getcategorylist();
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/sub-category/displaysubcategory.php');
+	}
 	public function view_subcategory($subcategory_id)
 	{
 		$view_subcategory=$this->subcat_model->getsubcategorydetail($subcategory_id);

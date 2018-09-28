@@ -35,12 +35,13 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			<div class="box-body">
         				<form class="form-horizontal" name="addsubcategory" id="addsubcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
                   <div class="form-group notranslate">
-                      
+                       <?php
+                                        foreach ($editdisplaycategory as $key => $data) 
+                                      { ?>
                                 <label for="category_name" class="col-sm-3 control-label">Category<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
-                                       <option value="">Select Category</option>
-
+                                       <option value="<?php echo $data[2];?>"><?php echo $data[0];?></option>
                                       <?php
                                         foreach ($category_view as $key => $data1) 
                                       { ?>
@@ -50,14 +51,12 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <span id="cat_nameerror" class="show_required"></span><br>
                                 </div> 
                             </div>
-                              <?php
-                                        foreach ($editdisplaycategory as $key => $data) 
-                                      { ?>
-                  <input type="hidden" name="sub_category_id" value='<?php echo $data[0];?>' id="sub_category_id"/>
+                             
+                  <input type="hidden" name="sub_category_id" value='<?php echo $data[1];?>' id="sub_category_id"/>
         					   <div class="form-group notranslate">
                                 <label for="sub_category_name" class="col-sm-3 control-label">Sub Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data[2];?>'/>
+                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data[3];?>'/>
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
@@ -65,7 +64,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" onchange="ImagePreview();">
-                                        <div id="SubcatPicture" style="background-image: url(http://localhost/doora/images/sub_category/<?php echo $data[3];?>);margin:10px 0 0 0;background-color: none;"></div><br>
+                                        <div id="SubcatPicture" style="background-image: url(http://localhost/doora/images/sub_category/<?php echo $data[4];?>);margin:10px 0 0 0;background-color: none;"></div><br>
                                         <span id="category_imageerror" class="show_required"></span>                                           
                                    </div>
                                     <?php

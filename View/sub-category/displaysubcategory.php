@@ -9,10 +9,21 @@
             <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>
         </div>
     </section>-->
+     <?php 
+        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/sub_category/subcategory_controller.php");
+        /*$controller=new subcategory_controller();
+        $controller->display_subcategorydata(); */
+
+       // require_once("subcategory_controller.php");
+        $controller=new subcategory_controller();
+        $controller->display_subcategory();
+        ?>
+
     <script>
         $(document).ready(function(){
             $("#category_name").select2(); 
         });
+
     </script>
     <section class="content">
         <div class="row">
@@ -34,7 +45,7 @@
                              <div class="form-group">
                                 <label for="category_name" class="col-sm-1 control-label">Category</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
-                                    <select id="category_name" name="category_name" class="form-control">
+                                    <select id="category_name" name="category_name" class="form-control" aria-invalid="false" >
                                     <option value="">Select Category</option>
                                      <?php
 						                 foreach ($category_view as $key => $data1) 
@@ -43,6 +54,7 @@
 						                	<?php   } ?>
                                     </select>
                                 </div> 
+                                <input type="hidden" name="category_name" id="category_name" />
                             </div>
                           </form>
                           <hr>
@@ -57,7 +69,7 @@
                               <th style="text-align:center;" width="10%">Action</th>
                             </tr>
                              </thead>
-               
+                             <tbody>
 <?php 
               
                 $i=0;
@@ -85,6 +97,7 @@
                                 </td>
                                  </tr>
                            <?php } ?>
+                           </tbody>
                          </table>
                     </div>
                 </div>
@@ -93,3 +106,38 @@
     </section>
 </div>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <script>
+  //document.forms["addsubcategory"].submit();
+/*$(document).ready(function(){
+
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"/doora/adminpanel/Controller/sub_category/subcategory_controller.php",
+   method:"POST",
+   success:function(data)
+   {
+    alert($('#category_name').val());
+    //alert(data);
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#category_name').change(function(){
+  $('#category_name').val($('#category_name').val());
+  var query = $('#category_name').val();
+  load_data(query);
+ });
+ 
+});*/
+$('#category_name').change(function(){
+    $.ajax({
+        type: "POST",
+        url: "/doora/adminpanel/Controller/sub_category/subcategory_controller.php",
+       //data: {text:$(this).val()}
+       success:function
+    });
+});
+ 
+</script>
