@@ -40,10 +40,63 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();">
-                                        <div id="PreviewPicture" style="margin:10px 0 0 0" ></div><br>
-                                        <span id="category_imageerror" class="show_required"></span>                                           
-                                   </div>
-                             </div>                             
+                                        <button id="submit" class="btn btn-success" style="margin-top:2%">Upload Image</button>
+                                      </div> <span id="category_imageerror" class="show_required"></span>
+                                        <div class="col-md-2" style="margin-top: 10px;"> </div>
+                                      <div class="col-md-5" style="margin-top: 125px;">
+                                        <div id="preview-crop-image" style="width:300px;height:300px;"></div>
+                                     
+                                      </div>  
+                                       <div class="col-md-2" style="margin-top: 10px;"> 
+                                          <div id="upload-demo"></div>
+                                      </div>                     
+                               
+                           </div> 
+        <script type="text/javascript">
+            var resize = $('#upload-demo').croppie({
+                enableExif: true,
+                enableOrientation: true,    
+                viewport: { 
+                     width: 400,
+                    height: 170,
+                    type: 'square' 
+                },
+                boundary: {
+                     width: 400,
+                    height: 400
+                }
+            });
+            
+            $('#category_image').on('change', function () { 
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    resize.croppie('bind',{
+                        url: e.target.result
+                    }).then(function(){
+                        console.log('Complete');
+                    });
+                },
+                reader.readAsDataURL(this.files[0]);
+            });
+            
+            $('#submit').on('click', function (ev) {
+                resize.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function (img) {
+                    $.ajax({
+                        url: "/doora/adminpanel/View/category/croppie.php",
+                        type: "POST",
+                        data: {"category_image":img},
+                        success: function (data) {
+                            html = '<img src="' + img + '" />';
+                            $("#preview-crop-image").html(html);
+                        }
+                    });
+                });
+            });
+        </script>
+                                                                                       
                              <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
@@ -96,21 +149,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
             } 
         }
-         //document.getElementById('is_super_market').addEventListener('change', validate);
-
-         function ImagePreview() { 
-             var PreviewIMG = document.getElementById('PreviewPicture'); 
-             var UploadFile    =  document.getElementById('category_image').files[0]; 
-             var ReaderObj  =  new FileReader(); 
-             ReaderObj.onloadend = function () { 
-                PreviewIMG.style.backgroundImage  = "url("+ ReaderObj.result+")";
-              }
-             if (UploadFile) { 
-                ReaderObj.readAsDataURL(UploadFile);
-              } else { 
-                 PreviewIMG.style.backgroundcolor  = "";
-              } 
-            }
 </script>
  <?php 
                             if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
