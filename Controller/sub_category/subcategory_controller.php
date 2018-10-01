@@ -40,7 +40,7 @@ class subcategory_controller{
 			
 			$subcategory_name=$_POST['sub_category_name'];
 			//echo $subcategory_name;
-			$subcategory_image=$_FILES['sub_category_image']['name'];
+			$subcategory_image=$_POST['imagename'];
 			//echo $subcategory_image;
 			$category_id=$_POST['category_name'];
 

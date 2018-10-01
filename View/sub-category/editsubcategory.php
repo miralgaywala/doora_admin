@@ -146,7 +146,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $tn = imagecreatetruecolor($modwidth, $modheight) ; 
                                   $image = imagecreatefromjpeg($file) ; 
                                   imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
-                                  imagejpeg($tn, $save, 90) ; 
+                                  imagejpeg($tn, $save, 90); 
                                   return $save;                                  
                               }
                             ?>       

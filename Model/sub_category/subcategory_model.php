@@ -59,6 +59,7 @@ class subcategory_model
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
         $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
+        //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
         return $add_subcategory;
     }
     public function geteditdata($subcategory_id)

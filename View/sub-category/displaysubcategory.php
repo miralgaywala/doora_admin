@@ -131,13 +131,3 @@
  });
  
 });*/
-$('#category_name').change(function(){
-    $.ajax({
-        type: "POST",
-        url: "/doora/adminpanel/Controller/sub_category/subcategory_controller.php",
-       //data: {text:$(this).val()}
-       success:function
-    });
-});
- 
-</script>
