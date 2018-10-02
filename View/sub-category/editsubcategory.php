@@ -56,20 +56,30 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					   <div class="form-group notranslate">
                                 <label for="sub_category_name" class="col-sm-3 control-label">Sub Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data[3];?>'/>
+                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data[3];?>' onblur="subcategoryname();"/>
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" onchange="ImagePreview();">
-                                        <div id="SubcatPicture" style="background-image: url(http://localhost/doora/images/sub_category/<?php echo $data[4];?>);margin:10px 0 0 0;background-color: none;"></div><br>
-                                        <span id="category_imageerror" class="show_required"></span>                                           
-                                   </div>
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*"><span id="category_imageerror" class="show_required"></span>
+                                       <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
+                                      </div> <span id="category_imageerror" class="show_required"></span>
+                                        <div class="col-md-3" style="margin-top: 10px;"> </div>
+                                      <div class="col-md-2" style="margin-top: 10px;">
+                                        <div id="preview-crop-image" style="width:62px;height:62px;"><img src="<?php echo "/doora/images/sub_category/".$data[4]; ?>" style="width:62px;height:62px;" /></div>
+                                      <input type="hidden" name="imagename" id="imagename" value='<?php echo $data[4];?>'/>
+                                      </div>  
+                                       <div class="col-md-1" style="margin-top: 10px;"> 
+                                          <div id="upload-demo"></div>
+                                      </div>                     
+                               
+                           </div>
+                                  
                                     <?php
                                   }?>
-                             </div>                               
+                                                    
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="subcategory_submit" value="Submit" id="subcategory_submit" class="btn btn-primary"  />
                                     <button class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/View/sub-category/addsubcategory.php'">Cancel</button>
@@ -79,31 +89,108 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			</div>
         		</div>
         	</div>	
-       
+       <script type="text/javascript">
+            var resize = $('#upload-demo').croppie({
+                enableExif: true,
+                enableOrientation: true,    
+                viewport: { 
+                     width: 62,
+                    height: 62,
+                    type: 'square' 
+                },
+                boundary: {
+                     width: 100,
+                    height: 100
+                }
+            });
+            
+            $('#sub_category_image').on('change', function () { 
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    resize.croppie('bind',{
+                        url: e.target.result
+                    }).then(function(){
+                        console.log('Complete');
+                    });
+                },
+                reader.readAsDataURL(this.files[0]);
+            });
+            
+            $('#btn-upload').on('click', function (ev) {
+                resize.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function (img) {
+                    $.ajax({
+                        url: "/doora/adminpanel/View/sub-category/croppie.php",
+                        type: "POST",
+                        data: {"sub_category_image":img},
+                        success: function (data) {
+                            html = '<img src="' + img + '" />';
+                            //alert(data);
+                            $('#imagename').val(data);
+                            $("#preview-crop-image").html(html);
+                        }
+                    });
+                });
+            }); 
+        </script>                         
     </section>
 </div>
 
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
+  function subcategoryname()
+                      {
+                        var name=document.getElementById("sub_category_name").value;
+                        if(name)
+                        {
+                            $.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/sub-category/checkdata.php',
+                              data: {
+                                sub_category_name:name
+                              },
+                              success: function (data) {
+                               
+                               $('#category_nameerror').html(data);
+                             }
+                              });
+                            /* }
+                             else
+                             {
+                              $( '#category_nameerror' ).html("");
+                              return false;
+                             }*/
+
+                        }
+                   }  
                       function validateForm() {
                                     //var category_name = document.getElementById["category_name"].value;
                                     var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;
                                     var subcategoryimage = document.getElementById("sub_category_image").value;
-                                    /*if(category_name == "")
+                                    if(category_name == "0" && subcategoryname.trim() == "" && subcategoryimage == "")
                                     {
-                                        document.getElementById('cat_nameerror').innerHTML="Please select Category";
+                                       document.getElementById('categoryerror').innerHTML="Please Select Category Name";
+                                       document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
+                                       document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;
-                                    }*/
-                                    if (subcategoryname == "") {
+                                    }
+                                    if(category_name == "0")
+                                    {
+                                      document.getElementById('categoryerror').innerHTML="Please Enter Category Name";
+                                        return false;
+                                    }
+                                    if (subcategoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
                                         return false;
                                       }
-                                    if(subcategoryimage == "")
+                                   /* if(subcategoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;
-                                      }
+                                      }*/
                                   }
 
        
@@ -124,30 +211,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php 
                             if(isset($_POST['subcategory_submit']) && !empty($_POST['subcategory_submit'])){
                                   $category_name =$_POST['sub_category_name'];
-                                  $imagename = $_FILES['sub_category_image']['name'];
-                                  $source = $_FILES['sub_category_image']['tmp_name'];
-                                  $sub_category_id=$_POST['sub_category_id'];
+                                  $_POST['imagename'];
+                                   $category_id=$_POST['category_name'];                                  
+                                   $sub_category_id=$_POST['sub_category_id'];
                                   //echo $sub_category_id;
-                                  $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/sub_category/" . $imagename; 
-                                 
-                                  move_uploaded_file($source, $target);
-                                  $imagepath = $imagename;
-                                 
-                                  $path="/doora/images/sub_category/" . $imagepath; 
-                                  $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
-                                  $_FILES['sub_category_image']= $imagepath;
-
-                                  $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/sub_category/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
-                                  //echo $_POST['category_image'];
-                                  list($width, $height) = getimagesize($file) ;                                    
-                                  $modwidth=62;
-                                  $diff = $width / $modwidth;                                  
-                                  $modheight = 62;
-                                  $tn = imagecreatetruecolor($modwidth, $modheight) ; 
-                                  $image = imagecreatefromjpeg($file) ; 
-                                  imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
-                                  imagejpeg($tn, $save, 90); 
-                                  return $save;                                  
+                   
                               }
                             ?>       
                        

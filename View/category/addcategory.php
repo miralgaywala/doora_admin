@@ -11,6 +11,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         ?>
 
 <!--Main Content -->
+
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>
@@ -32,16 +33,19 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control"/>
+                                    <input name="category_name" type="text" id="category_name" class="form-control" onblur="categoryname();" />
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="category_image" type="file" id="category_image" accept="image/*" onchange="ImagePreview();">
-                                        <button id="submit" class="btn btn-success" style="margin-top:2%">Upload Image</button>
-                                      </div> <span id="category_imageerror" class="show_required"></span>
+                                        <input name="category_image" type="file" id="category_image" accept="image/*"/>
+                                        <span id="category_imageerror" class="show_required"></span>
+                                          <input type="hidden" name="imagename" id="imagename">
+                                          <br>
+                                       <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
+                                      </div> 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
                                       <div class="col-md-5" style="margin-top: 125px;">
                                         <div id="preview-crop-image" style="width:300px;height:300px;"></div>
@@ -79,7 +83,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 reader.readAsDataURL(this.files[0]);
             });
             
-            $('#submit').on('click', function (ev) {
+            $('#btn-upload').on('click', function (ev) {
                 resize.croppie('result', {
                     type: 'canvas',
                     size: 'viewport'
@@ -89,7 +93,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
+                         
                             html = '<img src="' + img + '" />';
+                            $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
                         }
                     });
@@ -101,8 +107,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
                                         <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="return validate();"/>
+                                        <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
-                             </div>    
+                                   
+                             </div>  
+
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="category_submit" value="Submit" id="category_submit" class="btn btn-primary"  />
                                     <button class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php'">Cancel</button>
@@ -119,10 +128,40 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
+                      function categoryname()
+                      {
+                        var name=document.getElementById("category_name").value;
+                        if(name)
+                        {
+                            $.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/category/checkdata.php',
+                              data: {
+                                category_name:name
+                              },
+                              success: function (data) {
+                               $('#category_nameerror').html(data);
+                             }
+                              });
+                            /* }
+                             else
+                             {
+                              $( '#category_nameerror' ).html("");
+                              return false;
+                             }*/
+
+                        }
+                   }   
                       function validateForm() {
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
                                     var categoryimage = document.getElementById("category_image").value;
-                                    if (categoryname == "") {
+                                    if(categoryname == "" && categoryimage == "")
+                                    {
+                                        document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
+                                        document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                        return false;
+                                    }
+                                    if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
                                         return false;
                                       }
@@ -132,23 +171,38 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                         return false;
                                       }
                                   }
-                                  function check()
-                                  {
-                                      window.location.href="/doora/adminpanel/controller/category/issupermarketcontroller.php";
-                                  }
+                                  
          function validate() {
             if (document.getElementById('is_super_market').checked) {
                   if(confirm("are you sure you want to checked it?") == true )
                   {
-                    check();
-                  }
+                    $.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/category/issuper.php',
+                              data: {
+                                is_super_market:name
+                              },
+                              success: function (data) {
+                               $('#issuper_market_error').html(data);
+                             }
+                              });
+                            /* }
+                             else
+                             {
+                              $( '#category_nameerror' ).html("");
+                              return false;
+                             }*/
+
+                        }
+                  
                   else
                   {
                     return false;
                   }
 
             } 
-        }
+        }  
+        
 </script>
  <?php 
                             if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
@@ -164,30 +218,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     $_POST['is_super_market']=0;
                                   }
                                   $_POST['is_super_market'];
-                                  $imagename = $_FILES['category_image']['name'];
-                                  $source = $_FILES['category_image']['tmp_name'];
-                                  
-                                  $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagename; 
-                                 
-                                  move_uploaded_file($source, $target);
-                                  $imagepath = $imagename;
-                                 
-                                  $path="/doora/images/category/" . $imagepath; 
-                                  $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
-                                  $_FILES['category_image']= $imagepath;
-
-                                  $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/category/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
-                                  //echo $_POST['category_image'];
-                                  list($width, $height) = getimagesize($file) ;                                    
-                                  $modwidth=394;
-                                  $diff = $width / $modwidth;                                  
-                                  $modheight = 170;
-                                  $tn = imagecreatetruecolor($modwidth, $modheight) ; 
-                                  $image = imagecreatefromjpeg($file) ; 
-                                  imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
-
-                                  imagejpeg($tn, $save, 90) ; 
-                                  return $save;                                  
+                                  $_POST['imagename'];               
                               }
                             ?>       
                        

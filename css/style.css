@@ -44,6 +44,7 @@
         #crop_wrapper img{
             width:600px;
             height:400px;
+            display: none;
         }
         #crop_div{
             width:300px;
@@ -56,5 +57,13 @@
         .cr-slider-wrap
         {
             display: none;
+        }
+        .croppie-container
+        {
+           height:200px;
+        }
+        .croppie-container
+        {
+            height:150px;
         }
     </style>

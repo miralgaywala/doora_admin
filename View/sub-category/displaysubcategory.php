@@ -70,7 +70,7 @@
                             </tr>
                              </thead>
                              <tbody>
-<?php 
+              <?php 
               
                 $i=0;
                 foreach ($displaysubcategory as $key => $data) 
@@ -87,7 +87,7 @@
                                         <a <?php echo "href=/doora/adminpanel/Controller/sub_category/editsubcategory_controller.php?id=".$data[0]; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="return confirm('are you sure you want to delete?');" <?php echo "href=/doora/adminpanel/Controller/sub_category/deletesubcategory_controller.php?id=".$data[0]; ?> title="Delete" >
+                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=/doora/adminpanel/Controller/sub_category/deletesubcategory_controller.php?id=".$data[0]; ?> title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                         <a <?php echo "href=/doora/adminpanel/Controller/sub_category/viewsubcategory_controller.php?id=".$data[0]; ?> title="View all detail">
@@ -123,11 +123,9 @@
    }
   })
  }
-
  $('#category_name').change(function(){
   $('#category_name').val($('#category_name').val());
   var query = $('#category_name').val();
   load_data(query);
- });
- 
+ }); 
 });*/

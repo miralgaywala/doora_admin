@@ -58,9 +58,9 @@ class subcategory_model
         $con= $this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
-        $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
-        //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
-        return $add_subcategory;
+        //$add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
+        echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
+        //return $add_subcategory;
     }
     public function geteditdata($subcategory_id)
     {
@@ -76,8 +76,9 @@ class subcategory_model
         $con= $this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
-        $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id); 
-        return $edit_category;
+        //echo "update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id;
+       $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id); 
+       return $edit_category;
     }
 }
 ?>

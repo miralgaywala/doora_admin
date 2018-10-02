@@ -9,7 +9,9 @@
             <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>
         </div>
     </section>-->
+
     <section class="content">
+   
     	<div class="row">
     		<div class="col-md-10" style="float: left;"> <h2>Category List</h2></div>
     		<div class="col-md-2">
@@ -57,7 +59,7 @@
                                         <a <?php echo "href=/doora/adminpanel/Controller/category/editcategory_controller.php?id=".$data[0]; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('are you sure you want to delete?');" <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data[0];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Category?');" <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data[0];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                         <a <?php echo "href=/doora/adminpanel/Controller/category/viewcategory_controller.php?id=".$data[0]; ?> title="View all detail">

@@ -45,7 +45,7 @@ class subcategory_controller{
 			$category_id=$_POST['category_name'];
 
 			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
-			return $add_subcategory;
+			echo '<script>window.location.href=href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php";</script>';
 		}
 	}
 	public function edit_subcategory($subcategory_id)
@@ -61,12 +61,12 @@ class subcategory_controller{
 			$subcategory_id=$_POST['sub_category_id'];
 			$subcategory_name=$_POST['sub_category_name'];
 			//echo $subcategory_name;
-			$subcategory_image=$_FILES['sub_category_image']['name'];
+			$subcategory_image=$_POST['imagename'];
 			//echo $subcategory_image;
 			$category_id=$_POST['category_name'];
 			//echo $category_id;
 			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
-			return $edit_subcategory;
+			echo '<script>window.location.href=href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php";</script>';
 		}
 	}
 }

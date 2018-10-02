@@ -13,7 +13,7 @@ class category_controller{
 			
 			$category_name=$_POST['category_name'];
 			//echo $category_name;
-			$category_image=$_FILES['category_image']['name'];
+			$category_image=$_POST['imagename'];
 			//echo $category_image;
 			if(isset($_POST['is_super_market']))
                                   {
@@ -26,8 +26,10 @@ class category_controller{
                  $is_super_market=$_POST['is_super_market'];
 
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
-			return $add_category;
+			
+			echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php";</script>';
 		}
+
 	}
 	public function display_category()
 	{
@@ -53,7 +55,7 @@ class category_controller{
 			//echo $category_id;
 			$category_name=$_POST['category_name'];
 			//echo $category_name;
-			$category_image=$_FILES['category_image']['name'];
+			$category_image=$_POST['imagename'];
 			//echo $category_image;
 			if(isset($_POST['is_super_market']))
                                   {
@@ -65,6 +67,11 @@ class category_controller{
                                   }
                  $is_super_market=$_POST['is_super_market'];
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
+			echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php';</script>";
+			echo '<div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+  </div>';
 		}
 	}
 	public function delete_category($category_id)
@@ -77,31 +84,5 @@ class category_controller{
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/viewcategory.php');
 		return $view_category;
 	}
-	public function is_supermarket()
-	{		
-		$supermarket=$this->cat_model->issupermarket();
-		if($supermarket > 0)
-		{
-			//echo "<script>alert('you have already select the super market.');</script>";
-			echo "<script>check();</script>";
-		}
-		else
-		{
-			echo "<script>window.history.back();</script>";
-		}
-	}
 }
 ?>
-<script type="text/javascript">
-	function check()
-	{
-		if(confirm('you have already check super market. Do you want super market?') == true)
-		{
-			window.history.back();
-		}
-		else
-		{
-			window.location.href="/doora/adminpanel/View/category/addcategory.php";			
-		}
-	}
-</script>

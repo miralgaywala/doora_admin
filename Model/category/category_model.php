@@ -18,12 +18,12 @@ class category_model{
         {
             $con->query("update category set is_super_market=0");
         }
-      //$add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
+      $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        
        //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
       // echo "<script>window.alert('Data Inserted')</script>";
        //echo $add_category;      
-        //return $add_category;
+        return $add_category;
     }
     public function getcategorylist()
     {
@@ -70,13 +70,13 @@ class category_model{
         $viewcategory=$viewcategory->fetch_all();
         return $viewcategory;
     }
-    public function issupermarket()
+   /* public function issupermarket()
     {
 
         $con=$this->db->connection();
         $issupermarket=$con->query("select count(*) from category where 'is_super_market'=1");   
         $count=$issupermarket->num_rows;
         return $count;
-    }
+    }*/
 }
 ?>

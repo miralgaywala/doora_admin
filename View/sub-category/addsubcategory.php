@@ -37,28 +37,31 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="category_name" class="col-sm-3 control-label">Category<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
-                                       <option value="">Select category</option>
+                                       <option value="0">Select category</option>
                                   <?php    foreach ($category as $key => $data) 
                                     { ?>
                                     <option value="<?php echo $data[0];?>"><?php echo $data[1];?></option>
                                     
                                   <?php }?>
                                   </select>
+                                  <span id="categoryerror" class="show_required"></span>
                                 </div> 
                             </div>
+
         					   <div class="form-group notranslate">
                                 <label for="sub_category_name" class="col-sm-3 control-label">Sub Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control"/>
-                                    <span id="category_nameerror" class="show_required"></span><br>
+                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" onblur="subcategoryname();" />
+                                    <span id="category_nameerror" class="show_required"></span>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*"><span id="category_imageerror" class="show_required"></span>
-										<button id="submit" class="btn btn-success" name="btn-upload" style="margin-top:2%">Upload Image</button>
-                                      </div> <span id="category_imageerror" class="show_required"></span>
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*">
+                                        <span id="category_imageerror" class="show_required"></span><br>
+										                  <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
+                                      </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-2" style="margin-top: 10px;">
                                         <div id="preview-crop-image" style="width:62px;height:62px;"></div>
@@ -105,7 +108,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 reader.readAsDataURL(this.files[0]);
             });
             
-            $('#submit').on('click', function (ev) {
+            $('#btn-upload').on('click', function (ev) {
                 resize.croppie('result', {
                     type: 'canvas',
                     size: 'viewport'
@@ -130,11 +133,50 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
+                      function subcategoryname()
+                      {
+                        var name=document.getElementById("sub_category_name").value;
+                        if(name)
+                        {
+                            $.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/sub-category/checkdata.php',
+                              data: {
+                                sub_category_name:name
+                              },
+                              success: function (data) {
+                               
+                               $('#category_nameerror').html(data);
+                             }
+                              });
+                            /* }
+                             else
+                             {
+                              $( '#category_nameerror' ).html("");
+                              return false;
+                             }*/
+
+                        }
+                   }  
+                  
                       function validateForm() {
                                     var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;
                                     var subcategoryimage = document.getElementById("sub_category_image").value;
-                                    if (subcategoryname == "") {
-                                        document.getElementById('category_nameerror').innerHTML="Enter Category Name";
+                                    var category_name = document.getElementById("category_name").value;
+                                    if(category_name == "0" && subcategoryname.trim() == "" && subcategoryimage == "")
+                                    {
+                                       document.getElementById('categoryerror').innerHTML="Please Select Category Name";
+                                       document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
+                                       document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                        return false;
+                                    }
+                                    if(category_name == "0")
+                                    {
+                                      document.getElementById('categoryerror').innerHTML="Please Enter Category Name";
+                                        return false;
+                                    }
+                                    if (subcategoryname.trim() == "") {
+                                        document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
                                         return false;
                                       }
                                     if(subcategoryimage == "")
