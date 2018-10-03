@@ -17,7 +17,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;"> <h2>Sub Category</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Sub Category</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
@@ -64,18 +64,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-2" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:62px;height:62px;"></div>
+                                        <div id="preview-crop-image" style="width:62px;height:62px; border-style: ridge;"></div>
                                      	<input type="hidden" name="imagename" id="imagename">
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
                                           <div id="upload-demo"></div>
                                       </div>                     
-                               
                            </div> 
                              </div>                               
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="subcategory_submit" value="Submit" id="subcategory_submit" class="btn btn-primary"  />
-                                    <button class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/addsubcategory_controller.php'">Cancel</button>
+                                    <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit"/>
+                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addsubcategory_form').reset();window.location.href='http://localhost/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">Cancel</button>
                             </div>  
                            </div>
                          </form>
@@ -133,7 +132,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
-                      function subcategoryname()
+                      /*function subcategoryname()
                       {
                         var name=document.getElementById("sub_category_name").value;
                         if(name)
@@ -154,10 +153,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              {
                               $( '#category_nameerror' ).html("");
                               return false;
-                             }*/
+                             }
 
                         }
-                   }  
+                   }  */
                   
                       function validateForm() {
                                     var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;

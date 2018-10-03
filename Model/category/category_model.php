@@ -18,12 +18,28 @@ class category_model{
         {
             $con->query("update category set is_super_market=0");
         }
+        $select=$con->query("select * from category where is_deleted=0 AND category_name='".$category_name."'");
+        $count=$select->num_rows;
+        
+       // echo $count;
+        if($count > 1)
+        {
+            echo '<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category Already Exists!!
+            </div>';
+
+        }
+        else
+        {
       $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        
        //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
-      // echo "<script>window.alert('Data Inserted')</script>";
+      //echo "<script>window.alert('Data Inserted')</script>";
        //echo $add_category;      
         return $add_category;
+        echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php';</script>";
+    }
     }
     public function getcategorylist()
     {
@@ -59,6 +75,7 @@ class category_model{
         {
             $con->query("update category set is_super_market=0");
         }
+
         $edit_category=$con->query("update category SET category_name='".$category_name."' , category_image='".$category_image."' , updated_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id); 
          return $edit_category;
         //echo "update category SET category_name='".$category_name."' , category_image='".$category_image."' , upadted_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id;

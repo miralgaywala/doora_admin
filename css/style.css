@@ -66,4 +66,12 @@
         {
             height:150px;
         }
+        .content
+        {
+            padding-top: 0px;
+        }
+        .alert
+        {
+            margin-bottom: 0px;
+        }
     </style>

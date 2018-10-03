@@ -45,7 +45,7 @@ class subcategory_controller{
 			$category_id=$_POST['category_name'];
 
 			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
-			echo '<script>window.location.href=href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php";</script>';
+			
 		}
 	}
 	public function edit_subcategory($subcategory_id)

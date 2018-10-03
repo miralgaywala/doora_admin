@@ -15,7 +15,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>    
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>    
         <div class="col-md-2">
             <br/>   
             <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
@@ -36,18 +36,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                      <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
-                            <div class="form-group notranslate">
+                            <div class="form-group notranslate" style="padding-bottom: 250px;">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="category_image" type="file" id="category_image" accept="image/*">
-                                        <span id="category_imageerror" class="show_required"></span>
+                                        <span id="category_imageerror" class="show_required"></span><br>
                                        <input type="hidden" name="imagename" id="imagename" value="<?php echo $data[2]; ?>">
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
                                       </div> 
 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
-                                      <div class="col-md-5" style="margin-top: 125px;">
-                                        <div id="preview-crop-image" style="width:300px;height:300px;"><img src="<?php echo "/doora/images/category/".$data[2]; ?>" style="width:400px;height:170px;" /></div>
+                                      <div class="col-md-5" style="margin-top: 10px;">
+                                        <div id="preview-crop-image" style="width:400px;height:170px;border-style: ridge;"><img src="<?php echo "/doora/images/category/".$data[2]; ?>" style="width:400px;height:170px;" /></div>
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
                                           <div id="upload-demo"></div>
@@ -61,6 +61,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                          <br> <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
                              </div>  
+                             <?php } ?>
         <script type="text/javascript">
             var resize = $('#upload-demo').croppie({
                 enableExif: true,
@@ -109,11 +110,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         </script>                  
                                
                              <div class="box-footer notranslate">
-                                    <input type="submit" name="category_submit" value="Submit" id="category_submit" class="btn btn-primary" />
-                                    <button class="btn btn-default pull-right" onclick="history.go(0);">Cancel</button>
+                                   <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
+                                     <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.replace('http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php');">Cancel</button>
                             </div>                         
                     </div>
-                         </form> <?php } ?>
+                         </form> 
         			</div>
         		</div>
         	</div>	      
@@ -122,38 +123,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php 
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
-  function categoryname()
-                      {
-                        var name=document.getElementById("category_name").value;
-                        if(name)
-                        {
-                            $.ajax({
-                              type: 'post',
-                              url: '/doora/adminpanel/View/category/checkdata.php',
-                              data: {
-                                category_name:name
-                              },
-                              success: function (data) {
-                               $('#category_nameerror').html(data);
-                               if(data=="OK") 
-                               {
-                                return true;  
-                               }
-                               else
-                               {
-                                return false; 
-                               }
-                              }
-                              });
-                            /* }
-                             else
-                             {
-                              $( '#category_nameerror' ).html("");
-                              return false;
-                             }*/
-
-                        }
-                   }   
                           function validateForm() {
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
                                     var categoryimage = document.getElementById("category_image").value;

@@ -7,7 +7,7 @@ $data = base64_decode($data);
 $count=count (glob ($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/*.jpg'));
 $imageName = $count + 1 . '.jpg';
 echo $imageName;
-//file_put_contents($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/' . $imageName, $data);
+file_put_contents($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/' . $imageName, $data);
 
 
 // if ((($data == "image/gif") || ($data == "image/jpeg") || ($data == "image/jpg") || ($data == "image/pjpeg") || ($data == "image/x-png") || ($data == "image/png"))) {

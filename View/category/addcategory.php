@@ -14,7 +14,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;"> <h2>Category</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
@@ -33,22 +33,22 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control" onblur="categoryname();" />
+                                    <input name="category_name" type="text" id="category_name" class="form-control"/>
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
-                            <div class="form-group notranslate">
+                            <div class="form-group notranslate" style="padding-bottom: 250px;">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="category_image" type="file" id="category_image" accept="image/*"/>
-                                        <span id="category_imageerror" class="show_required"></span>
+                                        <span id="category_imageerror" class="show_required"></span><br>
                                           <input type="hidden" name="imagename" id="imagename">
                                           <br>
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
                                       </div> 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
-                                      <div class="col-md-5" style="margin-top: 125px;">
-                                        <div id="preview-crop-image" style="width:300px;height:300px;"></div>
+                                      <div class="col-md-5" style="margin-top: 10px;">
+                                        <div id="preview-crop-image" style="width:400px;height:170px;border-style: ridge;"></div>
                                      
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
@@ -93,8 +93,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
-                         
-                            html = '<img src="' + img + '" />';
+                         	//alert(data);
+                            html = '<img src="' + img + '" style="border-style:ridge;"/>';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
                         }
@@ -113,8 +113,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              </div>  
 
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="category_submit" value="Submit" id="category_submit" class="btn btn-primary"  />
-                                    <button class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php'">Cancel</button>
+                                    <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
+                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'">Cancel</button>
                             </div>  
                            </div>
                          </form>
@@ -128,7 +128,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
-                      function categoryname()
+                     /* function categoryname()
                       {
                         var name=document.getElementById("category_name").value;
                         if(name)
@@ -148,10 +148,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              {
                               $( '#category_nameerror' ).html("");
                               return false;
-                             }*/
+                             }
 
                         }
-                   }   
+                   } */  
                       function validateForm() {
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
                                     var categoryimage = document.getElementById("category_image").value;
@@ -161,11 +161,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;
                                     }
-                                    if (categoryname.trim() == "") {
+                                   else if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
                                         return false;
                                       }
-                                    if(categoryimage == "")
+                                   else if(categoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         return false;

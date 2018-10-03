@@ -26,8 +26,9 @@
 
     </script>
     <section class="content">
+      <div id='msg'></div>
         <div class="row">
-            <div class="col-md-10" style="float: left;"> <h2>Sub Category List</h2></div>
+            <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Sub Category List</h2></div>
             <div class="col-md-2">
                 <br/>   
             <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>
