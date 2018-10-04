@@ -3,7 +3,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
  //include("View/sidemenu.php");
 include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
- 
+
  <?php 
         include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
         $controller=new category_controller();
@@ -22,7 +22,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
-      </div>      
+      </div>   
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">

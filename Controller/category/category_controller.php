@@ -26,12 +26,32 @@ class category_controller{
                  $is_super_market=$_POST['is_super_market'];
 
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
+			if($add_category=="1")
+			{
+			echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=0";</script>';
+			}
+			else
+			{
+			echo '<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category already Exists!!
+            </div>';         
+			}
 			
 			//echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php";</script>';
 		}
 
 	}
 	public function display_category()
+	{
+		//echo $_SERVER['DOCUMENT_ROOT'];
+		$displaycategory=$this->cat_model->getcategorylist();
+		//print_r($displaycategory);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/displaycategory.php');
+
+		return $displaycategory;
+	}
+	public function display_category1($msg)
 	{
 		//echo $_SERVER['DOCUMENT_ROOT'];
 		$displaycategory=$this->cat_model->getcategorylist();
@@ -67,11 +87,13 @@ class category_controller{
                                   }
                  $is_super_market=$_POST['is_super_market'];
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
-			echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php';</script>";
+			echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2';</script>";
 	}
+}
 	public function delete_category($category_id)
 	{
 		$this->cat_model->deletecategory($category_id);
+		echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=3';</script>";
 	}
 	public function view_category($category_id)
 	{

@@ -1,12 +1,21 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/sub_category/subcategory_model.php");
 class subcategory_controller{
+	
 	public function __construct()
 	{
 		$this->subcat_model=new subcategory_model();
 	}
 	public function display_subcategory()
 	{
+		
+		$category_view=$this->subcat_model->getcategory();
+		$displaysubcategory=$this->subcat_model->getsubcategorylist();
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/sub-category/displaysubcategory.php');
+	}
+	public function display_subcategory1($msg)
+	{
+		//echo "from sub-categpry1    ".$msg;
 		$category_view=$this->subcat_model->getcategory();
 		$displaysubcategory=$this->subcat_model->getsubcategorylist();
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/sub-category/displaysubcategory.php');
@@ -25,6 +34,7 @@ class subcategory_controller{
 	public function delete_subcategory($subcategory_id)
 	{
 		$this->subcat_model->deletesubcategory($subcategory_id);
+		echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=3";</script>';
 	}
 	public function bind_category()
 	{
@@ -43,9 +53,18 @@ class subcategory_controller{
 			$subcategory_image=$_POST['imagename'];
 			//echo $subcategory_image;
 			$category_id=$_POST['category_name'];
-
 			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
-			
+			if($add_subcategory=="1")
+			{
+			echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=0";</script>';
+			}
+			else
+			{
+			echo '<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Sub-Category already Exists!!
+            </div>';         
+			}
 		}
 	}
 	public function edit_subcategory($subcategory_id)
@@ -66,7 +85,7 @@ class subcategory_controller{
 			$category_id=$_POST['category_name'];
 			//echo $category_id;
 			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
-			echo '<script>window.location.href=href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php";</script>';
+			echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=2";</script>';
 		}
 	}
 }

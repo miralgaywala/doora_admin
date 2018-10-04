@@ -111,7 +111,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                
                              <div class="box-footer notranslate">
                                    <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
-                                     <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.replace('http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php');">Cancel</button>
+                                     <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'"> 
                             </div>                         
                     </div>
                          </form> 
@@ -194,4 +194,5 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $_POST['is_super_market'];
                                    $_POST['imagename'];  
                                   }
+                                  if(isset($_POST['']))
                                 ?>       

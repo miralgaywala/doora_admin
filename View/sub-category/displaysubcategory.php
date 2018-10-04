@@ -31,11 +31,37 @@
             <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Sub Category List</h2></div>
             <div class="col-md-2">
                 <br/>   
-            <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>
-
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+            <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>          
             </div>
         </div> 
+        <?php 
+            if($msg==0)
+            {
+           $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Sub-Category Has been Inserted successful!!
+            </div>';
+            echo $msg;
+          }
+          else if($msg==2)
+          {
+            $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Sub-Category Has been updated successful!!
+            </div>';
+            echo $msg;
+           
+          }
+          else if($msg==3)
+          {
+            $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Sub-Category Has been deleted successful!!
+            </div>';
+            echo $msg;
+           
+          }
+           ?>
         <div class="row">
             <div class="col-xs-12">
             

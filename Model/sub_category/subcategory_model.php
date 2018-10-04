@@ -49,7 +49,7 @@ class subcategory_model
     public function getcategory()
     {
         $con=$this->db->connection();
-        $category=$con->query("select * from category where is_deleted=0 AND NOT is_super_market=1 ");
+        $category=$con->query("select * from category where is_deleted=0 AND NOT is_super_market=1");
         $getcategory=$category->fetch_all();
         return $getcategory;
     }
@@ -60,28 +60,25 @@ class subcategory_model
         $date= $dt->format('Y-m-d H:i:s');
         $select=$con->query("select * from sub_category where sub_category_name='".$subcategory_name."' AND is_deleted=0 ");
         $count=$select->num_rows;
-        if($count > 0)
+       $add_subcategory="";
+        if($count > 0)  
         {
-            echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub-Category Already Exists!!
-            </div>';
-
+            $add_subcategory="0";
         }
         else
         {
         $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
         //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
-        echo '<script> document.getElementById("msg").innerHTML("<div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert"aria-label="close">&times;</a>Sub-Category Already Exists!!</div>");window.location.href=href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php";</script>';
-
-           return $add_subcategory;
+        $add_subcategory="1";
+           //return $msg;
         }
+        return $add_subcategory;
     }
     public function geteditdata($subcategory_id)
     {
         $con=$this->db->connection();
         //$editdata=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
-        $editdata=$con->query("select cat.category_name,sc.* from category as cat, sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
+        $editdata=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
         $geteditdata=$editdata->fetch_all();
         //  print_r($geteditdata);
         return $geteditdata;
@@ -97,6 +94,3 @@ class subcategory_model
     }
 }
 ?>
-<script>
-    document.getElementById('msg').innerHTML('<div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert"aria-label="close">&times;</a>Sub-Category Already Exists!!</div>');
-    </script>

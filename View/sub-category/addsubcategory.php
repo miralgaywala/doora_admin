@@ -59,7 +59,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*">
-                                        <span id="category_imageerror" class="show_required"></span><br>
+                                        <span id="category_imageerror" class="show_required"></span><br><br>
 										                  <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
                                       </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>

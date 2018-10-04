@@ -21,6 +21,34 @@
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
     		</div>
     	</div> 
+        <?php 
+            if($msg==0)
+            {
+           $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category Has been Inserted successful!!
+            </div>';
+            echo $msg;
+          }
+          else if($msg==2)
+          {
+            $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category Has been updated successful!!
+            </div>';
+            echo $msg;
+           
+          }
+          else if($msg==3)
+          {
+            $msg='<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category Has been deleted successful!!
+            </div>';
+            echo $msg;
+           
+          }
+           ?>
         <div class="row">
         	<div class="col-xs-12">
         	

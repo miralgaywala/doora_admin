@@ -63,9 +63,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*"><span id="category_imageerror" class="show_required"></span>
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*"><span id="category_imageerror" class="show_required"></span><br>
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
-                                      </div> <span id="category_imageerror" class="show_required"></span>
+                                      </div> 
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-2" style="margin-top: 10px;">
                                         <div id="preview-crop-image" style="width:62px;height:62px;border-style: ridge;"><img src="<?php echo "/doora/images/sub_category/".$data[4]; ?>" style="width:62px;height:62px;" /></div>
@@ -82,7 +82,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                                     
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" id="subcategory_submit" class="btn btn-primary pull-right"/>
-                                    <button class="btn btn-default pull-right" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">Cancel</button>
+                                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default pull-right" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">
                             </div>  
                            </div>
                          </form>

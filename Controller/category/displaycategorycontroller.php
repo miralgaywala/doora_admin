@@ -13,7 +13,14 @@ and open the template in the editor.
         <?php
         require_once("category_controller.php");
         $controller=new category_controller();
-        $controller->display_category();
+        if(isset($_GET['id']))
+        {
+        $controller->display_category1($_GET['id']);
+         }
+       else
+       {
+         $controller->display_category1("1");
+       }
         ?>
     </body>
 </html>

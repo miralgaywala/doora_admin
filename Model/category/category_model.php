@@ -20,26 +20,22 @@ class category_model{
         }
         $select=$con->query("select * from category where is_deleted=0 AND category_name='".$category_name."'");
         $count=$select->num_rows;
-        
-       // echo $count;
-        if($count > 1)
+        $add_category="";
+       //echo $count;
+        if($count > 0)
         {
-            echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category Already Exists!!
-            </div>';
-
+           $add_category="0";
         }
         else
         {
-      $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
-       
+        $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
+       $add_category="1";
        //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
       //echo "<script>window.alert('Data Inserted')</script>";
-       //echo $add_category;      
+       //echo $add_category;    
+        }  
         return $add_category;
-        echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php';</script>";
-    }
+   
     }
     public function getcategorylist()
     {
@@ -61,7 +57,7 @@ class category_model{
         $con=$this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
-        $con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
+        $delete=$con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
         //echo "update category SET is_deleted=1 where category_id=".$category_id;
        // echo "delete * from category where category_id=".$category_id;      
     }

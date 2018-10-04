@@ -11,9 +11,21 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("subcategory_controller.php");
+
+       require_once("subcategory_controller.php");
         $controller=new subcategory_controller();
-        $controller->display_subcategory();
+
+        if(isset($_GET['id']))
+        {
+              //echo "from controller".$_GET['id'];
+              $controller->display_subcategory1($_GET['id']);
+        }
+       else
+       {
+         $controller->display_subcategory1("1");
+       }
+ 
+       
         ?>
     </body>
 </html>
