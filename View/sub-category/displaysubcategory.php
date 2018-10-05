@@ -39,7 +39,7 @@
             {
            $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub-Category Has been Inserted successful!!
+            Sub Category Has been Added successfully
             </div>';
             echo $msg;
           }
@@ -47,7 +47,7 @@
           {
             $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub-Category Has been updated successful!!
+            Sub Category Has been updated successfully
             </div>';
             echo $msg;
            
@@ -56,10 +56,9 @@
           {
             $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub-Category Has been deleted successful!!
+            Sub Category Has been deleted successfully
             </div>';
             echo $msg;
-           
           }
            ?>
         <div class="row">

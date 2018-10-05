@@ -34,7 +34,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/tag/displaytagcontroller.php">
             <i class="fa fa-clipboard"></i> <span>Tag</span>
             <span class="pull-right-container">
             </span>

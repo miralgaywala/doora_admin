@@ -87,7 +87,19 @@ class category_controller{
                                   }
                  $is_super_market=$_POST['is_super_market'];
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
-			echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2';</script>";
+			if($edit_categorydata=="1")
+			{
+			echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2";</script>';
+			}
+			else
+			{
+			echo '<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Category already Exists!!
+            </div>';         
+			}
+			
+			//echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2';</script>";
 	}
 }
 	public function delete_category($category_id)

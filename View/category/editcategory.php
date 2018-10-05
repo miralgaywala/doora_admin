@@ -36,10 +36,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                      <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
-                            <div class="form-group notranslate" style="padding-bottom: 250px;">
+                            <div class="form-group notranslate">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="category_image" type="file" id="category_image" accept="image/*">
+                                        <input name="category_image" type="file" id="category_image" accept="image/*" style="margin-top: 10px;">
                                         <span id="category_imageerror" class="show_required"></span><br>
                                        <input type="hidden" name="imagename" id="imagename" value="<?php echo $data[2]; ?>">
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
@@ -47,10 +47,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
                                       <div class="col-md-5" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:400px;height:170px;border-style: ridge;"><img src="<?php echo "/doora/images/category/".$data[2]; ?>" style="width:400px;height:170px;" /></div>
+                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/category/".$data[2]; ?>" style="width:400px;height:170px;" /></div>
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
-                                          <div id="upload-demo"></div>
+                                          <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
                                       </div>                     
                                </div>
                         
@@ -142,24 +142,38 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                               data: {
                                 is_super_market:name
                               },
-                              success: function (data) {
-                               $('#issuper_market_error').html(data);
-                             }
-                              });
-                            /* }
-                             else
-                             {
-                              $( '#category_nameerror' ).html("");
-                              return false;
-                             }*/
+                              success: function (data1) {
 
-                        }
-                  
+                               //$('#issuper_market_error').html(data1);
+                               
+                                 $('#issuper_market_error').html(data1);
+
+                              }
+                            });
+                        }          
                   else
                   {
                     return false;
                   }
 
+            }
+            else
+            {
+              $.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/category/issuper.php',
+                              data: {
+                                is_super_market:name
+                              },
+                              success: function (data1) {
+
+                               //$('#issuper_market_error').html(data1);
+                               
+                               
+                                $('#issuper_market_error').hide();
+                              
+                              }
+                            });
             } 
         }  
          document.getElementById('is_super_market').addEventListener('change', validate);

@@ -62,7 +62,7 @@ class subcategory_controller{
 			{
 			echo '<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub-Category already Exists!!
+            Sub Category already Exists!!
             </div>';         
 			}
 		}
@@ -85,7 +85,18 @@ class subcategory_controller{
 			$category_id=$_POST['category_name'];
 			//echo $category_id;
 			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
-			echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=2";</script>';
+			if($edit_subcategory=="1")
+			{
+				echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=2";</script>';
+			}
+			else
+			{
+			echo '<div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Sub Category already Exists!!
+            </div>';         
+			}
+			
 		}
 	}
 }

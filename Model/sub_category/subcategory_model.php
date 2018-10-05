@@ -34,7 +34,7 @@ class subcategory_model
     public function getsubcategorydetail($subcategory_id)
     {
         $con=$this->db->connection();
-        $viewsubcategory=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
+        $viewsubcategory=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
         $view=$viewsubcategory->fetch_all();
         return $view;
     }
@@ -55,6 +55,7 @@ class subcategory_model
     }
     public function addsubcategory_data($category_id,$subcategory_name,$subcategory_image)
     {
+        $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
@@ -85,11 +86,22 @@ class subcategory_model
     }
     public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
     {
+        $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
-        //echo "update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id;
-       $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id); 
+        $select=$con->query("select * from sub_category where is_deleted=0 AND category_id=".$category_id." AND sub_category_name='".$subcategory_name."' AND sub_category_id!=".$subcategory_id);
+        $count=$select->num_rows;
+        $edit_category="";
+        if($count > 0)
+        {
+            $edit_category="0";
+        }
+        else
+        {
+           $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id); 
+            $edit_category="1";
+        }
        return $edit_category;
     }
 }

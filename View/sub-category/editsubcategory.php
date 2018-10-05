@@ -63,16 +63,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*"><span id="category_imageerror" class="show_required"></span><br>
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" style="margin-top: 10px;"><span id="category_imageerror" class="show_required"></span><br>
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
                                       </div> 
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-2" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:62px;height:62px;border-style: ridge;"><img src="<?php echo "/doora/images/sub_category/".$data[4]; ?>" style="width:62px;height:62px;" /></div>
+                                        <div id="preview-crop-image" style="width:64px;height:64px; border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/sub_category/".$data[4]; ?>" style="width:62px;height:62px;" /></div>
                                       <input type="hidden" name="imagename" id="imagename" value='<?php echo $data[4];?>'/>
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
-                                          <div id="upload-demo"></div>
+                                          <div id="upload-demo" style="width:102px;height:102px; border-style: groove;border-width: thin;"></div>
                                       </div>                     
                                
                            </div>
@@ -141,31 +141,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
-  function subcategoryname()
-                      {
-                        var name=document.getElementById("sub_category_name").value;
-                        if(name)
-                        {
-                            $.ajax({
-                              type: 'post',
-                              url: '/doora/adminpanel/View/sub-category/checkdata.php',
-                              data: {
-                                sub_category_name:name
-                              },
-                              success: function (data) {
-                               
-                               $('#category_nameerror').html(data);
-                             }
-                              });
-                            /* }
-                             else
-                             {
-                              $( '#category_nameerror' ).html("");
-                              return false;
-                             }*/
-
-                        }
-                   }  
                       function validateForm() {
                                     //var category_name = document.getElementById["category_name"].value;
                                     var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;

@@ -58,17 +58,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*">
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" style="margin-top: 10px;">
                                         <span id="category_imageerror" class="show_required"></span><br><br>
 										                  <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
                                       </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-2" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:62px;height:62px; border-style: ridge;"></div>
+                                        <div id="preview-crop-image" style="width:64px;height:64px; border-style: groove;border-width: thin;"></div>
                                      	<input type="hidden" name="imagename" id="imagename">
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
-                                          <div id="upload-demo"></div>
+                                          <div id="upload-demo" style="width:102px;height:102px; border-style: groove;border-width: thin;"></div>
                                       </div>                     
                            </div> 
                              </div>                               
@@ -159,30 +159,61 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                    }  */
                   
                       function validateForm() {
-                                    var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;
+                                    var subcategoryname = document.getElementById("sub_category_name").value;
                                     var subcategoryimage = document.getElementById("sub_category_image").value;
                                     var category_name = document.getElementById("category_name").value;
-                                    if(category_name == "0" && subcategoryname.trim() == "" && subcategoryimage == "")
-                                    {
-                                       document.getElementById('categoryerror').innerHTML="Please Select Category Name";
-                                       document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
-                                       document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
-                                    }
+                                      var imagename = document.getElementById("imagename").value;
+                                    // if(category_name == "0" && subcategoryname.trim() == "" && subcategoryimage == "" && imagename == "")
+                                    // {
+                                    //    document.getElementById('categoryerror').innerHTML="Please Select Category Name";
+                                    //    document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
+                                    //    document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                    //     return false;
+                                    // }
+                                    var count=0;
                                     if(category_name == "0")
                                     {
                                       document.getElementById('categoryerror').innerHTML="Please Enter Category Name";
-                                        return false;
+                                       count++;
                                     }
+                                    else
+                                      {
+                                        document.getElementById('categoryerror').innerHTML="";
+                                      }
                                     if (subcategoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
-                                        return false;
+                                        count++;
+                                      }
+                                      else
+                                      {
+                                        document.getElementById('category_nameerror').innerHTML="";
                                       }
                                     if(subcategoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
+                                        count++;
                                       }
+                                       else
+                                      {
+                                        document.getElementById('category_imageerror').innerHTML="";
+                                      }
+                                    if(imagename == "")
+                                    {
+                                      document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                       count++;
+                                    }
+                                     else
+                                      {
+                                        document.getElementById('category_imageerror').innerHTML="";
+                                      }
+                                  if(count>0)
+                                   {
+                                    return false;
+                                   }
+                                   else
+                                   {
+                                    return true;
+                                   }
                                   }
 </script>	
  <?php 

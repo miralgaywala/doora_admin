@@ -26,7 +26,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   {
                ?>
                   <tr>
-                    <td>Sub_Category_Id</td>
+                    <td>Category Name</td>
                   <td><?php echo $data[0];?></td>
                   </tr>
                   <tr>
@@ -35,23 +35,28 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                   <td>Sub_Catgeory_Name</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data[3];?></td>
                   </tr>
                   <tr>
+                  <td>Sub_Catgeory_Id</td>
+                  <td><?php echo $data[2];?></td>
+                  </tr>
+                  
+                  <tr>
                     <td>Sub_Category_Image</td>
-                  <td><img <?php echo "src=/doora/images/sub_category/".$data[3];?> id="SubCategoryPicture"/></td>
+                  <td><img <?php echo "src=/doora/images/sub_category/".$data[4];?> id="SubCategoryPicture"/></td>
                   </tr>
                   <tr>
                     <td>is_deleted</td>
-                  <td><?php echo $data[4];?></td>
-                  </tr>
-                  <tr>
-                    <td>Created_at</td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Created_at</td>
                   <td><?php echo $data[6];?></td>
+                  </tr>
+                  <tr>
+                    <td>Upadted_at</td>
+                  <td><?php echo $data[7];?></td>
                   </tr>
                 <?php } ?>
                 </table>

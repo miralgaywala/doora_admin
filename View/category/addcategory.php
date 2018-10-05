@@ -37,10 +37,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
-                            <div class="form-group notranslate" style="padding-bottom: 250px;">
+                            <div class="form-group notranslate">
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="category_image" type="file" id="category_image" accept="image/*"/>
+                                        <input name="category_image" type="file" id="category_image" accept="image/*" style="margin-top: 10px;" />
                                         <span id="category_imageerror" class="show_required"></span><br>
                                           <input type="hidden" name="imagename" id="imagename">
                                           <br>
@@ -48,11 +48,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       </div> 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
                                       <div class="col-md-5" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:400px;height:170px;border-style: ridge;"></div>
+                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"></div>
                                      
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
-                                          <div id="upload-demo"></div>
+                                          <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
                                       </div>                     
                                
                            </div> 
@@ -67,7 +67,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 },
                 boundary: {
                      width: 400,
-                    height: 400
+                    height: 400,
                 }
             });
             
@@ -106,7 +106,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="return validate();"/>
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="return validate();"/><br>
                                         <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
                                    
@@ -153,23 +153,53 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                         }
                    } */  
                       function validateForm() {
-                                    var categoryname = document.forms["addcategory"]["category_name"].value;
+                                    var categoryname = document.getElementById("category_name").value;
                                     var categoryimage = document.getElementById("category_image").value;
-                                    if(categoryname == "" && categoryimage == "")
-                                    {
-                                        document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
-                                        document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
-                                    }
-                                   else if (categoryname.trim() == "") {
+                                    var imagename = document.getElementById("imagename").value;
+                                    // if(categoryname.trim() == "" && categoryimage == "" && imagename == "")
+                                    // {
+                                    //     document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
+                                    //     document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                    //     return false;
+
+                                    // }
+                                    var count=0;
+                                    if (categoryname.trim() == "") {
+                                    	//alert(categoryname);
                                         document.getElementById('category_nameerror').innerHTML="Enter Category Name";
-                                        return false;
+                                        count++;
                                       }
-                                   else if(categoryimage == "")
+                                      else
+                                      {
+                                      	document.getElementById('category_nameerror').innerHTML="";
+                                      }
+                                    if(categoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
+                                       count++;
                                       }
+                                      else
+                                      {
+                                      	document.getElementById("category_imageerror").innerHTML="";
+                                      }
+                                     if(imagename == "")
+                                    {
+                                    	document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                        count++;
+                                    }
+                                    else
+                                    {
+                                    	document.getElementById("category_imageerror").innerHTML="";
+                                    }
+                                   
+                                   if(count>0)
+                                   {
+                                   	return false;
+                                   }
+                                   else
+                                   {
+                                   	return true;
+                                   }
                                   }
                                   
          function validate() {
@@ -182,24 +212,38 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                               data: {
                                 is_super_market:name
                               },
-                              success: function (data) {
-                               $('#issuper_market_error').html(data);
-                             }
-                              });
-                            /* }
-                             else
-                             {
-                              $( '#category_nameerror' ).html("");
-                              return false;
-                             }*/
+                              success: function (data1) {
 
-                        }
-                  
+                               //$('#issuper_market_error').html(data1);
+                               
+                               	 $('#issuper_market_error').html(data1);
+
+                             	}
+                            });
+                        }          
                   else
                   {
                     return false;
                   }
 
+            }
+            else
+            {
+            	$.ajax({
+                              type: 'post',
+                              url: '/doora/adminpanel/View/category/issuper.php',
+                              data: {
+                                is_super_market:name
+                              },
+                              success: function (data1) {
+
+                               //$('#issuper_market_error').html(data1);
+                               
+                               
+                               	$('#issuper_market_error').hide();
+                              
+                             	}
+                            });
             } 
         }  
         
@@ -221,5 +265,3 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $_POST['imagename'];               
                               }
                             ?>       
-                       
- 

@@ -7,9 +7,8 @@ class category_model{
     }
     public function addcategory_data($category_name,$category_image,$is_super_market)
     {
-
+        $category_name=trim($category_name);
         //echo $is_super_market;
-
     	$con= $this->db->connection();
     	$dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
@@ -30,7 +29,7 @@ class category_model{
         {
         $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        $add_category="1";
-       //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
+        //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
       //echo "<script>window.alert('Data Inserted')</script>";
        //echo $add_category;    
         }  
@@ -63,6 +62,7 @@ class category_model{
     }
     public function editcategorydata($category_id,$category_name,$category_image,$is_super_market)
     {
+        $category_name=trim($category_name);
         $con= $this->db->connection();
         $dt = new DateTime();
         $date= $dt->format('Y-m-d H:i:s');
@@ -71,10 +71,20 @@ class category_model{
         {
             $con->query("update category set is_super_market=0");
         }
-
+        $edit_category="";
+        $select=$con->query("select category_id from category where is_deleted=0 AND category_name='".$category_name."' AND category_id!=".$category_id);
+        $count=$select->num_rows;
+        if($count > 0)
+        {
+            $edit_category="0";
+        }
+        else
+        {
+            //echo "update category SET category_name='".$category_name."' , category_image='".$category_image."' , upadted_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id;
         $edit_category=$con->query("update category SET category_name='".$category_name."' , category_image='".$category_image."' , updated_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id); 
+        $edit_category="1";
+        }
          return $edit_category;
-        //echo "update category SET category_name='".$category_name."' , category_image='".$category_image."' , upadted_at='".$date."' , is_super_market=".$is_super_market." where category_id=".$category_id;
     }
     public function viewcategory($category_id)
     {
