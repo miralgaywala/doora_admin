@@ -28,7 +28,7 @@ class category_controller{
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
 			if($add_category=="1")
 			{
-			echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=0";</script>';
+			echo '<script>window.location.href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=0";</script>';
 			}
 			else
 			{
@@ -89,7 +89,7 @@ class category_controller{
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
 			if($edit_categorydata=="1")
 			{
-			echo '<script>window.location.href=href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2";</script>';
+			echo '<script>window.location.href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2";</script>';
 			}
 			else
 			{
@@ -105,7 +105,7 @@ class category_controller{
 	public function delete_category($category_id)
 	{
 		$this->cat_model->deletecategory($category_id);
-		echo "<script>window.location.href=href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=3';</script>";
+		echo "<script>window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=3';</script>";
 	}
 	public function view_category($category_id)
 	{

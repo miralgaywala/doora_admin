@@ -10,8 +10,8 @@ class category_model{
         $category_name=trim($category_name);
         //echo $is_super_market;
     	$con= $this->db->connection();
-    	$dt = new DateTime();
-        $date= $dt->format('Y-m-d H:i:s');
+    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=$date->format('y-m-d H:i:s');
         //$is_delete=0;
         if($is_super_market==1)
         {
@@ -54,8 +54,8 @@ class category_model{
     public function deletecategory($category_id)
     {
         $con=$this->db->connection();
-        $dt = new DateTime();
-        $date= $dt->format('Y-m-d H:i:s');
+        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=$date->format('y-m-d H:i:s');
         $delete=$con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
         //echo "update category SET is_deleted=1 where category_id=".$category_id;
        // echo "delete * from category where category_id=".$category_id;      
@@ -64,8 +64,8 @@ class category_model{
     {
         $category_name=trim($category_name);
         $con= $this->db->connection();
-        $dt = new DateTime();
-        $date= $dt->format('Y-m-d H:i:s');
+        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=$date->format('y-m-d H:i:s');
         //echo $date;
         if($is_super_market == 1)
         {

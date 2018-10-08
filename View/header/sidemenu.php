@@ -41,7 +41,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/offer_type/displayoffercontroller.php">
             <i class="fa fa-circle-o"></i> <span>Offer type</span>
             <span class="pull-right-container">
             </span>

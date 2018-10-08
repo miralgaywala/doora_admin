@@ -11,15 +11,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("tag_controller.php");
-        $controller=new tag_controller();   
+        require_once("offer_controller.php");
+        $controller=new offer_controller();   
         if(isset($_GET['id']))
         {
-        $controller->display_tag($_GET['id']);
+        $controller->display_offer($_GET['id']);
          }
        else
        {
-         $controller->display_tag("1");
+         $controller->display_offer("1");
        }    
         ?>
     </body>

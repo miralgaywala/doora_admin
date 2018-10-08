@@ -1,20 +1,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
-<!--Main Content -->
-
-   <!-- <section class="row">
-        <h3 class="column-left">Category List</h3>
-        <div class="column-right">
-            <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>
-        </div>
-    </section>-->
      <?php 
         include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/sub_category/subcategory_controller.php");
-        /*$controller=new subcategory_controller();
-        $controller->display_subcategorydata(); */
-
-       // require_once("subcategory_controller.php");
         $controller=new subcategory_controller();
         $controller->display_subcategory();
         ?>
@@ -91,7 +79,6 @@
                               <th style="text-align:center;" width="5%">Sub Category Id</th>
                               <th style="text-align:center;">Sub Category Name</th>
                               <th style="text-align:center;" width="15%">Sub Category Image</th>
-                              <th style="text-align:center;" width="10%">Is_Delete</th>
                               <th style="text-align:center;" width="10%">Action</th>
                             </tr>
                              </thead>
@@ -106,7 +93,6 @@
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><?php echo $data[2]; ?></td>
                                 <td style="text-align:center;"><img <?php echo "src=/doora/images/sub_category/".$data[3];?> id="SubCategoryPicture"/></td>
-                                <td style="text-align:center;"><?php echo $data[4]; ?></td>
                                 <td style="text-align:center;">
                           
                                     <div >
@@ -132,26 +118,3 @@
     </section>
 </div>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
- <script>
-  //document.forms["addsubcategory"].submit();
-/*$(document).ready(function(){
-
- function load_data(query='')
- {
-  $.ajax({
-   url:"/doora/adminpanel/Controller/sub_category/subcategory_controller.php",
-   method:"POST",
-   success:function(data)
-   {
-    alert($('#category_name').val());
-    //alert(data);
-    $('tbody').html(data);
-   }
-  })
- }
- $('#category_name').change(function(){
-  $('#category_name').val($('#category_name').val());
-  var query = $('#category_name').val();
-  load_data(query);
- }); 
-});*/
