@@ -8,11 +8,9 @@ class category_model{
     public function addcategory_data($category_name,$category_image,$is_super_market)
     {
         $category_name=trim($category_name);
-        //echo $is_super_market;
     	$con= $this->db->connection();
     	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
         $date=$date->format('y-m-d H:i:s');
-        //$is_delete=0;
         if($is_super_market==1)
         {
             $con->query("update category set is_super_market=0");
@@ -30,11 +28,8 @@ class category_model{
         $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
        $add_category="1";
         //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
-      //echo "<script>window.alert('Data Inserted')</script>";
-       //echo $add_category;    
         }  
         return $add_category;
-   
     }
     public function getcategorylist()
     {
@@ -57,8 +52,7 @@ class category_model{
         $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
         $date=$date->format('y-m-d H:i:s');
         $delete=$con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
-        //echo "update category SET is_deleted=1 where category_id=".$category_id;
-       // echo "delete * from category where category_id=".$category_id;      
+        //echo "update category SET is_deleted=1 where category_id=".$category_id;   
     }
     public function editcategorydata($category_id,$category_name,$category_image,$is_super_market)
     {
@@ -66,7 +60,6 @@ class category_model{
         $con= $this->db->connection();
         $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
         $date=$date->format('y-m-d H:i:s');
-        //echo $date;
         if($is_super_market == 1)
         {
             $con->query("update category set is_super_market=0");
@@ -76,7 +69,7 @@ class category_model{
         $count=$select->num_rows;
         if($count > 0)
         {
-            $edit_category="0";
+            $edit_category="0";   
         }
         else
         {
@@ -93,13 +86,5 @@ class category_model{
         $viewcategory=$viewcategory->fetch_all();
         return $viewcategory;
     }
-   /* public function issupermarket()
-    {
-
-        $con=$this->db->connection();
-        $issupermarket=$con->query("select count(*) from category where 'is_super_market'=1");   
-        $count=$issupermarket->num_rows;
-        return $count;
-    }*/
 }
 ?>

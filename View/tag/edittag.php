@@ -63,7 +63,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var count=0;
                                     if (tag.trim() == "") {
                                     	//alert(categoryname);
-                                        document.getElementById('tag_error').innerHTML="Enter Tag";
+                                        document.getElementById('tag_error').innerHTML="Please Enter Tag";
                                         count++;
                                       }
                                       else

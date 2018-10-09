@@ -9,25 +9,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         $controller=new category_controller();
         $controller->add_category();       
         ?>
-
-<!--Main Content -->
-
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
                <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div>   
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">
         			<br>
-        			<!-- box-header -->
         			<div class="box-body">
         				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
         					<div class="form-group notranslate">
@@ -128,45 +121,13 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php //include("View/footer.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
  <script type="text/javascript">
-                     /* function categoryname()
-                      {
-                        var name=document.getElementById("category_name").value;
-                        if(name)
-                        {
-                            $.ajax({
-                              type: 'post',
-                              url: '/doora/adminpanel/View/category/checkdata.php',
-                              data: {
-                                category_name:name
-                              },
-                              success: function (data) {
-                               $('#category_nameerror').html(data);
-                             }
-                              });
-                            /* }
-                             else
-                             {
-                              $( '#category_nameerror' ).html("");
-                              return false;
-                             }
-
-                        }
-                   } */  
                       function validateForm() {
                                     var categoryname = document.getElementById("category_name").value;
                                     var categoryimage = document.getElementById("category_image").value;
                                     var imagename = document.getElementById("imagename").value;
-                                    // if(categoryname.trim() == "" && categoryimage == "" && imagename == "")
-                                    // {
-                                    //     document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
-                                    //     document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                    //     return false;
-
-                                    // }
                                     var count=0;
                                     if (categoryname.trim() == "") {
-                                    	//alert(categoryname);
-                                        document.getElementById('category_nameerror').innerHTML="Enter Category Name";
+                                        document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
                                         count++;
                                       }
                                       else
@@ -236,12 +197,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 is_super_market:name
                               },
                               success: function (data1) {
-
-                               //$('#issuper_market_error').html(data1);
-                               
-                               
-                               	$('#issuper_market_error').hide();
-                              
+                                    $('#issuper_market_error').hide();
                              	}
                             });
             } 
@@ -251,8 +207,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php 
                             if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
                                   $category_name =$_POST['category_name'];
-            
-                                  //echo $category_name;
                                   if(isset($_POST['is_super_market']))
                                   {                                 	
                                     $_POST['is_super_market']=1;

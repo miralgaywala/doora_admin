@@ -55,7 +55,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var tag = document.getElementById("tag_name").value;
                                     var count=0;
                                     if (tag.trim() == "") {
-                                        document.getElementById('tag_error').innerHTML="Enter Tag";
+                                        document.getElementById('tag_error').innerHTML="Please Enter Tag";
                                         count++;
                                       }
                                       else

@@ -63,7 +63,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var count=0;
                                     if (offer.trim() == "") {
                                     	//alert(categoryname);
-                                        document.getElementById('offer_error').innerHTML="Enter Offer Title";
+                                        document.getElementById('offer_error').innerHTML="Please Enter Offer Title";
                                         count++;
                                       }
                                       else

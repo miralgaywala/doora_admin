@@ -158,7 +158,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                         return false;
                                     }
                                     if (subcategoryname.trim() == "") {
-                                        document.getElementById('category_nameerror').innerHTML="Enter Category Name";
+                                        document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
                                         return false;
                                       }
                                    /* if(subcategoryimage == "")

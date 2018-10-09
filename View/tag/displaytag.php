@@ -13,27 +13,27 @@
         <?php 
             if($msg==0)
             {
-           $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Tag Has been Added successfully
-            </div>';
-            echo $msg;
+               $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Tag Has been Added successfully
+                </div>';
+                echo $msg;
           }
           else if($msg==2)
           {
-            $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Tag Has been updated successfully
-            </div>';
-            echo $msg;           
+                $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Tag Has been updated successfully
+                </div>';
+                echo $msg;           
           }
           else if($msg==3)
           {
-            $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Tag Has been deleted successfully
-            </div>';
-            echo $msg;           
+                $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Tag Has been deleted successfully
+                </div>';
+                echo $msg;           
           }
            ?>
         <div class="row">
@@ -73,7 +73,7 @@
                                     </div>
                                 </td>
                                  </tr>
-                           <?php    } ?>
+                           <?php  } ?>
                   </table>
         			</div>
         		</div>

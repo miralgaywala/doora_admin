@@ -71,7 +71,6 @@ class subcategory_model
         $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
         //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
         $add_subcategory="1";
-           //return $msg;
         }
         return $add_subcategory;
     }
@@ -81,7 +80,6 @@ class subcategory_model
         //$editdata=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
         $editdata=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
         $geteditdata=$editdata->fetch_all();
-        //  print_r($geteditdata);
         return $geteditdata;
     }
     public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)

@@ -12,27 +12,27 @@
         <?php 
             if($msg==0)
           {
-           $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Offer Title Has been Added successfully
-            </div>';
-            echo $msg;
+               $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Offer Title Has been Added successfully
+                </div>';
+                echo $msg;
           }
           else if($msg==2)
           {
-            $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Offer Title Has been updated successfully
-            </div>';
-            echo $msg;           
+              $msg='<div class="alert alert-info alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              Offer Title Has been updated successfully
+              </div>';
+              echo $msg;           
           }
           else if($msg==3)
           {
-            $msg='<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Offer Title Has been deleted successfully
-            </div>';
-            echo $msg;
+              $msg='<div class="alert alert-info alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              Offer Title Has been deleted successfully
+              </div>';
+              echo $msg;
           }
            ?>
         <div class="row">

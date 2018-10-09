@@ -108,13 +108,12 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 });
             });
         </script>                  
-                               
-                             <div class="box-footer notranslate">
+                               <div class="box-footer notranslate">
                                    <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
                                      <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php'"> 
                             </div>                         
                     </div>
-                         </form> 
+               </form> 
         			</div>
         		</div>
         	</div>	      
@@ -143,9 +142,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 is_super_market:name
                               },
                               success: function (data1) {
-
-                               //$('#issuper_market_error').html(data1);
-                               
                                  $('#issuper_market_error').html(data1);
 
                               }
@@ -166,12 +162,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 is_super_market:name
                               },
                               success: function (data1) {
-
-                               //$('#issuper_market_error').html(data1);
-                               
-                               
                                 $('#issuper_market_error').hide();
-                              
                               }
                             });
             } 
@@ -194,9 +185,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php 
                          if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
                                   $category_name =$_POST['category_name'];            
-                                  //echo $category_name;                                  
+                                                           
                                   $category_id=$_POST['category_id'];
-                                  //echo $category_id;
+                               
                                   if(isset($_POST['is_super_market']))
                                   {
                                     $_POST['is_super_market']=1;

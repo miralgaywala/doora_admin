@@ -55,7 +55,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var offer = document.getElementById("offer_title").value;
                                     var count=0;
                                     if (offer.trim() == "") {
-                                        document.getElementById('offer_error').innerHTML="Enter Offer Title";
+                                        document.getElementById('offer_error').innerHTML="Please Enter Offer Title";
                                         count++;
                                       }
                                       else

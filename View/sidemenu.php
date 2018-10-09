@@ -15,7 +15,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Business</a></li>
+            <li><a href="/doora/adminpanel/Controller/business/displaybusinesslist_controller.php"><i class="fa fa-circle-o"></i> Business</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Customer</a></li>
           </ul>
         </li>

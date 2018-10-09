@@ -11,7 +11,7 @@ class tag_model
        $con=$this->db->connection();
        $gettag=$con->query("select * from deal_tags where NOT is_deleted=1");
        $tag=$gettag->fetch_all();
-      	return $tag;
+       return $tag;
     }
 
     public function addtag_data($tag)
@@ -31,8 +31,7 @@ class tag_model
         {
        	//echo "insert into deal_tags(tag,created_at) values('".$tag."','".$date."')";    
         $tag=$con->query("insert into deal_tags (tag,created_at) values('".$tag."','".$date."')"); 
-       	$addtag="1";
-      
+       	$addtag="1";   
         }  
        return $addtag;
     }
@@ -45,7 +44,7 @@ class tag_model
     }
     public function edittaglist($tag_id)
     {
-    	 $con= $this->db->connection();
+    	$con= $this->db->connection();
         $edittag=$con->query("select * from deal_tags where tag_id=".$tag_id);
         $edittagdata=$edittag->fetch_all();
         return $edittagdata;
@@ -68,7 +67,7 @@ class tag_model
         $tag=$con->query("update deal_tags SET tag='".$tag."' , updated_at='".$date."' where tag_id=".$tag_id); 
        	$edittag="1";      
         }  
-       return $edittag;
+        return $edittag;
     }
     public function deletetag($tag_id)
     {
