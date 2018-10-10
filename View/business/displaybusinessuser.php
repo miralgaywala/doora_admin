@@ -11,36 +11,56 @@
     		</div>
     	</div> 
         <?php 
-          //   if($msg==0)
-          //   {
-          //      $msg='<div class="alert alert-info alert-dismissible">
-          //       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          //       Tag Has been Added successfully
-          //       </div>';
-          //       echo $msg;
-          // }
-          // else if($msg==2)
-          // {
-          //       $msg='<div class="alert alert-info alert-dismissible">
-          //       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          //       Tag Has been updated successfully
-          //       </div>';
-          //       echo $msg;           
-          // }
-          // else if($msg==3)
-          // {
-          //       $msg='<div class="alert alert-info alert-dismissible">
-          //       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          //       Tag Has been deleted successfully
-          //       </div>';
-          //       echo $msg;           
-          // }
+            if($msg==1)
+            {
+               $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Deactivate Has been successfully
+                </div>';
+                echo $msg;
+          }
+          else if($msg==2)
+          {
+                $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Activate Has been successfully
+                </div>';
+                echo $msg;           
+          }
+         	else if($msg==3)
+          {
+                $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Business Has been deleted successfully
+                </div>';
+                echo $msg;           
+          }
            ?>
+            <script>
+        $(document).ready(function(){
+            $("#user").select2(); 
+        });
+
+    </script>
         <div class="row">
         	<div class="col-xs-12">
         	
         		<div class="box">
         				<div class="box-body">
+        					<form class="form-horizontal" name="displayuser" id="displayuser" role="form" action="" method="post" enctype="multipart/form-data">
+                             <div class="form-group">
+                                <label for="user" class="col-sm-3 control-label">Business User</label>
+                                <div class="col-sm-7" style="padding-top: 6px">
+                                    <select id="user" name="user" class="form-control" aria-invalid="false" >
+                                    <option value="0">All Business User</option>
+                                    <option value="0">Activate</option>
+                                     <option value="0">Deactivate</option>
+                                     <option value="0">Deleted</option>
+                                    </select>
+                                </div> 
+                            </div>
+                          </form>
+                          <hr>
         				<table id="example1" class="table table-bordered table-hover">
 			                <thead>
 			                <tr>
@@ -52,7 +72,7 @@
                         <th style="text-align:center;">Contact No</th>
                         <th style="text-align:center;" width="5%">Stripe Customer Id</th>
                         <th style="text-align:center;" width="5%">Super Market</th>
-			                  <th style="text-align:center;" width="10%">Action</th>
+			                  <th style="text-align:center;" width="15%">Action</th>
 			                </tr>
 							 </thead>
                 <?php
@@ -71,17 +91,36 @@
                                 <td style="text-align:center;">
                           
                                     <div>
-                                       <input name="is_active" type="checkbox" id="is_active" <?php if($data[24] == 1) echo 'checked="checked"';?> style="margin-right: 2px;" onclick="is_active();"/>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Tag?');" <?php //echo "href=/doora/adminpanel/Controller/tag/deletetag_controller.php?id=".$data[0];?>  title="Delete" >
+                                    	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail"><i class="fa fa-eye"></i></a>
+                                  
+                                    	  
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/business/deletebusiness_controller.php?id=".$data[0];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessbranch_controller.php?id=".$data[0];?> title="View all detail">
-                                          <i class="fa fa-eye"></i>
+                                        <br/>
+                                    	<a <?php $value=$data[24]; if($value == 1 ){ ?>
+                                    		onclick="javascript: return confirm('Do you really want to Deactivate This Business?');"
+                                    	<?php } else{ ?>
+                                    		onclick="javascript: return confirm('Do you really want to Activate This Business?');"
+                                    	<?php }?>
+                                    	<?php echo "href=/doora/adminpanel/Controller/business/isactive_controller.php?id=".$data[0]."&value=".$data[24];?>><?php $value=$data[24]; if($value == 1 ){
+                                    		echo "Activate";
+                                    	}
+                                    	else
+                                    	{
+                                    		echo "Deactivate"; 
+                                    	} ?></a>
+                                    	<br/>
+                                    	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessbranch_controller.php?id=".$data[0];?> title="View all detail" style="margin-right: 3px;">
+                                        	View Brach
                                         </a>
-                                    </div>
+                                         <br/>
+                                        <a href="#" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
+                                      </div>
                                 </td>
                                  </tr>
-                           <?php  } ?>
+                           <?php
+                            } ?>
                   </table>
         			</div>
         		</div>
@@ -89,25 +128,4 @@
        </div>
     </section>
 </div>
-<script type="text/javascript">
-  function is_active()
-  {
-       if (document.getElementById('is_active').checked)
-       {
-            $.ajax({
-                              type: 'post',
-                              url: '/doora/adminpanel/View/business/isactive.php',
-                              data: {
-                                is_active:isactive
-                              },
-                              success: function (data1) {
-                              }
-                            });
-       }
-       else
-       {
-        
-       }
-  }
-</script>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  

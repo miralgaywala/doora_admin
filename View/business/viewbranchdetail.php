@@ -12,7 +12,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Tag</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Branch Detail</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->

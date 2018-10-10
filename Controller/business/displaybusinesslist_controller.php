@@ -19,7 +19,7 @@ and open the template in the editor.
          }
        else
        {
-         $controller->display_businessuser("1");
+         $controller->display_businessuser("0");
        }    
         ?>
     </body>

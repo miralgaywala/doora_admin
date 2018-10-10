@@ -24,5 +24,28 @@ class business_controller
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/viewbranchdetail.php');
 		return $view_branch;
 	}
+	public function is_active($id,$data)
+	{
+		$is_active=$this->business_model->updateactive($id,$data);
+		if($is_active=="1")
+		{
+			echo "<script>window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php?id=2';</script>";
+		}
+		else
+		{
+			echo "<script>window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php?id=1';</script>";			
+		}
+	}
+	public function delete_business($id)
+	{
+		$this->business_model->deletebusiness($id);
+		echo "<script>window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php?id=3';</script>";
+	}
+	public function viewbusiness_detail($id)
+	{
+		$viewbusiness_detail=$this->business_model->getbusinessdetail($id);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/viewbuisnessdetail.php');
+		return $viewbusiness_detail;
+	}
 }
 ?>
