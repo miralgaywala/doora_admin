@@ -18,7 +18,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-2">
                 <br/>   
             
-               <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/tag/displaytagcontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/tag/displaytagcontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
         </div>
       </div>   
         <div class="row">
@@ -37,7 +37,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             </div>                                              
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="tag_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="tag_submit"/>
-                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addtag_form').reset();window.location.href='http://localhost/doora/adminpanel/Controller/tag/displaytagcontroller.php'" value="Cancel"></button>
+                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addtag_form').reset();window.location.href='/doora/adminpanel/Controller/tag/displaytagcontroller.php'" value="Cancel"></button>
                             </div>  
                            </div>
                          </form>

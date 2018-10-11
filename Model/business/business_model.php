@@ -59,5 +59,6 @@ class business_model
        $businessuser=$getbusinessdetail->fetch_all();
        return $businessuser;
     }
+    
 }
 ?>

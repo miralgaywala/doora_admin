@@ -5,17 +5,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
  
  <?php
-       foreach ($viewbusiness_detail as $key => $data) 
+       foreach ($viewcustomer_detail as $key => $data) 
                   {
                ?>
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Business Detail</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Customer Detail</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/customer/displaycustomerlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
   
         </div>
       </div> 
@@ -27,10 +27,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <tr>
                     <td>User Id</td>
                   <td><?php echo $data[0];?></td>
-                  </tr>
-                  <tr>
-                    <td>Business Name</td>
-                  <td><?php echo $data[1];?></td>
                   </tr>
                   <tr>
                     <td>Name</td>

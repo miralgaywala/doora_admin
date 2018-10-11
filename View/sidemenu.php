@@ -16,7 +16,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/doora/adminpanel/Controller/business/displaybusinesslist_controller.php"><i class="fa fa-circle-o"></i> Business</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Customer</a></li>
+            <li><a href="/doora/adminpanel/Controller/customer/displaycustomerlist_controller.php"><i class="fa fa-circle-o"></i> Customer</a></li>
+            <li><a href="/doora/adminpanel/Controller/Admin/displayadminlist_controller.php"><i class="fa fa-circle-o"></i> Admin</a></li>
           </ul>
         </li>
        <li>

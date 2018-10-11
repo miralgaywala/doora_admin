@@ -7,7 +7,7 @@
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Business Franchise List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-                <button style="float: right;" onclick="window.location.href='http://localhost/doora/adminpanel/Controller/business/displaybusinesslist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+                <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
     		</div>
     	</div> 
         <div class="row">

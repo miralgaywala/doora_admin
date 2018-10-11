@@ -8,11 +8,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Sub Category</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Admin Detail</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
@@ -22,41 +22,52 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			<div class="box-body">
         				<table width="50%" style="font-size: 15px;">
                   <?php
-                   foreach ($view_subcategory as $key => $data) 
+                   foreach ($viewadmin_detail as $key => $data) 
                   {
                ?>
                   <tr>
-                    <td>Category Name</td>
+                    <td>Admin Id</td>
                   <td><?php echo $data[0];?></td>
                   </tr>
                   <tr>
-                  <td>Category_Id</td>
+                    <td>Role Id</td>
                   <td><?php echo $data[1];?></td>
                   </tr>
                   <tr>
-                  <td>Sub_Catgeory_Name</td>
+                    <td>Username</td>
+                  <td><?php echo $data[2];?></td>
+                  </tr>
+                  <tr>
+                    <td>Password</td>
                   <td><?php echo $data[3];?></td>
                   </tr>
                   <tr>
-                  <td>Sub_Catgeory_Id</td>
-                  <td><?php echo $data[2];?></td>
-                  </tr>
-                  
-                  <tr>
-                    <td>Sub_Category_Image</td>
-                  <td><img <?php echo "src=/doora/images/sub_category/".$data[4];?> id="SubCategoryPicture"/></td>
+                    <td>Admin Name</td>
+                  <td><?php echo $data[4];?></td>
                   </tr>
                   <tr>
-                    <td>is_deleted</td>
+                    <td>Email Address</td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Created_at</td>
+                    <td>Phone No</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
                   <tr>
+                    <td>Profile Image</td>
+                  <td><img <?php echo "src=/doora/images/profile/".$data[7];?> id="Picture"/></td>
+                  </tr>
+                  <tr>
+                    <td>is_deleted</td>
+                  <td><?php echo $data[8];?></td>
+                  </tr>
+                  <tr>
+                    <td>Created_at</td>
+                  <td><?php echo $data[9];?></td>
+                  </tr>
+                  <tr>
                     <td>Upadted_at</td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data[10];?></td>
                   </tr>
                 <?php } ?>
                 </table>
