@@ -10,22 +10,22 @@
     		</div>
     	</div> 
         <?php 
-          //   if($msg==1)
-          //   {
-          //      $msg='<div class="alert alert-info alert-dismissible">
-          //       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          //       Deactivate Has been successfully
-          //       </div>';
-          //       echo $msg;
-          // }
-          // else if($msg==2)
-          // {
-          //       $msg='<div class="alert alert-info alert-dismissible">
-          //       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          //       Activate Has been successfully
-          //       </div>';
-          //       echo $msg;           
-          // }
+            if($msg==1)
+            {
+               $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Admin Has been Added successfully
+                </div>';
+                echo $msg;
+          }
+          else if($msg==2)
+          {
+                $msg='<div class="alert alert-info alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Admin Has been Updated successfully
+                </div>';
+                echo $msg;           
+          }
          	if($msg==3)
           {
                 $msg='<div class="alert alert-info alert-dismissible">
@@ -70,7 +70,7 @@
                                 <td style="text-align:center;"><?php echo $data[5];?></td> 
                                 <td style="text-align:center;">
                                   <div >
-                                        <a <?php //echo "href=/doora/adminpanel/Controller/category/editcategory_controller.php?id=".$data[0]; ?> title="Edit" >
+                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/editadmin_controller.php?id=".$data[0]; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
                                         <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=/doora/adminpanel/Controller/admin/deleteadmin_controller.php?id=".$data[0];?>  title="Delete" >

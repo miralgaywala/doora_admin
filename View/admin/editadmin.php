@@ -7,7 +7,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php 
         include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/admin/admin_controller.php");
         $controller=new admin_controller();
-        $controller->add_admin();       
+        $controller->edit_admin();       
         ?>
 
 <script>
@@ -17,6 +17,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </script>
 
 <!--Main Content -->
+<?php foreach ($viewadmin_detail as $key => $data) {
+ 
+?>
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;"> <h2>Add/Edit Admin</h2></div>
@@ -36,10 +39,12 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
               <div class="box-body">
                 <form class="form-horizontal" name="addadmin" id="addadmin_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
                   <div class="form-group notranslate">
+                     <input type="hidden" value="<?php echo $data[0]?>" name="id">
                                 <label for="profile_image" class="col-sm-3 control-label">Profile Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="profile_image" type="file" id="profile_image" accept="image/*" onchange="ImagePreview();" style="margin-top: 6px;">
-                                        <div id="AdminPicture" style="margin:10px 0 0 0" ></div><br>
+                                        <input type="hidden" value="<?php echo $data[7]?>" name="image"/>
+                                        <div id="AdminPicture" style="background-image:url('/doora/images/profile/<?php echo $data[7];?>');margin:10px 0 0 0"></div><br>
                                         <span id="profile_imageerror" class="show_required"></span>                                           
                                    </div>
                              </div>   
@@ -47,6 +52,13 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="role" class="col-sm-3 control-label">Role<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="role" name="role" class="form-control">
+                                      <option value="<?php echo $data[1]?>"><?php if($data[1]==1)
+                                      {
+                                        echo "Admin";
+                                      }
+                                      elseif ($data[1]==2) {
+                                         echo "Sub-Admin";
+                                       } ?></option>
                                        <option value="0">Select Role</option>
                                        <option value="1">Admin</option>
                                        <option value="2">Sub Admin</option>
@@ -57,38 +69,39 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                           <div class="form-group notranslate">
                                 <label for="user_name" class="col-sm-3 control-label">Username<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="user_name" type="text" id="user_name" class="form-control"/>
+                                    <input name="user_name" type="text" id="user_name" class="form-control" value="<?php echo $data[2]?>"/>
                                     <span id="user_nameerror" class="show_required"></span>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="password" class="col-sm-3 control-label">Password<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="password" type="text" id="password" class="form-control"/>
+                                    <input name="password" type="text" id="password" class="form-control" value="<?php echo $data[3]?>"/>
                                     <span id="passworderror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="admin_name" class="col-sm-3 control-label">Admin Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="admin_name" type="text" id="admin_name" class="form-control"/>
+                                    <input name="admin_name" type="text" id="admin_name" class="form-control" value="<?php echo $data[4]?>"/>
                                     <span id="admin_nameerror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="email_address" class="col-sm-3 control-label">Email Address<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="email_address" type="text" id="email_address" class="form-control"/>
+                                    <input name="email_address" type="text" id="email_address" class="form-control" value="<?php echo $data[5]?>"/>
                                     <span id="email_addresserror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="phone_no" class="col-sm-3 control-label">Phone No.<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="phone_no" type="text" id="phone_no" class="form-control"/>
+                                    <input name="phone_no" type="text" id="phone_no" class="form-control" value="<?php echo $data[6]?>"/>
                                     <span id="phone_noerror" class="show_required"></span>  
                                 </div>
-                            </div>                            
+                            </div>    
+                            <?php }?>                        
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="admin_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit"/>
                                     <button type="button" class="btn btn-default pull-right" onclick="document.getElementById('addadmin_form').reset();window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'">Cancel</button>
@@ -126,7 +139,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var email_address = document.getElementById("email_address").value;
                                     var phone_no = document.getElementById("phone_no").value;
                                     var profile_image = document.getElementById("profile_image").value;
-                                    var re = /^(?=.*[a-zA-Z]).{6,12}$/
+                                    var re = /^(?=.*?[0-9])(?=.*[a-zA-Z]).{6,12}$/
                                     var reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
                                     var count=0;
                                     if(role == "0")
@@ -194,16 +207,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       else
                                       {
                                         document.getElementById('phone_noerror').innerHTML="";
-                                      }
-                                    if(profile_image == "")
-                                      {
-                                        document.getElementById("profile_imageerror").innerHTML="Please Select Image";
-                                       count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById("profile_imageerror").innerHTML="";
-                                      }                                  
+                                      }                        
                                    if(count>0)
                                    {
                                     return false;
@@ -222,31 +226,21 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $password=$_POST['password'];
                                   $admin_name=$_POST['admin_name'];
                                   $email_address = $_POST['email_address'];
-                                  $phone_no=$_POST['phone_no'];
+                                  $phone_no=$_POST['phone_no']; 
+                                  $id=$_POST['id'];
+                                 if(!is_uploaded_file($_FILES['profile_image']['tmp_name']))
+                                 {
+                                    $imagename=$_POST['image'];
+                                    //echo $imagename; 
+                                 }
+                                 else
+                                 {
                                   $imagename = $_FILES['profile_image']['name'];
-                                  $source = $_FILES['profile_image']['tmp_name'];
-                                  
+                                  $source = $_FILES['profile_image']['tmp_name'];                                  
                                   $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/profile/" . $imagename; 
-                                 
-                                  move_uploaded_file($source, $target);
-                                  $imagepath = $imagename;
-                                 
-                                  $path="/doora/images/profile/" . $imagepath; 
-                                  $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
-                                  $_FILES['profile_image']= $imagepath;
-
-                                  $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/profile/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
-                                  //echo $_POST['category_image'];
-                                  list($width, $height) = getimagesize($file) ;                                    
-                                  $modwidth=150;
-                                  $diff = $width / $modwidth;                                  
-                                  $modheight = 150;
-                                  $tn = imagecreatetruecolor($modwidth, $modheight) ; 
-                                  $image = imagecreatefromjpeg($file) ; 
-                                  imagecopyresampled($tn, $image, 0, 0, 0, 0, $modwidth, $modheight, $width, $height) ; 
-
-                                  imagejpeg($tn, $save, 90) ; 
-                                  return $save;                                  
+                                  move_uploaded_file($source, $target);  
+                                  //echo $imagename;
+                                }                                
                               }
                             ?>       
                        

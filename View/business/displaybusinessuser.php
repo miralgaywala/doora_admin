@@ -126,6 +126,35 @@
         		</div>
         	</div>	
        </div>
+       <script>
+// $(document).ready(function(){
+//   $("#category_name").on("change", function() {
+//     var value = $(this).val().toLowerCase();
+//     $("#example1 tr").filter(function() {
+//         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//     });
+//   });
+// });
+$("#category_name").on("change", function() {
+    var value = $(this).val();
+
+    $("#example1 tr").each(function(index) {
+        if (index != 0) {
+
+            $row = $(this);
+
+            var id = $row.find("td:first").text();
+
+            if (id.indexOf(value) != 0) {
+                $(this).hide();
+            }
+            else {
+                $(this).show();
+            }
+        }
+    });
+})  
+</script>
     </section>
 </div>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  

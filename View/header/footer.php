@@ -30,8 +30,10 @@
 	});*/
   $(document).ready(function() {
    $('#example1').DataTable( {
-            "order": [[ 1, 'asc' ]]
+            "order": [[ 1, 'asc' ]],
     } );
+   
+
 } );
 </script>
 <!-- jQuery UI 1.11.4 -->

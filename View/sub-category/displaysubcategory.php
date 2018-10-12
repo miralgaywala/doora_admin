@@ -75,6 +75,7 @@
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
                             <tr>
+                              <th style="display: none;" ></th>
                               <th style="text-align:center;" width="5%">#</th>
                               <th style="text-align:center;" width="5%">Sub Category Id</th>
                               <th style="text-align:center;">Sub Category Name</th>
@@ -89,6 +90,7 @@
                 foreach ($displaysubcategory as $key => $data) 
                 {
                   ?> <tr>
+                                <td style="display: none;" id="filter"><?php echo $data[1]; ?></td>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><?php echo $data[2]; ?></td>
@@ -117,4 +119,39 @@
        </div>
     </section>
 </div>
+<script>
+// $(document).ready(function(){
+//   $("#category_name").on("change", function() {
+//     var value = $(this).val().toLowerCase();
+//     $("#example1 tr").filter(function() {
+//         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//     });
+//   });
+// });
+$("#category_name").on("change", function() {
+    var value = $(this).val();
+
+    $("#example1 tr").each(function(index) {
+        if (index != 0) {
+
+            $row = $(this);
+
+            var id = $row.find("td:first").text();
+
+            if (id.indexOf(value) != 0) {
+                $(this).hide();
+            }
+            else {
+                $(this).show();
+            }
+        }
+    });
+})  
+</script>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <script type="text/javascript">
+//  oTable = $('#example1').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+// $('#category_name').change(function(){
+//  oTable.search($(this).val()).draw() 
+// })
+ </script>
