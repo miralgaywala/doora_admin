@@ -49,7 +49,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/deal/viewdeal_controller.php">
             <i class="fa fa-handshake-o"></i> <span>Deal</span>
             <span class="pull-right-container">
             </span>

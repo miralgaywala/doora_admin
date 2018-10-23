@@ -59,7 +59,7 @@
                              <div class="form-group">
                                 <label for="category_name" class="col-sm-1 control-label">Category</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
-                                    <select id="category_name" name="category_name" class="form-control" aria-invalid="false" >
+                                    <select id="category_name" name="category_name" class="form-control select2" aria-invalid="false" >
                                     <option value="">Select Category</option>
                                      <?php
 						                 foreach ($category_view as $key => $data1) 

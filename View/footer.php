@@ -34,6 +34,12 @@
     } );
     
 
+$('select[name="category_name"]').on("change", function(event){
+    var category = $('select[name="category_name"]').val();
+    console.log(category);
+    t.fnFilter("^"+ $(this).val() +"$", 2, false, false)
+
+});
       
 } );
 </script>
