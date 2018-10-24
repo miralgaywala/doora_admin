@@ -178,6 +178,54 @@ function loadtag(){
   								
     							</label>
     							</div>	
+                  <hr>
+                  <table id="example1" class="table table-bordered table-hover" style="width:100%">
+                            <thead>
+                            <tr>
+                             
+                              <th style="text-align:center;">#</th>
+                              <th style="text-align:center;" >Deal Id</th>
+                              <th style="text-align:center;">Franchise Address</th>
+                              <th style="text-align:center;width:20px;">Deal Title</th>
+                              <th style="text-align:center;">Promocode</th>
+                              <th style="text-align:center;">terms and Condition</th>
+                               <th style="text-align:center;">Deal Photo</th>
+                              <th style="text-align:center;">Action</th>
+                            </tr>
+                             </thead>
+                     
+                    <tbody>
+              <?php 
+              
+                $i=0;
+                foreach ($display_deal as $key => $data) 
+                {
+                  // $text = $data[3];
+                  // $html = preg_replace("/\\\\u([0-9A-F]{2,5})/i", "&#x$1;", $text);
+                  $text=$data[3];
+                  $html="\"$text\"";
+                  $term = $data[11];
+                  $condition = "\"$term\"";
+                  ?> <tr>
+                                <td style="text-align:center;"><?php echo $i=$i+1;?></td>
+                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
+                                <td style="text-align:center;"><?php echo $data[20]; ?></td>
+                                <td style="text-align:center;"><?php echo json_decode(''.$html.''); ?></td>
+                                 <td style="text-align:center;"><?php echo $data[7]; ?></td>
+                                  <td style="text-align:center;"><?php echo json_decode(''.$condition.''); ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[14];?> id="DealPicture"/></td>
+                                <td style="text-align:center;">
+                          
+                                    <div >
+                                     <a <?php echo "href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=".$data[0]; ?> title="View all detail">
+                                          <i class="fa fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>
+                           <?php } ?>
+                           </tbody>
+                         </table>
         			</div>
         		</div>
         	</div>	

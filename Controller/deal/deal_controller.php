@@ -9,9 +9,16 @@ class deal_controller
 	public function view_deal()
 	{
 		$display_deal=$this->deal_model->getdisplay_deal();
-		$display_tag=$this->deal_model->getdisplay_tag();
-		$display_category=$this->deal_model->getdisplay_category();
 		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
 	}
+	public function viewdetail_deal($id)
+	{
+		$display_dealdetail=$this->deal_model->getdisplaydetail_deal($id);
+		$deal_tag=$this->deal_model->getdealtag($id);
+		$deal_cat=$this->deal_model->getdealcat($id);
+		$deal_category=$this->deal_model->getdealcategory($id);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdealdetail.php");
+	}
+
 }
 ?>

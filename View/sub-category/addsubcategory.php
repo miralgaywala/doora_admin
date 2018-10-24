@@ -63,12 +63,12 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 										                  <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
                                       </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
-                                      <div class="col-md-2" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:64px;height:64px; border-style: groove;border-width: thin;"></div>
+                                      <div class="col-md-3" style="margin-top: 10px;">
+                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"></div>
                                      	<input type="hidden" name="imagename" id="imagename">
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
-                                          <div id="upload-demo" style="width:102px;height:102px; border-style: groove;border-width: thin;"></div>
+                                          <div id="upload-demo" style="width:201px;height:201px; border-style: groove;border-width: thin;"></div>
                                       </div>                     
                            </div> 
                              </div>                               
@@ -85,13 +85,13 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                 enableExif: true,
                 enableOrientation: true,    
                 viewport: { 
-                     width: 62,
-                    height: 62,
+                     width: 186,
+                    height: 186,
                     type: 'square' 
                 },
                 boundary: {
-                     width: 100,
-                    height: 100
+                     width: 200,
+                    height: 200
                 }
             });
             

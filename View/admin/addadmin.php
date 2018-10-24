@@ -126,7 +126,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     var email_address = document.getElementById("email_address").value;
                                     var phone_no = document.getElementById("phone_no").value;
                                     var profile_image = document.getElementById("profile_image").value;
-                                    var re = /^.{6,12}$/
+                                    var re = /^(?=.*?[0-9])(?=.*[a-zA-Z]).{6,12}$/
                                     var reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
                                     var count=0;
                                     if(role == "0")
