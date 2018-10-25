@@ -17,6 +17,11 @@ class deal_controller
 		$deal_tag=$this->deal_model->getdealtag($id);
 		$deal_cat=$this->deal_model->getdealcat($id);
 		$deal_category=$this->deal_model->getdealcategory($id);
+		$deal_rdm=$this->deal_model->getdealreedeam($id);
+		$deal_purchased=$this->deal_model->getdealpurchased($id);
+		$instore_rdm = $this->deal_model->gettotalrdminstore($id);
+		$instore_pur= $this->deal_model->gettotalpurinstore($id);
+		$isonline_pur= $this->deal_model->gettotalonlinepur($id);
 		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdealdetail.php");
 	}
 

@@ -12,6 +12,29 @@
             $("#category_name").select2(); 
         });
 
+        $(document).ready(function(){
+      $('#category_name').change(function(){
+        loadsubcategory($(this).find(':selected').val())
+      })
+    })
+        function loadsubcategory(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+    var elem = document.getElementById("category_name");
+      selectedNode = elem.options[elem.selectedIndex];
+      var CategoryId = selectedNode.value;
+      console.log(selectedNode.value);
+        $.ajax({
+            type: "POST",
+            url: "/doora/adminpanel/View/sub_category/subcategory.php",
+            data: "get=subcategory&category_id="+ CategoryId,
+            success:function(data1) { 
+                //console.log(data1);
+                  $('#sub_category').html(data1);
+            }
+            });
+}
+
     </script>
     <section class="content">
       <div id='msg'></div>

@@ -59,7 +59,7 @@ class subcategory_model
         $con= $this->db->connection();
         $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
         $date=$date->format('y-m-d H:i:s');
-        $select=$con->query("select * from sub_category where sub_category_name='".$subcategory_name."' AND is_deleted=0 ");
+        $select=$con->query("select * from sub_category where sub_category_name='".$subcategory_name."' AND category_id=".$category_id." AND is_deleted=0 ");
         $count=$select->num_rows;
        $add_subcategory="";
         if($count > 0)  

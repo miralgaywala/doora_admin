@@ -20,7 +20,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         	<div class="col-xs-12">
         		<div class="box">            
         			<div class="box-body">
-        				<table width="100%" style="font-size: 15px;">
+        				<table width=100%" style="font-size: 15px;">
                   <?php
                    foreach ($display_dealdetail as $key => $data) 
                   {
@@ -33,14 +33,30 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     <td>Business Deal Id</td>
                   <td><?php echo $data[0];?></td>
                   </tr>
+                   <tr>
+                    <td>Business User Id</td>
+                  <td><?php echo $data[21];?></td>
+                  </tr>
+                  <tr>
+                    <td>Business Name</td>
+                  <td><?php echo $data[23];?></td>
+                  </tr>
                   <tr>
                   <td>Franchise Id</td>
                   <td><?php echo $data[1];?></td>
+                  </tr>
+                   <tr>
+                    <td>Franchise Address</td>
+                  <td><?php echo $data[20];?></td>
                   </tr>
                   <tr>
                   <td>Offer Id</td>
                   <td><?php echo $data[2];?></td>
                   </tr>
+					<tr>
+                  <td>Offer Title</td>
+                  <td><?php echo $data[30];?></td>
+                  </tr>                  
                   <tr>
                   <td>Deal Title</td>
                   <td><?php echo json_decode(''.$html.'');?></td>
@@ -60,10 +76,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <tr>
                     <td>Promocode</td>
                   <td><?php echo $data[7];?></td>
-                  </tr>
-                  <tr>
-                    <td>Timezone Offset</td>
-                  <td><?php echo $data[8];?></td>
                   </tr>
                   <tr>
                     <td>Is In Store</td>
@@ -86,11 +98,36 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
+                    <td>Total In Store Reedem Quantity</td>
+                  <td> <?php  foreach ($instore_rdm as $pur) {               
+                   ?><?php echo $pur[3]; ?><?php } ?></td>
+                  </tr>
+                	<tr>
+                    <td>Total In Store Purchased Quantity</td>
+                  <td> <?php foreach ($instore_pur as $pur) {                   
+                   ?><?php echo $pur[3];?><?php } ?></td>
+                  </tr>
+                  <tr>
+                    <td>Total Online Purchased Quantity</td>
+                  <td> <?php foreach ($isonline_pur as $pur) {                   
+                   ?><?php echo $pur[3];?><?php } ?></td>
+                  </tr>
+                  <tr>
+                    <td>Total Reedem Quantity</td>
+                  <td> <?php foreach ($deal_rdm as $rdm) {                   
+                   ?><?php echo $rdm[3];?><?php } ?></td>
+                  </tr>
+                  <tr>
+                    <td>Total Purchased Quantity</td>
+                  <td> <?php foreach ($deal_purchased as $pur) {                   
+                   ?><?php echo $pur[3];?><?php } ?></td>
+                  </tr>
+                  <tr>
                     <td>Terms and Condition</td>
                   <td><?php echo json_decode(''.$condition.'');?></td>
                   </tr>
                   <tr>
-                    <td>Overall Quentity</td>
+                    <td>Overall Quantity</td>
                   <td><?php if($data[12] == 0 ) 
                   {echo "No Limit";
                 }
@@ -100,7 +137,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Per Person Quentity</td>
+                    <td>Per Person Quantity</td>
                   <td><?php if($data[13] == 0 ) 
                   {echo "No Limit";
                 }
@@ -113,6 +150,22 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     <td>Deal Photo</td>
                   <td><img <?php echo "src=/doora/images/deal/".$data[14];?> id="DealPicture"/></td>
                   </tr>
+                   <?php if($data[15] == NULL) 
+                    {
+                    	
+                    }
+                    else
+                    	{?>
+                  <tr>	
+                    <td>Deal Video</td>
+                 
+                   
+                  <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
+  					<source <?php echo "src=/doora/video/deal/".$data[15];?> type="video/mp4">
+					</video></td> <?php } ?>
+				
+                  </tr>
+               
                   <tr>
                     <td>Deal Start time</td>
                   <td><?php echo $data[16];?></td>
@@ -121,18 +174,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     <td>Deal End time</td>
                   <td><?php echo $data[17];?></td>
                   </tr>
-                  <tr>
-                    <td>Franchise Address</td>
-                  <td><?php echo $data[20];?></td>
-                  </tr>
-                  <tr>
-                    <td>Business User Id</td>
-                  <td><?php echo $data[21];?></td>
-                  </tr>
-                  <tr>
-                    <td>Business Name</td>
-                  <td><?php echo $data[23];?></td>
-                  </tr>
+                 
+                 
                   <tr>
                     <td>Tag Id</td>
                   <td> <?php foreach ($deal_tag as $tag) {                   
