@@ -34,7 +34,7 @@ class subcategory_controller{
 	public function delete_subcategory($subcategory_id)
 	{
 		$this->subcat_model->deletesubcategory($subcategory_id);
-		echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=3";</script>';
+		echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=m3";</script>';
 	}
 	public function bind_category()
 	{
@@ -56,7 +56,7 @@ class subcategory_controller{
 			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
 			if($add_subcategory=="1")
 			{
-			echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=0";</script>';
+			echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=m0";</script>';
 			}
 			else
 			{
@@ -87,7 +87,7 @@ class subcategory_controller{
 			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
 			if($edit_subcategory=="1")
 			{
-				echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=2";</script>';
+				echo '<script>window.location.href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php?id=m2";</script>';
 			}
 			else
 			{
@@ -98,5 +98,12 @@ class subcategory_controller{
 			}
 			
 		}
+	}
+	public function filter_subcategory($msg)
+	{
+		$category_view=$this->subcat_model->getcategory();
+		$category=$this->subcat_model->getcategoryfilter($msg);
+		$displaysubcategory=$this->subcat_model->getsubcategoryfilter($msg);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/sub-category/displaysubcategory.php');
 	}
 }

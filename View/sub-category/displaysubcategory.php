@@ -20,21 +20,12 @@
         function loadsubcategory(CategoryId){
       
         //var UsersId = $('#category').val(); 
-    var elem = document.getElementById("category_name");
-      selectedNode = elem.options[elem.selectedIndex];
-      var CategoryId = selectedNode.value;
-      console.log(selectedNode.value);
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/sub_category/subcategory.php",
-            data: "get=subcategory&category_id="+ CategoryId,
-            success:function(data1) { 
-                //console.log(data1);
-                  $('#sub_category').html(data1);
-            }
-            });
+        var elem = document.getElementById("category_name");
+        selectedNode = elem.options[elem.selectedIndex];
+        var CategoryId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId;
 }
-
     </script>
     <section class="content">
       <div id='msg'></div>
@@ -46,7 +37,7 @@
             </div>
         </div> 
         <?php 
-            if($msg==0)
+            if($msg=="m0")
             {
            $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -54,7 +45,7 @@
             </div>';
             echo $msg;
           }
-          else if($msg==2)
+          else if($msg=="m2")
           {
             $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -63,7 +54,7 @@
             echo $msg;
            
           }
-          else if($msg==3)
+          else if($msg=="m3")
           {
             $msg='<div class="alert alert-info alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -83,7 +74,11 @@
                                 <label for="category_name" class="col-sm-1 control-label">Category</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control select2" aria-invalid="false" >
-                                    <option value="">Select Category</option>
+                                      <?php foreach($category as $data2)
+                                      {?>
+                                          <option value="<?php echo $data2[0];?>"><?php echo $data2[1];?></option>
+                                      <?php }?>
+                                    <option value="0">Select Category</option>
                                      <?php
 						                 foreach ($category_view as $key => $data1) 
 						                { ?>
@@ -98,7 +93,6 @@
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                              <th style="display: none;" ></th>
                               <th style="text-align:center;" width="5%">#</th>
                               <th style="text-align:center;" width="5%">Sub Category Id</th>
                               <th style="text-align:center;">Sub Category Name</th>
@@ -113,7 +107,6 @@
                 foreach ($displaysubcategory as $key => $data) 
                 {
                   ?> <tr>
-                                <td style="display: none;" id="filter"><?php echo $data[1]; ?></td>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><?php echo $data[2]; ?></td>
@@ -142,39 +135,4 @@
        </div>
     </section>
 </div>
-<script>
-// $(document).ready(function(){
-//   $("#category_name").on("change", function() {
-//     var value = $(this).val().toLowerCase();
-//     $("#example1 tr").filter(function() {
-//         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//     });
-//   });
-// });
-$("#category_name").on("change", function() {
-    var value = $(this).val();
-
-    $("#example1 tr").each(function(index) {
-        if (index != 0) {
-
-            $row = $(this);
-
-            var id = $row.find("td:first").text();
-
-            if (id.indexOf(value) != 0) {
-                $(this).hide();
-            }
-            else {
-                $(this).show();
-            }
-        }
-    });
-})  
-</script>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
- <script type="text/javascript">
-//  oTable = $('#example1').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
-// $('#category_name').change(function(){
-//  oTable.search($(this).val()).draw() 
-// })
- </script>

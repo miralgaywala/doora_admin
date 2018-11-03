@@ -24,6 +24,32 @@ class deal_controller
 		$isonline_pur= $this->deal_model->gettotalonlinepur($id);
 		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdealdetail.php");
 	}
-
+	public function subcategoryfilter_deal($msg)
+	{
+		$display_deal=$this->deal_model->getsubcategory_filter($msg);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
+	public function branchfilter_deal($msg)
+	{
+		$display_deal=$this->deal_model->getbranch_filter($msg);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
+	public function categoryfilter_deal($msg)
+	{
+		$display_deal=$this->deal_model->getcategory_filter($msg);
+		$getsubcategory=$this->deal_model->getcategorylist($msg);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
+	public function tagfilter_deal($msg)
+	{
+		$display_deal=$this->deal_model->gettag_filter($msg);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
+	public function businessfilter_deal($msg)
+	{
+		$display_deal=$this->deal_model->getbusiness_filter($msg);
+		$getbranch=$this->deal_model->getbranchlist($msg);
+		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
 }
 ?>

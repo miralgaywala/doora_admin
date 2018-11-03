@@ -102,5 +102,26 @@ class subcategory_model
         }
        return $edit_category;
     }
+    public function getsubcategoryfilter($msg)
+    {
+        $con=$this->db->connection();
+        if($msg==0)
+        {
+            $getsubcategory=$con->query("select * from sub_category where is_deleted=0");
+        }
+        else
+        {
+        $getsubcategory=$con->query("select * from sub_category where is_deleted=0 AND category_id=".$msg);
+        }
+        $subcategory=$getsubcategory->fetch_all();   
+        return $subcategory;
+    }
+    public function getcategoryfilter($msg)
+    {
+        $con=$this->db->connection();
+        $category=$con->query("select * from category where category_id=".$msg);
+        $getcategory=$category->fetch_all();
+        return $getcategory;
+    }
 }
 ?>

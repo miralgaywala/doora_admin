@@ -13,14 +13,8 @@
     <script>
     	$(document).ready(function(){
 		  $('#business').change(function(){
-		    loadbranch($(this).find(':selected').val())
 		  })
 		  $('#branch').change(function(){
-		  })
-		  $('#category').change(function(){
-		    loadsubcategory($(this).find(':selected').val())
-		  })
-		  $('#sub_category').change(function(){
 		  })
 		})
 
@@ -35,26 +29,26 @@
             }
 		});
     }
-    function loadbranch(UsersId){
-        $("#branch").children().remove()
-        //var UsersId = $('#business').val(); 
-		var elem = document.getElementById("business"),
-	    selectedNode = elem.options[elem.selectedIndex];
-	    var UsersId = selectedNode.value;
-   //console.log(UsersId);
-        // var sel = document.getElementById('branch');
-        // var opt = sel.options[sel.selectedIndex];
-       // console.log( opt.value );
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/deal/branch.php",
-            data: "get=branch&user_id="+ UsersId,
-           	success:function(data1) {	
-           			//console.log(data1);
-                	$('#branch').html(data1);
-            }
-            });
-}
+//     function loadbranch(UsersId){
+//         $("#branch").children().remove()
+//         //var UsersId = $('#business').val(); 
+// 		var elem = document.getElementById("business"),
+// 	    selectedNode = elem.options[elem.selectedIndex];
+// 	    var UsersId = selectedNode.value;
+//    //console.log(UsersId);
+//         // var sel = document.getElementById('branch');
+//         // var opt = sel.options[sel.selectedIndex];
+//        // console.log( opt.value );
+//         $.ajax({
+//             type: "POST",
+//             url: "/doora/adminpanel/View/deal/branch.php",
+//             data: "get=branch&user_id="+ UsersId,
+//            	success:function(data1) {	
+//            			//console.log(data1);
+//                 	$('#branch').html(data1);
+//             }
+//             });
+// }
 function loadtag(){
         $.ajax({
             type: "POST",
@@ -75,36 +69,88 @@ function loadtag(){
             }
 		});
     }
-    function loadsubcategory(CategoryId){
-        $("#sub_category").children().remove()
-        //var UsersId = $('#category').val(); 
-		var elem = document.getElementById("category");
-	    selectedNode = elem.options[elem.selectedIndex];
-	    var CategoryId = selectedNode.value;
-  		console.log(selectedNode.value);
-        // var sel = document.getElementById('branch');
-        // var opt = sel.options[sel.selectedIndex];
-       // console.log( opt.value );
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/deal/subcategory.php",
-            data: "get=subcategory&category_id="+ CategoryId,
-           	success:function(data1) {	
-           			//console.log(data1);
-                	$('#sub_category').html(data1);
-            }
-            });
-}
 		loadbusiness();
 		loadtag();
 		loadcategory();
+    </script>
+
+    <script>
+$(document).ready(function(){
+      $('#sub_category').change(function(){
+        loadsubcategoryfilter($(this).find(':selected').val())
+      })
+    })
+        function loadsubcategoryfilter(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("sub_category");
+        selectedNode = elem.options[elem.selectedIndex];
+        var CategoryId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId;
+}
+$(document).ready(function(){
+      $('#category').change(function(){
+        loadcategoryfilter($(this).find(':selected').val())
+      })
+    })
+        function loadcategoryfilter(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("category");
+        selectedNode = elem.options[elem.selectedIndex];
+        var CategoryId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/deal/categoryfilter.php?category_id='+CategoryId;
+}
+$(document).ready(function(){
+      $('#branch').change(function(){
+        loadbranchfilter($(this).find(':selected').val())
+      })
+    })
+        function loadbranchfilter(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("branch");
+        selectedNode = elem.options[elem.selectedIndex];
+        var branchId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/deal/branchfilter.php?branch_id='+branchId;
+}
+$(document).ready(function(){
+      $('#tag').change(function(){
+        loadtagfilter($(this).find(':selected').val())
+      })
+    })
+        function loadtagfilter(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("tag");
+        selectedNode = elem.options[elem.selectedIndex];
+        var tagId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/deal/tagfilter.php?tag_id='+tagId;
+}
+$(document).ready(function(){
+      $('#business').change(function(){
+        loadbusinessfilter($(this).find(':selected').val())
+      })
+    })
+        function loadbusinessfilter(CategoryId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("business");
+        selectedNode = elem.options[elem.selectedIndex];
+        var businessId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/deal/businessfilter.php?business_id='+businessId;
+}
     </script>
 <section class="content">   
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Deal</h2></div>
     		<div class="col-md-2">
-                <br/>   
-                
+                <br/>                   
     		</div>
     	</div> 
         <div class="row">
@@ -125,6 +171,8 @@ function loadtag(){
                                 <div class="col-sm-5" style="padding-top: 6px;">
                                     <select id="branch" name="" class="form-control">
                                        <option value="0">Select Business Branch</option>
+                                        <?php foreach ($getbranch as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
                  </div>
@@ -147,6 +195,8 @@ function loadtag(){
                                 <div class="col-sm-3" style="padding-top: 20px;padding-left: 5px;">
                                     <select id="sub_category" name="" class="form-control">
                                        <option value="0">Select Sub Category</option>
+                                       <?php foreach ($getsubcategory as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
    					</div>
@@ -200,22 +250,22 @@ function loadtag(){
                 $i=0;
                 foreach ($display_deal as $key => $data) 
                 {
+                  //print_r($display_deal);
                   // $text = $data[3];
                   // $html = preg_replace("/\\\\u([0-9A-F]{2,5})/i", "&#x$1;", $text);
                   $text=$data[3];
                   $html="\"$text\"";
-                  $term = $data[11];
+                  $term = $data[12];
                   $condition = "\"$term\"";
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[20]; ?></td>
+                                <td style="text-align:center;"><?php echo $data[21]; ?></td>
                                 <td style="text-align:center;"><?php echo json_decode(''.$html.''); ?></td>
                                  <td style="text-align:center;"><?php echo $data[7]; ?></td>
                                   <td style="text-align:center;"><?php echo json_decode(''.$condition.''); ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[14];?> id="DealPicture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
                                 <td style="text-align:center;">
-                          
                                     <div >
                                      <a <?php echo "href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=".$data[0]; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>

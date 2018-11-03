@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-//include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/deal/deal.php");
 class deal_model
 {
 	public function __construct() {
@@ -50,7 +49,6 @@ class deal_model
        }
        public function getdealpurchased($id)
        {
-        //echo "hi";
           $con=$this->db->connection();
           $getdealpur=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=0 OR upd.is_online=1) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
           $deal_pur=$getdealpur->fetch_all();
@@ -77,6 +75,54 @@ class deal_model
               $online_pur=$getonlinepur->fetch_all();
               return $online_pur;
        }
-    
+    public function getsubcategory_filter($msg)
+    {
+          $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,dps.sub_cat_id from business_deal as bd left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id where dps.sub_cat_id=".$msg);
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getbranch_filter($msg)
+    {
+          $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.franchise_id=".$msg);
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getcategory_filter($msg)
+    {
+          $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where ca.category_id=".$msg);
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getcategorylist($msg)
+    {
+              $con=$this->db->connection();
+              $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$msg);
+              $category=$getonlinepur->fetch_all();   
+              return $category;
+    }
+    public function gettag_filter($msg)
+    {
+          $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.tag_id=".$msg);
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getbranchlist($msg)
+    {
+              $con=$this->db->connection();
+              $getonlinepur=$con->query("select franchise_id, franchise_address from business_franchise where is_deleted=0 AND business_user_id=".$msg);
+              $branch=$getonlinepur->fetch_all();   
+              return $branch;
+    }
+    public function getbusiness_filter($msg)
+    {
+          $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.business_user_id=".$msg);
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
 }
 ?>

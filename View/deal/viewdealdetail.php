@@ -24,9 +24,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <?php
                    foreach ($display_dealdetail as $key => $data) 
                   {
+                    //print_r($display_dealdetail);
                      $text=$data[3];
                   $html="\"$text\"";
-                  $term = $data[11];
+                  $term = $data[12];
                   $condition = "\"$term\"";
                ?>
                   <tr>
@@ -35,11 +36,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Business User Id</td>
-                  <td><?php echo $data[21];?></td>
+                  <td><?php echo $data[22];?></td>
                   </tr>
                   <tr>
                     <td>Business Name</td>
-                  <td><?php echo $data[23];?></td>
+                  <td><?php echo $data[24];?></td>
                   </tr>
                   <tr>
                   <td>Franchise Id</td>
@@ -47,7 +48,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Franchise Address</td>
-                  <td><?php echo $data[20];?></td>
+                  <td><?php echo $data[21];?></td>
                   </tr>
                   <tr>
                   <td>Offer Id</td>
@@ -55,7 +56,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
 					<tr>
                   <td>Offer Title</td>
-                  <td><?php echo $data[30];?></td>
+                  <td><?php echo $data[31];?></td>
                   </tr>                  
                   <tr>
                   <td>Deal Title</td>
@@ -148,11 +149,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Deal Photo</td>
-                  <td><img <?php echo "src=/doora/images/deal/".$data[14];?> id="DealPicture"/></td>
+                  <td><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
                   </tr>
-                   <?php if($data[15] == NULL) 
+                   <?php if($data[16] == NULL)
                     {
-                    	
+                      
                     }
                     else
                     	{?>
@@ -161,18 +162,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                  
                    
                   <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
-  					<source <?php echo "src=/doora/video/deal/".$data[15];?> type="video/mp4">
+  					<source <?php echo "src=/doora/video/deal/".$data[16];?> type="video/mp4">
 					</video></td> <?php } ?>
 				
                   </tr>
                
                   <tr>
                     <td>Deal Start time</td>
-                  <td><?php echo $data[16];?></td>
+                  <td><?php echo $data[17];?></td>
                   </tr>
                   <tr>
                     <td>Deal End time</td>
-                  <td><?php echo $data[17];?></td>
+                  <td><?php echo $data[18];?></td>
                   </tr>
                  
                  
