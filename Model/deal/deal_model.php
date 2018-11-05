@@ -92,12 +92,20 @@ class deal_model
     public function getcategory_filter($msg)
     {
           $con=$this->db->connection();
+          if($msg == 0)
+          {
+             $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id ");
+          }
+            else
+            {
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where ca.category_id=".$msg);
+            }  
               $deal=$getonlinepur->fetch_all();
               return $deal;
     }
     public function getcategorylist($msg)
     {
+
               $con=$this->db->connection();
               $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$msg);
               $category=$getonlinepur->fetch_all();   
@@ -106,7 +114,13 @@ class deal_model
     public function gettag_filter($msg)
     {
           $con=$this->db->connection();
-              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.tag_id=".$msg);
+          if($msg == 0 )
+          {
+            $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id ");
+          }
+             else
+             { $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.tag_id=".$msg);
+         }
               $deal=$getonlinepur->fetch_all();
               return $deal;
     }
@@ -120,9 +134,67 @@ class deal_model
     public function getbusiness_filter($msg)
     {
           $con=$this->db->connection();
+          if($msg == 0)
+          {
+                $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id");
+          }
+          else
+          {
+
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.business_user_id=".$msg);
+          }
               $deal=$getonlinepur->fetch_all();
               return $deal;
+    }
+    public function getdisplay_activedeal($msg)
+    {
+      $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=1");
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getdisplay_deactivedeal($msg)
+    {
+      $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=0");
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getdisplay_expireddeal($msg)
+    {
+      $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.deal_end_time < now()");
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getdisplay_purchaseddeal($msg)
+    {
+      $con=$this->db->connection();
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 OR upd.is_online=1) group by bd.business_deal_id");
+              $deal=$getonlinepur->fetch_all();
+              return $deal;
+    }
+    public function getdisplay_tag()
+    {
+      $con=$this->db->connection();
+
+              $gettag=$con->query("select tag_id,tag from deal_tags where is_deleted=0");
+              $alltag=$gettag->fetch_all();
+              return $alltag;
+    }
+    public function getdisplay_business()
+    {
+      $con=$this->db->connection();
+              $gettag=$con->query("select user_id,business_name from users where is_deleted=0 AND is_business=1");
+              $alltag=$gettag->fetch_all();
+              return $alltag;
+    }
+    public function getdisplay_category()
+    {
+      $con=$this->db->connection();
+              $gettag=$con->query("select category_id,category_name from category where NOT is_deleted=1");
+              $alltag=$gettag->fetch_all();
+              return $alltag;
     }
 }
 ?>

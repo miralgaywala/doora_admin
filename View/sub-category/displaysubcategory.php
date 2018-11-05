@@ -74,19 +74,25 @@
                                 <label for="category_name" class="col-sm-1 control-label">Category</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control select2" aria-invalid="false" >
-                                      <?php foreach($category as $data2)
-                                      {?>
-                                          <option value="<?php echo $data2[0];?>"><?php echo $data2[1];?></option>
-                                      <?php }?>
-                                    <option value="0">Select Category</option>
+                                        <option value="0">Select Category</option>
+                                    <?php 
+                                    if($_GET['category_id'])
+                                    {
+                                      $selected = $_GET['category_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                      ?>
                                      <?php
 						                 foreach ($category_view as $key => $data1) 
 						                { ?>
-						                	 <option value="<?php echo $data1[0];?>"><?php echo $data1[1];?></option>
+						                	  <option value="<?php echo $data1[0];?>" <?php if($data1[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data1[1];?></option>
 						                	<?php   } ?>
                                     </select>
                                 </div> 
-                                <input type="hidden" name="category_name" id="category_name" />
+                                <input type="hidden" name="category_name" id="category_name"/>
                             </div>
                           </form>
                           <hr>

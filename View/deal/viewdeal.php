@@ -10,71 +10,7 @@
               $("#sub_category").select2(); 
         });
     </script>
-    <script>
-    	$(document).ready(function(){
-		  $('#business').change(function(){
-		  })
-		  $('#branch').change(function(){
-		  })
-		})
-
-		function loadbusiness(){
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/deal/ajax.php",
-            data: "get=business",
-            success:function(data) {
-            	//console.log(data);
-                	$('#business').html(data);
-            }
-		});
-    }
-//     function loadbranch(UsersId){
-//         $("#branch").children().remove()
-//         //var UsersId = $('#business').val(); 
-// 		var elem = document.getElementById("business"),
-// 	    selectedNode = elem.options[elem.selectedIndex];
-// 	    var UsersId = selectedNode.value;
-//    //console.log(UsersId);
-//         // var sel = document.getElementById('branch');
-//         // var opt = sel.options[sel.selectedIndex];
-//        // console.log( opt.value );
-//         $.ajax({
-//             type: "POST",
-//             url: "/doora/adminpanel/View/deal/branch.php",
-//             data: "get=branch&user_id="+ UsersId,
-//            	success:function(data1) {	
-//            			//console.log(data1);
-//                 	$('#branch').html(data1);
-//             }
-//             });
-// }
-function loadtag(){
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/deal/tag.php",
-            data: "get=tag",
-            success:function(data) {	
-                	$('#tag').html(data);
-            }
-		});
-    }
-    function loadcategory(){
-        $.ajax({
-            type: "POST",
-            url: "/doora/adminpanel/View/deal/category.php",
-            data: "get=category",
-            success:function(data) {	
-                	$('#category').html(data);
-            }
-		});
-    }
-		loadbusiness();
-		loadtag();
-		loadcategory();
-    </script>
-
-    <script>
+    <script>                  
 $(document).ready(function(){
       $('#sub_category').change(function(){
         loadsubcategoryfilter($(this).find(':selected').val())
@@ -108,7 +44,7 @@ $(document).ready(function(){
         loadbranchfilter($(this).find(':selected').val())
       })
     })
-        function loadbranchfilter(CategoryId){
+        function loadbranchfilter(branchId){
       
         //var UsersId = $('#category').val(); 
         var elem = document.getElementById("branch");
@@ -122,7 +58,7 @@ $(document).ready(function(){
         loadtagfilter($(this).find(':selected').val())
       })
     })
-        function loadtagfilter(CategoryId){
+        function loadtagfilter(tagId){
       
         //var UsersId = $('#category').val(); 
         var elem = document.getElementById("tag");
@@ -136,7 +72,7 @@ $(document).ready(function(){
         loadbusinessfilter($(this).find(':selected').val())
       })
     })
-        function loadbusinessfilter(CategoryId){
+        function loadbusinessfilter(businessId){
       
         //var UsersId = $('#category').val(); 
         var elem = document.getElementById("business");
@@ -146,6 +82,33 @@ $(document).ready(function(){
         window.location.href='/doora/adminpanel/Controller/deal/businessfilter.php?business_id='+businessId;
 }
     </script>
+    <script>
+  function alldata()
+    {
+        window.location.href='/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1';
+        document.getElementById("all").checked = true;
+    }   
+    function active()
+    {
+       window.location.href='/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2';
+       document.getElementById("active").checked = true;
+    }
+    function deactive()
+    {
+      window.location.href='/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3';
+      document.getElementById("deactive").checked = true;
+    }
+    function expired()
+    {
+      window.location.href='/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4';
+      document.getElementById("expired").checked = true;
+    }
+    function purchased()
+    {
+      window.location.href='/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5';
+      document.getElementById("purchased").checked = true;
+    }
+ </script>
 <section class="content">   
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Deal</h2></div>
@@ -155,24 +118,42 @@ $(document).ready(function(){
     	</div> 
         <div class="row">
         	<div class="col-xs-12">
-        	
         		<div class="box">
         				<div class="box-body">
                <div class="row">
                                 <label for="business" class="col-sm-1 control-label" style="margin-top: 10px;">Business</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
                                     <select id="business" name="" class="form-control">
-                                       <option value="">Select Business</option>                              
+                                       <option value="0">Select Business</option> 
+                                       <?php 
+                                    if($_GET['business_id'])
+                                    {
+                                      $selected = $_GET['business_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                      ?>
+                                       <?php foreach ($getbusiness as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>                             
                                   </select>
                                 </div> 
-                      
-                           
                                 <label for="branch" class="col-sm-2 control-label" style="margin-top: 10px;">Business Branch</label>
                                 <div class="col-sm-5" style="padding-top: 6px;">
                                     <select id="branch" name="" class="form-control">
                                        <option value="0">Select Business Branch</option>
-                                        <?php foreach ($getbranch as  $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>
+                                        <?php 
+                                        if($_GET['branch_id'])
+                                    {
+                                      $selected = $_GET['branch_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                        foreach ($getbranch as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
                  </div>
@@ -181,6 +162,17 @@ $(document).ready(function(){
                                 <div class="col-sm-2" style="padding-top: 20px">
                                     <select id="tag" name="" class="form-control">
                                        <option value="0">Select tag</option>
+                                       <?php 
+                                       if($_GET['tag_id'])
+                                    {
+                                      $selected = $_GET['tag_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                       foreach ($gettag as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
                          
@@ -188,6 +180,17 @@ $(document).ready(function(){
                                 <div class="col-sm-3" style="padding-top: 20px">
                                     <select id="category" name="" class="form-control">
                                        <option value="0">Select Catgeory</option>
+                                        <?php 
+                                        if($_GET['category_id'])
+                                    {
+                                      $selected = $_GET['category_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                        foreach ($getcategory as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>       
                                   </select>
                                 </div> 
                                 <label for="sub_category" class="col-sm-2 control-label" style="margin-top: 25px;">Sub Category</label>
@@ -195,44 +198,50 @@ $(document).ready(function(){
                                 <div class="col-sm-3" style="padding-top: 20px;padding-left: 5px;">
                                     <select id="sub_category" name="" class="form-control">
                                        <option value="0">Select Sub Category</option>
-                                       <?php foreach ($getsubcategory as  $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>
+                                       <?php 
+                                       if($_GET['subcategory_id'])
+                                    {
+                                      $selected = $_GET['subcategory_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                       foreach ($getsubcategory as  $data) {
+                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
    					</div>
    					<div class="row">
    						<div class="col-sm-1"></div>
+              <?php if(isset($_GET['data']))
+                                    {
+                                      $selected = $_GET['data'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }?>
                                 <label class="radio-inline col-sm-2" style="margin-top: 25px;">
-                                	
-      									<input type="radio" name="optradio" checked>All
-  									
+      									<input type="radio" name="optradio" id="all" onclick="return alldata();" <?php if("a1" == $selected ) { ?> checked <?php } ?> >All
     							</label>
                                 <label class="radio-inline col-sm-2" style="margin-top: 25px;">
-                                	
-      									<input type="radio" name="optradio">Active
-  									
+      									<input type="radio" name="optradio" id="active" onclick="return active();" <?php if("a2" == $selected ) { ?> checked <?php } ?>>Active
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-                                	
-      									<input type="radio" name="optradio">Deactive
-  									
+      									<input type="radio" name="optradio" id="deactive" onclick="return deactive();" <?php if("a3" == $selected ) { ?> checked <?php } ?>>Deactive
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-                                	
-      									<input type="radio" name="optradio">Expired
-  								
+      									<input type="radio" name="optradio" id="expired" onclick="return expired();" <?php if("a4" == $selected ) { ?> checked <?php } ?>>Expired
     							</label>
     							<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-                                	
-      									<input type="radio" name="optradio">Purchased
-  								
+      									<input type="radio" name="optradio" id="purchased" onclick="return purchased();" <?php if("a5" == $selected ) { ?> checked <?php } ?>>Purchased
     							</label>
     							</div>	
                   <hr>
                   <table id="example1" class="table table-bordered table-hover" style="width:100%">
                             <thead>
                             <tr>
-                             
                               <th style="text-align:center;">#</th>
                               <th style="text-align:center;" >Deal Id</th>
                               <th style="text-align:center;">Franchise Address</th>
@@ -283,3 +292,4 @@ $(document).ready(function(){
     </section>
 </div>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ 
