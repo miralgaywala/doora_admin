@@ -33,7 +33,11 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		print_r($display_deal);
+		// print_r($gettag);
+		// print_r($getbusiness);
+		// print_r($getcategory);
+		//include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
 	}
 	public function branchfilter_deal($msg)
 	{

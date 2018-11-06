@@ -10,21 +10,42 @@
               $("#sub_category").select2(); 
         });
     </script>
-    <script>                  
-$(document).ready(function(){
+    <script> 
+    $(document).ready(function(){
       $('#sub_category').change(function(){
         loadsubcategoryfilter($(this).find(':selected').val())
       })
-    })
-        function loadsubcategoryfilter(CategoryId){
-      
-        //var UsersId = $('#category').val(); 
-        var elem = document.getElementById("sub_category");
+    })   
+
+         function loadsubcategoryfilter(CategoryId){
+         	var elem = document.getElementById("sub_category");
+		//alert("hiii");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId;
-}
+        alert(CategoryId);
+		   $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result").html(data);
+		   }
+      });
+}             
+// $(document).ready(function(){
+//       $('#sub_category').change(function(){
+//         loadsubcategoryfilter($(this).find(':selected').val())
+//       })
+//     })
+//         function loadsubcategoryfilter(CategoryId){
+      
+//         //var UsersId = $('#category').val(); 
+//         var elem = document.getElementById("sub_category");
+//         selectedNode = elem.options[elem.selectedIndex];
+//         var CategoryId = selectedNode.value;
+//         console.log(selectedNode.value);
+//         window.location.href='/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId;
+// }
 $(document).ready(function(){
       $('#category').change(function(){
         loadcategoryfilter($(this).find(':selected').val())
@@ -109,6 +130,8 @@ $(document).ready(function(){
       document.getElementById("purchased").checked = true;
     }
  </script>
+ <?php $result='<div id="result"></div>';
+ ?>
 <section class="content">   
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Deal</h2></div>
@@ -126,7 +149,7 @@ $(document).ready(function(){
                                     <select id="business" name="" class="form-control">
                                        <option value="0">Select Business</option> 
                                        <?php 
-                                    if($_GET['business_id'])
+                                    if(isset($_GET['business_id']))
                                     {
                                       $selected = $_GET['business_id'];
                                     }
@@ -144,7 +167,7 @@ $(document).ready(function(){
                                     <select id="branch" name="" class="form-control">
                                        <option value="0">Select Business Branch</option>
                                         <?php 
-                                        if($_GET['branch_id'])
+                                        if(isset($_GET['branch_id']))
                                     {
                                       $selected = $_GET['branch_id'];
                                     }
@@ -163,7 +186,7 @@ $(document).ready(function(){
                                     <select id="tag" name="" class="form-control">
                                        <option value="0">Select tag</option>
                                        <?php 
-                                       if($_GET['tag_id'])
+                                       if(isset($_GET['tag_id']))
                                     {
                                       $selected = $_GET['tag_id'];
                                     }
@@ -181,7 +204,7 @@ $(document).ready(function(){
                                     <select id="category" name="" class="form-control">
                                        <option value="0">Select Catgeory</option>
                                         <?php 
-                                        if($_GET['category_id'])
+                                        if(isset($_GET['category_id']))
                                     {
                                       $selected = $_GET['category_id'];
                                     }
@@ -199,7 +222,7 @@ $(document).ready(function(){
                                     <select id="sub_category" name="" class="form-control">
                                        <option value="0">Select Sub Category</option>
                                        <?php 
-                                       if($_GET['subcategory_id'])
+                                       if(isset($_GET['subcategory_id']))
                                     {
                                       $selected = $_GET['subcategory_id'];
                                     }
@@ -257,8 +280,14 @@ $(document).ready(function(){
               <?php 
               
                 $i=0;
+                //echo $display_deal;
+                 $display_deal1='<div id="result"></div>';
+                 //echo $result;
+                // $result = implode(",", $result);
+                 print_r($display_deal1);
                 foreach ($display_deal as $key => $data) 
                 {
+                //print_r($key);
                   //print_r($display_deal);
                   // $text = $data[3];
                   // $html = preg_replace("/\\\\u([0-9A-F]{2,5})/i", "&#x$1;", $text);
@@ -270,13 +299,13 @@ $(document).ready(function(){
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><?php echo $data[21]; ?></td>
-                                <td style="text-align:center;"><?php echo json_decode(''.$html.''); ?></td>
-                                 <td style="text-align:center;"><?php echo $data[7]; ?></td>
-                                  <td style="text-align:center;"><?php echo json_decode(''.$condition.''); ?></td>
+                                <td style="text-align:center;"><?php echo json_decode(''.$html.'');?></td>
+                                <td style="text-align:center;"><?php echo $data[7]; ?></td>
+                                <td style="text-align:center;"><?php echo json_decode(''.$condition.'');?></td>
                                 <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
                                 <td style="text-align:center;">
-                                    <div >
-                                     <a <?php echo "href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=".$data[0]; ?> title="View all detail">
+                                    <div>
+                                   <a <?php echo "href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=".$data[0]; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -292,4 +321,3 @@ $(document).ready(function(){
     </section>
 </div>
  <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
- 
