@@ -33,7 +33,7 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		print_r($display_deal);
+		echo json_encode($display_deal);
 		// print_r($gettag);
 		// print_r($getbusiness);
 		// print_r($getcategory);

@@ -41,11 +41,20 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="category_name" class="col-sm-3 control-label">Category<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
-                                       <option value="<?php echo $data[2];?>"><?php echo $data[0];?></option>
                                       <?php
+                                      if($data[])
+                                    {
+                                      $selected = $_GET['id'];
+                                      echo $selected;
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                  }
                                         foreach ($category_view as $key => $data1) 
                                       { ?>
-                                         <option value="<?php echo $data1[0];?>"><?php echo $data1[1];?></option>
+                                         <option value="<?php echo $data1[0];?>" <?php if($data1[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data1[1];?></option>
                                     <?php   } ?>
                                     </select>
                                     <span id="cat_nameerror" class="show_required"></span><br>

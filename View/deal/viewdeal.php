@@ -22,7 +22,6 @@
 		//alert("hiii");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
-        alert(CategoryId);
 		   $.ajax({
 		   url: '/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
 		   type: 'POST',
@@ -282,15 +281,10 @@ $(document).ready(function(){
                 $i=0;
                 //echo $display_deal;
                  $display_deal1='<div id="result"></div>';
-                 //echo $result;
-                // $result = implode(",", $result);
-                 print_r($display_deal1);
+                 
+                echo $display_deal1;
                 foreach ($display_deal as $key => $data) 
-                {
-                //print_r($key);
-                  //print_r($display_deal);
-                  // $text = $data[3];
-                  // $html = preg_replace("/\\\\u([0-9A-F]{2,5})/i", "&#x$1;", $text);
+                {      
                   $text=$data[3];
                   $html="\"$text\"";
                   $term = $data[12];
