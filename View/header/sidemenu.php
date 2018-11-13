@@ -70,14 +70,14 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/content_management/addcontentmanagement_controller.php">
             <i class="fa fa-group"></i> <span>Content management</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/support/viewsupport_controller.php">
             <i class="fa fa-support"></i> <span>Support</span>
             <span class="pull-right-container">
             </span>
