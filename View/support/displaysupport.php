@@ -103,11 +103,11 @@
                                           <i class="fa fa-eye"></i>
                                         </a>
                                         <br>
-                                                                              <a <?php $value=$data[3]; if($value == 1 ){ ?>
+                                        <a <?php $value=$data[3]; if($value == 1 ){ ?>
                                         onclick="javascript: return confirm('Do you really want to close this support request?');"
                                       <?php } else{ ?>
                                         onclick="javascript: return confirm('Do you really want to open this support request?');"
-                                      <?php }?>
+                                      <?php }?> <?php  $value=$data[3]; if($value == 1 ){ ?> style="color: red;" <?php } else {?> style="color: green;"<?php }?>
                                       <?php echo "href=/doora/adminpanel/Controller/support/isopen_controller.php?id=".$data[0]."&value=".$data[3];?>><?php $value=$data[3]; if($value == 1 ){
                                         echo "Open";
                                       }

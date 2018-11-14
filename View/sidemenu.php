@@ -56,7 +56,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/doora/adminpanel/Controller/subscription_package/displaysubscription_controller.php">
             <i class="fa fa-clipboard"></i> <span>Subscription packages</span>
             <span class="pull-right-container">
             </span>

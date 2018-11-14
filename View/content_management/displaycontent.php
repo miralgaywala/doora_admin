@@ -11,7 +11,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         ?>
 
 <!--Main Content -->
-
+<script src="https://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Content Management</h2></div>
@@ -62,13 +62,25 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <span id="term_error" class="show_required"></span><br>
                                 </div>
                             </div> 
-                            <div class="form-group notranslate">
-                                <label for="help" class="col-sm-3 control-label">Help<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="help" type="text" id="help" class="form-control" value="<?php foreach($display_content as $data) { echo $data[3];}?>"/>
-                                    <span id="help_error" class="show_required"></span><br>
-                                </div>
-                            </div>                                             
+                                  <div class="form-group notranslate">
+                                             <label for="help" class="notranslate col-sm-3 control-label">Help<span class="show_required">*</span></label>
+                                             <div class="col-sm-8 notranslate">
+                                                 <textarea class="ckeditor" cols="80" id="help" name="help" rows="10" >
+                                                  <?php 
+                                                  foreach($display_content as $data)
+                                                  {
+                                                    echo $data[3];
+                                                  }
+
+                                                   ?>
+                                                 </textarea>
+                                             </div>
+                                         </div>   
+                                         <script language="Javascript">
+<!--
+  CKEDITOR.replace( 'help' );
+//-->
+</script>                                        
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="content_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="content_submit"/>
                             </div>  

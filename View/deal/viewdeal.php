@@ -274,15 +274,20 @@ $(document).ready(function(){
                               <th style="text-align:center;">Action</th>
                             </tr>
                              </thead>
-                     
                     <tbody>
               <?php 
-              
                 $i=0;
                 //echo $display_deal;
-                 $display_deal1='<div id="result"></div>';
-                 
-                echo $display_deal1;
+                 $display_deal1="<div id='result'></div>";
+        echo $display_deal1;           
+$serialized = json_encode($display_deal1);
+echo $serialized;
+//$myNewArray = json_decode($display_deal1);
+//print_r($myNewArray);
+      // foreach ($myNewArray as $key => $data1) {
+      // echo $data1[1];
+      // echo $data1[2];
+      // }
                 foreach ($display_deal as $key => $data) 
                 {      
                   $str   = ''.$data[3].'';
@@ -299,9 +304,8 @@ $(document).ready(function(){
             // http://unicode.org/faq/utf_bom.html#utf16-4
             $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
         }
-
         // https://tools.ietf.org/html/rfc3629#section-3
-        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
         if ($cp > 0xD7FF && 0xE000 > $cp) {
             $cp = 0xFFFD;
         }
@@ -332,7 +336,6 @@ $(document).ready(function(){
             // http://unicode.org/faq/utf_bom.html#utf16-4
             $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
         }
-
         // https://tools.ietf.org/html/rfc3629#section-3
         // Characters between U+D800 and U+DFFF are not allowed in UTF-8
         if ($cp > 0xD7FF && 0xE000 > $cp) {

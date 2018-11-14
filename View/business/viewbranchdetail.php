@@ -50,11 +50,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Created_at</td>
+                    <td>Created At</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[7];?></td>
                   </tr>
                 <?php } ?>

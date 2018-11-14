@@ -58,15 +58,15 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><img <?php echo "src=/doora/images/profile/".$data[7];?> id="Picture"/></td>
                   </tr>
                   <tr>
-                    <td>is_deleted</td>
+                    <td>Is Deleted</td>
                   <td><?php echo $data[8];?></td>
                   </tr>
                   <tr>
-                    <td>Created_at</td>
+                    <td>Created At</td>
                   <td><?php echo $data[9];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[10];?></td>
                   </tr>
                 <?php } ?>

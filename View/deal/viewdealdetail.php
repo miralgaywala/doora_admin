@@ -268,11 +268,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                    ?><?php echo $category[1];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
-                    <td>Created_at</td>
+                    <td>Created At</td>
                   <td><?php echo $data[18];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[19];?></td>
                   </tr>
                 <?php } ?>

@@ -30,32 +30,32 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><?php echo $data[0];?></td>
                   </tr>
                   <tr>
-                  <td>Category_Id</td>
+                  <td>Category Id</td>
                   <td><?php echo $data[1];?></td>
                   </tr>
                   <tr>
-                  <td>Sub_Catgeory_Name</td>
+                  <td>Sub Catgeory Name</td>
                   <td><?php echo $data[3];?></td>
                   </tr>
                   <tr>
-                  <td>Sub_Catgeory_Id</td>
+                  <td>Sub Catgeory Id</td>
                   <td><?php echo $data[2];?></td>
                   </tr>
                   
                   <tr>
-                    <td>Sub_Category_Image</td>
+                    <td>Sub Category Image</td>
                   <td><img <?php echo "src=/doora/images/sub_category/".$data[4];?> id="SubCategoryPicture"/></td>
                   </tr>
                   <tr>
-                    <td>is_deleted</td>
+                    <td>Is Deleted</td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Created_at</td>
+                    <td>Created At</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[7];?></td>
                   </tr>
                 <?php } ?>

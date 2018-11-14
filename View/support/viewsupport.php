@@ -58,11 +58,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     }, $str);
                ?>
                   <tr>
-                    <td>Support id </td>
+                    <td>Support Id </td>
                   <td><?php echo $data[0];?></td>
                   </tr>
                   <tr>
-                    <td>User id </td>
+                    <td>User Id </td>
                   <td><?php echo $data[1];?></td>
                   </tr>
                    <tr>
@@ -73,20 +73,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td>Message </td>
                   <td><?php echo $html;?></td>
                   </tr>
-                  <tr>
-                  <td>Message </td>
-                  <td><?php echo $data[3];?></td>
-                  </tr>
                    <tr>
-                    <td>is deleted </td>
+                    <td>Is Deleted </td>
                   <td><?php echo $data[4];?></td>
                   </tr>
                   <tr>
-                    <td>Created_at </td>
+                    <td>Created At </td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted_at</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
                 <?php } ?>
