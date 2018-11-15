@@ -55,10 +55,30 @@ class business_model
     public function getbusinessdetail($id)
     {
        $con=$this->db->connection();
-       $getbusinessdetail=$con->query("select * from users where is_deleted=0 AND is_business=1 AND user_id=".$id);
+       $getbusinessdetail=$con->query("select * from users where is_business=1 AND user_id=".$id);
        $businessuser=$getbusinessdetail->fetch_all();
        return $businessuser;
     }
-    
+    public function getactivatefilter($msg)
+    {
+       $con=$this->db->connection();
+       $getbusinessactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=1");
+       $businessactivate=$getbusinessactivate->fetch_all();
+       return $businessactivate;
+    }
+    public function getdeactivatefilter($msg)
+    {
+       $con=$this->db->connection();
+       $getbusinessdeactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=0");
+       $businessdeactivate=$getbusinessdeactivate->fetch_all();
+       return $businessdeactivate;
+    }
+    public function getdeleteedilter($msg)
+    {
+       $con=$this->db->connection();
+       $getbusinessdelete=$con->query("select * from users where is_deleted=1 AND is_business=1");
+       $businessdelete=$getbusinessdelete->fetch_all();
+       return $businessdelete;
+    }
 }
 ?>

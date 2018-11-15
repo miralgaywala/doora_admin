@@ -47,5 +47,27 @@ class business_controller
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/viewbuisnessdetail.php');
 		return $viewbusiness_detail;
 	}
+	public function filter_business($msg)
+	{
+		if($msg == "f1")
+		{
+			$display_businessuser=$this->business_model->getactivatefilter($msg);
+			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/displaybusinessuser.php');
+		}
+		elseif ($msg == "f2") {
+			$display_businessuser=$this->business_model->getdeactivatefilter($msg);
+			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/displaybusinessuser.php');
+		}
+		elseif ($msg == "f3") {
+			$display_businessuser=$this->business_model->getdeleteedilter($msg);
+			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/displaybusinessuser.php');
+		}
+		else
+		{
+			$display_businessuser=$this->business_model->getdisplay_businessuser();
+			include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/displaybusinessuser.php');
+		}
+		
+	}
 }
 ?>

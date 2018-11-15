@@ -1,6 +1,26 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
  include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
+ <script>
+        $(document).ready(function(){
+            $("#user").select2(); 
+        });
+
+        $(document).ready(function(){
+      $('#user').change(function(){
+        loadbusiness($(this).find(':selected').val())
+      })
+    })
+        function loadbusiness(UserId){
+      
+        //var UsersId = $('#category').val(); 
+        var elem = document.getElementById("user");
+        selectedNode = elem.options[elem.selectedIndex];
+        var UserId = selectedNode.value;
+        console.log(selectedNode.value);
+        window.location.href='/doora/adminpanel/Controller/business/businessfilter.php?user_id='+UserId;
+}
+    </script>
 <section class="content">
    
     	<div class="row">
@@ -36,12 +56,6 @@
                 echo $msg;           
           }
            ?>
-            <script>
-        $(document).ready(function(){
-            $("#user").select2(); 
-        });
-
-    </script>
         <div class="row">
         	<div class="col-xs-12">
         	
@@ -51,11 +65,21 @@
                              <div class="form-group">
                                 <label for="user" class="col-sm-3 control-label">Business User</label>
                                 <div class="col-sm-7" style="padding-top: 6px">
-                                    <select id="user" name="user" class="form-control" aria-invalid="false" >
-                                    <option value="0">All Business User</option>
-                                    <option value="0">Activate</option>
-                                     <option value="0">Deactivate</option>
-                                     <option value="0">Deleted</option>
+                                    <select id="user" name="user" class="form-control" aria-invalid="false">
+                                        <?php 
+                                            if($_GET['user_id'])
+                                    {
+                                      $selected = $_GET['user_id'];
+                                    }
+                                    else
+                                    {
+                                      $selected = ' ';
+                                    }
+                                        ?>
+                                     <option value="f0">All Business User</option>
+                                     <option value="f1" <?php if("f1" == $selected ) { ?> selected  <?php } ?>>Activate</option>
+                                     <option value="f2" <?php if("f2" == $selected ) { ?> selected  <?php } ?>>Deactivate</option>
+                                     <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option>
                                     </select>
                                 </div> 
                             </div>
@@ -67,11 +91,11 @@
 			                  <th style="text-align:center;" width="5%">#</th>
 			                  <th style="text-align:center;" width="5%">User id</th>
 			                  <th style="text-align:center;">Buisness Name</th>
-                        <th style="text-align:center;">Photo</th>
-                        <th style="text-align:center;">Email Id</th>
-                        <th style="text-align:center;">Contact No</th>
-                        <th style="text-align:center;" width="5%">Stripe Customer Id</th>
-                        <th style="text-align:center;" width="5%">Super Market</th>
+                              <th style="text-align:center;">Photo</th>
+                              <th style="text-align:center;">Email Id</th>
+                              <th style="text-align:center;">Contact No</th>
+                              <th style="text-align:center;" width="5%">Stripe Customer Id</th>
+                              <th style="text-align:center;" width="5%">Super Market</th>
 			                  <th style="text-align:center;" width="15%">Action</th>
 			                </tr>
 							 </thead>
@@ -93,10 +117,11 @@
                                     <div>
                                     	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail"><i class="fa fa-eye"></i></a>
                                   
-                                    	  
+                                    	   <?php $value=$data[16]; if($value == 0 ){ ?> 
                                         <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/business/deletebusiness_controller.php?id=".$data[0];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
+                                           <?php } ?>
                                         <br/>
                                     	<a <?php $value=$data[24]; if($value == 1 ){ ?>
                                     		onclick="javascript: return confirm('Do you really want to Deactivate This Business?');"
@@ -111,9 +136,11 @@
                                     		echo "Deactivate"; 
                                     	} ?></a>
                                     	<br/>
+                                      
                                     	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessbranch_controller.php?id=".$data[0];?> title="View all detail" style="margin-right: 3px;">
-                                        	View Brach
+                                        	View Branch
                                         </a>
+
                                          <br/>
                                         <a href="#" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                       </div>

@@ -197,7 +197,6 @@ $(document).ready(function(){
                                           ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
-                         
                                 <label for="category" class="col-sm-1 control-label" style="margin-top: 25px">Catgeory</label>
                                 <div class="col-sm-3" style="padding-top: 20px">
                                     <select id="category" name="" class="form-control">
@@ -265,11 +264,11 @@ $(document).ready(function(){
                             <thead>
                             <tr>
                               <th style="text-align:center;">#</th>
-                              <th style="text-align:center;" >Deal Id</th>
+                              <th style="text-align:center;">Deal Id</th>
                               <th style="text-align:center;">Franchise Address</th>
                               <th style="text-align:center;width:20px;">Deal Title</th>
                               <th style="text-align:center;">Promocode</th>
-                              <th style="text-align:center;">terms and Condition</th>
+                              <th style="text-align:center;">Terms and Condition</th>
                                <th style="text-align:center;">Deal Photo</th>
                               <th style="text-align:center;">Action</th>
                             </tr>
@@ -278,16 +277,18 @@ $(document).ready(function(){
               <?php 
                 $i=0;
                 //echo $display_deal;
-                 $display_deal1="<div id='result'></div>";
+                 $display_deal1='<div id="result"></div>';
         echo $display_deal1;           
 $serialized = json_encode($display_deal1);
-echo $serialized;
-//$myNewArray = json_decode($display_deal1);
-//print_r($myNewArray);
-      // foreach ($myNewArray as $key => $data1) {
-      // echo $data1[1];
-      // echo $data1[2];
-      // }
+//echo $serialized;
+$myNewArray = json_decode($display_deal1);
+                 // $serialized = serialize($display_deal1);
+                 // $myNewArray = unserialize($serialized);
+print_r($myNewArray);
+      foreach ($myNewArray as $key => $data1) {
+      echo $data1[1];
+      echo $data1[2];
+      }
                 foreach ($display_deal as $key => $data) 
                 {      
                   $str   = ''.$data[3].'';
@@ -374,6 +375,7 @@ echo $serialized;
                            <?php } ?>
                            </tbody>
                          </table>
+
         			</div>
         		</div>
         	</div>	
