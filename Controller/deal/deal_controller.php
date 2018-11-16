@@ -1,4 +1,4 @@
-<?php
+                                                                                         <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/deal/deal_model.php");
 class deal_controller
 {
@@ -33,7 +33,14 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		print_r($display_deal);
+		$array = array();
+		foreach ($display_deal as $key => $data) {
+			$array = array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]);
+			echo json_encode($array);
+		}
+		
+		//echo json_encode(array_values($display_deal));
+			
 		//echo json_encode($display_deal);
 		// print_r($gettag);
 		// print_r($getbusiness);

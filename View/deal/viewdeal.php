@@ -210,12 +210,11 @@ $(document).ready(function(){
                                     {
                                       $selected = ' ';
                                     }
-                                        foreach ($getcategory as  $data) {
+                                        foreach ($getcategory as $data) {
                                           ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>       
                                   </select>
                                 </div> 
                                 <label for="sub_category" class="col-sm-2 control-label" style="margin-top: 25px;">Sub Category</label>
-                               
                                 <div class="col-sm-3" style="padding-top: 20px;padding-left: 5px;">
                                     <select id="sub_category" name="" class="form-control">
                                        <option value="0">Select Sub Category</option>
@@ -228,7 +227,7 @@ $(document).ready(function(){
                                     {
                                       $selected = ' ';
                                     }
-                                       foreach ($getsubcategory as  $data) {
+                                       foreach ($getsubcategory as $data) {
                                           ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
@@ -269,7 +268,7 @@ $(document).ready(function(){
                               <th style="text-align:center;width:20px;">Deal Title</th>
                               <th style="text-align:center;">Promocode</th>
                               <th style="text-align:center;">Terms and Condition</th>
-                               <th style="text-align:center;">Deal Photo</th>
+                              <th style="text-align:center;">Deal Photo</th>
                               <th style="text-align:center;">Action</th>
                             </tr>
                              </thead>
@@ -278,17 +277,10 @@ $(document).ready(function(){
                 $i=0;
                 //echo $display_deal;
                  $display_deal1='<div id="result"></div>';
-        echo $display_deal1;           
-$serialized = json_encode($display_deal1);
-//echo $serialized;
-$myNewArray = json_decode($display_deal1);
-                 // $serialized = serialize($display_deal1);
-                 // $myNewArray = unserialize($serialized);
-print_r($myNewArray);
-      foreach ($myNewArray as $key => $data1) {
-      echo $data1[1];
-      echo $data1[2];
-      }
+                 echo $display_deal1;
+
+                $json = json_decode($display_deal1, true);
+          
                 foreach ($display_deal as $key => $data) 
                 {      
                   $str   = ''.$data[3].'';
@@ -302,7 +294,8 @@ print_r($myNewArray);
             $lead  = hexdec($matches[1]);
             $trail = hexdec($matches[2]);
 
-            // http://unicode.org/faq/utf_bom.html#utf16-4
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
             $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
         }
         // https://tools.ietf.org/html/rfc3629#section-3
@@ -312,7 +305,7 @@ print_r($myNewArray);
         }
 
         // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
-        // php_utf32_utf8(unsigned char *buf, unsigned k)
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
 
         if ($cp < 0x80) {
             return chr($cp);
