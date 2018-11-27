@@ -26,8 +26,8 @@
 		   url: '/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
 		   type: 'POST',
 		   success: function(data) {
-		           console.log(data);
-		           $("#result").html(data);
+		           //console.log(data);
+		           $("#result").text(data);
 		   }
       });
 }             
@@ -274,13 +274,49 @@ $(document).ready(function(){
                              </thead>
                     <tbody>
               <?php 
+             $html = "<div id='result'></div>";
+             //echo $html;
+             $preg= preg_replace("/<div id='result'>(.*?)<\/div>/", " ", $html);
+              echo "<pre>"; print_r($preg);echo "</pre>";
+           
+            // echo "<script>console.log('".$html."')</script>";
+            //  print_r($html);
+   //    $s = "<div id='result'>this is the variable</div>";
+   //    echo $s;
+  	// $preg= preg_replace("/<div id='result'>(.*?)<\/div>/", "$1", $s);
+  	// echo $preg;
+           
+   //           echo "<pre>"; print_r(trim($html));echo "</pre>";
+
+// $dom = new DOMDocument();
+// $dom->loadHTML($html);
+// $result_data = $dom->getElementsByTagName('p');
+// for ($i = 0; $i < $result_data->length; $i++)
+//        echo $result_data->item($i)->nodeValue;
+// print_r($result_data);
+            //  $str_arr=json_decode($result_data);
+            // echo "<pre>"; print_r($str_arr[0]); echo "</pre>";
+             //$str='<div id="result"></div>';
+            // $str_arr=rtrim($str);
+           //echo "<pre>";print_r(rtrim($str));echo "</pre>";
+              //print_r(json_decode($str,true));
+            //echo "<pre>";print_r($str_arr[0]);echo "</pre>";
+          // $array=json_decode($str);
+          // echo $array['0'];
+   //         $jsonData = html_entity_decode($str);
+   //         echo $jsonData;
+			// $k=json_decode($jsonData,true);
+			// print_r($k);
+             //echo "<pre>";print_r($arr);echo "</pre>";
+             // echo json_decode($str, true);
+    //           	$doc = new DOMDocument();
+				// $d=$doc->loadHtml($str);
+				// $a = $doc->getElementById('result');
+			
                 $i=0;
                 //echo $display_deal;
-                 $display_deal1='<div id="result"></div>';
-                 echo $display_deal1;
-
-                $json = json_decode($display_deal1, true);
-          
+               // $json = json_decode($display_deal1, true);
+      			        
                 foreach ($display_deal as $key => $data) 
                 {      
                   $str   = ''.$data[3].'';
@@ -354,7 +390,7 @@ $(document).ready(function(){
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
                                 <td style="text-align:center;"><?php echo $data[21]; ?></td>
                                 <td style="text-align:center;"><?php echo $html;?></td>
-                                <td style="text-align:center;"><?php echo $data[7]; ?></td>
+                                <td style="text-align:center;"><?php echo $data[7];?></td>
                                 <td style="text-align:center;"><?php echo $condition;?></td>
                                 <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
                                 <td style="text-align:center;">

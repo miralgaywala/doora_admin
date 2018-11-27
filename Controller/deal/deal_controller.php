@@ -34,13 +34,14 @@ class deal_controller
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
 		$array = array();
+		$json="";
 		foreach ($display_deal as $key => $data) {
-			$array = array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]);
-			echo json_encode($array);
-		}
-		
-		//echo json_encode(array_values($display_deal));
+			//$array = array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]);
+			//array_push($array, array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]));
 			
+		}
+		print_r($array);
+		//echo json_encode(array_values($display_deal));
 		//echo json_encode($display_deal);
 		// print_r($gettag);
 		// print_r($getbusiness);
@@ -120,6 +121,25 @@ class deal_controller
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
 		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+	}
+	public function generaterow($index,$value0,$value21,$html,$value7,$condition,$value15)
+	{
+		echo "<tr>
+                                <td style=\"text-align:center;\">".$index."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img <?php echo 'src=/doora/images/deal/'.$value15;?> id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a <?php echo \"href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=\".$value0; ?> title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
 	}
 }
 ?>
