@@ -78,7 +78,7 @@ class deal_model
     public function getsubcategory_filter($msg)
     {
           $con=$this->db->connection();
-              $getonlinepur=$con->query("select bd.*,dps.sub_cat_id from business_deal as bd left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id where dps.sub_cat_id=".$msg);
+              $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id where sc.sub_category_id=".$msg);
               $deal=$getonlinepur->fetch_all();
               return $deal;
     }

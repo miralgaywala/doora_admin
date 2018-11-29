@@ -26,25 +26,15 @@
 		   url: '/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
 		   type: 'POST',
 		   success: function(data) {
-		           //console.log(data);
-		           $("#result").text(data);
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		           $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		});
 		   }
       });
 }             
-// $(document).ready(function(){
-//       $('#sub_category').change(function(){
-//         loadsubcategoryfilter($(this).find(':selected').val())
-//       })
-//     })
-//         function loadsubcategoryfilter(CategoryId){
-      
-//         //var UsersId = $('#category').val(); 
-//         var elem = document.getElementById("sub_category");
-//         selectedNode = elem.options[elem.selectedIndex];
-//         var CategoryId = selectedNode.value;
-//         console.log(selectedNode.value);
-//         window.location.href='/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId;
-// }
 $(document).ready(function(){
       $('#category').change(function(){
         loadcategoryfilter($(this).find(':selected').val())
@@ -56,8 +46,19 @@ $(document).ready(function(){
         var elem = document.getElementById("category");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/deal/categoryfilter.php?category_id='+CategoryId;
+        $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/categoryfilter.php?category_id='+CategoryId,
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		           $('#example2').DataTable( {
+		            "order": [[ 1, 'asc' ]],
+		    		} );
+    
+		   }
+      });
 }
 $(document).ready(function(){
       $('#branch').change(function(){
@@ -84,8 +85,23 @@ $(document).ready(function(){
         var elem = document.getElementById("tag");
         selectedNode = elem.options[elem.selectedIndex];
         var tagId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/deal/tagfilter.php?tag_id='+tagId;
+        $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/tagfilter.php?tag_id='+tagId,
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		          if ($.fn.dataTable.isDataTable('#example2')) {
+				                 $('#example2').DataTable().destroy();     
+				                 $('#example2').DataTable();          
+				            }
+				           
+				$('#example2').DataTable({
+			 "order": [[ 1, 'asc' ]],
+				})
+			}
+      });
 }
 $(document).ready(function(){
       $('#business').change(function(){
@@ -94,7 +110,7 @@ $(document).ready(function(){
     })
         function loadbusinessfilter(businessId){
       
-        //var UsersId = $('#category').val(); 
+        //var UsersId = $('#category').val();
         var elem = document.getElementById("business");
         selectedNode = elem.options[elem.selectedIndex];
         var businessId = selectedNode.value;
@@ -105,35 +121,84 @@ $(document).ready(function(){
     <script>
   function alldata()
     {
-        window.location.href='/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1';
-        document.getElementById("all").checked = true;
+		   $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1',
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		   }
+      });
+       		         $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		}).fnDestroy();
     }   
     function active()
     {
-       window.location.href='/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2';
-       document.getElementById("active").checked = true;
+      $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2',
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		           $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		}).fnDestroy();
+		   }
+      });
     }
     function deactive()
     {
-      window.location.href='/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3';
-      document.getElementById("deactive").checked = true;
+      $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3',
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		           $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		} );
+		   }
+      });
     }
     function expired()
     {
-      window.location.href='/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4';
-      document.getElementById("expired").checked = true;
+      $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4',
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		           $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		} );
+		   }
+      });
     }
     function purchased()
     {
-      window.location.href='/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5';
-      document.getElementById("purchased").checked = true;
+      $.ajax({
+		   url: '/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5',
+		   type: 'POST',
+		   success: function(data) {
+		           console.log(data);
+		           $("#result_data").empty();
+		           $("#result_data").append(data);
+		          $('#example2').DataTable({
+		            "order": [[ 1, 'asc' ]],
+		    		} );
+		   }
+      });
     }
  </script>
- <?php $result='<div id="result"></div>';
- ?>
+ 
 <section class="content">   
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Deal</h2></div>
+    		<div class="col-md-10" style="float:left;margin-bottom:10px;"> <h2>Deal</h2></div>
     		<div class="col-md-2">
                 <br/>                   
     		</div>
@@ -202,16 +267,8 @@ $(document).ready(function(){
                                     <select id="category" name="" class="form-control">
                                        <option value="0">Select Catgeory</option>
                                         <?php 
-                                        if(isset($_GET['category_id']))
-                                    {
-                                      $selected = $_GET['category_id'];
-                                    }
-                                    else
-                                    {
-                                      $selected = ' ';
-                                    }
                                         foreach ($getcategory as $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>       
+                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>       
                                   </select>
                                 </div> 
                                 <label for="sub_category" class="col-sm-2 control-label" style="margin-top: 25px;">Sub Category</label>
@@ -219,16 +276,8 @@ $(document).ready(function(){
                                     <select id="sub_category" name="" class="form-control">
                                        <option value="0">Select Sub Category</option>
                                        <?php 
-                                       if(isset($_GET['subcategory_id']))
-                                    {
-                                      $selected = $_GET['subcategory_id'];
-                                    }
-                                    else
-                                    {
-                                      $selected = ' ';
-                                    }
                                        foreach ($getsubcategory as $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>" <?php if($data[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data[1]; ?></option> <?php }?>
+                                          ?> <option value="<?php echo $data[0]; ?>" ><?php echo $data[1]; ?></option> <?php }?>
                                   </select>
                                 </div> 
    					</div>
@@ -243,23 +292,23 @@ $(document).ready(function(){
                                       $selected = ' ';
                                     }?>
                                 <label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="all" onclick="return alldata();" <?php if("a1" == $selected ) { ?> checked <?php } ?> >All
+      									<input type="radio" name="optradio" id="all" onclick="alldata();" checked>All
     							</label>
                                 <label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="active" onclick="return active();" <?php if("a2" == $selected ) { ?> checked <?php } ?>>Active
+      									<input type="radio" name="optradio" id="active" onclick="active();">Active
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="deactive" onclick="return deactive();" <?php if("a3" == $selected ) { ?> checked <?php } ?>>Deactive
+      									<input type="radio" name="optradio" id="deactive" onclick="deactive();">Deactive
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="expired" onclick="return expired();" <?php if("a4" == $selected ) { ?> checked <?php } ?>>Expired
+      									<input type="radio" name="optradio" id="expired" onclick="expired();">Expired
     							</label>
     							<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="purchased" onclick="return purchased();" <?php if("a5" == $selected ) { ?> checked <?php } ?>>Purchased
+      									<input type="radio" name="optradio" id="purchased" onclick="purchased();">Purchased
     							</label>
     							</div>	
                   <hr>
-                  <table id="example1" class="table table-bordered table-hover" style="width:100%">
+                  <table id="example2" class="table table-bordered table-condensed table-hover" style="width:100%">
                             <thead>
                             <tr>
                               <th style="text-align:center;">#</th>
@@ -272,136 +321,7 @@ $(document).ready(function(){
                               <th style="text-align:center;">Action</th>
                             </tr>
                              </thead>
-                    <tbody>
-              <?php 
-             $html = "<div id='result'></div>";
-             //echo $html;
-             $preg= preg_replace("/<div id='result'>(.*?)<\/div>/", " ", $html);
-              echo "<pre>"; print_r($preg);echo "</pre>";
-           
-            // echo "<script>console.log('".$html."')</script>";
-            //  print_r($html);
-   //    $s = "<div id='result'>this is the variable</div>";
-   //    echo $s;
-  	// $preg= preg_replace("/<div id='result'>(.*?)<\/div>/", "$1", $s);
-  	// echo $preg;
-           
-   //           echo "<pre>"; print_r(trim($html));echo "</pre>";
-
-// $dom = new DOMDocument();
-// $dom->loadHTML($html);
-// $result_data = $dom->getElementsByTagName('p');
-// for ($i = 0; $i < $result_data->length; $i++)
-//        echo $result_data->item($i)->nodeValue;
-// print_r($result_data);
-            //  $str_arr=json_decode($result_data);
-            // echo "<pre>"; print_r($str_arr[0]); echo "</pre>";
-             //$str='<div id="result"></div>';
-            // $str_arr=rtrim($str);
-           //echo "<pre>";print_r(rtrim($str));echo "</pre>";
-              //print_r(json_decode($str,true));
-            //echo "<pre>";print_r($str_arr[0]);echo "</pre>";
-          // $array=json_decode($str);
-          // echo $array['0'];
-   //         $jsonData = html_entity_decode($str);
-   //         echo $jsonData;
-			// $k=json_decode($jsonData,true);
-			// print_r($k);
-             //echo "<pre>";print_r($arr);echo "</pre>";
-             // echo json_decode($str, true);
-    //           	$doc = new DOMDocument();
-				// $d=$doc->loadHtml($str);
-				// $a = $doc->getElementById('result');
-			
-                $i=0;
-                //echo $display_deal;
-               // $json = json_decode($display_deal1, true);
-      			        
-                foreach ($display_deal as $key => $data) 
-                {      
-                  $str   = ''.$data[3].'';
-    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
-          |\\\u([\da-fA-F]{4})/sx';
-    $html= preg_replace_callback($regex, function($matches) {
-
-        if (isset($matches[3])) {
-            $cp = hexdec($matches[3]);
-        } else {
-            $lead  = hexdec($matches[1]);
-            $trail = hexdec($matches[2]);
-
-            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
-            //$display_deal = '<div id='result'></div>'; echo $json
-            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
-        }
-        // https://tools.ietf.org/html/rfc3629#section-3
-        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
-        if ($cp > 0xD7FF && 0xE000 > $cp) {
-            $cp = 0xFFFD;
-        }
-
-        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
-        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
-
-        if ($cp < 0x80) {
-            return chr($cp);
-        } else if ($cp < 0xA0) {
-            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
-        }
-
-        return html_entity_decode('&#' . $cp . ';');
-    }, $str);
-
-    $str   = ''.$data[12].'';
-    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
-          |\\\u([\da-fA-F]{4})/sx';
-    $condition= preg_replace_callback($regex, function($matches) {
-
-        if (isset($matches[3])) {
-            $cp = hexdec($matches[3]);
-        } else {
-            $lead  = hexdec($matches[1]);
-            $trail = hexdec($matches[2]);
-
-            // http://unicode.org/faq/utf_bom.html#utf16-4
-            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
-        }
-        // https://tools.ietf.org/html/rfc3629#section-3
-        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
-        if ($cp > 0xD7FF && 0xE000 > $cp) {
-            $cp = 0xFFFD;
-        }
-
-        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
-        // php_utf32_utf8(unsigned char *buf, unsigned k)
-
-        if ($cp < 0x80) {
-            return chr($cp);
-        } else if ($cp < 0xA0) {
-            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
-        }
-
-        return html_entity_decode('&#' . $cp . ';');
-    }, $str);
-                    // $term = $data[12];
-                    // $condition = "\"$term\"";
-                  ?> <tr>
-                                <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[21]; ?></td>
-                                <td style="text-align:center;"><?php echo $html;?></td>
-                                <td style="text-align:center;"><?php echo $data[7];?></td>
-                                <td style="text-align:center;"><?php echo $condition;?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
-                                <td style="text-align:center;">
-                                    <div>
-                                   <a <?php echo "href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=".$data[0]; ?> title="View all detail">
-                                          <i class="fa fa-eye"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                                 </tr>
-                           <?php } ?>
+                    		<tbody id="result_data">
                            </tbody>
                          </table>
 

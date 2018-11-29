@@ -33,20 +33,96 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		$array = array();
-		$json="";
+		$i=0;
 		foreach ($display_deal as $key => $data) {
-			//$array = array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]);
-			//array_push($array, array('0'=>$data[0] , '21'=>$data[21] , '3'=>$data[3],'7'=>$data[7],'12'=>$data[12],'15'=>$data[15]));
-			
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
 		}
-		print_r($array);
-		//echo json_encode(array_values($display_deal));
-		//echo json_encode($display_deal);
-		// print_r($gettag);
-		// print_r($getbusiness);
-		// print_r($getcategory);
-		//include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		
 	}
 	public function branchfilter_deal($msg)
 	{
@@ -63,7 +139,95 @@ class deal_controller
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
 		$getsubcategory=$this->deal_model->getcategorylist($msg);
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
 	}
 	public function tagfilter_deal($msg)
 	{
@@ -71,7 +235,96 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
+		
 	}
 	public function businessfilter_deal($msg)
 	{
@@ -88,7 +341,96 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
+		//include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
 	}
 	public function activedatafilter_deal($msg)
 	{
@@ -96,7 +438,95 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
 	}
 	public function deactivedatafilter_deal($msg)
 	{
@@ -104,7 +534,95 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
 	}
 	public function expireddatafilter_deal($msg)
 	{
@@ -112,7 +630,95 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
+                                <td style=\"text-align:center;\">".$value0."</td>
+                                <td style=\"text-align:center;\">".$value21."</td>
+                                <td style=\"text-align:center;\">".$html."</td>
+                                <td style=\"text-align:center;\">".$value7."</td>
+                                <td style=\"text-align:center;\">".$condition."</td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\">
+                                    <div>
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                          <i class=\"fa fa-eye\"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                 </tr>";
+		}
 	}
 	public function purchaseddatafilter_deal($msg)
 	{
@@ -120,26 +726,95 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
-	}
-	public function generaterow($index,$value0,$value21,$html,$value7,$condition,$value15)
-	{
-		echo "<tr>
-                                <td style=\"text-align:center;\">".$index."</td>
+		$i=0;
+		foreach ($display_deal as $key => $data) {
+			$i=$i+1;
+			$value0=$data[0];
+			$value21=$data[21];
+			$str   = ''.$data[3].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $html= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4uii$lead = hexdec(matches[3]);$trail = hexdec($matches[1]);$cp = hexdec($matches[2])
+            //$display_deal = '<div id='result'></div>'; echo $json
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8  
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+
+    $str   = ''.$data[12].'';
+    $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
+          |\\\u([\da-fA-F]{4})/sx';
+    $condition= preg_replace_callback($regex, function($matches) {
+
+        if (isset($matches[3])) {
+            $cp = hexdec($matches[3]);
+        } else {
+            $lead  = hexdec($matches[1]);
+            $trail = hexdec($matches[2]);
+
+            // http://unicode.org/faq/utf_bom.html#utf16-4
+            $cp = ($lead << 10) + $trail + 0x10000 - (0xD800 << 10) - 0xDC00;
+        }
+        // https://tools.ietf.org/html/rfc3629#section-3
+        // Characters between U+D800 and U+DFFF are not allowed in UTF-8
+        if ($cp > 0xD7FF && 0xE000 > $cp) {
+            $cp = 0xFFFD;
+        }
+
+        // https://github.com/php/php-src/blob/php-5.6.4/ext/standard/html.c#L471
+        // php_utf32_utf8(unsigned char *buf, unsigned k)
+
+        if ($cp < 0x80) {
+            return chr($cp);
+        } else if ($cp < 0xA0) {
+            return chr(0xC0 | $cp >> 6) . chr(0x80 | $cp & 0x3F);
+        }
+
+        return html_entity_decode('&#' . $cp . ';');
+    }, $str);
+    		$value7=$data[7];
+    		$value15=$data[15];
+		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
+    		echo "<tr>
+                                <td style=\"text-align:center;\">".$i."</td>
                                 <td style=\"text-align:center;\">".$value0."</td>
                                 <td style=\"text-align:center;\">".$value21."</td>
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img <?php echo 'src=/doora/images/deal/'.$value15;?> id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a <?php echo \"href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=\".$value0; ?> title=\"View all detail\">
+                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
                                 </td>
                                  </tr>";
+		}
 	}
 }
 ?>
