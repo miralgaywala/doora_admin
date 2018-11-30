@@ -9,6 +9,8 @@
              $("#category").select2(); 
               $("#sub_category").select2(); 
         });
+        
+
     </script>
     <script> 
     $(document).ready(function(){
@@ -16,8 +18,7 @@
         loadsubcategoryfilter($(this).find(':selected').val())
       })
     })   
-
-         function loadsubcategoryfilter(CategoryId){
+    function loadsubcategoryfilter(CategoryId){
          	var elem = document.getElementById("sub_category");
 		//alert("hiii");
         selectedNode = elem.options[elem.selectedIndex];
@@ -29,9 +30,9 @@
 		           console.log(data);
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
-		           $('#example2').DataTable({
-		            "order": [[ 1, 'asc' ]],
-		    		});
+		      //      $('#example2').DataTable({
+		      //       "order": [[ 1, 'asc' ]],
+		    		// });
 		   }
       });
 }             
@@ -53,12 +54,11 @@ $(document).ready(function(){
 		           console.log(data);
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
-		           $('#example2').DataTable( {
+		           $('#example2').DataTable({
 		            "order": [[ 1, 'asc' ]],
-		    		} );
-    
+		    		});
 		   }
-      });
+    });
 }
 $(document).ready(function(){
       $('#branch').change(function(){
@@ -71,8 +71,20 @@ $(document).ready(function(){
         var elem = document.getElementById("branch");
         selectedNode = elem.options[elem.selectedIndex];
         var branchId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/deal/branchfilter.php?branch_id='+branchId;
+        $.ajax({
+       url: '/doora/adminpanel/Controller/deal/branchfilter.php?branch_id='+branchId,
+       type: 'POST',
+       success: function(data) {
+               console.log(data);
+               $("#result_data").empty();
+               $("#result_data").append(data);
+              $(document).ready(function() {
+    $('#example2').DataTable( {
+        select: true,
+    } );
+} );
+       }
+      });
 }
 $(document).ready(function(){
       $('#tag').change(function(){
@@ -92,15 +104,12 @@ $(document).ready(function(){
 		           console.log(data);
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
-		          if ($.fn.dataTable.isDataTable('#example2')) {
-				                 $('#example2').DataTable().destroy();     
-				                 $('#example2').DataTable();          
-				            }
-				           
-				$('#example2').DataTable({
-			 "order": [[ 1, 'asc' ]],
-				})
-			}
+		          $(document).ready(function() {
+    $('#example2').DataTable( {
+        select: true,
+    } );
+} );
+			 }
       });
 }
 $(document).ready(function(){
@@ -114,8 +123,20 @@ $(document).ready(function(){
         var elem = document.getElementById("business");
         selectedNode = elem.options[elem.selectedIndex];
         var businessId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/deal/businessfilter.php?business_id='+businessId;
+        $.ajax({
+       url: '/doora/adminpanel/Controller/deal/businessfilter.php?business_id='+businessId,
+       type: 'POST',
+       success: function(data) {
+               console.log(data);
+               $("#result_data").empty();
+               $("#result_data").append(data);
+              $(document).ready(function() {
+    $('#example2').DataTable( {
+        select: true,
+    } );
+} );
+       }
+      });
 }
     </script>
     <script>
