@@ -103,11 +103,11 @@ class deal_model
               $deal=$getonlinepur->fetch_all();
               return $deal;
     }
-    public function getcategorylist($msg)
+    public function getsubcategorylist($id)
     {
 
               $con=$this->db->connection();
-              $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$msg);
+              $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$id);
               $category=$getonlinepur->fetch_all();   
               return $category;
     }
@@ -124,10 +124,10 @@ class deal_model
               $deal=$getonlinepur->fetch_all();
               return $deal;
     }
-    public function getbranchlist($msg)
+    public function getbranchlist($id)
     {
               $con=$this->db->connection();
-              $getonlinepur=$con->query("select franchise_id, franchise_address from business_franchise where is_deleted=0 AND business_user_id=".$msg);
+              $getonlinepur=$con->query("select franchise_id, franchise_address from business_franchise where is_deleted=0 AND business_user_id=".$id);
               $branch=$getonlinepur->fetch_all();   
               return $branch;
     }

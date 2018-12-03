@@ -1,4 +1,4 @@
-                                                                                         <?php
+<?php
 include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/deal/deal_model.php");
 class deal_controller
 {
@@ -27,12 +27,32 @@ class deal_controller
 		$isonline_pur= $this->deal_model->gettotalonlinepur($id);
 		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdealdetail.php");
 	}
+    public function subcategory_deal($id)
+    {
+        $sub_category=$this->deal_model->getsubcategorylist($id);
+        //print_r($sub_category);
+        $retval="<option value='0'>Select Sub-category</option>";
+       
+        foreach ($sub_category as $key => $data) {
+        $retval=$retval."<option value='".$data[0]."'>".$data[1]."</option>";
+        }
+        echo $retval;
+    }
+    public function branch_deal($id)
+    {
+        $branch=$this->deal_model->getbranchlist($id);
+        //print_r($branch);
+        $retval="<option value='0'>Select Business Branch</option>";
+       
+        foreach ($branch as $key => $data) {
+        $retval=$retval."<option value='".$data[0]."'>".$data[1]."</option>";
+        }
+        echo $retval;
+    }
 	public function subcategoryfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getsubcategory_filter($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -104,6 +124,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -127,9 +156,6 @@ class deal_controller
 	public function branchfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getbranch_filter($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
@@ -200,6 +226,15 @@ class deal_controller
     }, $str);
             $value7=$data[7];
             $value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }   
         //generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
             echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -222,10 +257,7 @@ class deal_controller
 	public function categoryfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getcategory_filter($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
-		$getsubcategory=$this->deal_model->getcategorylist($msg);
+
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -297,6 +329,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -319,9 +360,7 @@ class deal_controller
 	public function tagfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->gettag_filter($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -393,6 +432,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -416,10 +464,7 @@ class deal_controller
 	public function businessfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getbusiness_filter($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
-		$getbranch=$this->deal_model->getbranchlist($msg);
+		
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
@@ -491,6 +536,15 @@ class deal_controller
     }, $str);
             $value7=$data[7];
             $value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
         //generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
             echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -513,9 +567,7 @@ class deal_controller
 	public function alldatafilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getdisplay_deal();
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -587,6 +639,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -610,9 +671,7 @@ class deal_controller
 	public function activedatafilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getdisplay_activedeal($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -683,6 +742,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -705,9 +773,7 @@ class deal_controller
 	public function deactivedatafilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getdisplay_deactivedeal($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -779,6 +845,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -801,9 +876,7 @@ class deal_controller
 	public function expireddatafilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getdisplay_expireddeal($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -875,6 +948,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
@@ -897,9 +979,7 @@ class deal_controller
 	public function purchaseddatafilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getdisplay_purchaseddeal($msg);
-		$gettag = $this->deal_model->getdisplay_tag();
-		$getbusiness = $this->deal_model->getdisplay_business();
-		$getcategory = $this->deal_model->getdisplay_category();
+		
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
@@ -971,6 +1051,15 @@ class deal_controller
     }, $str);
     		$value7=$data[7];
     		$value15=$data[15];
+            if($data[15] == NULL)
+            {
+                $value15 = "default.png";
+            }
+            else
+            {
+                $value15 = $data[15];
+                
+            }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                 <td style=\"text-align:center;\">".$i."</td>
