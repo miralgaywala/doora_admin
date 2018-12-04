@@ -9,7 +9,7 @@ class customer_model
     public function getdisplay_customer()
     {
        $con=$this->db->connection();
-       $getcustomer=$con->query("select * from users where is_deleted=0 AND is_business=0");
+       $getcustomer=$con->query("select * from users where is_deleted=0 AND is_business=0 order by user_id desc");
        $customer=$getcustomer->fetch_all();
        return $customer;
     }

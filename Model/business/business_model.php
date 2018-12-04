@@ -9,7 +9,7 @@ class business_model
     public function getdisplay_businessuser()
     {
        $con=$this->db->connection();
-       $getbusinessuser=$con->query("select * from users where is_deleted=0 AND is_business=1");
+       $getbusinessuser=$con->query("select * from users where is_deleted=0 AND is_business=1 order by user_id desc");
        $businessuser=$getbusinessuser->fetch_all();
        return $businessuser;
     }
@@ -62,21 +62,21 @@ class business_model
     public function getactivatefilter($msg)
     {
        $con=$this->db->connection();
-       $getbusinessactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=1");
+       $getbusinessactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=1 order by user_id desc");
        $businessactivate=$getbusinessactivate->fetch_all();
        return $businessactivate;
     }
     public function getdeactivatefilter($msg)
     {
        $con=$this->db->connection();
-       $getbusinessdeactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=0");
+       $getbusinessdeactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=0 order by user_id desc");
        $businessdeactivate=$getbusinessdeactivate->fetch_all();
        return $businessdeactivate;
     }
     public function getdeleteedilter($msg)
     {
        $con=$this->db->connection();
-       $getbusinessdelete=$con->query("select * from users where is_deleted=1 AND is_business=1");
+       $getbusinessdelete=$con->query("select * from users where is_deleted=1 AND is_business=1 order by user_id desc");
        $businessdelete=$getbusinessdelete->fetch_all();
        return $businessdelete;
     }

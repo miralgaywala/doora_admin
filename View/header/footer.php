@@ -30,7 +30,7 @@
 	});*/
   $(document).ready(function() {
    $('#example1').DataTable( {
-            "order": [[ 1, 'asc' ]],
+            
     } );
    
 

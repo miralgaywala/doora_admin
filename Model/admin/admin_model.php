@@ -9,7 +9,7 @@ class admin_model
     public function getdisplay_admin()
     {
        $con=$this->db->connection();
-       $getadmin=$con->query("select * from admin where is_deleted=0");
+       $getadmin=$con->query("select * from admin where is_deleted=0 order by admin_id desc");
        $admin=$getadmin->fetch_all();
        return $admin;
     }

@@ -46,16 +46,20 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><?php echo $data[4];?></td>
                   </tr>
                   <tr>
-                    <td>Is Deleted</td>
+                    <td>Is Branch Activate</td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Created At</td>
+                    <td>Is Deleted</td>
                   <td><?php echo $data[6];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                    <td>Created At</td>
                   <td><?php echo $data[7];?></td>
+                  </tr>
+                  <tr>
+                    <td>Upadted At</td>
+                  <td><?php echo $data[8];?></td>
                   </tr>
                 <?php } ?>
                 </table>

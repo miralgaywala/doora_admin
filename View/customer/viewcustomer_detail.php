@@ -93,32 +93,56 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><?php echo $data[17];?></td>
                   </tr>
                   <tr>
-                    <td>Is Email Verified</td>
+                    <td>Subscription End Date</td>
                   <td><?php echo $data[18];?></td>
                   </tr>
                   <tr>
-                    <td>Access Token</td>
+                    <td>Is Free Month Subscription</td>
                   <td><?php echo $data[19];?></td>
                   </tr>
                   <tr>
-                    <td>Created At</td>
+                    <td>Is Monthly Bill Pending</td>
                   <td><?php echo $data[20];?></td>
                   </tr>
                   <tr>
-                    <td>Upadated At</td>
+                    <td>Is Email Verified</td>
                   <td><?php echo $data[21];?></td>
                   </tr>
                   <tr>
-                    <td>Is Super Market</td>
+                    <td>Free trial Expiry Date</td>
                   <td><?php echo $data[22];?></td>
                   </tr>
                   <tr>
-                    <td>Website Url</td>
+                    <td>Is Start Subscription</td>
                   <td><?php echo $data[23];?></td>
                   </tr>
                   <tr>
-                    <td>Is Active</td>
+                    <td>Is Free Trial Started</td>
                   <td><?php echo $data[24];?></td>
+                  </tr>
+                  <tr>
+                    <td>Access Token</td>
+                  <td><?php echo $data[25];?></td>
+                  </tr>
+                  <tr>
+                    <td>Created At</td>
+                  <td><?php echo $data[26];?></td>
+                  </tr>
+                  <tr>
+                    <td>Upadated At</td>
+                  <td><?php echo $data[27];?></td>
+                  </tr>
+                  <tr>
+                    <td>Is Super Market</td>
+                  <td><?php echo $data[28];?></td>
+                  </tr>
+                  <tr>
+                    <td>Website Url</td>
+                  <td><?php echo $data[29];?></td>
+                  </tr>
+                  <tr>
+                    <td>Is Active</td>
+                  <td><?php echo $data[30];?></td>
                   </tr>
                 <?php } ?>
                 </table>

@@ -57,7 +57,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                            <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[6] == 1) echo 'checked="checked"';?>/>
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[3] == 1) echo 'checked="checked"';?>/>
                                          <br> <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
                              </div>  

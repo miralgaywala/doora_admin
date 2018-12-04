@@ -58,7 +58,18 @@
                 <?php
                 $i=0;
                 foreach ($display_admin as $key => $data) 
-                {                    
+                {
+                  if($data[7] == NULL)
+                 {
+                  $data[7]= "default.png";
+                 }
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
+                  $data[7] = $data[7];
+                 }
+                 else
+                 {
+                  $data[7]= "default.png";
+                 }            
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>

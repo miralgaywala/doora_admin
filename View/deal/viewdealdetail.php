@@ -57,7 +57,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[12].'';
+    $str   = ''.$data[10].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -89,6 +89,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
+    if($data[13] == NULL)
+                 {
+                  $data[13] = "default.png";
+                 }
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
+                  $data[13] = $data[13];
+                 }
+                 else
+                 {
+                  $data[13]= "default.png";
+                 }     
                ?>
                   <tr>
                     <td>Business Deal Id</td>
@@ -96,11 +107,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Business User Id</td>
-                  <td><?php echo $data[22];?></td>
+                  <td><?php echo $data[21];?></td>
                   </tr>
                   <tr>
                     <td>Business Name</td>
-                  <td><?php echo $data[24];?></td>
+                  <td><?php echo $data[23];?></td>
                   </tr>
                   <tr>
                   <td>Franchise Id</td>
@@ -108,7 +119,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Franchise Address</td>
-                  <td><?php echo $data[21];?></td>
+                  <td><?php echo $data[20];?></td>
                   </tr>
                   <tr>
                   <td>Offer Id</td>
@@ -116,7 +127,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
 					<tr>
                   <td>Offer Title</td>
-                  <td><?php echo $data[31];?></td>
+                  <td><?php echo $data[30];?></td>
                   </tr>                  
                   <tr>
                   <td>Deal Title</td>
@@ -140,7 +151,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Is In Store</td>
-                  <td><?php if($data[9] == 0 ) 
+                  <td><?php if($data[8] == 0 ) 
                   {echo "No";
                 }
                     else
@@ -150,7 +161,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Is Online</td>
-                  <td><?php if($data[10] == 0 ) 
+                  <td><?php if($data[9] == 0 ) 
                   {echo "No";
                 }
                     else
@@ -189,6 +200,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Overall Quantity</td>
+                  <td><?php if($data[11] == 0 ) 
+                  {echo "No Limit";
+                }
+                    else
+                      {
+                        echo $data[11];
+                      }?></td>
+                  </tr>
+                  <tr>
+                    <td>Per Person Quantity</td>
                   <td><?php if($data[12] == 0 ) 
                   {echo "No Limit";
                 }
@@ -198,20 +219,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Per Person Quantity</td>
-                  <td><?php if($data[13] == 0 ) 
-                  {echo "No Limit";
-                }
-                    else
-                      {
-                        echo $data[13];
-                      }?></td>
-                  </tr>
-                  <tr>
                     <td>Deal Photo</td>
-                  <td><img <?php echo "src=/doora/images/deal/".$data[15];?> id="DealPicture"/></td>
+                  <td><img <?php echo "src=/doora/images/deal/".$data[13];?> id="DealPicture"/></td>
                   </tr>
-                   <?php if($data[16] == NULL)
+                   <?php if($data[14] == NULL)
                     {
                       
                     }
@@ -222,21 +233,19 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                  
                    
                   <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
-  					<source <?php echo "src=/doora/video/deal/".$data[16];?> type="video/mp4">
+  					<source <?php echo "src=/doora/video/deal/".$data[14];?> type="video/mp4">
 					</video></td> <?php } ?>
 				
                   </tr>
                
                   <tr>
                     <td>Deal Start time</td>
-                  <td><?php echo $data[17];?></td>
+                  <td><?php echo $data[15];?></td>
                   </tr>
                   <tr>
                     <td>Deal End time</td>
-                  <td><?php echo $data[18];?></td>
-                  </tr>
-                 
-                 
+                  <td><?php echo $data[16];?></td>
+                  </tr>                 
                   <tr>
                     <td>Tag Id</td>
                   <td> <?php foreach ($deal_tag as $tag) {                   
@@ -285,8 +294,4 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </div>
 
  <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
- 
-     
-                       
- 
+ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  

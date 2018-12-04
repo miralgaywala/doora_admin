@@ -24,6 +24,17 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <?php
                    foreach ($viewadmin_detail as $key => $data) 
                   {
+                    if($data[7] == NULL)
+                 {
+                  $data[7]= "default.png";
+                 }
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
+                  $data[7] = $data[7];
+                 }
+                 else
+                 {
+                  $data[7]= "default.png";
+                 }            
                ?>
                   <tr>
                     <td>Admin Id</td>

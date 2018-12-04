@@ -1,6 +1,5 @@
 <?php 
 include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
-
 include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
 
@@ -47,40 +46,76 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			<div class="box-body">
         				<form class="form-horizontal" name="addtag" id="addtag_form" role="form" action="" method="post" onsubmit="return validateForm();">
         					<div class="form-group notranslate">
-                    
                     <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data[0];}?>">
                                 <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="privacy_policy" type="text" id="privacy_policy" value="<?php foreach($display_content as $data) { echo $data[1];}?>" class="form-control"/>
+                                <div class="col-sm-8 notranslate">
+                                   <textarea class="ckeditor" cols="80" id="privacy_policy" name="privacy_policy" rows="10" >
+                                                  <?php 
+                                                  foreach($display_content as $data)
+                                                  {
+                                                    echo $data[1];
+                                                  }
+
+                                                   ?>
+                                                 </textarea>
                                     <span id="privacy_error" class="show_required"></span><br>
                                 </div>
                             </div>  
+                             <script language="Javascript">
+                                            CKEDITOR.replace( 'privacy_policy' );
+                                         </script> 
                             <div class="form-group notranslate">
                                 <label for="term_condition" class="col-sm-3 control-label">Terms & Conditions<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="term_condition" type="text" id="term_condition" value="<?php foreach($display_content as $data) { echo $data[2];}?>" class="form-control"/>
+                                <div class="col-sm-8 notranslate">
+                                    <textarea class="ckeditor" cols="80" id="term_condition" name="term_condition" rows="10" >
+                                                  <?php 
+                                                  foreach($display_content as $data)
+                                                  {
+                                                    echo $data[2];
+                                                  }
+
+                                                   ?>
+                                                 </textarea>
                                     <span id="term_error" class="show_required"></span><br>
                                 </div>
                             </div> 
+                             <script language="Javascript">
+                                            CKEDITOR.replace( 'term_condition' );
+                                         </script> 
                                   <div class="form-group notranslate">
-                                             <label for="help" class="notranslate col-sm-3 control-label">Help<span class="show_required">*</span></label>
+                                             <label for="helpc" class="notranslate col-sm-3 control-label">Help(Customer)<span class="show_required">*</span></label>
                                              <div class="col-sm-8 notranslate">
-                                                 <textarea class="ckeditor" cols="80" id="help" name="help" rows="10" >
+                                                 <textarea class="ckeditor" cols="80" id="helpc" name="helpc" rows="10" >
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
                                                     echo $data[3];
                                                   }
-
                                                    ?>
                                                  </textarea>
+                                                 <span id="helpc_error" class="show_required"></span><br>
                                              </div>
                                          </div>   
                                          <script language="Javascript">
-<!--
-  CKEDITOR.replace( 'help' );
-//-->
-</script>                                        
+                                            CKEDITOR.replace( 'helpc' );
+                                         </script>   
+                                         <div class="form-group notranslate">
+                                             <label for="helpb" class="notranslate col-sm-3 control-label">Help(Business)<span class="show_required">*</span></label>
+                                             <div class="col-sm-8 notranslate">
+                                                 <textarea class="ckeditor" cols="80" id="helpb" name="helpb" rows="10" >
+                                                  <?php 
+                                                  foreach($display_content as $data)
+                                                  {
+                                                    echo $data[4];
+                                                  }
+                                                   ?>
+                                                 </textarea>
+                                                 <span id="helpb_error" class="show_required"></span><br>
+                                             </div>
+                                         </div>   
+                                         <script language="Javascript">
+                                            CKEDITOR.replace( 'helpb' );
+                                         </script>                                       
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="content_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="content_submit"/>
                             </div>  
@@ -99,11 +134,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       function validateForm() {
                                     var privacy = document.getElementById("privacy_policy").value;
                                     var term = document.getElementById("term_condition").value;
-                                    var help = document.getElementById("help").value;
-                                    var count=0;
+                                    var helpc = document.getElementById("helpc").value;
+                                     var helpb = document.getElementById("helpb").value;
                                     var count=0;
                                     if (privacy.trim() == "") {
-                                        document.getElementById('privacy_error').innerHTML="Please Enter Privacy Policy URL";
+                                        document.getElementById('privacy_error').innerHTML="Please Enter Privacy Policy";
                                         count++;
                                       }
                                       else
@@ -112,21 +147,30 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       }
                                     if(term.trim() == "")
                                       {
-                                        document.getElementById("term_error").innerHTML="Please Enter Terms And Condition URL";
+                                        document.getElementById("term_error").innerHTML="Please Enter Terms And Condition";
                                        count++;
                                       }
                                       else
                                       {
                                         document.getElementById("term_error").innerHTML="";
                                       }
-                                     if(help.trim() == "")
+                                     if(helpc.trim() == "")
                                     {
-                                      document.getElementById("help_error").innerHTML="Please Enter Help URL";
+                                      document.getElementById("helpc_error").innerHTML="Please Enter Help(Customer)";
                                         count++;
                                     }
                                     else
                                     {
-                                      document.getElementById("help_error").innerHTML="";
+                                      document.getElementById("helpc_error").innerHTML="";
+                                    }
+                                    if(helpb.trim() == "")
+                                    {
+                                      document.getElementById("helpb_error").innerHTML="Please Enter Help(Business)";
+                                        count++;
+                                    }
+                                    else
+                                    {
+                                      document.getElementById("helpb_error").innerHTML="";
                                     }
                                    
                                    if(count>0)
@@ -145,6 +189,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                  $content_id =$_POST['content_id'];
                                   $privacy_policy =$_POST['privacy_policy'];
                                    $term_condition =$_POST['term_condition'];
-                                    $help =$_POST['help'];
+                                    $helpc =$_POST['helpc'];
+                                    $helpb =$_POST['helpb'];
                               }
                             ?>       

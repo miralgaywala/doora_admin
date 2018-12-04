@@ -9,6 +9,7 @@ class support_controller
 	public function display_support($msg)
 	{
 		$display_support=$this->support_model->getdisplay_support();
+		//print_r($display_support);
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/support/displaysupport.php');
 		return $display_support;
 	}

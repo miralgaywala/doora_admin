@@ -32,7 +32,7 @@
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-                "order": [[ 1, 'asc' ]],
+                
                 "destroy":true,
             });
 		   }
@@ -59,7 +59,7 @@ $(document).ready(function(){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		          
 		            "destroy":true,
 		    		});
 		   }
@@ -101,7 +101,7 @@ $(document).ready(function(){
                $("#result_data").empty();
                $("#result_data").append(data);
         				$('#example2').dataTable({
-        		            "order": [[ 1, 'asc' ]],
+        		           
         		            "destroy":true,
         		    		});
        }
@@ -129,7 +129,7 @@ $(document).ready(function(){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		           
 		            "destroy":true,
 		    		});
 			 }
@@ -174,7 +174,7 @@ function loadbranch(UsersId){
                $("#result_data").empty();
                $("#result_data").append(data);
               $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		           
 		            "destroy":true,
 		    		});
       		 }
@@ -195,7 +195,7 @@ function loadbranch(UsersId){
                                                    $("#result_data").empty();
                                                    $("#result_data").append(data);
                                                      $('#example2').dataTable({
-                                                    "order": [[ 1, 'asc' ]],
+                                                   
                                                     "destroy":true,
                                                 });
                                                  }
@@ -215,7 +215,7 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
        		       $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		            
 		            "destroy":true,
 		    		});
        		   }
@@ -232,7 +232,7 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		           
 		            "destroy":true,
 		    		});
 		   }
@@ -249,7 +249,7 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		            
 		            "destroy":true,
 		    		});
 		   }
@@ -266,7 +266,7 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		           
 		            "destroy":true,
 		    		});
 		   }
@@ -283,7 +283,7 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		            "order": [[ 1, 'asc' ]],
+		           
 		            "destroy":true,
 		    		});
 		   }
@@ -319,8 +319,8 @@ function loadbranch(UsersId){
                                       
                                   </select>
                                 </div> 
-                 </div>
-                 <div class="row">
+                          </div>
+                              <div class="row">
                                 <label for="tag" class="col-sm-1 control-label" style="margin-top: 25px">Tag</label>
                                 <div class="col-sm-2" style="padding-top: 20px">
                                     <select id="tag" name="" class="form-control">

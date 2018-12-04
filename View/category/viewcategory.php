@@ -39,19 +39,19 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[3];?></td>
-                  </tr>
-                  <tr>
-                    <td>Created At</td>
                   <td><?php echo $data[4];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                    <td>Created At</td>
                   <td><?php echo $data[5];?></td>
                   </tr>
                   <tr>
-                    <td>Is Super Market</td>
+                    <td>Upadted At</td>
                   <td><?php echo $data[6];?></td>
+                  </tr>
+                  <tr>
+                    <td>Is Super Market</td>
+                  <td><?php echo $data[3];?></td>
                   </tr>
                 <?php } ?>
                 </table>

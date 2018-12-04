@@ -8,7 +8,7 @@ class support_model
     public function getdisplay_support()
     {
        $con=$this->db->connection();
-       $getsupport=$con->query("select s.*,user.name from support as s left join users as user on s.user_id = user.user_id where NOT s.is_deleted=1");
+       $getsupport=$con->query("select s.*,user.name from support as s left join users as user on s.user_id = user.user_id where NOT s.is_deleted=1 order by s.created_at desc");
        $support=$getsupport->fetch_all();
        return $support;
     }

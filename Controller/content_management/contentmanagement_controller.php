@@ -19,8 +19,9 @@ class content_controller
                      $content_id =$_POST['content_id'];
                      $privacy_policy =$_POST['privacy_policy'];
                      $term_condition =$_POST['term_condition'];
-                     $help =$_POST['help'];
-                     $add_content=$this->content_model->addcontent_data($content_id,$privacy_policy,$term_condition,$help);
+                     $helpc =$_POST['helpc'];
+                     $helpb =$_POST['helpb'];
+                     $add_content=$this->content_model->addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb);
                      	if($add_content=="0")
 						{
 						echo '<script>window.location.href="/doora/adminpanel/Controller/content_management/addcontentmanagement_controller.php?id=0";</script>';

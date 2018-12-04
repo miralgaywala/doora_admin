@@ -102,7 +102,19 @@
                 <?php
                 $i=0;
                 foreach ($display_businessuser as $key => $data) 
-                {                    
+                {        
+                
+                if($data[5] == NULL)
+                 {
+                  $data[5]= "default.png";
+                 }
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
+                  $data[5] = $data[5];
+                 }
+                 else
+                 {
+                  $data[5]= "default.png";
+                 }            
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data[0]; ?></td>
@@ -111,7 +123,7 @@
                                 <td style="text-align:center;"><?php echo $data[6];?></td>
                                 <td style="text-align:center;"><?php echo $data[12];?></td>
                                 <td style="text-align:center;"><?php echo $data[13];?></td>
-                                <td style="text-align:center;"><?php echo $data[22];?></td>
+                                <td style="text-align:center;"><?php echo $data[28];?></td>
                                 <td style="text-align:center;">
                           
                                     <div>
@@ -123,12 +135,12 @@
                                         </a>
                                            <?php } ?>
                                         <br/>
-                                    	<a <?php $value=$data[24]; if($value == 1 ){ ?>
+                                    	<a <?php $value=$data[30]; if($value == 1 ){ ?>
                                     		onclick="javascript: return confirm('Do you really want to Deactivate This Business?');"
                                     	<?php } else{ ?>
                                     		onclick="javascript: return confirm('Do you really want to Activate This Business?');"
                                     	<?php }?>
-                                    	<?php echo "href=/doora/adminpanel/Controller/business/isactive_controller.php?id=".$data[0]."&value=".$data[24];?>><?php $value=$data[24]; if($value == 1 ){
+                                    	<?php echo "href=/doora/adminpanel/Controller/business/isactive_controller.php?id=".$data[0]."&value=".$data[30];?>><?php $value=$data[30]; if($value == 1 ){
                                     		echo "Activate";
                                     	}
                                     	else
