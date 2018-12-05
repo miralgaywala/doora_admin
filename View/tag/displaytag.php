@@ -56,18 +56,18 @@
                 {                    
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[1]; ?></td>
+                                <td style="text-align:center;"><?php echo $data['tag_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['tag']; ?></td>
                                 <td style="text-align:center;">
                           
                                     <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/edittag_controller.php?id=".$data[0]; ?> title="Edit" >
+                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/edittag_controller.php?id=".$data['tag_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Tag?');" <?php echo "href=/doora/adminpanel/Controller/tag/deletetag_controller.php?id=".$data[0];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Tag?');" <?php echo "href=/doora/adminpanel/Controller/tag/deletetag_controller.php?id=".$data['tag_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/viewtag_controller.php?id=".$data[0];?> title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/viewtag_controller.php?id=".$data['tag_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

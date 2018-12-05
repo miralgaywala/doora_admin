@@ -9,6 +9,7 @@ class tag_controller
 	public function display_tag($msg)
 	{
 		$display_tag=$this->tag_model->getdisplay_tag();
+		//print_r($display_tag);
 		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/tag/displaytag.php');
 		return $display_tag;
 	}

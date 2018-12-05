@@ -10,14 +10,14 @@ class admin_model
     {
        $con=$this->db->connection();
        $getadmin=$con->query("select * from admin where is_deleted=0 order by admin_id desc");
-       $admin=$getadmin->fetch_all();
+       $admin=mysqli_fetch_all($getadmin,MYSQLI_ASSOC);
        return $admin;
     }
     public function getadmindetail($id)
     {
        $con=$this->db->connection();
        $getadmindetail=$con->query("select * from admin where is_deleted=0 AND admin_id=".$id);
-       $adminuser=$getadmindetail->fetch_all();
+       $adminuser=mysqli_fetch_all($getadmindetail,MYSQLI_ASSOC);
        return $adminuser;
     }
     public function deleteadmin($id)

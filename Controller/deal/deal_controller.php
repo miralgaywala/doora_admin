@@ -57,7 +57,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -162,7 +162,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -267,7 +267,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -372,7 +372,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -478,7 +478,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -583,7 +583,7 @@ class deal_controller
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
 			$value0=$data[0];
-			$value21=$data[20];
+			$value21=$data[21];
 			$str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -698,7 +698,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -803,7 +803,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -908,7 +908,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
@@ -1013,7 +1013,7 @@ class deal_controller
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
             $value0=$data[0];
-            $value21=$data[20];
+            $value21=$data[21];
             $str   = ''.$data[3].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';

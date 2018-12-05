@@ -24,61 +24,61 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <?php
                    foreach ($viewadmin_detail as $key => $data) 
                   {
-                    if($data[7] == NULL)
+                    if($data['profile_image'] == NULL)
                  {
-                  $data[7]= "default.png";
+                  $data['profile_image']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
-                  $data[7] = $data[7];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['profile_image'])) {
+                  $data['profile_image'] = $data['profile_image'];
                  }
                  else
                  {
-                  $data[7]= "default.png";
+                  $data['profile_image']= "default.png";
                  }            
                ?>
                   <tr>
                     <td>Admin Id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['admin_id'];?></td>
                   </tr>
                   <tr>
                     <td>Role Id</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['role_id'];?></td>
                   </tr>
                   <tr>
                     <td>Username</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['username'];?></td>
                   </tr>
                   <tr>
                     <td>Password</td>
-                  <td><?php echo $data[3];?></td>
+                  <td><?php echo $data['password'];?></td>
                   </tr>
                   <tr>
                     <td>Admin Name</td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['admin_name'];?></td>
                   </tr>
                   <tr>
                     <td>Email Address</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['email_address'];?></td>
                   </tr>
                   <tr>
                     <td>Phone No</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['phone_no'];?></td>
                   </tr>
                   <tr>
                     <td>Profile Image</td>
-                  <td><img <?php echo "src=/doora/images/profile/".$data[7];?> id="Picture"/></td>
+                  <td><img <?php echo "src=/doora/images/profile/".$data['profile_image'];?> id="Picture"/></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[8];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[9];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[10];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

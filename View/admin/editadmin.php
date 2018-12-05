@@ -39,12 +39,12 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
               <div class="box-body">
                 <form class="form-horizontal" name="addadmin" id="addadmin_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
                   <div class="form-group notranslate">
-                     <input type="hidden" value="<?php echo $data[0]?>" name="id">
+                     <input type="hidden" value="<?php echo $data['admin_id']?>" name="id">
                                 <label for="profile_image" class="col-sm-3 control-label">Profile Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="profile_image" type="file" id="profile_image" accept="image/*" onchange="ImagePreview();" style="margin-top: 6px;">
-                                        <input type="hidden" value="<?php echo $data[7]?>" name="image"/>
-                                        <div id="AdminPicture" style="background-image:url('/doora/images/profile/<?php echo $data[7];?>');margin:10px 0 0 0"></div><br>
+                                        <input type="hidden" value="<?php echo $data['profile_image']?>" name="image"/>
+                                        <div id="AdminPicture" style="background-image:url('/doora/images/profile/<?php echo $data['profile_image'];?>');margin:10px 0 0 0"></div><br>
                                         <span id="profile_imageerror" class="show_required"></span>                                           
                                    </div>
                              </div>   
@@ -52,11 +52,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <label for="role" class="col-sm-3 control-label">Role<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="role" name="role" class="form-control">
-                                      <option value="<?php echo $data[1]?>"><?php if($data[1]==1)
+                                      <option value="<?php echo $data['role_id']?>"><?php if($data['role_id']==1)
                                       {
                                         echo "Admin";
                                       }
-                                      elseif ($data[1]==2) {
+                                      elseif ($data['role_id']==2) {
                                          echo "Sub-Admin";
                                        } ?></option>
                                        <option value="0">Select Role</option>
@@ -69,35 +69,35 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                           <div class="form-group notranslate">
                                 <label for="user_name" class="col-sm-3 control-label">Username<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="user_name" type="text" id="user_name" class="form-control" value="<?php echo $data[2]?>"/>
+                                    <input name="user_name" type="text" id="user_name" class="form-control" value="<?php echo $data['username']?>"/>
                                     <span id="user_nameerror" class="show_required"></span>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="password" class="col-sm-3 control-label">Password<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="password" type="text" id="password" class="form-control" value="<?php echo $data[3]?>"/>
+                                    <input name="password" type="text" id="password" class="form-control" value="<?php echo $data['password']?>"/>
                                     <span id="passworderror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="admin_name" class="col-sm-3 control-label">Admin Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="admin_name" type="text" id="admin_name" class="form-control" value="<?php echo $data[4]?>"/>
+                                    <input name="admin_name" type="text" id="admin_name" class="form-control" value="<?php echo $data['admin_name']?>"/>
                                     <span id="admin_nameerror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="email_address" class="col-sm-3 control-label">Email Address<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="email_address" type="text" id="email_address" class="form-control" value="<?php echo $data[5]?>"/>
+                                    <input name="email_address" type="text" id="email_address" class="form-control" value="<?php echo $data['email_address']?>"/>
                                     <span id="email_addresserror" class="show_required"></span>  
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="phone_no" class="col-sm-3 control-label">Phone No.<span class="show_required">*</span></label>
                                 <div class="col-sm-8">
-                                    <input name="phone_no" type="text" id="phone_no" class="form-control" value="<?php echo $data[6]?>"/>
+                                    <input name="phone_no" type="text" id="phone_no" class="form-control" value="<?php echo $data['phone_no']?>"/>
                                     <span id="phone_noerror" class="show_required"></span>  
                                 </div>
                             </div>    

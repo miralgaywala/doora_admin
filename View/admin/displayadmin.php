@@ -59,35 +59,35 @@
                 $i=0;
                 foreach ($display_admin as $key => $data) 
                 {
-                  if($data[7] == NULL)
+                  if($data['profile_image'] == NULL)
                  {
-                  $data[7]= "default.png";
+                  $data['profile_image']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
-                  $data[7] = $data[7];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['profile_image'])) {
+                  $data['profile_image'] = $data['profile_image'];
                  }
                  else
                  {
-                  $data[7]= "default.png";
+                  $data['profile_image']= "default.png";
                  }            
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[1]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[2];?></td>
-                                <td style="text-align:center;"><?php echo $data[4];?></td> 
-                                <td style="text-align:center;"><?php echo $data[6];?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data[7];?> id="profilePicture"/></td>
-                                <td style="text-align:center;"><?php echo $data[5];?></td> 
+                                <td style="text-align:center;"><?php echo $data['admin_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['role_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['username'];?></td>
+                                <td style="text-align:center;"><?php echo $data['admin_name'];?></td> 
+                                <td style="text-align:center;"><?php echo $data['phone_no'];?></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data['profile_image'];?> id="profilePicture"/></td>
+                                <td style="text-align:center;"><?php echo $data['email_address'];?></td> 
                                 <td style="text-align:center;">
                                   <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/editadmin_controller.php?id=".$data[0]; ?> title="Edit" >
+                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/editadmin_controller.php?id=".$data['admin_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=/doora/adminpanel/Controller/admin/deleteadmin_controller.php?id=".$data[0];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=/doora/adminpanel/Controller/admin/deleteadmin_controller.php?id=".$data['admin_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/viewadmin_controller.php?id=".$data[0]; ?> title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/viewadmin_controller.php?id=".$data['admin_id']; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

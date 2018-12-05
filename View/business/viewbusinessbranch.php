@@ -30,13 +30,13 @@
                 {                    
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[2]; ?></td>
+                                <td style="text-align:center;"><?php echo $data['franchise_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['franchise_address']; ?></td>
                                 <td style="text-align:center;">
                           
                                     <div>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbranchdetail_controller.php?id=".$data[0];?> title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbranchdetail_controller.php?id=".$data['franchise_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

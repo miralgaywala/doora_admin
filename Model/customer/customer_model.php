@@ -10,14 +10,14 @@ class customer_model
     {
        $con=$this->db->connection();
        $getcustomer=$con->query("select * from users where is_deleted=0 AND is_business=0 order by user_id desc");
-       $customer=$getcustomer->fetch_all();
+       $customer=mysqli_fetch_all($getcustomer,MYSQLI_ASSOC);
        return $customer;
     }
     public function getcustomerdetail($id)
     {
        $con=$this->db->connection();
        $getcustomerdetail=$con->query("select * from users where is_deleted=0 AND is_business=0 AND user_id=".$id);
-       $customeruser=$getcustomerdetail->fetch_all();
+       $customeruser=mysqli_fetch_all($getcustomerdetail,MYSQLI_ASSOC);
        return $customeruser;
     }
     public function updateactive($id,$data)

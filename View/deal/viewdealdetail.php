@@ -107,11 +107,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Business User Id</td>
-                  <td><?php echo $data[21];?></td>
+                  <td><?php echo $data[22];?></td>
                   </tr>
                   <tr>
                     <td>Business Name</td>
-                  <td><?php echo $data[23];?></td>
+                  <td><?php echo $data[24];?></td>
                   </tr>
                   <tr>
                   <td>Franchise Id</td>
@@ -119,15 +119,15 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Franchise Address</td>
-                  <td><?php echo $data[20];?></td>
+                  <td><?php echo $data[21];?></td>
                   </tr>
                   <tr>
                   <td>Offer Id</td>
                   <td><?php echo $data[2];?></td>
                   </tr>
-					<tr>
+					        <tr>
                   <td>Offer Title</td>
-                  <td><?php echo $data[30];?></td>
+                  <td><?php echo $data[31];?></td>
                   </tr>                  
                   <tr>
                   <td>Deal Title</td>
@@ -229,9 +229,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     else
                     	{?>
                   <tr>	
-                    <td>Deal Video</td>
-                 
-                   
+                    <td>Deal Video</td>                   
                   <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
   					<source <?php echo "src=/doora/video/deal/".$data[14];?> type="video/mp4">
 					</video></td> <?php } ?>
@@ -277,12 +275,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                    ?><?php echo $category[1];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
-                    <td>Created At</td>
+                    <td>Is Aspectfit</td>
                   <td><?php echo $data[18];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                    <td>Created At</td>
                   <td><?php echo $data[19];?></td>
+                  </tr>
+                  <tr>
+                    <td>Upadted At</td>
+                  <td><?php echo $data[20];?></td>
                   </tr>
                 <?php } ?>
                 </table>

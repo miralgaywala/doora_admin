@@ -7,7 +7,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php
        foreach ($view_branch as $key => $data) 
                   {
-                    $id=$data[1];
+                    $id=$data['franchise_id'];
                ?>
 <!--Main Content -->
     <section class="content">
@@ -27,39 +27,39 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         				<table width="50%" style="font-size: 15px;">
                   <tr>
                     <td>Frenchise id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['franchise_id'];?></td>
                   </tr>
                   <tr>
                     <td>Business User Id</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['business_user_id'];?></td>
                   </tr>
                   <tr>
                     <td>Frenchise Address</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['franchise_address'];?></td>
                   </tr>
                   <tr>
                     <td>Latitude</td>
-                  <td><?php echo $data[3];?></td>
+                  <td><?php echo $data['latitude'];?></td>
                   </tr>
                   <tr>
                     <td>Longitude</td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['longitude'];?></td>
                   </tr>
                   <tr>
                     <td>Is Branch Activate</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['is_branch_active'];?></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[8];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

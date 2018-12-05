@@ -56,40 +56,40 @@
                 $i=0;
                 foreach ($display_customer as $key => $data) 
                 {      
-                if($data[5] == NULL)
+                if($data['photo'] == NULL)
                  {
-                  $data[5]= "default.png";
+                  $data['photo']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data[5])) {
-                  $data[5] = $data[5];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['photo'])) {
+                  $data['photo'] = $data['photo'];
                  }
                  else
                  {
-                  $data[5]= "default.png";
+                  $data['photo']= "default.png";
                  }                  
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[2]; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data[5];?> id="profilePicture"/></td>
-                                <td style="text-align:center;"><?php echo $data[6];?></td>
-                                <td style="text-align:center;"><?php echo $data[12];?></td> 
+                                <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['name']; ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data['photo'];?> id="profilePicture"/></td>
+                                <td style="text-align:center;"><?php echo $data['email'];?></td>
+                                <td style="text-align:center;"><?php echo $data['mobile_no'];?></td> 
                                 <td style="text-align:center;">
                           
                                     <div>
-                                    	<a <?php echo "href=/doora/adminpanel/Controller/customer/viewcustomer_controller.php?id=".$data[0];?> title="View all detail"><i class="fa fa-eye"></i></a>
+                                    	<a <?php echo "href=/doora/adminpanel/Controller/customer/viewcustomer_controller.php?id=".$data['user_id'];?> title="View all detail"><i class="fa fa-eye"></i></a>
                                   
                                     	  
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/customer/deletecustomer_controller.php?id=".$data[0];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/customer/deletecustomer_controller.php?id=".$data['user_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                         <br/>
-                                    	<a <?php $value=$data[30]; if($value == 1 ){ ?>
+                                    	<a <?php $value=$data['is_active']; if($value == 1 ){ ?>
                                     		onclick="javascript: return confirm('Do you really want to Deactivate This Customer?');"
                                     	<?php } else{ ?>
                                     		onclick="javascript: return confirm('Do you really want to Activate This Customer?');"
                                     	<?php }?>
-                                    	<?php echo "href=/doora/adminpanel/Controller/Customer/isactive_controller.php?id=".$data[0]."&value=".$data[30];?>><?php $value=$data[30]; if($value == 1 ){
+                                    	<?php echo "href=/doora/adminpanel/Controller/Customer/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
                                     		echo "Activate";
                                     	}
                                     	else

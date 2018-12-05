@@ -10,7 +10,8 @@ class tag_model
     {
        $con=$this->db->connection();
        $gettag=$con->query("select * from deal_tags where NOT is_deleted=1");
-       $tag=$gettag->fetch_all();
+       $tag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
+       //echo "<pre>";print_r($tag);echo "</pre>";
        return $tag;
     }
 
@@ -37,16 +38,16 @@ class tag_model
     }
     public function viewtag($tag_id)
     {
-    	 $con= $this->db->connection();
+    	$con= $this->db->connection();
         $viewtag=$con->query("select * from deal_tags where tag_id=".$tag_id);
-        $viewtag=$viewtag->fetch_all();
+        $viewtag=mysqli_fetch_all($viewtag,MYSQLI_ASSOC);
         return $viewtag;
     }
     public function edittaglist($tag_id)
     {
     	$con= $this->db->connection();
         $edittag=$con->query("select * from deal_tags where tag_id=".$tag_id);
-        $edittagdata=$edittag->fetch_all();
+        $edittagdata=mysqli_fetch_all($edittag,MYSQLI_ASSOC);
         return $edittagdata;
     }
     public function edittag_data($tag_id,$tag)

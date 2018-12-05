@@ -10,21 +10,21 @@ class business_model
     {
        $con=$this->db->connection();
        $getbusinessuser=$con->query("select * from users where is_deleted=0 AND is_business=1 order by user_id desc");
-       $businessuser=$getbusinessuser->fetch_all();
+       $businessuser=mysqli_fetch_all($getbusinessuser,MYSQLI_ASSOC);
        return $businessuser;
     }
     public function getbusinessbranchdetail($user_id)
     {
         $con=$this->db->connection();
         $viewbusinessbranch=$con->query("select * from business_franchise where business_user_id=".$user_id);
-        $view=$viewbusinessbranch->fetch_all();
+        $view=mysqli_fetch_all($viewbusinessbranch,MYSQLI_ASSOC);
         return $view;
     }
     public function getbranchdetail($frenchise_id)
     {
         $con=$this->db->connection();
         $viewbranchdetail=$con->query("select * from business_franchise where franchise_id=".$frenchise_id);
-        $view=$viewbranchdetail->fetch_all();
+        $view=mysqli_fetch_all($viewbranchdetail,MYSQLI_ASSOC);
         return $view;
     }
     public function updateactive($id,$data)
@@ -56,28 +56,28 @@ class business_model
     {
        $con=$this->db->connection();
        $getbusinessdetail=$con->query("select * from users where is_business=1 AND user_id=".$id);
-       $businessuser=$getbusinessdetail->fetch_all();
+       $businessuser=mysqli_fetch_all($getbusinessdetail,MYSQLI_ASSOC);
        return $businessuser;
     }
     public function getactivatefilter($msg)
     {
        $con=$this->db->connection();
        $getbusinessactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=1 order by user_id desc");
-       $businessactivate=$getbusinessactivate->fetch_all();
+       $businessactivate=mysqli_fetch_all($getbusinessactivate,MYSQLI_ASSOC);
        return $businessactivate;
     }
     public function getdeactivatefilter($msg)
     {
        $con=$this->db->connection();
        $getbusinessdeactivate=$con->query("select * from users where is_deleted=0 AND is_business=1 AND is_active=0 order by user_id desc");
-       $businessdeactivate=$getbusinessdeactivate->fetch_all();
+       $businessdeactivate=mysqli_fetch_all($getbusinessdeactivate,MYSQLI_ASSOC);
        return $businessdeactivate;
     }
     public function getdeleteedilter($msg)
     {
        $con=$this->db->connection();
        $getbusinessdelete=$con->query("select * from users where is_deleted=1 AND is_business=1 order by user_id desc");
-       $businessdelete=$getbusinessdelete->fetch_all();
+       $businessdelete=mysqli_fetch_all($getbusinessdelete,MYSQLI_ASSOC);
        return $businessdelete;
     }
 }
