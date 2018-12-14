@@ -112,10 +112,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <td><?php echo $data['subscription_enddate'];?></td>
                   </tr>
                   <tr>
-                    <td>Is Free Month Subscription</td>
-                  <td><?php echo $data['is_free_month_subscription'];?></td>
-                  </tr>
-                  <tr>
                     <td>Is Monthly Bill Pending</td>
                   <td><?php echo $data['is_monthly_bill_pending'];?></td>
                   </tr>

@@ -36,8 +36,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         					<div class="form-group notranslate">
                                 <label for="offer_title" class="col-sm-3 control-label">Offer Title<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input type="hidden" name="offer_id" value='<?php echo $data[0];?>' id="offer_id"/>
-                                    <input name="offer_title" type="text" id="offer_title" class="form-control" value="<?php echo $data[1]; ?>" />
+                                    <input type="hidden" name="offer_id" value="<?php echo $data['offer_id'];?>" id="offer_id"/>
+                                    <input name="offer_title" type="text" id="offer_title" class="form-control" value="<?php echo $data['offer_title']; ?>" />
                                     <span id="offer_error" class="show_required"></span><br>
                                 </div>
                             </div> 

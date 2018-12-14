@@ -42,9 +42,9 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
                                        <!-- <option value="<?php echo $data[2];?>"><?php echo $data[0];?></option> -->
-                                       <?php if($data[2])
+                                       <?php if($data['category_id'])
                                        {
-                                       	$selected = $data[2];
+                                       	$selected = $data['category_id'];
                                        }
                                        else
                                     {
@@ -54,18 +54,18 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       <?php
                                         foreach ($category_view as $key => $data1) 
                                       { ?>
-                                         <option value="<?php echo $data1[0];?>" <?php if($data1[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data1[1];?></option>
+                                         <option value="<?php echo $data1['category_id'];?>" <?php if($data1['category_id'] == $selected ) { ?> selected  <?php } ?>><?php echo $data1['category_name'];?></option>
                                     <?php   } ?>
                                     </select>
                                     <span id="cat_nameerror" class="show_required"></span><br>
                                 </div> 
                             </div>
                              
-                  <input type="hidden" name="sub_category_id" value='<?php echo $data[1];?>' id="sub_category_id"/>
+                  <input type="hidden" name="sub_category_id" value='<?php echo $data['sub_category_id'];?>' id="sub_category_id"/>
         					   <div class="form-group notranslate">
                                 <label for="sub_category_name" class="col-sm-3 control-label">Sub Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data[3];?>' onblur="subcategoryname();"/>
+                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data['sub_category_name'];?>' onblur="subcategoryname();"/>
                                     <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
@@ -77,8 +77,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       </div> 
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-3" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/sub_category/".$data[4]; ?>" style="width:186px;height:186px;" /></div>
-                                      <input type="hidden" name="imagename" id="imagename" value='<?php echo $data[4];?>'/>
+                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/sub_category/".$data['sub_category_image']; ?>" style="width:186px;height:186px;" /></div>
+                                      <input type="hidden" name="imagename" id="imagename" value='<?php echo $data['sub_category_image'];?>'/>
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
                                           <div id="upload-demo" style="width:201px;height:201px; border-style: groove;border-width: thin;"></div>

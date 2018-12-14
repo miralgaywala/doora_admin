@@ -137,8 +137,8 @@ $(document).ready(function(){
 }
 $(document).ready(function(){
       $('#business').change(function(){
-        loadbusinessfilter($(this).find(':selected').val())
         loadbranch($(this).find(':selected').val())
+        loadbusinessfilter($(this).find(':selected').val())
       })
     })
 function loadbranch(UsersId){
@@ -148,7 +148,6 @@ function loadbranch(UsersId){
           selectedNode = elem.options[elem.selectedIndex];
           var UsersId = selectedNode.value;
        //console.log(UsersId);
-            
             $.ajax({
                 type: "POST",
                 url: '/doora/adminpanel/Controller/deal/branch.php?branch_id='+UsersId,
@@ -309,7 +308,7 @@ function loadbranch(UsersId){
                                        <option value="0">Select Business</option> 
                                        
                                        <?php foreach ($getbusiness as  $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>                             
+                                          ?> <option value="<?php echo $data['user_error()_id']; ?>"><?php echo $data['business_name']; ?></option> <?php }?>                             
                                   </select>
                                 </div> 
                                 <label for="branch" class="col-sm-2 control-label" style="margin-top: 10px;">Business Branch</label>
@@ -327,7 +326,7 @@ function loadbranch(UsersId){
                                        <option value="0">Select tag</option>
                                        <?php 
                                        foreach ($gettag as  $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>
+                                          ?> <option value="<?php echo $data['tag_id']; ?>"><?php echo $data['tag']; ?></option> <?php }?>
                                   </select>
                                 </div> 
                                 <label for="category" class="col-sm-1 control-label" style="margin-top: 25px">Catgeory</label>
@@ -336,7 +335,7 @@ function loadbranch(UsersId){
                                        <option value="0">Select Catgeory</option>
                                         <?php 
                                         foreach ($getcategory as $data) {
-                                          ?> <option value="<?php echo $data[0]; ?>"><?php echo $data[1]; ?></option> <?php }?>       
+                                          ?> <option value="<?php echo $data['category_id']; ?>"><?php echo $data['category_name']; ?></option> <?php }?>       
                                   </select>
                                 </div> 
                                 <label for="sub_category" class="col-sm-2 control-label" style="margin-top: 25px;">Sub Category</label>

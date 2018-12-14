@@ -27,23 +27,23 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                ?>
                   <tr>
                     <td>Offer Id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['offer_id'];?></td>
                   </tr>
                   <tr>
                     <td>Offer Title</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['offer_title'];?></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[3];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

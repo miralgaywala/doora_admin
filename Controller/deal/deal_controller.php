@@ -34,7 +34,7 @@ class deal_controller
         $retval="<option value='0'>Select Sub-category</option>";
        
         foreach ($sub_category as $key => $data) {
-        $retval=$retval."<option value='".$data[0]."'>".$data[1]."</option>";
+        $retval=$retval."<option value='".$data['sub_category_id']."'>".$data['sub_category_name']."</option>";
         }
         echo $retval;
     }
@@ -45,20 +45,19 @@ class deal_controller
         $retval="<option value='0'>Select Business Branch</option>";
        
         foreach ($branch as $key => $data) {
-        $retval=$retval."<option value='".$data[0]."'>".$data[1]."</option>";
+        $retval=$retval."<option value='".$data['franchise_id']."'>".$data['franchise_address']."</option>";
         }
         echo $retval;
     }
 	public function subcategoryfilter_deal($msg)
 	{
 		$display_deal=$this->deal_model->getsubcategory_filter($msg);
-
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -91,7 +90,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -122,14 +121,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -161,9 +160,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -196,7 +195,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -227,14 +226,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -266,9 +265,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -301,7 +300,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -332,14 +331,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -371,9 +370,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -406,7 +405,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -437,14 +436,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -477,9 +476,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -512,7 +511,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -543,14 +542,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -582,9 +581,9 @@ class deal_controller
 		$i=0;
 		foreach ($display_deal as $key => $data) {
 			$i=$i+1;
-			$value0=$data[0];
-			$value21=$data[21];
-			$str   = ''.$data[3].'';
+			$value0=$data['business_deal_id'];
+			$value21=$data['franchise_address'];
+			$str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -617,7 +616,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -648,23 +647,15 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-    		$value7=$data[7];
-    		$value15=$data[13];
-            // if($data[13] == NULL)
-            // {
-            //     $value15 = "default.png";
-            // }
-            // else
-            // {
-            //     $value15 = $data[13];
-                
-            // }
-            if($data[13] == NULL)
+    		$value7=$data['promocode'];
+    		$value15=$data['deal_photo'];
+            
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -697,9 +688,9 @@ class deal_controller
         $i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -732,7 +723,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -763,14 +754,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -802,9 +793,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -837,7 +828,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -868,14 +859,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -907,9 +898,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -942,7 +933,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -973,14 +964,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {
@@ -1012,9 +1003,9 @@ class deal_controller
 		$i=0;
         foreach ($display_deal as $key => $data) {
             $i=$i+1;
-            $value0=$data[0];
-            $value21=$data[21];
-            $str   = ''.$data[3].'';
+            $value0=$data['business_deal_id'];
+            $value21=$data['franchise_address'];
+            $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -1047,7 +1038,7 @@ class deal_controller
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -1078,14 +1069,14 @@ class deal_controller
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-            $value7=$data[7];
-            $value15=$data[13];
-            if($data[13] == NULL)
+            $value7=$data['promocode'];
+            $value15=$data['deal_photo'];
+            if($data['deal_photo'] == NULL)
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $value15 = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $value15 = $data['deal_photo'];
                  }
                  else
                  {

@@ -46,14 +46,14 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			<div class="box-body">
         				<form class="form-horizontal" name="addtag" id="addtag_form" role="form" action="" method="post" onsubmit="return validateForm();">
         					<div class="form-group notranslate">
-                    <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data[0];}?>">
+                    <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data['content_management_id'];}?>">
                                 <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
                                    <textarea class="ckeditor" cols="80" id="privacy_policy" name="privacy_policy" rows="10" >
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
-                                                    echo $data[1];
+                                                    echo $data['privacy_policy'];
                                                   }
 
                                                    ?>
@@ -71,7 +71,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
-                                                    echo $data[2];
+                                                    echo $data['terms_and_condition'];
                                                   }
 
                                                    ?>
@@ -89,7 +89,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
-                                                    echo $data[3];
+                                                    echo $data['help_customer'];
                                                   }
                                                    ?>
                                                  </textarea>
@@ -106,7 +106,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
-                                                    echo $data[4];
+                                                    echo $data['help_business'];
                                                   }
                                                    ?>
                                                  </textarea>

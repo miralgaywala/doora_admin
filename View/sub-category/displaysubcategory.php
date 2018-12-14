@@ -88,7 +88,7 @@
                                      <?php
 						                 foreach ($category_view as $key => $data1) 
 						                { ?>
-						                	  <option value="<?php echo $data1[0];?>" <?php if($data1[0] == $selected ) { ?> selected  <?php } ?>><?php echo $data1[1];?></option>
+						                	  <option value="<?php echo $data1['category_id'];?>" <?php if($data1['category_id'] == $selected ) { ?> selected  <?php } ?>><?php echo $data1['category_name'];?></option>
 						                	<?php   } ?>
                                     </select>
                                 </div> 
@@ -114,19 +114,19 @@
                 {
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[2]; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/sub_category/".$data[3];?> id="SubCategoryPicture"/></td>
+                                <td style="text-align:center;"><?php echo $data['sub_category_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['sub_category_name']; ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=/doora/images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture"/></td>
                                 <td style="text-align:center;">
                           
                                     <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/editsubcategory_controller.php?id=".$data[0]; ?> title="Edit" >
+                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/editsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=/doora/adminpanel/Controller/sub_category/deletesubcategory_controller.php?id=".$data[0]; ?> title="Delete" >
+                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=/doora/adminpanel/Controller/sub_category/deletesubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/viewsubcategory_controller.php?id=".$data[0]; ?> title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/viewsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

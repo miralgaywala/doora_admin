@@ -10,7 +10,7 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
-        $subcategory=$getsubcategory->fetch_all();   
+        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC); 
         return $subcategory;
     }
     public function getcategorylist()
@@ -19,14 +19,14 @@ class subcategory_model
                         {
                          $con=$this->db->connection();
                          $getcategory=$con->query("select * from sub_category where category_id=1");
-                         $subcategory=$getcategory->fetch_all(); 
+                         $subcategory=mysqli_fetch_all($getcategory,MYSQLI_ASSOC); 
                          return $category;
                         }
                         else
                         {
                         $con=$this->db->connection();
                         $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
-                        $subcategory=$getsubcategory->fetch_all(); 
+                        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC); 
                         //print_r($subcategory);  
                         return $subcategory;
                        }
@@ -35,7 +35,7 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $viewsubcategory=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
-        $view=$viewsubcategory->fetch_all();
+        $view=mysqli_fetch_all($viewsubcategory,MYSQLI_ASSOC);
         return $view;
     }
     public function deletesubcategory($subcategory_id)
@@ -50,7 +50,7 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $category=$con->query("select * from category where is_deleted=0 AND NOT is_super_market=1");
-        $getcategory=$category->fetch_all();
+        $getcategory=mysqli_fetch_all($category,MYSQLI_ASSOC);
         return $getcategory;
     }
     public function addsubcategory_data($category_id,$subcategory_name,$subcategory_image)
@@ -79,7 +79,7 @@ class subcategory_model
         $con=$this->db->connection();
         //$editdata=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
         $editdata=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
-        $geteditdata=$editdata->fetch_all();
+        $geteditdata=mysqli_fetch_all($editdata,MYSQLI_ASSOC);
         return $geteditdata;
     }
     public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
@@ -113,14 +113,14 @@ class subcategory_model
         {
         $getsubcategory=$con->query("select * from sub_category where is_deleted=0 AND category_id=".$msg);
         }
-        $subcategory=$getsubcategory->fetch_all();   
+        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC);   
         return $subcategory;
     }
     public function getcategoryfilter($msg)
     {
         $con=$this->db->connection();
         $category=$con->query("select * from category where category_id=".$msg);
-        $getcategory=$category->fetch_all();
+        $getcategory=mysqli_fetch_all($category,MYSQLI_ASSOC);
         return $getcategory;
     }
 }

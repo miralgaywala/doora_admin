@@ -24,7 +24,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <?php
                    foreach ($display_dealdetail as $key => $data) 
                   {
-                    $str   = ''.$data[3].'';
+                    $str   = ''.$data['deal_title'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -57,7 +57,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
 
-    $str   = ''.$data[10].'';
+    $str   = ''.$data['terms_and_condition'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
@@ -89,45 +89,45 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-    if($data[13] == NULL)
+    if($data['deal_photo'] == NULL)
                  {
-                  $data[13] = "default.png";
+                  $data['deal_photo'] = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data[13])) {
-                  $data[13] = $data[13];
+                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                  $data['deal_photo'] = $data['deal_photo'];
                  }
                  else
                  {
-                  $data[13]= "default.png";
+                  $data['deal_photo']= "default.png";
                  }     
                ?>
                   <tr>
                     <td>Business Deal Id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['business_deal_id'];?></td>
                   </tr>
                    <tr>
                     <td>Business User Id</td>
-                  <td><?php echo $data[22];?></td>
+                  <td><?php echo $data['user_id'];?></td>
                   </tr>
                   <tr>
                     <td>Business Name</td>
-                  <td><?php echo $data[24];?></td>
+                  <td><?php echo $data['business_name'];?></td>
                   </tr>
                   <tr>
                   <td>Franchise Id</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['franchise_id'];?></td>
                   </tr>
                    <tr>
                     <td>Franchise Address</td>
-                  <td><?php echo $data[21];?></td>
+                  <td><?php echo $data['franchise_address'];?></td>
                   </tr>
                   <tr>
                   <td>Offer Id</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['offer_id'];?></td>
                   </tr>
 					        <tr>
                   <td>Offer Title</td>
-                  <td><?php echo $data[31];?></td>
+                  <td><?php echo $data['offer_title'];?></td>
                   </tr>                  
                   <tr>
                   <td>Deal Title</td>
@@ -135,23 +135,23 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>rgb r</td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['rgb_r'];?></td>
                   </tr>
                   <tr>
                     <td>rgb g</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['rgb_g'];?></td>
                   </tr>
                   <tr>
                     <td>rgb b</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['rgb_b'];?></td>
                   </tr>
                   <tr>
                     <td>Promocode</td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data['promocode'];?></td>
                   </tr>
                   <tr>
                     <td>Is In Store</td>
-                  <td><?php if($data[8] == 0 ) 
+                  <td><?php if($data['is_in_store'] == 0 ) 
                   {echo "No";
                 }
                     else
@@ -161,7 +161,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Is Online</td>
-                  <td><?php if($data[9] == 0 ) 
+                  <td><?php if($data['is_online'] == 0 ) 
                   {echo "No";
                 }
                     else
@@ -172,27 +172,27 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <tr>
                     <td>Total In Store Reedem Quantity</td>
                   <td> <?php  foreach ($instore_rdm as $pur) {               
-                   ?><?php echo $pur[3]; ?><?php } ?></td>
+                   ?><?php echo $pur['SUM(upd.quantity)']; ?><?php } ?></td>
                   </tr>
                 	<tr>
                     <td>Total In Store Purchased Quantity</td>
                   <td> <?php foreach ($instore_pur as $pur) {                   
-                   ?><?php echo $pur[3];?><?php } ?></td>
+                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
                   </tr>
                   <tr>
                     <td>Total Online Purchased Quantity</td>
                   <td> <?php foreach ($isonline_pur as $pur) {                   
-                   ?><?php echo $pur[3];?><?php } ?></td>
+                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
                   </tr>
                   <tr>
                     <td>Total Reedem Quantity</td>
                   <td> <?php foreach ($deal_rdm as $rdm) {                   
-                   ?><?php echo $rdm[3];?><?php } ?></td>
+                   ?><?php echo $rdm['SUM(upd.quantity)'];?><?php } ?></td>
                   </tr>
                   <tr>
                     <td>Total Purchased Quantity</td>
                   <td> <?php foreach ($deal_purchased as $pur) {                   
-                   ?><?php echo $pur[3];?><?php } ?></td>
+                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
                   </tr>
                   <tr>
                     <td>Terms and Condition</td>
@@ -200,29 +200,29 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                   <tr>
                     <td>Overall Quantity</td>
-                  <td><?php if($data[11] == 0 ) 
+                  <td><?php if($data['overall_qty'] == 0 ) 
                   {echo "No Limit";
                 }
                     else
                       {
-                        echo $data[11];
+                        echo $data['overall_qty'];
                       }?></td>
                   </tr>
                   <tr>
                     <td>Per Person Quantity</td>
-                  <td><?php if($data[12] == 0 ) 
+                  <td><?php if($data['per_person_qty'] == 0 ) 
                   {echo "No Limit";
                 }
                     else
                       {
-                        echo $data[12];
+                        echo $data['per_person_qty'];
                       }?></td>
                   </tr>
                   <tr>
                     <td>Deal Photo</td>
-                  <td><img <?php echo "src=/doora/images/deal/".$data[13];?> id="DealPicture"/></td>
+                  <td><img <?php echo "src=/doora/images/deal/".$data['deal_photo'];?> id="DealPicture"/></td>
                   </tr>
-                   <?php if($data[14] == NULL)
+                   <?php if($data['deal_video'] == NULL)
                     {
                       
                     }
@@ -231,60 +231,60 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <tr>	
                     <td>Deal Video</td>                   
                   <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
-  					<source <?php echo "src=/doora/video/deal/".$data[14];?> type="video/mp4">
+  					<source <?php echo "src=/doora/video/deal/".$data['deal_video'];?> type="video/mp4">
 					</video></td> <?php } ?>
 				
                   </tr>
                
                   <tr>
                     <td>Deal Start time</td>
-                  <td><?php echo $data[15];?></td>
+                  <td><?php echo $data['deal_start_time'];?></td>
                   </tr>
                   <tr>
                     <td>Deal End time</td>
-                  <td><?php echo $data[16];?></td>
+                  <td><?php echo $data['deal_end_time'];?></td>
                   </tr>                 
                   <tr>
                     <td>Tag Id</td>
                   <td> <?php foreach ($deal_tag as $tag) {                   
-                   ?><?php echo $tag[0];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $tag['tag_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Tag</td>
                   <td> <?php foreach ($deal_tag as $tag) {                   
-                   ?><?php echo $tag[1];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $tag['tag'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Sub Catgeory Id</td>
                  <td> <?php foreach ($deal_cat as $cat) {                   
-                   ?><?php echo $cat[0];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $cat['sub_category_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Sub Category Name</td>
                  <td> <?php foreach ($deal_cat as $cat) {                  
-                   ?><?php echo $cat[2];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $cat['sub_category_name'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Category Id</td>
                   <td> <?php foreach ($deal_category as $category) {                    
-                   ?><?php echo $category[2];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $category['category_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Category Name</td>
                  <td> <?php foreach ($deal_category as $category) {                    
-                   ?><?php echo $category[1];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                   ?><?php echo $category['category_name'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
                   </tr>
                   <tr>
                     <td>Is Aspectfit</td>
-                  <td><?php echo $data[18];?></td>
+                  <td><?php echo $data['is_aspectfit'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[19];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[20];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

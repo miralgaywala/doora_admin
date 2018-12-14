@@ -10,7 +10,7 @@ class offer_model
     {
        $con=$this->db->connection();
        $getoffer=$con->query("select * from offer_category where NOT is_deleted=1");
-       $offer=$getoffer->fetch_all();
+       $offer=mysqli_fetch_all($getoffer,MYSQLI_ASSOC);
        return $offer;
     }
      public function addoffer_data($offer)
@@ -38,14 +38,14 @@ class offer_model
     {
     	 $con= $this->db->connection();
         $viewoffer=$con->query("select * from offer_category where offer_id=".$offer_id);
-        $viewoffer=$viewoffer->fetch_all();
+        $viewoffer=mysqli_fetch_all($viewoffer,MYSQLI_ASSOC);
         return $viewoffer;
     }
     public function editofferlist($offer_id)
     {
     	 $con= $this->db->connection();
         $editoffer=$con->query("select * from offer_category where offer_id=".$offer_id);
-        $editofferdata=$editoffer->fetch_all();
+        $editofferdata=mysqli_fetch_all($editoffer,MYSQLI_ASSOC);
         return $editofferdata;
     }
     public function editoffer_data($offer_id,$offer)

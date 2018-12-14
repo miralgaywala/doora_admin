@@ -27,31 +27,31 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                ?>
                   <tr>
                     <td>Category Id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['category_id'];?></td>
                   </tr>
                   <tr>
                     <td>Category Name</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['category_name'];?></td>
                   </tr>
                   <tr>
                     <td>Category Image</td>
-                  <td><img <?php echo "src=/doora/images/category/".$data[2];?> id="Picture"/></td>
+                  <td><img <?php echo "src=/doora/images/category/".$data['category_image'];?> id="Picture"/></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                   <tr>
                     <td>Is Super Market</td>
-                  <td><?php echo $data[3];?></td>
+                  <td><?php echo $data['is_super_market'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

@@ -24,7 +24,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   <?php
                    foreach ($display_support as $key => $data) 
                   {
-                    $str   = ''.$data[2].'';
+                    $str   = ''.$data['message'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -59,15 +59,15 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                ?>
                   <tr>
                     <td>Support Id </td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['support_id'];?></td>
                   </tr>
                   <tr>
                     <td>User Id </td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['user_id'];?></td>
                   </tr>
                    <tr>
                     <td>User Name </td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data['name'];?></td>
                   </tr>
                   <tr>
                   <td>Message </td>
@@ -75,15 +75,15 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   </tr>
                    <tr>
                     <td>Is Deleted </td>
-                  <td><?php echo $data[4];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At </td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

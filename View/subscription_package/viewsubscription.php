@@ -27,31 +27,31 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                ?>
                   <tr>
                     <td>Subscription plan Id</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['subscription_plan_id'];?></td>
                   </tr>
                   <tr>
                     <td>Price</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['price'];?></td>
                   </tr>
                   <tr>
                     <td>Per Deal Redeem Price</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['per_deal_redeem_price'];?></td>
                   </tr>
                   <tr>
                     <td>Free Days</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['free_days'];?></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[8];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[9];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>

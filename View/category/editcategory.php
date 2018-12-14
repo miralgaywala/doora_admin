@@ -5,7 +5,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  <?php
     foreach ($editcategorylist as $key => $data) 
     {
-      $image=$data[2];
+      $image=$data['category_image'];
  ?>
   <?php
       include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
@@ -28,11 +28,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         			<!-- box-header -->
         			<div class="box-body">
         				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
-        					<input type="hidden" name="category_id" value='<?php echo $data[0];?>' id="category_id"/>
+        					<input type="hidden" name="category_id" value="<?php echo $data['category_id'];?>"" id="category_id"/>
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control" value='<?php echo $data[1];?>' onblur="categoryname();"/>
+                                    <input name="category_name" type="text" id="category_name" class="form-control" value="<?php echo $data["category_name"];?>"" onblur="categoryname();"/>
                                      <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
@@ -41,13 +41,13 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <div class="col-sm-8">
                                         <input name="category_image" type="file" id="category_image" accept="image/*" style="margin-top: 10px;">
                                         <span id="category_imageerror" class="show_required"></span><br>
-                                       <input type="hidden" name="imagename" id="imagename" value="<?php echo $data[2]; ?>">
+                                       <input type="hidden" name="imagename" id="imagename" value="<?php echo $data['category_image']; ?>">
                                        <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
                                       </div> 
 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
                                       <div class="col-md-5" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/category/".$data[2]; ?>" style="width:400px;height:170px;" /></div>
+                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/category/".$data['category_image']; ?>" style="width:400px;height:170px;" /></div>
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
                                           <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
@@ -57,7 +57,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                            <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data[3] == 1) echo 'checked="checked"';?>/>
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data['is_super_market'] == 1) echo 'checked="checked"';?>/>
                                          <br> <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
                              </div>  

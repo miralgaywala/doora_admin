@@ -54,7 +54,7 @@
                 $i=0;
                 foreach ($display_support as $key => $data) 
                 {   
-                  $str   = ''.$data[2].'';
+                  $str   = ''.$data['message'].'';
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $html= preg_replace_callback($regex, function($matches) {
@@ -89,26 +89,26 @@
 
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data[0]; ?></td>
-                                <td style="text-align:center;"><?php echo $data[7]; ?></td>
+                                <td style="text-align:center;"><?php echo $data['support_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['name']; ?></td>
                                 <td style="text-align:center;"><?php echo $html; ?></td>
                                 <td style="text-align:center;">
                           
                                     <div >
                       
-                                        <a onclick="javascript: return confirm('Do you really want to delete this support request?');" <?php echo "href=/doora/adminpanel/Controller/support/deletesupport_controller.php?id=".$data[0];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this support request?');" <?php echo "href=/doora/adminpanel/Controller/support/deletesupport_controller.php?id=".$data['support_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/support/displaysupport_controller.php?id=".$data[0];?> title="View all detail">
+                                        <a <?php echo "href=/doora/adminpanel/Controller/support/displaysupport_controller.php?id=".$data['support_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                         <br>
-                                        <a <?php $value=$data[3]; if($value == 1 ){ ?>
+                                        <a <?php $value=$data['is_open']; if($value == 1 ){ ?>
                                         onclick="javascript: return confirm('Do you really want to close this support request?');"
                                       <?php } else{ ?>
                                         onclick="javascript: return confirm('Do you really want to open this support request?');"
-                                      <?php }?> <?php  $value=$data[3]; if($value == 1 ){ ?> style="color: red;" <?php } else {?> style="color: green;"<?php }?>
-                                      <?php echo "href=/doora/adminpanel/Controller/support/isopen_controller.php?id=".$data[0]."&value=".$data[3];?>><?php $value=$data[3]; if($value == 1 ){
+                                      <?php }?> <?php  $value=$data['is_open']; if($value == 1 ){ ?> style="color: red;" <?php } else {?> style="color: green;"<?php }?>
+                                      <?php echo "href=/doora/adminpanel/Controller/support/isopen_controller.php?id=".$data['support_id']."&value=".$data['is_open'];?>><?php $value=$data['is_open']; if($value == 1 ){
                                         echo "Open";
                                       }
                                       else

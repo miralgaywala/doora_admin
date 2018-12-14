@@ -30,25 +30,25 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         				<form class="form-horizontal" name="addsubscription" id="addsubscription_form" role="form" action="" method="post" onsubmit="return validateForm();"> 
                   <?php foreach ($edit_subscription as $key => $data) {
                     ?>
-                    <input type="hidden" name="subscription_plan_id" value="<?php echo $data[0]; ?>">
+                    <input type="hidden" name="subscription_plan_id" value="<?php echo $data['subscription_plan_id']; ?>">
                             <div class="form-group notranslate">
                                 <label for="price" class="col-sm-3 control-label">Price<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="price" type="text" id="price" class="form-control" value="<?php echo $data[2]; ?>" />
+                                    <input name="price" type="text" id="price" class="form-control" value="<?php echo $data['price']; ?>" />
                                     <span id="price_error" class="show_required"></span><br>
                                 </div>
                             </div>  
                             <div class="form-group notranslate">
                                 <label for="per_deal_redeem_price" class="col-sm-3 control-label">Per deal redeem price<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="per_deal_redeem_price" type="text" id="per_deal_redeem_price" class="form-control" value="<?php echo $data[5]; ?>" />
+                                    <input name="per_deal_redeem_price" type="text" id="per_deal_redeem_price" class="form-control" value="<?php echo $data['per_deal_redeem_price']; ?>" />
                                     <span id="per_deal_redeem_price_error" class="show_required"></span><br>
                                 </div>
                             </div>    
                             <div class="form-group notranslate">
                                 <label for="free_days" class="col-sm-3 control-label">Free days<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="free_days" type="text" id="free_days" class="form-control" value="<?php echo $data[6]; ?>" />
+                                    <input name="free_days" type="text" id="free_days" class="form-control" value="<?php echo $data['free_days']; ?>" />
                                     <span id="free_days_error" class="show_required"></span><br>
                                 </div>
                             </div>                                          

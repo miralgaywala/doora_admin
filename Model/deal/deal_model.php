@@ -9,84 +9,85 @@ class deal_model
     {
        $con=$this->db->connection();
        $getdeal=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id group by business_deal_id order by bd.business_deal_id desc");
-       $deal=$getdeal->fetch_all();
+       $deal=mysqli_fetch_all($getdeal,MYSQLI_ASSOC);
        return $deal;
     }
     public function getdisplaydetail_deal($id)
     {
       $con=$this->db->connection();
        $getdealdetail=$con->query("select bd.*,bf.franchise_address,bf.business_user_id,us.user_id,us.business_name,dpt.tag_id,dt.tag,dps.sub_cat_id,sc.sub_category_name,ca.category_id,ca.category_name,oc.offer_title from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join users as us on bf.business_user_id = us.user_id left join deal_post_tag as dpt on bd.business_deal_id = dpt.deal_id left join deal_tags as dt on dpt.tag_id = dt.tag_id left join offer_category as oc on bd.offer_id = oc.offer_id left join deal_post_subcategory as dps on bd.business_deal_id = dps.deal_id left join sub_category as sc on dps.sub_cat_id = sc.sub_category_id left join category as ca on sc.category_id = ca.category_id where bd.business_deal_id=".$id." group by business_deal_id");
-       $dealdetail=$getdealdetail->fetch_all();
+       $dealdetail=mysqli_fetch_all($getdealdetail,MYSQLI_ASSOC);
        return $dealdetail;
     }
     public function getdealtag($id)
     {
       $con=$this->db->connection();
       $getdealtag=$con->query("select dt.* from business_deal as bd left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.deal_id=".$id);
-      $deal_tag=$getdealtag->fetch_all();
+      $deal_tag=mysqli_fetch_all($getdealtag,MYSQLI_ASSOC);
       return $deal_tag;
     }
     public function getdealcat($id)
     {
       $con=$this->db->connection();
       $getdealcat=$con->query("select sc.*,ca.category_name from business_deal as bd left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where dps.deal_id=".$id);
-      $deal_cat=$getdealcat->fetch_all();
+      $deal_cat=mysqli_fetch_all($getdealcat,MYSQLI_ASSOC);
       return $deal_cat;
     }
     public function getdealcategory($id)
     {
       $con=$this->db->connection();
       $getdealcategory=$con->query("select bd.business_deal_id,ca.category_name,ca.category_id from business_deal as bd left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where dps.deal_id=".$id." group by ca.category_id");
-      $deal_category=$getdealcategory->fetch_all();
+      $deal_category=mysqli_fetch_all($getdealcategory,MYSQLI_ASSOC);
       return $deal_category;   
        }
        public function getdealreedeam($id)
        {
           $con=$this->db->connection();
           $getdealrdm=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 OR upd.is_online=1) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
-          $deal_rdm=$getdealrdm->fetch_all();
+          $deal_rdm=mysqli_fetch_all($getdealrdm,MYSQLI_ASSOC);
           return $deal_rdm;   
        }
        public function getdealpurchased($id)
        {
           $con=$this->db->connection();
           $getdealpur=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=0 OR upd.is_online=1) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
-          $deal_pur=$getdealpur->fetch_all();
+          $deal_pur=mysqli_fetch_all($getdealpur,MYSQLI_ASSOC);
           return $deal_pur;
        }
        public function gettotalrdminstore($id)
        {
             $con=$this->db->connection();
               $getinstorerdm=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 AND upd.is_online=0) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
-              $instore_rdm=$getinstorerdm->fetch_all();
+              $instore_rdm=mysqli_fetch_all($getinstorerdm,MYSQLI_ASSOC);
               return $instore_rdm;
        }
        public function gettotalpurinstore($id)
        {
             $con=$this->db->connection();
               $getinstorepur=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=0 AND upd.is_online=0) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
-              $instore_pur=$getinstorepur->fetch_all();
+              $instore_pur=mysqli_fetch_all($getinstorepur,MYSQLI_ASSOC);
+              
               return $instore_pur;
        }
        public function gettotalonlinepur($id)
        {
               $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where upd.is_online=1 AND upd.business_deal_id=".$id." group by bd.business_deal_id");
-              $online_pur=$getonlinepur->fetch_all();
+              $online_pur=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $online_pur;
        }
     public function getsubcategory_filter($msg)
     {
           $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id where sc.sub_category_id=".$msg." order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+               $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getbranch_filter($msg)
     {
           $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.franchise_id=".$msg." order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+               $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getcategory_filter($msg)
@@ -100,7 +101,7 @@ class deal_model
             {
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where ca.category_id=".$msg." order by bd.business_deal_id desc");
             }  
-              $deal=$getonlinepur->fetch_all();
+               $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getsubcategorylist($id)
@@ -108,7 +109,7 @@ class deal_model
 
               $con=$this->db->connection();
               $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$id);
-              $category=$getonlinepur->fetch_all();   
+              $category=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);   
               return $category;
     }
     public function gettag_filter($msg)
@@ -121,7 +122,7 @@ class deal_model
              else
              { $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.tag_id=".$msg." order by bd.business_deal_id desc");
          }
-              $deal=$getonlinepur->fetch_all();
+              $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getbranchlist($id)
@@ -143,35 +144,35 @@ class deal_model
 
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.business_user_id=".$msg." order by bd.business_deal_id desc");
           }
-              $deal=$getonlinepur->fetch_all();
+              $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getdisplay_activedeal($msg)
     {
       $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=1 order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+              $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getdisplay_deactivedeal($msg)
     {
       $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=0 order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+              $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getdisplay_expireddeal($msg)
     {
       $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.deal_end_time < now() order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+               $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getdisplay_purchaseddeal($msg)
     {
       $con=$this->db->connection();
               $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 OR upd.is_online=1) group by bd.business_deal_id order by bd.business_deal_id desc");
-              $deal=$getonlinepur->fetch_all();
+                $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
               return $deal;
     }
     public function getdisplay_tag()
@@ -179,21 +180,21 @@ class deal_model
       $con=$this->db->connection();
 
               $gettag=$con->query("select tag_id,tag from deal_tags where is_deleted=0");
-              $alltag=$gettag->fetch_all();
+              $alltag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
               return $alltag;
     }
     public function getdisplay_business()
     {
-      $con=$this->db->connection();
+              $con=$this->db->connection();
               $gettag=$con->query("select user_id,business_name from users where is_deleted=0 AND is_business=1");
-              $alltag=$gettag->fetch_all();
+              $alltag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
               return $alltag;
     }
     public function getdisplay_category()
     {
       $con=$this->db->connection();
               $gettag=$con->query("select category_id,category_name from category where NOT is_deleted=1");
-              $alltag=$gettag->fetch_all();
+               $alltag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
               return $alltag;
     }
 }

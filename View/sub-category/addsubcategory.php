@@ -40,7 +40,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                        <option value="0">Select category</option>
                                   <?php    foreach ($category as $key => $data) 
                                     { ?>
-                                    <option value="<?php echo $data[0];?>"><?php echo $data[1];?></option>
+                                    <option value="<?php echo $data['category_id'];?>"><?php echo $data['category_name'];?></option>
                                     
                                   <?php }?>
                                   </select>

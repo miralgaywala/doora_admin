@@ -36,14 +36,14 @@ class category_model{
         $con=$this->db->connection();
         $getcategory=$con->query("select * from category where NOT is_deleted=1");
 
-        $category=$getcategory->fetch_all();
+        $category=mysqli_fetch_all($getcategory,MYSQLI_ASSOC);
         return $category;
     }
     public function geteditcategorylist($category_id)
     {
         $con=$this->db->connection();
         $geteditcategorylist=$con->query("select * from category where category_id=".$category_id);
-        $editcategorylist=$geteditcategorylist->fetch_all();
+        $editcategorylist=mysqli_fetch_all($geteditcategorylist,MYSQLI_ASSOC);
         return $editcategorylist;
     }
     public function deletecategory($category_id)
@@ -83,7 +83,7 @@ class category_model{
     {
         $con= $this->db->connection();
         $viewcategory=$con->query("select * from category where category_id=".$category_id);
-        $viewcategory=$viewcategory->fetch_all();
+        $viewcategory=mysqli_fetch_all($viewcategory,MYSQLI_ASSOC);
         return $viewcategory;
     }
 }

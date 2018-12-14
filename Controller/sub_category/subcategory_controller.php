@@ -78,6 +78,7 @@ class subcategory_controller{
 		if(isset($_POST['subcategory_submit']) && !empty($_POST['subcategory_submit']))
 		{
 			$subcategory_id=$_POST['sub_category_id'];
+			//echo $subcategory_id;
 			$subcategory_name=$_POST['sub_category_name'];
 			//echo $subcategory_name;
 			$subcategory_image=$_POST['imagename'];

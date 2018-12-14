@@ -27,36 +27,36 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                ?>
                   <tr>
                     <td>Category Name</td>
-                  <td><?php echo $data[0];?></td>
+                  <td><?php echo $data['category_name'];?></td>
                   </tr>
                   <tr>
                   <td>Category Id</td>
-                  <td><?php echo $data[1];?></td>
+                  <td><?php echo $data['category_id'];?></td>
                   </tr>
                   <tr>
                   <td>Sub Catgeory Name</td>
-                  <td><?php echo $data[3];?></td>
+                  <td><?php echo $data['sub_category_name'];?></td>
                   </tr>
                   <tr>
                   <td>Sub Catgeory Id</td>
-                  <td><?php echo $data[2];?></td>
+                  <td><?php echo $data['sub_category_id'];?></td>
                   </tr>
                   
                   <tr>
                     <td>Sub Category Image</td>
-                  <td><img <?php echo "src=/doora/images/sub_category/".$data[4];?> id="SubCategoryPicture"/></td>
+                  <td><img <?php echo "src=/doora/images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture"/></td>
                   </tr>
                   <tr>
                     <td>Is Deleted</td>
-                  <td><?php echo $data[5];?></td>
+                  <td><?php echo $data['is_deleted'];?></td>
                   </tr>
                   <tr>
                     <td>Created At</td>
-                  <td><?php echo $data[6];?></td>
+                  <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
                     <td>Upadted At</td>
-                  <td><?php echo $data[7];?></td>
+                  <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
                 </table>
