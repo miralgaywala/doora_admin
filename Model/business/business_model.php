@@ -80,5 +80,43 @@ class business_model
        $businessdelete=mysqli_fetch_all($getbusinessdelete,MYSQLI_ASSOC);
        return $businessdelete;
     }
+    public function getbusinessinvoice($user_id)
+    {
+      $con=$this->db->connection();
+       $getbusinessinvoice=$con->query("select extract(YEAR_MONTH from bi.month_start_date) as year_mon,bi.*,SUM(bi.total_amount) as total_amount,last_day(bi.month_start_date)as month_end_date,extract(month from bi.`month_start_date`) as month,extract(YEAR from bi.`month_start_date`) as year from business_invoice as bi WHERE bi.business_id = ".$user_id." GROUP BY extract(YEAR from bi.`month_start_date`),extract(month from bi.`month_start_date`) ORDER BY extract(YEAR from bi.`month_start_date`) desc ,extract(month from bi.`month_start_date`) desc ");
+       $businessinvoice=mysqli_fetch_all($getbusinessinvoice,MYSQLI_ASSOC);
+       //echo "<pre>";print_r($businessinvoice); echo "</pre>";
+       return $businessinvoice;
+    }
+    public function getinvoicedetail($invoice_id)
+    {
+      $con=$this->db->connection();
+       $getbusinessinvoice=$con->query("select extract(YEAR_MONTH from bi.month_start_date) as year_mon,bi.*,SUM(bi.total_amount) as total_amount,last_day(bi.month_start_date)as month_end_date,extract(month from bi.`month_start_date`) as month,extract(YEAR from bi.`month_start_date`) as year from business_invoice as bi WHERE bi.business_invoice_id = ".$invoice_id." GROUP BY extract(YEAR from bi.`month_start_date`),extract(month from bi.`month_start_date`) ORDER BY extract(YEAR from bi.`month_start_date`) desc ,extract(month from bi.`month_start_date`) desc ");
+       $businessinvoice=mysqli_fetch_all($getbusinessinvoice,MYSQLI_ASSOC);
+       //echo "<pre>";print_r($businessinvoice); echo "</pre>";
+       return $businessinvoice;
+    }
+    public function getdealinvoicedetail($invoice_id)
+    {
+       $con=$this->db->connection();
+       $getbusinessinvoice=$con->query("select extract(YEAR_MONTH from bi.month_start_date) as year_mon,bi.*,SUM(bi.total_amount) as total_amount,last_day(bi.month_start_date)as month_end_date,extract(month from bi.`month_start_date`) as month,extract(YEAR from bi.`month_start_date`) as year from business_invoice as bi WHERE bi.business_invoice_id = ".$invoice_id." GROUP BY extract(YEAR from bi.`month_start_date`),extract(month from bi.`month_start_date`) ORDER BY extract(YEAR from bi.`month_start_date`) desc ,extract(month from bi.`month_start_date`) desc ");
+       $businessinvoice=mysqli_fetch_all($getbusinessinvoice,MYSQLI_ASSOC);
+       foreach ($businessinvoice as $value) {
+       $user_id= $value['business_id'];
+       $month=$value['month'];
+       $year=$value['year'];
+       }
+       $getbusinessdealinvoice=$con->query("SELECT * FROM business_invoice WHERE business_id = " .$user_id." and MONTH(month_start_date) = ".$month." and YEAR(month_start_date) = ".$year);
+       $businessinvoicedeal=mysqli_fetch_all($getbusinessdealinvoice,MYSQLI_ASSOC);
+       foreach ($businessinvoicedeal as $value) {
+        $deal_id=$value['deal_id'];
+        $getbusinessdeal=$con->query("SELECT bd.*,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=1)as online_redeem,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=0 and is_cart=1)as offline_redeem,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=0)as online_purchase,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=1)as offline_purchase FROM `business_deal` as bd WHERE bd.business_deal_id=".$deal_id." and bd.is_active = 1 GROUP BY bd.business_deal_id");
+        $businessinvoicedealdetail[]=mysqli_fetch_all($getbusinessdeal,MYSQLI_ASSOC);
+        
+       }
+        //echo "<pre>";print_r($businessinvoicedealdetail); echo "</pre>";
+       return $businessinvoicedealdetail;
+       
+    }
 }
 ?>

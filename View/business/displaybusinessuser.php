@@ -155,7 +155,10 @@
 
                                          <br/>
                                         <a href="#" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
+                                        <br/>
+                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail">View Invoices</a>
                                       </div>
+
                                 </td>
                                  </tr>
                            <?php

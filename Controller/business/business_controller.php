@@ -69,5 +69,18 @@ class business_controller
 		}
 		
 	}
+	public function view_invoices($user_id)
+	{
+		$view_invoices=$this->business_model->getbusinessinvoice($user_id);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/viewbuisnessinvoice.php');
+		return $view_invoices;
+	}
+	public function viewinvoice_detail($invoice_id)
+	{
+		$view_invoice_detail=$this->business_model->getinvoicedetail($invoice_id);
+		$view_deal_invoice_detail=$this->business_model->getdealinvoicedetail($invoice_id);
+		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/business/viewbuisnessinvoicedetail.php');
+		return $view_invoice_detail;
+	}
 }
 ?>

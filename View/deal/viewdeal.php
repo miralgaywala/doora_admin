@@ -265,7 +265,6 @@ function loadbranch(UsersId){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		           
 		            "destroy":true,
 		    		});
 		   }
