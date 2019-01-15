@@ -16,7 +16,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Content Management</h2></div>
         <div class="col-md-2">
                 <br/>   
-            
         </div>
       </div> 
       <?php
@@ -35,7 +34,6 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
             Content management has been updated successfully
             </div>';
             echo $msg;
-           
           }  
           ?>
         <div class="row">

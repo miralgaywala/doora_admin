@@ -15,7 +15,8 @@
     <script> 
     $(document).ready(function(){
       $('#sub_category').change(function(){
-        loadsubcategoryfilter($(this).find(':selected').val())
+        // loadsubcategoryfilter($(this).find(':selected').val())
+        loadfilter()
       })
     })   
     function loadsubcategoryfilter(CategoryId){
@@ -32,7 +33,6 @@
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-                
                 "destroy":true,
             });
 		   }
@@ -40,8 +40,10 @@
 }             
 $(document).ready(function(){
       $('#category').change(function(){
-        loadcategoryfilter($(this).find(':selected').val())
+   
+        // loadcategoryfilter($(this).find(':selected').val())
         loadsubcategory($(this).find(':selected').val())
+             loadfilter()
       })
     })
         function loadcategoryfilter(CategoryId){
@@ -71,7 +73,7 @@ function loadsubcategory(CategoryId){
     var elem = document.getElementById("category");
       selectedNode = elem.options[elem.selectedIndex];
       var CategoryId = selectedNode.value;
-      console.log(selectedNode.value);
+    
         $.ajax({
             type: "POST",
             url: '/doora/adminpanel/Controller/deal/subcategory.php?category_id='+CategoryId,
@@ -83,7 +85,8 @@ function loadsubcategory(CategoryId){
 }
 $(document).ready(function(){
       $('#branch').change(function(){
-        loadbranchfilter($(this).find(':selected').val())
+        loadfilter()
+        // loadbranchfilter($(this).find(':selected').val())
       })
     })
         function loadbranchfilter(branchId){
@@ -109,7 +112,8 @@ $(document).ready(function(){
 }
 $(document).ready(function(){
       $('#tag').change(function(){
-        loadtagfilter($(this).find(':selected').val())
+        loadfilter()
+        // loadtagfilter($(this).find(':selected').val())
       })
     })
         function loadtagfilter(tagId){
@@ -137,8 +141,10 @@ $(document).ready(function(){
 }
 $(document).ready(function(){
       $('#business').change(function(){
+      
         loadbranch($(this).find(':selected').val())
-        loadbusinessfilter($(this).find(':selected').val())
+          loadfilter()
+        // loadbusinessfilter($(this).find(':selected').val())
       })
     })
 function loadbranch(UsersId){
@@ -153,7 +159,7 @@ function loadbranch(UsersId){
                 url: '/doora/adminpanel/Controller/deal/branch.php?branch_id='+UsersId,
                
                 success:function(data1) { 
-                    //console.log(data1);
+                    // console.log(data1);
                       $('#branch').html(data1);
                 }
                 });
@@ -178,6 +184,38 @@ function loadbranch(UsersId){
 		    		});
       		 }
       });
+}
+function loadfilter(){
+      // console.log($('#business').val());
+      //  console.log($('#branch').val()); 
+      //  console.log($('#tag').val()); 
+        // console.log($('#sub_category').val()); 
+      //  console.log($('#category').val()); 
+      var radio=$("input[name='optradio']:checked").val();
+
+      var business_id = $('#business').val();
+      var branch = $('#branch').val();
+      var tag = $('#tag').val();
+      var sub_category = $('#sub_category').val();
+      var category = $('#category').val();
+        $('#example2').dataTable().fnDestroy();
+        $.ajax({
+       url: '/doora/adminpanel/Controller/deal/loadfilter.php',
+       data : {business_id : business_id,branch : branch,tag : tag, category : category, sub_category : sub_category,radio : radio},
+       type: 'POST',
+       success: function(data) {
+        console.log("filter");
+               console.log(data);
+               $("#result_data").empty();
+               $("#result_data").append(data);
+              $('#example2').dataTable({
+               
+                "destroy":true,
+            });
+           }
+
+      });
+        
 }
     </script>
     <script>
@@ -205,87 +243,93 @@ function loadbranch(UsersId){
                                    
   function alldata()
     {
-    	 $('#example2').dataTable().fnDestroy();
-		   $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1',
-		   type: 'POST',
-		   success: function(data) {
-		           //console.log(data);
-		           $("#result_data").empty();
-		           $("#result_data").append(data);
-       		       $('#example2').dataTable({
+      loadfilter()
+      
+    	//  $('#example2').dataTable().fnDestroy();
+		   // $.ajax({
+		   // url: '/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1',
+		   // type: 'POST',
+		   // success: function(data) {
+		   //         //console.log(data);
+		   //         $("#result_data").empty();
+		   //         $("#result_data").append(data);
+     //   		       $('#example2').dataTable({
 		            
-		            "destroy":true,
-		    		});
-       		   }
-      });
+		   //          "destroy":true,
+		   //  		});
+     //   		   }
+     //  });
     }   
     function active()
     {
-    	$('#example2').dataTable().fnDestroy();
-      $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2',
-		   type: 'POST',
-		   success: function(data){
-		           //console.log(data);
-		           $("#result_data").empty();
-		           $("#result_data").append(data);
-		           $('#example2').dataTable({
+      loadfilter()
+    	// $('#example2').dataTable().fnDestroy();
+     //  $.ajax({
+		   // url: '/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2',
+		   // type: 'POST',
+		   // success: function(data){
+		   //         //console.log(data);
+		   //         $("#result_data").empty();
+		   //         $("#result_data").append(data);
+		   //         $('#example2').dataTable({
 		           
-		            "destroy":true,
-		    		});
-		   }
-      });
+		   //          "destroy":true,
+		   //  		});
+		   // }
+     //  });
     }
     function deactive()
     {
-    	$('#example2').dataTable().fnDestroy();
-      $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3',
-		   type: 'POST',
-		   success: function(data){
-		           //console.log(data);
-		           $("#result_data").empty();
-		           $("#result_data").append(data);
-		           $('#example2').dataTable({
+      loadfilter()
+    	// $('#example2').dataTable().fnDestroy();
+     //  $.ajax({
+		   // url: '/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3',
+		   // type: 'POST',
+		   // success: function(data){
+		   //         //console.log(data);
+		   //         $("#result_data").empty();
+		   //         $("#result_data").append(data);
+		   //         $('#example2').dataTable({
 		            
-		            "destroy":true,
-		    		});
-		   }
-      });
+		   //          "destroy":true,
+		   //  		});
+		   // }
+     //  });
     }
     function expired()
     {
-    	$('#example2').dataTable().fnDestroy();
-      $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4',
-		   type: 'POST',
-		   success: function(data){
-		           //console.log(data);
-		           $("#result_data").empty();
-		           $("#result_data").append(data);
-		           $('#example2').dataTable({
-		            "destroy":true,
-		    		});
-		   }
-      });
+      loadfilter()
+    	// $('#example2').dataTable().fnDestroy();
+     //  $.ajax({
+		   // url: '/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4',
+		   // type: 'POST',
+		   // success: function(data){
+		   //         //console.log(data);
+		   //         $("#result_data").empty();
+		   //         $("#result_data").append(data);
+		   //         $('#example2').dataTable({
+		   //          "destroy":true,
+		   //  		});
+		   // }
+     //  });
     }
     function purchased()
     {
-    	$('#example2').dataTable().fnDestroy();
-      $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5',
-		   type: 'POST',
-		   success: function(data) {
-		           //console.log(data);
-		           $("#result_data").empty();
-		           $("#result_data").append(data);
-		           $('#example2').dataTable({
+      loadfilter()
+    	// $('#example2').dataTable().fnDestroy();
+     //  $.ajax({
+		   // url: '/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5',
+		   // type: 'POST',
+		   // success: function(data) {
+		   //         //console.log(data);
+		   //         $("#result_data").empty();
+		   //         $("#result_data").append(data);
+		   //         $('#example2').dataTable({
 		           
-		            "destroy":true,
-		    		});
-		   }
-      });
+		   //          "destroy":true,
+		   //  		});
+		   // }
+     //  });
     }
  </script>
  
@@ -307,7 +351,7 @@ function loadbranch(UsersId){
                                        <option value="0">Select Business</option> 
                                        
                                        <?php foreach ($getbusiness as  $data) {
-                                          ?> <option value="<?php echo $data['user_error()_id']; ?>"><?php echo $data['business_name']; ?></option> <?php }?>                             
+                                          ?> <option value="<?php echo $data['user_id']; ?>"><?php echo $data['business_name']; ?></option> <?php }?>                             
                                   </select>
                                 </div> 
                                 <label for="branch" class="col-sm-2 control-label" style="margin-top: 10px;">Business Branch</label>
@@ -354,30 +398,30 @@ function loadbranch(UsersId){
       									<input type="radio" name="optradio" id="all" onclick="alldata();" checked>All
     							</label>
                                 <label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="active" onclick="active();">Active
+      									<input type="radio" name="optradio" id="active" onclick="active();" value="active">Active
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="deactive" onclick="deactive();">Deactive
+      									<input type="radio" name="optradio" id="deactive" onclick="deactive();" value="deactive">Deactive
     							</label>
 								<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="expired" onclick="expired();">Expired
+      									<input type="radio" name="optradio" id="expired" onclick="expired();" value="expired">Expired
     							</label>
     							<label class="radio-inline col-sm-2" style="margin-top: 25px;">
-      									<input type="radio" name="optradio" id="purchased" onclick="purchased();">Purchased
+      									<input type="radio" name="optradio" id="purchased" onclick="purchased();" value="purchased">Purchased
     							</label>
     							</div>	
                   <hr>
                   <table id="example2" class="table table-bordered table-condensed table-hover" style="width:100%">
                             <thead>
                             <tr>
-                              <th style="text-align:center;">#</th>
-                              <th style="text-align:center;">Deal Id</th>
-                              <th style="text-align:center;">Franchise Address</th>
-                              <th style="text-align:center;width:20px;">Deal Title</th>
-                              <th style="text-align:center;">Promocode</th>
-                              <th style="text-align:center;">Terms and Condition</th>
-                              <th style="text-align:center;">Deal Photo</th>
-                              <th style="text-align:center;">Action</th>
+                              <th style="text-align:center;" width="10%">#</th>
+                              <th style="text-align:center;" width="10%">Deal Id</th>
+                              <th style="text-align:center;" width="20%">Franchise Address</th>
+                              <th style="text-align:center;" width="20%">Deal Title</th>
+                              <th style="text-align:center;" width="10%">Promocode</th>
+                              <th style="text-align:center;" width="10%">Terms and Condition</th>
+                              <th style="text-align:center;" width="10%">Deal Photo</th>
+                              <th style="text-align:center;" width="10%">Action</th>
                             </tr>
                              </thead>
                     		<tbody id="result_data">

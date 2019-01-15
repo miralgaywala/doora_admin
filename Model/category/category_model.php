@@ -35,7 +35,6 @@ class category_model{
     {
         $con=$this->db->connection();
         $getcategory=$con->query("select * from category where NOT is_deleted=1");
-
         $category=mysqli_fetch_all($getcategory,MYSQLI_ASSOC);
         return $category;
     }

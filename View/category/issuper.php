@@ -1,5 +1,5 @@
 <?php   
-			$connection = mysqli_connect("localhost", "root", "", "sprookr_latest");
+			$connection = mysqli_connect("leocan.co", "leocamq9_spr_usr", "spk123!@#", "leocamq9_sprookr_db");
 			if(isset($_POST['is_super_market']))
 			{
 			$select = "select count(*) from category where 'is_super_market'=1";

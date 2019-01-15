@@ -106,7 +106,6 @@ class deal_model
     }
     public function getsubcategorylist($id)
     {
-
               $con=$this->db->connection();
               $getonlinepur=$con->query("select sub_category_id,sub_category_name from sub_category where is_deleted=0 AND category_id=".$id);
               $category=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);   
@@ -129,7 +128,7 @@ class deal_model
     {
               $con=$this->db->connection();
               $getonlinepur=$con->query("select franchise_id, franchise_address from business_franchise where is_deleted=0 AND business_user_id=".$id);
-              $branch=$getonlinepur->fetch_all();   
+              $branch=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);   
               return $branch;
     }
     public function getbusiness_filter($msg)
@@ -196,6 +195,25 @@ class deal_model
               $gettag=$con->query("select category_id,category_name from category where NOT is_deleted=1");
                $alltag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
               return $alltag;
+    }
+    public function loadfilter_deal($business_id,$branch,$tag,$sub_category,$category,$radio)
+    {
+      $con=$this->db->connection();
+      $whereClauses = array(); 
+    if ($business_id > 0) $whereClauses[] ="bf.business_user_id='".$business_id."'";
+    if ($branch > 0) $whereClauses[] ="bf.franchise_id='".$branch."'"; 
+    if ($tag > 0) $whereClauses[] ="dpt.tag_id='".$tag."'";
+    if ($category > 0) $whereClauses[] ="ca.category_id='".$category."'"; 
+    if ($sub_category > 0) $whereClauses[] ="dps.sub_cat_id='".$sub_category."'"; 
+    if ($radio == 'active') $whereClauses[] ="bd.is_active=1"; 
+    if ($radio == 'deactive') $whereClauses[] ="bd.is_active=0"; 
+    if ($radio == 'expired') $whereClauses[] ="bd.deal_end_time < now()"; 
+    if ($radio == 'purchased') $whereClauses[] ="(upd.is_cart=1 OR upd.is_online=1)"; 
+    $where = ''; 
+    if (count($whereClauses) > 0) { $where = ' WHERE '.implode(' AND ',$whereClauses); }
+     $getonlinepur=$con->query("select bd.*,bf.franchise_address,bf.business_user_id,us.user_id,us.business_name,dpt.tag_id,dt.tag,dps.sub_cat_id,sc.sub_category_name,ca.category_id,ca.category_name,oc.offer_title,upd.is_cart,upd.is_online from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id left join users as us on bf.business_user_id = us.user_id left join deal_post_tag as dpt on bd.business_deal_id = dpt.deal_id left join deal_tags as dt on dpt.tag_id = dt.tag_id left join offer_category as oc on bd.offer_id = oc.offer_id left join deal_post_subcategory as dps on bd.business_deal_id = dps.deal_id left join sub_category as sc on dps.sub_cat_id = sc.sub_category_id left join category as ca on sc.category_id = ca.category_id" .$where. " group by business_deal_id");  
+      $deal=mysqli_fetch_all($getonlinepur,MYSQLI_ASSOC);
+              return $deal;
     }
 }
 ?>

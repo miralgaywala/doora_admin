@@ -108,6 +108,20 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
             });
             
             $('#btn-upload').on('click', function (ev) {
+              if(document.getElementById("sub_category_image").value == "") {
+                var categoryimage = document.getElementById("sub_category_image").value;
+                if(categoryimage == "")
+                                      {
+                                        document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                       count++;
+                                      }
+                                      else
+                                      {
+                                        document.getElementById("category_imageerror").innerHTML="";
+                                      }
+              }
+              else
+              {
                 resize.croppie('result', {
                     type: 'canvas',
                     size: 'viewport'
@@ -124,6 +138,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                         }
                     });
                 });
+              }
             });	
         </script>                         
     </section>

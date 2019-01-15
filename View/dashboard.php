@@ -1,11 +1,10 @@
 
-
  <?php include("header.php");
- //include("sidemenu.php");
+ include("sidemenu.php");
  ?>
-
-    <section class="content">
-        <center><h1>Welcome to Dashboard!!</h1></center>
+<section class="content">
+   
+    	 <center><p style="font-size: 40px;">Welcome to Dashboard!!</p></center>
     </section>
 </div>
  <?php include("footer.php");?> 
