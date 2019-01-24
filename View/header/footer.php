@@ -73,3 +73,13 @@
 <script src="../../dist/js/demo.js"></script>
 </body>
 </html>
+<script>
+//  $("a").on('click',function(e) {
+// var href = $(this).attr('href');
+//         alert(href);
+// if(href != undefined) {
+//   e.preventDefault();
+//             $("#html").load($(this).attr('href'));
+//     } 
+// });
+</script>

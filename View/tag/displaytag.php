@@ -1,13 +1,14 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+<?php 
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+?> 
 <section class="content">
    
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Tag List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/tag/addtag.php';">+ Add Tag</button>
+    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/tag/addtag.php';">+ Add Tag</button>
     		</div>
     	</div> 
         <?php 
@@ -61,13 +62,13 @@
                                 <td style="text-align:center;">
                           
                                     <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/edittag_controller.php?id=".$data['tag_id']; ?> title="Edit" >
+                                        <a <?php echo "href=../../Controller/tag/edittag_controller.php?id=".$data['tag_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Tag?');" <?php echo "href=/doora/adminpanel/Controller/tag/deletetag_controller.php?id=".$data['tag_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Tag?');" <?php echo "href=../../Controller/tag/deletetag_controller.php?id=".$data['tag_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/tag/viewtag_controller.php?id=".$data['tag_id'];?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/tag/viewtag_controller.php?id=".$data['tag_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -81,4 +82,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <?php include "../../View/header/footer.php";?>  

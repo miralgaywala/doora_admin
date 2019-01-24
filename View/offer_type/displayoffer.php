@@ -1,12 +1,12 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
  ?>
     <section class="content">
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Offer List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/offer_type/addoffer.php';">+ Add Offer</button>
+    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/offer_type/addoffer.php';">+ Add Offer</button>
     		</div>
     	</div> 
         <?php 
@@ -58,13 +58,13 @@
                                 <td style="text-align:center;"><?php echo $data['offer_title']; ?></td>
                                 <td style="text-align:center;">
                                    <div>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/offer_type/editoffer_controller.php?id=".$data['offer_id']; ?> title="Edit" >
+                                        <a <?php echo "href=../../Controller/offer_type/editoffer_controller.php?id=".$data['offer_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Offer Title?');" <?php echo "href=/doora/adminpanel/Controller/offer_type/deleteoffer_controller.php?id=".$data['offer_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Offer Title?');" <?php echo "href=../../Controller/offer_type/deleteoffer_controller.php?id=".$data['offer_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/offer_type/viewoffer_controller.php?id=".$data['offer_id'];?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/offer_type/viewoffer_controller.php?id=".$data['offer_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -78,4 +78,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+  <?php include "../../View/header/footer.php";?>  

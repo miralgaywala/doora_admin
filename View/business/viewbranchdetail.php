@@ -1,7 +1,8 @@
 <?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
+include "../../View/header/header.php";
+
  //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../../View/header/sidemenu.php";
  ?>
  
  <?php
@@ -24,41 +25,55 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         	<div class="col-xs-12">
         		<div class="box">            
         			<div class="box-body">
-        				<table width="50%" style="font-size: 15px;">
+        				 <table style="font-size: 15px;" style="width: 100%;" class="table table-striped">
                   <tr>
-                    <td>Frenchise id</td>
+                 <td style="width: 20%">Frenchise id</td>
                   <td><?php echo $data['franchise_id'];?></td>
                   </tr>
                   <tr>
-                    <td>Business User Id</td>
+                   <td style="width: 20%">Business User Id</td>
                   <td><?php echo $data['business_user_id'];?></td>
                   </tr>
                   <tr>
-                    <td>Frenchise Address</td>
+                   <td style="width: 20%">Frenchise Address</td>
                   <td><?php echo $data['franchise_address'];?></td>
                   </tr>
                   <tr>
-                    <td>Latitude</td>
+                   <td style="width: 20%">Latitude</td>
                   <td><?php echo $data['latitude'];?></td>
                   </tr>
                   <tr>
-                    <td>Longitude</td>
+                   <td style="width: 20%">Longitude</td>
                   <td><?php echo $data['longitude'];?></td>
                   </tr>
                   <tr>
-                    <td>Is Branch Activate</td>
-                  <td><?php echo $data['is_branch_active'];?></td>
+                 <td style="width: 20%">Branch Activate</td>
+                  <td><?php if($data['is_branch_active'] == 0)
+                  {
+                    echo "No";
+                  }
+                  else
+                    {
+                      echo "Yes";
+                    }?></td>
                   </tr>
                   <tr>
-                    <td>Is Deleted</td>
-                  <td><?php echo $data['is_deleted'];?></td>
+                  <td style="width: 20%">Deleted</td>
+                  <td><?php if($data['is_deleted'] == 0)
+                  {
+                    echo "No";
+                  }
+                  else
+                    {
+                      echo "Yes";
+                    }?></td>
                   </tr>
                   <tr>
-                    <td>Created At</td>
+                   <td style="width: 20%">Created Date</td>
                   <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                  <td style="width: 20%">Upadted Date</td>
                   <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
@@ -71,8 +86,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+   <?php include "../../View/header/footer.php";?>  
  
      
                        

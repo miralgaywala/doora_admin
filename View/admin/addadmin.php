@@ -1,11 +1,13 @@
 <?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
+include "../header/header.php";
+// include($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/View/header/header.php");
  //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../header/sidemenu.php";
+
  ?>
  
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/admin/admin_controller.php");
+        include_once("../../Controller/admin/admin_controller.php");
         $controller=new admin_controller();
         $controller->add_admin();       
         ?>
@@ -23,7 +25,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-             <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+             <button style="float: right;" onclick="window.location.href='../../Controller/admin/displayadminlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
 
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
@@ -91,7 +93,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             </div>                            
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="admin_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit"/>
-                                    <button type="button" class="btn btn-default pull-right" onclick="document.getElementById('addadmin_form').reset();window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'">Cancel</button>
+                                    <button type="button" class="btn btn-default pull-right" onclick="document.getElementById('addadmin_form').reset();window.location.href='../../Controller/admin/displayadminlist_controller.php'">Cancel</button>
                             </div> 
                            </div>
                          </form>
@@ -103,7 +105,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </div>
 
  <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ include "../header/footer.php";?> 
  <script type="text/javascript">
          function ImagePreview() { 
              var PreviewIMG = document.getElementById('AdminPicture'); 
@@ -226,16 +228,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $imagename = $_FILES['profile_image']['name'];
                                   $source = $_FILES['profile_image']['tmp_name'];
                                   
-                                  $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/profile/" . $imagename; 
+                                  $target = "../../../images/profile/" . $imagename; 
                                  
                                   move_uploaded_file($source, $target);
                                   $imagepath = $imagename;
                                  
-                                  $path="/doora/images/profile/" . $imagepath; 
+                                  $path="/sprookr/images/profile/" . $imagepath; 
                                   $save = $_SERVER['DOCUMENT_ROOT'].$path;//This is the new file you saving
                                   $_FILES['profile_image']= $imagepath;
 
-                                  $file = $_SERVER['DOCUMENT_ROOT']."/doora/images/profile/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
+                                  $file = "../../../images/profile/" . $imagepath; //$_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/images/". $imagepath; //This is the original file
                                   //echo $_POST['category_image'];
                                   list($width, $height) = getimagesize($file) ;                                    
                                   $modwidth=150;

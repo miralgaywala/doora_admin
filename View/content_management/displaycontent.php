@@ -1,10 +1,10 @@
 <?php 
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../../View/header/header.php";
+include "../../View/header/sidemenu.php";
  ?>
 
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/content_management/contentmanagement_controller.php");
+        include_once("../../Controller/content_management/contentmanagement_controller.php");
         $controller=new content_controller();
         $controller->add_content();       
         ?>
@@ -127,7 +127,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </div>
 
  <?php 
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ include "../../View/header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     var privacy = document.getElementById("privacy_policy").value;

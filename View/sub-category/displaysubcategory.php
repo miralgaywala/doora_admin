@@ -1,12 +1,9 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
-     <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/sub_category/subcategory_controller.php");
-        $controller=new subcategory_controller();
-        $controller->display_subcategory();
-        ?>
+ <?php 
+ include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
 
+ ?>
+     
     <script>
         $(document).ready(function(){
             $("#category_name").select2(); 
@@ -24,7 +21,7 @@
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
         console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId;
+        window.location.href='../../Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId;
 }
     </script>
     <section class="content">
@@ -33,7 +30,7 @@
             <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Sub Category List</h2></div>
             <div class="col-md-2">
                 <br/>   
-            <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>          
+            <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>          
             </div>
         </div> 
         <?php 
@@ -100,7 +97,7 @@
                             <thead>
                             <tr>
                               <th style="text-align:center;" width="5%">#</th>
-                              <th style="text-align:center;" width="5%">Sub Category Id</th>
+                              <th style="text-align:center;" width="15%">Sub Category Id</th>
                               <th style="text-align:center;">Sub Category Name</th>
                               <th style="text-align:center;" width="15%">Sub Category Image</th>
                               <th style="text-align:center;" width="10%">Action</th>
@@ -108,7 +105,6 @@
                              </thead>
                              <tbody>
               <?php 
-              
                 $i=0;
                 foreach ($displaysubcategory as $key => $data) 
                 {
@@ -116,17 +112,16 @@
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['sub_category_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['sub_category_name']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture"/></td>
                                 <td style="text-align:center;">
-                          
                                     <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/editsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Edit" >
+                                        <a <?php echo "href=../../Controller/sub_category/editsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=/doora/adminpanel/Controller/sub_category/deletesubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Delete" >
+                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=../../Controller/sub_category/deletesubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/sub_category/viewsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/sub_category/viewsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -141,4 +136,5 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+  <?php 
+   include "../../View/header/footer.php";?>  

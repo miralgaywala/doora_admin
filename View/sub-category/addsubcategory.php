@@ -1,29 +1,28 @@
-<?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+
  ?>
  
  <?php 
-       include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/sub_category/subcategory_controller.php");
+       include_once("../../Controller/sub_category/subcategory_controller.php");
         $controller=new subcategory_controller();
         $controller->add_subcategory();  
         ?>
-<script>
-        $(document).ready(function(){
-            $("#category_name").select2(); 
-        });
-    </script>
+        <script type="text/javascript">
+           $(document).ready(function(){
+        $('#category_name').select2();
+      });
+        </script>
 <!--Main Content -->
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Sub Category</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <button style="float: right;" onclick="window.location.href='../../Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
 
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div>      
         <div class="row">
@@ -74,7 +73,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                              </div>                               
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit"/>
-                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addsubcategory_form').reset();window.location.href='/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">Cancel</button>
+                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addsubcategory_form').reset();window.location.href='/sprookr/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">Cancel</button>
                             </div>  
                            </div>
                          </form>
@@ -127,7 +126,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "/doora/adminpanel/View/sub-category/croppie.php",
+                        url: "../sub-category/croppie.php",
                         type: "POST",
                         data: {"sub_category_image":img},
                         success: function (data) {
@@ -144,8 +143,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+  <?php include "../../View/header/footer.php";?>
  <script type="text/javascript">
                       /*function subcategoryname()
                       {
@@ -154,7 +152,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                         {
                             $.ajax({
                               type: 'post',
-                              url: '/doora/adminpanel/View/sub-category/checkdata.php',
+                              url: '/sprookr/adminpanel/View/sub-category/checkdata.php',
                               data: {
                                 sub_category_name:name
                               },

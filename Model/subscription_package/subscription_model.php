@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/subscription_package/subscription.php");
+include "../../Model/dbconfig.php";
+include"../../Model/subscription_package/subscription.php";
+
 class subscription_model
 {
 	public function __construct() {
@@ -10,7 +11,10 @@ class subscription_model
     {
        $con=$this->db->connection();
        $getsubscription=$con->query("select * from subscription_plans where NOT is_deleted=1");
-       $subscription=mysqli_fetch_all($getsubscription,MYSQLI_ASSOC);
+      $subscription = array();
+      while ($row = $getsubscription->fetch_assoc()) {
+        $subscription[] = $row;
+      }
        return $subscription;
     }
     public function addsubscription_data($price,$per_deal_redeem_price,$free_days)
@@ -39,7 +43,10 @@ class subscription_model
     { 
       $con=$this->db->connection();
        $getsubscription=$con->query("select * from subscription_plans where subscription_plan_id=".$subscription_id);
-       $subscription=mysqli_fetch_all($getsubscription,MYSQLI_ASSOC);
+       $subscription = array();
+      while ($row = $getsubscription->fetch_assoc()) {
+        $subscription[] = $row;
+      }
        return $subscription;
     }
     public function editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price,$free_days)
@@ -75,7 +82,10 @@ class subscription_model
   {
         $con=$this->db->connection();
        $getsubscription=$con->query("select * from subscription_plans where subscription_plan_id=".$subscription_id);
-       $subscription=mysqli_fetch_all($getsubscription,MYSQLI_ASSOC);
+       $subscription = array();
+      while ($row = $getsubscription->fetch_assoc()) {
+        $subscription[] = $row;
+      }
        return $subscription;
   }
   }

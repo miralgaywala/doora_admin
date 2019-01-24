@@ -1,11 +1,13 @@
-<?php 
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
+<?php //include("View/header.php");
+include "../header/header.php";
+// include($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/View/header/header.php");
+ //include("View/sidemenu.php");
+include "../header/sidemenu.php";
 
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
  ?>
 
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/subscription_package/subscription_controller.php");
+        include_once("../../Controller/subscription_package/subscription_controller.php");
         $controller=new subscription_controller();
         $controller->add_subscription();       
         ?>
@@ -18,7 +20,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-2">
                 <br/>   
             
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/subscription_package/displaysubscription_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="window.location.href='../../Controller/subscription_package/displaysubscription_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
         </div>
       </div>   
         <div class="row">
@@ -51,7 +53,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             </div>                                          
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="subscription_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="subscription_submit"/>
-                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addsubscription_form').reset();window.location.href='/doora/adminpanel/Controller/subscription_package/displaysubscription_controller.php'" value="Cancel"></button>
+                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addsubscription_form').reset();window.location.href='../../Controller/subscription_package/displaysubscription_controller.php'" value="Cancel"></button>
                             </div>  
                            </div>
                          </form>
@@ -62,8 +64,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php 
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ <?php //include("View/footer.php");
+ include "../header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     var price = document.getElementById("price").value;

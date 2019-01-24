@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/offer_type/offer_model.php");
+include "../../Model/offer_type/offer_model.php";
 class offer_controller
 {
 	public function __construct()
@@ -9,7 +9,8 @@ class offer_controller
 	public function display_offer($msg)
 	{
 		$display_offer=$this->offer_model->getdisplay_offer();
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/offer_type/displayoffer.php');
+		include "../../View/offer_type/displayoffer.php";
+	
 		return $display_offer;
 	}
 	public function add_offer()
@@ -20,7 +21,7 @@ class offer_controller
 			$add_offer=$this->offer_model->addoffer_data($offer);
 			if($add_offer=="1")
 			{
-			echo '<script>window.location.href="/doora/adminpanel/Controller/offer_type/displayoffercontroller.php?id=0";</script>';
+			echo '<script>window.location.href="../../Controller/offer_type/displayoffercontroller.php?id=0";</script>';
 			}
 			else
 			{
@@ -34,13 +35,14 @@ class offer_controller
 	public function view_offer($offer_id)
 	{
 		$view_offer=$this->offer_model->viewoffer($offer_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/offer_type/viewoffer.php');
+		include "../../View/offer_type/viewoffer.php";
 		return $view_offer;
 	}
 	public function editlist_offer($offer_id)
 	{
 		$edit_offer=$this->offer_model->editofferlist($offer_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/offer_type/editoffer.php');
+			include "../../View/offer_type/editoffer.php";
+		
 		return $edit_offer;
 	}
 	public function edit_offer()
@@ -52,7 +54,7 @@ class offer_controller
 			$edit_offer=$this->offer_model->editoffer_data($offer_id,$offer);
 			if($edit_offer=="1")                                                                                                                                    
 			{
-				echo '<script>window.location.href="/doora/adminpanel/Controller/offer_type/displayoffercontroller.php?id=2";</script>';
+				echo '<script>window.location.href="../../Controller/offer_type/displayoffercontroller.php?id=2";</script>';
 			}
 			else
 			{
@@ -66,7 +68,7 @@ class offer_controller
 	public function delete_offer($offer_id)
 	{
 		$this->offer_model->deleteoffer($offer_id);
-		echo '<script>window.location.href="/doora/adminpanel/Controller/offer_type/displayoffercontroller.php?id=3";</script>';
+		echo '<script>window.location.href="../../Controller/offer_type/displayoffercontroller.php?id=3";</script>';
 	}
 }
 ?>

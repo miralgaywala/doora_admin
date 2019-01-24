@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/sub_category/subcategory.php");
+include "../../Model/dbconfig.php";
+include"../../Model/sub_category/subcategory.php";
+
 class subcategory_model
 {
 	public function __construct() {
@@ -10,7 +11,10 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
-        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC); 
+       $subcategory = array();
+      while ($row = $getsubcategory->fetch_assoc()) {
+        $subcategory[] = $row;
+      }
         return $subcategory;
     }
     public function getcategorylist()
@@ -19,14 +23,20 @@ class subcategory_model
                         {
                          $con=$this->db->connection();
                          $getcategory=$con->query("select * from sub_category where category_id=1");
-                         $subcategory=mysqli_fetch_all($getcategory,MYSQLI_ASSOC); 
+                         $category = array();
+                          while ($row = $getcategory->fetch_assoc()) {
+                            $category[] = $row;
+                          }
                          return $category;
                         }
                         else
                         {
                         $con=$this->db->connection();
                         $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
-                        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC); 
+                        $subcategory = array();
+                          while ($row = $getsubcategory->fetch_assoc()) {
+                            $subcategory[] = $row;
+                          }
                         //print_r($subcategory);  
                         return $subcategory;
                        }
@@ -35,7 +45,10 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $viewsubcategory=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
-        $view=mysqli_fetch_all($viewsubcategory,MYSQLI_ASSOC);
+         $view = array();
+          while ($row = $viewsubcategory->fetch_assoc()) {
+           $view[] = $row;
+        }
         return $view;
     }
     public function deletesubcategory($subcategory_id)
@@ -50,7 +63,10 @@ class subcategory_model
     {
         $con=$this->db->connection();
         $category=$con->query("select * from category where is_deleted=0 AND NOT is_super_market=1");
-        $getcategory=mysqli_fetch_all($category,MYSQLI_ASSOC);
+        $getcategory = array();
+          while ($row = $category->fetch_assoc()) {
+           $getcategory[] = $row;
+        }
         return $getcategory;
     }
     public function addsubcategory_data($category_id,$subcategory_name,$subcategory_image)
@@ -79,7 +95,10 @@ class subcategory_model
         $con=$this->db->connection();
         //$editdata=$con->query("select * from sub_category where sub_category_id=".$subcategory_id);
         $editdata=$con->query("select cat.category_name,sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and sc.sub_category_id=".$subcategory_id);
-        $geteditdata=mysqli_fetch_all($editdata,MYSQLI_ASSOC);
+       $geteditdata = array();
+          while ($row = $editdata->fetch_assoc()) {
+           $geteditdata[] = $row;
+        }
         return $geteditdata;
     }
     public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
@@ -113,14 +132,20 @@ class subcategory_model
         {
         $getsubcategory=$con->query("select * from sub_category where is_deleted=0 AND category_id=".$msg);
         }
-        $subcategory=mysqli_fetch_all($getsubcategory,MYSQLI_ASSOC);   
+       $subcategory = array();
+          while ($row = $getsubcategory->fetch_assoc()) {
+           $subcategory[] = $row;
+        } 
         return $subcategory;
     }
     public function getcategoryfilter($msg)
     {
         $con=$this->db->connection();
         $category=$con->query("select * from category where category_id=".$msg);
-        $getcategory=mysqli_fetch_all($category,MYSQLI_ASSOC);
+        $getcategory = array();
+          while ($row = $category->fetch_assoc()) {
+           $getcategory[] = $row;
+        } 
         return $getcategory;
     }
 }

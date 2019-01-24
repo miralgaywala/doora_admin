@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/offer_type/offer.php");
+include "../../Model/dbconfig.php";
+include"../../Model/offer_type/offer.php";
+
 class offer_model
 {
 	public function __construct() {
@@ -10,7 +11,10 @@ class offer_model
     {
        $con=$this->db->connection();
        $getoffer=$con->query("select * from offer_category where NOT is_deleted=1");
-       $offer=mysqli_fetch_all($getoffer,MYSQLI_ASSOC);
+       $offer = array();
+      while ($row = $getoffer->fetch_assoc()) {
+        $offer[] = $row;
+      }
        return $offer;
     }
      public function addoffer_data($offer)
@@ -37,15 +41,21 @@ class offer_model
     public function viewoffer($offer_id)
     {
     	 $con= $this->db->connection();
-        $viewoffer=$con->query("select * from offer_category where offer_id=".$offer_id);
-        $viewoffer=mysqli_fetch_all($viewoffer,MYSQLI_ASSOC);
+        $viewoffer1=$con->query("select * from offer_category where offer_id=".$offer_id);
+       $viewoffer = array();
+      while ($row = $viewoffer1->fetch_assoc()) {
+        $viewoffer[] = $row;
+      }
         return $viewoffer;
     }
     public function editofferlist($offer_id)
     {
     	 $con= $this->db->connection();
         $editoffer=$con->query("select * from offer_category where offer_id=".$offer_id);
-        $editofferdata=mysqli_fetch_all($editoffer,MYSQLI_ASSOC);
+        $editofferdata = array();
+      while ($row = $editoffer->fetch_assoc()) {
+        $editofferdata[] = $row;
+      }
         return $editofferdata;
     }
     public function editoffer_data($offer_id,$offer)

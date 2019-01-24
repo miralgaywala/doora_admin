@@ -11,8 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-
-       require_once("subcategory_controller.php");
+         include ".././sub_category/subcategory_controller.php";
+   
         $controller=new subcategory_controller();
 
         if(isset($_GET['id']))

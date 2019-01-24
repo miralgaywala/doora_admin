@@ -1,3 +1,17 @@
+<?php 
+  
+   if (!isset($_SESSION)) {
+    session_start();
+}
+
+?> 
+<?php
+        if($_SESSION == NULL)
+        {
+            echo "<script>location.href='../../login.php'</script>";
+            exit;
+        }
+        ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +19,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Doora| Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script> 
@@ -46,9 +60,22 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <link rel="stylesheet" href="../../css/style.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
- <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+<link rel="stylesheet" href="../../bower_components/jquery/dist/jquery.min.js">
+<link rel="stylesheet" href="../../css/select2.min.css">
+<link rel="stylesheet" href="../../css/select2.full.min.js">
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
+<!-- link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+<style type="text/css">
+   .fancybox-is-open .fancybox-bg {
+    opacity: .7;
+}
+ </style>
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -57,9 +84,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">SP</span>
+      <span class="logo-mini">Doora</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Sprookr</span>
+      <span class="logo-lg">Doora</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -67,10 +94,40 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
-      
+          
+         
+          <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          
+            <li class="dropdown user user-menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <img src="../../../images/profile/logo_user.png" class="user-image" alt="User Image">
+               <span class="hidden-xs"><?php echo $_SESSION['admin_name']; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../../images/profile/logo_user.png" class="img-circle" alt="User Image">
+                <p>
+                <?php echo $_SESSION['admin_name'] ?>
+                 </p>
+              <li class="user-footer">
+                <div class="pull-left">
+                </div>
+                <div class="pull-right">
+                  <a href="../../logout.php" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+       
     </nav>
   </header>
-  <!--<style>
-     .dataTable > thead > tr > th[class*="sort"]::after{display: none}
-</style>-->
+<script type="text/javascript">
+  $(function()
+  {
+    $('.select2').select2();
+  });
+</script>

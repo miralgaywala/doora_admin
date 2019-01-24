@@ -1,12 +1,13 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+
  ?>
 <section class="content">   
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Admin List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-                <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/admin/addadmin.php';">+ Add Admin</button>
+                <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/admin/addadmin.php';">+ Add Admin</button>
     		</div>
     	</div> 
         <?php 
@@ -63,7 +64,7 @@
                  {
                   $data['profile_image']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['profile_image'])) {
+                else if(file_exists("../../../images/profile/".$data['profile_image'])) {
                   $data['profile_image'] = $data['profile_image'];
                  }
                  else
@@ -77,17 +78,17 @@
                                 <td style="text-align:center;"><?php echo $data['username'];?></td>
                                 <td style="text-align:center;"><?php echo $data['admin_name'];?></td> 
                                 <td style="text-align:center;"><?php echo $data['phone_no'];?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data['profile_image'];?> id="profilePicture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['profile_image'];?> id="profilePicture"/></td>
                                 <td style="text-align:center;"><?php echo $data['email_address'];?></td> 
                                 <td style="text-align:center;">
                                   <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/editadmin_controller.php?id=".$data['admin_id']; ?> title="Edit" >
+                                        <a <?php echo "href=../../Controller/admin/editadmin_controller.php?id=".$data['admin_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=/doora/adminpanel/Controller/admin/deleteadmin_controller.php?id=".$data['admin_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=../../Controller/admin/deleteadmin_controller.php?id=".$data['admin_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/admin/viewadmin_controller.php?id=".$data['admin_id']; ?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/admin/viewadmin_controller.php?id=".$data['admin_id']; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -102,4 +103,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <?php include "../../View/header/footer.php";?>  

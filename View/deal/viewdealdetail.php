@@ -1,7 +1,7 @@
 <?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+
  ?>
  
  
@@ -11,16 +11,16 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Deal Detail</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/deal/viewdeal_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <button style="float: right;" onclick="window.location.href='../../Controller/deal/viewdeal_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">            
         			<div class="box-body">
-        				<table width=100%" style="font-size: 15px;">
+        				 <table style="font-size: 15px;" style="width: 100%;" class="table table-striped">
                   <?php
                    foreach ($display_dealdetail as $key => $data) 
                   {
@@ -93,7 +93,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                  {
                   $data['deal_photo'] = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $data['deal_photo'] = $data['deal_photo'];
                  }
                  else
@@ -102,55 +102,43 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                  }     
                ?>
                   <tr>
-                    <td>Business Deal Id</td>
+                  <td style="width: 20%">Business Deal Id</td>
                   <td><?php echo $data['business_deal_id'];?></td>
                   </tr>
                    <tr>
-                    <td>Business User Id</td>
+                  <td style="width: 20%">Business User Id</td>
                   <td><?php echo $data['user_id'];?></td>
                   </tr>
                   <tr>
-                    <td>Business Name</td>
+                 <td style="width: 20%">Business Name</td>
                   <td><?php echo $data['business_name'];?></td>
                   </tr>
                   <tr>
-                  <td>Franchise Id</td>
+                 <td style="width: 20%">Franchise Id</td>
                   <td><?php echo $data['franchise_id'];?></td>
                   </tr>
                    <tr>
-                    <td>Franchise Address</td>
+                  <td style="width: 20%">Franchise Address</td>
                   <td><?php echo $data['franchise_address'];?></td>
                   </tr>
                   <tr>
-                  <td>Offer Id</td>
+                 <td style="width: 20%">Offer Id</td>
                   <td><?php echo $data['offer_id'];?></td>
                   </tr>
 					        <tr>
-                  <td>Offer Title</td>
+                 <td style="width: 20%">Offer Title</td>
                   <td><?php echo $data['offer_title'];?></td>
                   </tr>                  
                   <tr>
-                  <td>Deal Title</td>
+                 <td style="width: 20%">Deal Title</td>
                   <td><?php echo $html;?></td>
                   </tr>
                   <tr>
-                    <td>rgb r</td>
-                  <td><?php echo $data['rgb_r'];?></td>
-                  </tr>
-                  <tr>
-                    <td>rgb g</td>
-                  <td><?php echo $data['rgb_g'];?></td>
-                  </tr>
-                  <tr>
-                    <td>rgb b</td>
-                  <td><?php echo $data['rgb_b'];?></td>
-                  </tr>
-                  <tr>
-                    <td>Promocode</td>
+                 <td style="width: 20%">Promocode</td>
                   <td><?php echo $data['promocode'];?></td>
                   </tr>
                   <tr>
-                    <td>Is In Store</td>
+                  <td style="width: 20%"> In Store</td>
                   <td><?php if($data['is_in_store'] == 0 ) 
                   {echo "No";
                 }
@@ -160,7 +148,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Is Online</td>
+                  <td style="width: 20%">Online</td>
                   <td><?php if($data['is_online'] == 0 ) 
                   {echo "No";
                 }
@@ -170,36 +158,43 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Total In Store Reedem Quantity</td>
-                  <td> <?php  foreach ($instore_rdm as $pur) {               
-                   ?><?php echo $pur['SUM(upd.quantity)']; ?><?php } ?></td>
+                  <td style="width: 20%">Total In Store Reedem Quantity</td>
+                  <td> <?php if($instore_rdm == 0) { echo "0";} else { foreach ($instore_rdm as $pur) { 
+                  
+                   ?><?php echo $pur['SUM(upd.quantity)']; }?><?php } ?></td>
                   </tr>
                 	<tr>
-                    <td>Total In Store Purchased Quantity</td>
-                  <td> <?php foreach ($instore_pur as $pur) {                   
-                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
+                  <td style="width: 20%">Total In Store Purchased Quantity</td>
+                  <td> <?php if($instore_pur == 0) { echo "0"; } else { foreach ($instore_pur as $pur) { 
+                                    
+                   ?><?php echo $pur['SUM(upd.quantity)']; }?><?php } ?></td>
                   </tr>
                   <tr>
-                    <td>Total Online Purchased Quantity</td>
-                  <td> <?php foreach ($isonline_pur as $pur) {                   
-                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
+                  <td style="width: 20%">Total Online Purchased Quantity</td>
+                  <td> <?php if($instore_pur == 0) { echo "0";} else { foreach ($isonline_pur as $pur) { 
+                                  
+                   ?><?php echo $pur['SUM(upd.quantity)']; }?><?php } ?></td>
                   </tr>
                   <tr>
-                    <td>Total Reedem Quantity</td>
-                  <td> <?php foreach ($deal_rdm as $rdm) {                   
-                   ?><?php echo $rdm['SUM(upd.quantity)'];?><?php } ?></td>
+                  <td style="width: 20%">Total Reedem Quantity</td>
+                  <td> <?php if($deal_rdm == 0){
+                      echo "0";
+                  } else {foreach ($deal_rdm as $rdm) { 
+                                    
+                   ?><?php echo $rdm['SUM(upd.quantity)'];?><?php } }?></td>
                   </tr>
                   <tr>
-                    <td>Total Purchased Quantity</td>
-                  <td> <?php foreach ($deal_purchased as $pur) {                   
-                   ?><?php echo $pur['SUM(upd.quantity)'];?><?php } ?></td>
+                  <td style="width: 20%">Total Purchased Quantity</td>
+                  <td> <?php if($deal_purchased == 0) { echo "0"; } else { foreach ($deal_purchased as $pur) {
+                                    
+                   ?><?php echo $pur['SUM(upd.quantity)']; }?><?php } ?></td>
                   </tr>
                   <tr>
-                    <td>Terms and Condition</td>
+                  <td style="width: 20%">Terms and Condition</td>
                   <td><?php echo $condition;?></td>
                   </tr>
                   <tr>
-                    <td>Overall Quantity</td>
+                  <td style="width: 20%">Overall Quantity</td>
                   <td><?php if($data['overall_qty'] == 0 ) 
                   {echo "No Limit";
                 }
@@ -209,7 +204,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Per Person Quantity</td>
+                 <td style="width: 20%">Per Person Quantity</td>
                   <td><?php if($data['per_person_qty'] == 0 ) 
                   {echo "No Limit";
                 }
@@ -219,8 +214,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                       }?></td>
                   </tr>
                   <tr>
-                    <td>Deal Photo</td>
-                  <td><img <?php echo "src=/doora/images/deal/".$data['deal_photo'];?> id="DealPicture"/></td>
+                  <td style="width: 20%">Deal Photo</td>
+                  <td><a data-fancybox="gallery" <?php echo "href=../../../images/deal/".$data['deal_photo'];?>><img <?php echo "src=../../../images/deal/".$data['deal_photo'];?> id="DealPicture"/></a></td>
                   </tr>
                    <?php if($data['deal_video'] == NULL)
                     {
@@ -229,61 +224,62 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     else
                     	{?>
                   <tr>	
-                    <td>Deal Video</td>                   
+                 <td style="width: 20%">Deal Video</td>                   
                   <td><video width="200" height="200" style="border-style: groove; margin-top: 10px;" autoplay controls>
-  					<source <?php echo "src=/doora/video/deal/".$data['deal_video'];?> type="video/mp4">
+  					<source <?php echo "src=../../../video/deal/".$data['deal_video'];?> type="video/mp4">
 					</video></td> <?php } ?>
 				
                   </tr>
                
                   <tr>
-                    <td>Deal Start time</td>
+                 <td style="width: 20%">Deal Start time</td>
                   <td><?php echo $data['deal_start_time'];?></td>
                   </tr>
                   <tr>
-                    <td>Deal End time</td>
+                 <td style="width: 20%">Deal End time</td>
                   <td><?php echo $data['deal_end_time'];?></td>
                   </tr>                 
                   <tr>
-                    <td>Tag Id</td>
-                  <td> <?php foreach ($deal_tag as $tag) {                   
-                   ?><?php echo $tag['tag_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                 <td style="width: 20%">Tag Id</td>
+                  <td> <?php if($deal_tag == NULL) {echo "No";} else{ $count=count($deal_tag); $i=1; foreach ($deal_tag as $tag) {                   
+                   ?><?php echo $tag['tag_id']; if($i<$count) { echo "  ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
                   <tr>
-                    <td>Tag</td>
-                  <td> <?php foreach ($deal_tag as $tag) {                   
-                   ?><?php echo $tag['tag'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                  <td style="width: 20%">Tag</td>
+                  <td> 
+                    <?php if($deal_tag == NULL) {echo "No";} else{ $count=count($deal_tag); $i=1; foreach ($deal_tag as $tag) {
+                      ?><?php echo $tag['tag']; if($i<$count) { echo "  ,"; } $i=$i+1;  ?>&nbsp;&nbsp;
+                    <?php } }?>
+                     
+                   </td>
                   </tr>
                   <tr>
-                    <td>Sub Catgeory Id</td>
-                 <td> <?php foreach ($deal_cat as $cat) {                   
-                   ?><?php echo $cat['sub_category_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                 <td style="width: 20%">Sub Catgeory Id</td>
+                 <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                   
+                   ?><?php echo $cat['sub_category_id']; if($i<$count) { echo " ,"; } $i=$i+1; ?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
                   <tr>
-                    <td>Sub Category Name</td>
-                 <td> <?php foreach ($deal_cat as $cat) {                  
-                   ?><?php echo $cat['sub_category_name'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                 <td style="width: 20%">Sub Category Name</td>
+                 <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                  
+                   ?><?php echo $cat['sub_category_name']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
                   <tr>
-                    <td>Category Id</td>
-                  <td> <?php foreach ($deal_category as $category) {                    
-                   ?><?php echo $category['category_id'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                  <td style="width: 20%">Category Id</td>
+                  <td> <?php if($deal_category == NULL) {echo "No";} else{ $count=count($deal_category); $i=1; foreach ($deal_category as $category) {                    
+                   ?><?php echo $category['category_id']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
                   <tr>
-                    <td>Category Name</td>
-                 <td> <?php foreach ($deal_category as $category) {                    
-                   ?><?php echo $category['category_name'];?>,&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></td>
+                  <td style="width: 20%">Category Name</td>
+                 <td> <?php if($deal_category == NULL) {echo "No";} else{ $count=count($deal_category); $i=1; foreach ($deal_category as $category) {                    
+                   ?><?php echo $category['category_name']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
+                  
                   <tr>
-                    <td>Is Aspectfit</td>
-                  <td><?php echo $data['is_aspectfit'];?></td>
-                  </tr>
-                  <tr>
-                    <td>Created At</td>
+                 <td style="width: 20%">Created Date</td>
                   <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                 <td style="width: 20%">Upadted Date</td>
                   <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
@@ -295,5 +291,5 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <?php 
+include "../../View/header/footer.php";?> 

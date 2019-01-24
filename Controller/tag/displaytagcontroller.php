@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("tag_controller.php");
+        include ".././tag/tag_controller.php";
         $controller=new tag_controller();   
         if(isset($_GET['id']))
         {

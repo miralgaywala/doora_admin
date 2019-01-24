@@ -1,8 +1,7 @@
-<?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+<?php 
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+?> 
  
  
 <!--Main Content -->
@@ -11,38 +10,45 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Tag</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/tag/displaytagcontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <button style="float: right;" onclick="window.location.href='../../Controller/tag/displaytagcontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">            
         			<div class="box-body">
-        				<table width="50%" style="font-size: 15px;">
+        			 <table style="font-size: 15px;" style="width: 100%;" class="table table-striped">
                   <?php
                    foreach ($view_tag as $key => $data) 
                   {
                ?>
                   <tr>
-                    <td>Tag Id</td>
+                  <td style="width: 20%">Tag Id</td>
                   <td><?php echo $data['tag_id'];?></td>
                   </tr>
                   <tr>
-                    <td>Tag</td>
+                  <td style="width: 20%">Tag</td>
                   <td><?php echo $data['tag'];?></td>
                   </tr>
                   <tr>
-                    <td>Is Deleted</td>
-                  <td><?php echo $data['is_deleted'];?></td>
+                  <td style="width: 20%">Is Deleted</td>
+                  <td><?php if($data['is_deleted'] == 0)
+                  {
+                    echo "No";
+                  }
+                  else
+                    {
+                      echo "Yes";
+                    }?></td>
                   </tr>
                   <tr>
-                    <td>Created At</td>
+                  <td style="width: 20%">Created Date</td>
                   <td><?php echo $data['created_at'];?></td>
                   </tr>
                   <tr>
-                    <td>Upadted At</td>
+                  <td style="width: 20%">Upadted Date</td>
                   <td><?php echo $data['updated_at'];?></td>
                   </tr>
                 <?php } ?>
@@ -55,8 +61,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ <?php 
+include "../../View/header/footer.php";?> 
  
      
                        

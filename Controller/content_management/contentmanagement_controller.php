@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/content_management/contentmanagement_model.php");
+include "../../Model/content_management/contentmanagement_model.php";
 class content_controller
 {
 	public function __construct()
@@ -9,7 +9,8 @@ class content_controller
 	public function display_content($msg)
 	{
 		$display_content=$this->content_model->getdisplay_content();
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/content_management/displaycontent.php');
+		include "../../View/content_management/displaycontent.php";
+		
 		return $display_content;
 	}
 	public function add_content()
@@ -24,11 +25,11 @@ class content_controller
                      $add_content=$this->content_model->addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb);
                      	if($add_content=="0")
 						{
-						echo '<script>window.location.href="/doora/adminpanel/Controller/content_management/addcontentmanagement_controller.php?id=0";</script>';
+						echo '<script>window.location.href="../../Controller/content_management/addcontentmanagement_controller.php?id=0";</script>';
 						}
 						else
 						{
-						echo '<script>window.location.href="/doora/adminpanel/Controller/content_management/addcontentmanagement_controller.php?id=2";</script>';
+						echo '<script>window.location.href="../../Controller/content_management/addcontentmanagement_controller.php?id=2";</script>';
 						}	
         }
 	}

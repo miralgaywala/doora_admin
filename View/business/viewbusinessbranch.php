@@ -1,5 +1,6 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php //include("View/header.php");
+include "../../View/header/header.php";
+include "../../View/header/sidemenu.php";
  ?>
 <section class="content">
    
@@ -7,7 +8,7 @@
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Business Franchise List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-                <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/business/displaybusinesslist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+                <button style="float: right;" onclick="window.location.href='../../Controller/business/displaybusinesslist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
     		</div>
     	</div> 
         <div class="row">
@@ -36,7 +37,7 @@
                           
                                     <div>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbranchdetail_controller.php?id=".$data['franchise_id'];?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/business/viewbranchdetail_controller.php?id=".$data['franchise_id'];?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -50,4 +51,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <?php include "../../View/header/footer.php";?>  

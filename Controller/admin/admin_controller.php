@@ -1,5 +1,6 @@
 <?php 
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/admin/admin_model.php");
+include "../../Model/admin/admin_model.php";
+
 class admin_controller
 {
 	public function __construct()
@@ -9,19 +10,21 @@ class admin_controller
 	public function display_admin($msg)
 	{
 		$display_admin=$this->admin_model->getdisplay_admin();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/admin/displayadmin.php");
+		include "../../View/admin/displayadmin.php";
+		
 		return $display_admin;
 	}
 	public function viewadmin_detail($id)
 	{
 		$viewadmin_detail=$this->admin_model->getadmindetail($id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/admin/viewadmindetail.php');
+		include "../../View/admin/viewadmindetail.php";
+		
 		return $viewadmin_detail;
 	}
 	public function delete_admin($id)
 	{
 		$this->admin_model->deleteadmin($id);
-		echo "<script>window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php?id=3';</script>";
+		echo "<script>window.location.href='../../Controller/admin/displayadminlist_controller.php?id=3';</script>";
 	}
 	public function add_admin()
 	{
@@ -37,7 +40,7 @@ class admin_controller
 		 	$add_admin=$this->admin_model->addadmin($role,$user_name,$password,$admin_name,$email_address,$phone_no,$imagename);	
 		 	if($add_admin=="2")
 			{
-			echo "<script>window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php?id=1';</script>";
+			echo "<script>window.location.href='../../Controller/admin/displayadminlist_controller.php?id=1';</script>";
 			}
 			else
 			{
@@ -51,7 +54,8 @@ class admin_controller
 	public function getadmin_detail($id)
 	{
 		$viewadmin_detail=$this->admin_model->getadmindetail($id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/admin/editadmin.php');
+		include "../../View/admin/editadmin.php";
+	
 		return $viewadmin_detail;
 	}
 	public function edit_admin()
@@ -77,7 +81,7 @@ class admin_controller
 		 $edit=$this->admin_model->editadmin($id,$role,$user_name,$password,$admin_name,$email_address,$phone_no,$imagename);	
 		 	if($edit=="2")
 			{
-				echo "<script>window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php?id=2';</script>";
+				echo "<script>window.location.href='../../Controller/admin/displayadminlist_controller.php?id=2';</script>";
 			}
 			else
 			{

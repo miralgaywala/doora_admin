@@ -1,11 +1,10 @@
 <?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
  ?>
  
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/admin/admin_controller.php");
+        include_once("../../Controller/admin/admin_controller.php");
         $controller=new admin_controller();
         $controller->edit_admin();       
         ?>
@@ -26,7 +25,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-             <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+             <button style="float: right;" onclick="window.location.href='../../Controller/admin/displayadminlist_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
 
            <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
@@ -44,7 +43,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                     <div class="col-sm-8">
                                         <input name="profile_image" type="file" id="profile_image" accept="image/*" onchange="ImagePreview();" style="margin-top: 6px;">
                                         <input type="hidden" value="<?php echo $data['profile_image']?>" name="image"/>
-                                        <div id="AdminPicture" style="background-image:url('/doora/images/profile/<?php echo $data['profile_image'];?>');margin:10px 0 0 0"></div><br>
+                                        <div id="AdminPicture" style="background-image:url('../../../images/profile/<?php echo $data['profile_image'];?>');margin:10px 0 0 0"></div><br>
                                         <span id="profile_imageerror" class="show_required"></span>                                           
                                    </div>
                              </div>   
@@ -104,7 +103,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <?php }?>                        
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="admin_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit"/>
-                                    <button type="button" class="btn btn-default pull-right" onclick="document.getElementById('addadmin_form').reset();window.location.href='/doora/adminpanel/Controller/admin/displayadminlist_controller.php'">Cancel</button>
+                                    <button type="button" class="btn btn-default pull-right" onclick="document.getElementById('addadmin_form').reset();window.location.href='../../Controller/admin/displayadminlist_controller.php'">Cancel</button>
                             </div> 
                            </div>
                          </form>
@@ -116,7 +115,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </div>
 
  <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ include "../../View/header/footer.php";?> 
  <script type="text/javascript">
          function ImagePreview() { 
              var PreviewIMG = document.getElementById('AdminPicture'); 
@@ -237,7 +236,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                  {
                                   $imagename = $_FILES['profile_image']['name'];
                                   $source = $_FILES['profile_image']['tmp_name'];                                  
-                                  $target = $_SERVER['DOCUMENT_ROOT']."/doora/images/profile/" . $imagename; 
+                                  $target = "../../../images/profile/" . $imagename; 
                                   move_uploaded_file($source, $target);  
                                   //echo $imagename;
                                 }                                

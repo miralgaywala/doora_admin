@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/tag/tag_model.php");
+include "../../Model/tag/tag_model.php";
 class tag_controller
 {
 	public function __construct()
@@ -10,7 +10,7 @@ class tag_controller
 	{
 		$display_tag=$this->tag_model->getdisplay_tag();
 		//print_r($display_tag);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/tag/displaytag.php');
+		include "../../View/tag/displaytag.php";
 		return $display_tag;
 	}
 	public function add_tag()
@@ -21,7 +21,7 @@ class tag_controller
 			$add_tag=$this->tag_model->addtag_data($tag);
 			if($add_tag=="1")
 			{
-			echo '<script>window.location.href="/doora/adminpanel/Controller/tag/displaytagcontroller.php?id=0";</script>';
+			echo '<script>window.location.href="../../Controller/tag/displaytagcontroller.php?id=0";</script>';
 			}
 			else
 			{
@@ -35,13 +35,15 @@ class tag_controller
 	public function view_tag($tag_id)
 	{
 		$view_tag=$this->tag_model->viewtag($tag_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/tag/viewtag.php');
+		include "../../View/tag/viewtag.php";
+		
 		return $view_tag;
 	}
 	public function editlist_tag($tag_id)
 	{
 		$edit_tag=$this->tag_model->edittaglist($tag_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/tag/edittag.php');
+		include "../../View/tag/edittag.php";
+	
 		return $edit_tag;
 	}
 	public function edit_tag()
@@ -53,7 +55,7 @@ class tag_controller
 			$edit_tag=$this->tag_model->edittag_data($tag_id,$tag);
 			if($edit_tag=="1")
 			{
-				echo '<script>window.location.href="/doora/adminpanel/Controller/tag/displaytagcontroller.php?id=2";</script>';
+				echo '<script>window.location.href="../../Controller/tag/displaytagcontroller.php?id=2";</script>';
 			}
 			else
 			{
@@ -67,7 +69,7 @@ class tag_controller
 	public function delete_tag($tag_id)
 	{
 		$this->tag_model->deletetag($tag_id);
-		echo '<script>window.location.href="/doora/adminpanel/Controller/tag/displaytagcontroller.php?id=3";</script>';
+		echo '<script>window.location.href="../../Controller/tag/displaytagcontroller.php?id=3";</script>';
 	}
 }
 ?>

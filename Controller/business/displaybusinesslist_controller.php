@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("business_controller.php");
+       include ".././business/business_controller.php";
         $controller=new business_controller();   
         if(isset($_GET['id']))
         {

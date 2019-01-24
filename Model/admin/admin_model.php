@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/admin/admin.php");
+// require_once("./Model/dbconfig.php");
+include "../../Model/dbconfig.php";
+include"../../Model/admin/admin.php";
 class admin_model
 {
 	public function __construct() {
@@ -9,15 +10,21 @@ class admin_model
     public function getdisplay_admin()
     {
        $con=$this->db->connection();
+       $admin = array();
        $getadmin=$con->query("select * from admin where is_deleted=0 order by admin_id desc");
-       $admin=mysqli_fetch_all($getadmin,MYSQLI_ASSOC);
+       while ($row = $getadmin->fetch_assoc()) {
+        $admin[] = $row;
+      }
        return $admin;
     }
     public function getadmindetail($id)
     {
        $con=$this->db->connection();
+       $adminuser = array();
        $getadmindetail=$con->query("select * from admin where is_deleted=0 AND admin_id=".$id);
-       $adminuser=mysqli_fetch_all($getadmindetail,MYSQLI_ASSOC);
+       while ($row = $getadmindetail->fetch_assoc()) {
+        $adminuser[] = $row;
+      }
        return $adminuser;
     }
     public function deleteadmin($id)

@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("admin_controller.php");
+       include ".././admin/admin_controller.php";
         $controller=new admin_controller();   
         if(isset($_GET['id']))
         {

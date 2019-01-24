@@ -15,48 +15,48 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/doora/adminpanel/Controller/business/displaybusinesslist_controller.php"><i class="fa fa-circle-o"></i> Business</a></li>
-            <li><a href="/doora/adminpanel/Controller/customer/displaycustomerlist_controller.php"><i class="fa fa-circle-o"></i> Customer</a></li>
-            <li><a href="/doora/adminpanel/Controller/Admin/displayadminlist_controller.php"><i class="fa fa-circle-o"></i> Admin</a></li>
+            <li><a href="./Controller/business/displaybusinesslist_controller.php"><i class="fa fa-circle-o"></i> Business</a></li>
+            <li><a href="./Controller/customer/displaycustomerlist_controller.php"><i class="fa fa-circle-o"></i> Customer</a></li>
+            <li><a href="./Controller/admin/displayadminlist_controller.php"><i class="fa fa-circle-o"></i> Admin</a></li>
           </ul>
         </li>
        <li>
-          <a href="/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php">
+          <a href="./Controller/sub_category/displaysubcategorycontroller.php">
             <i class="fa fa-minus-square"></i> <span>Sub category</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/category/displaycategorycontroller.php">
+          <a href="./Controller/category/displaycategorycontroller.php">
             <i class="fa fa-plus-square"></i> <span>Category</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/tag/displaytagcontroller.php">
+          <a href="./Controller/tag/displaytagcontroller.php">
             <i class="fa fa-clipboard"></i> <span>Tag</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/offer_type/displayoffercontroller.php">
+          <a href="./Controller/offer_type/displayoffercontroller.php">
             <i class="fa fa-circle-o"></i> <span>Offer type</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/deal/viewdeal_controller.php">
+          <a href="./Controller/deal/viewdeal_controller.php">
             <i class="fa fa-handshake-o"></i> <span>Deal</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/subscription_package/displaysubscription_controller.php">
+          <a href="./Controller/subscription_package/displaysubscription_controller.php">
             <i class="fa fa-clipboard"></i> <span>Subscription packages</span>
             <span class="pull-right-container">
             </span>
@@ -70,14 +70,14 @@
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/content_management/addcontentmanagement_controller.php">
+          <a href="./Controller/content_management/addcontentmanagement_controller.php">
             <i class="fa fa-group"></i> <span>Content management</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="/doora/adminpanel/Controller/support/viewsupport_controller.php">
+          <a href="./Controller/support/viewsupport_controller.php">
             <i class="fa fa-support"></i> <span>Support</span>
             <span class="pull-right-container">
             </span>
@@ -87,8 +87,6 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
   <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
-    
 

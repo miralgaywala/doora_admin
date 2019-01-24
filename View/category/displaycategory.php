@@ -1,5 +1,5 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
  ?>
     <section class="content">
    
@@ -7,7 +7,7 @@
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Category List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/category/addcategory.php';">+ Add Category</button>
+    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/category/addcategory.php';">+ Add Category</button>
     		</div>
     	</div> 
         <?php 
@@ -60,18 +60,17 @@
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['category_id']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/category/".$data['category_image'];?> id="Picture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/category/".$data['category_image'];?> id="Picture"/></td>
                                 <td style="text-align:center;"><?php echo $data['category_name']; ?></td>
                                 <td style="text-align:center;">
-                          
-                                    <div >
-                                        <a <?php echo "href=/doora/adminpanel/Controller/category/editcategory_controller.php?id=".$data['category_id']; ?> title="Edit" >
+                                    <div>
+                                        <a <?php echo "href=../../Controller/category/editcategory_controller.php?id=".$data['category_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Category?');" <?php echo "href=/doora/adminpanel/Controller/category/deletecategory_controller.php?id=".$data['category_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Category?');" <?php echo "href=../../Controller/category/deletecategory_controller.php?id=".$data['category_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/category/viewcategory_controller.php?id=".$data['category_id']; ?> title="View all detail">
+                                        <a <?php echo "href=../../Controller/category/viewcategory_controller.php?id=".$data['category_id']; ?> title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -85,4 +84,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+<?php include "../../View/header/footer.php";?>  

@@ -1,5 +1,5 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
  ?>
 <section class="content">
    
@@ -60,7 +60,7 @@
                  {
                   $data['photo']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['photo'])) {
+                else if(file_exists("../../../images/profile/".$data['photo'])) {
                   $data['photo'] = $data['photo'];
                  }
                  else
@@ -71,25 +71,25 @@
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['name']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data['photo'];?> id="profilePicture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td> 
                                 <td style="text-align:center;">
                           
                                     <div>
-                                    	<a <?php echo "href=/doora/adminpanel/Controller/customer/viewcustomer_controller.php?id=".$data['user_id'];?> title="View all detail"><i class="fa fa-eye"></i></a>
+                                    	<a <?php echo "href=../../Controller/customer/viewcustomer_controller.php?id=".$data['user_id'];?> title="View all detail"><i class="fa fa-eye"></i></a>
                                   
                                     	  
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/customer/deletecustomer_controller.php?id=".$data['user_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=../../Controller/customer/deletecustomer_controller.php?id=".$data['user_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                         <br/>
                                     	<a <?php $value=$data['is_active']; if($value == 1 ){ ?>
-                                    		onclick="javascript: return confirm('Do you really want to Deactivate This Customer?');"
+                                    		onclick="javascript: return confirm('Do you really want to deactivate This Customer?');"
                                     	<?php } else{ ?>
-                                    		onclick="javascript: return confirm('Do you really want to Activate This Customer?');"
+                                    		onclick="javascript: return confirm('Do you really want to activate This Customer?');"
                                     	<?php }?>
-                                    	<?php echo "href=/doora/adminpanel/Controller/Customer/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
+                                    	<?php echo "href=../../Controller/Customer/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
                                     		echo "Activate";
                                     	}
                                     	else
@@ -108,4 +108,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+<?php include "../../View/header/footer.php";?>  

@@ -1,7 +1,7 @@
 
 <?php
 $msg="a1";
-        require_once("deal_controller.php");
+include ".././deal/deal_controller.php";
         $controller=new deal_controller();          
         $controller->activedatafilter_deal($msg);         
         ?>

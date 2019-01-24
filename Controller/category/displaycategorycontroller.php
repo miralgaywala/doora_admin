@@ -11,7 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("category_controller.php");
+        // require_once("category_controller.php");
+        include ".././category/category_controller.php";
         $controller=new category_controller();
         if(isset($_GET['id']))
         {

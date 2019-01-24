@@ -1,14 +1,14 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
  ?>
  <script>
-        $(document).ready(function(){
-          $("#business").select2(); 
-           $("#branch").select2(); 
-            $("#tag").select2(); 
-             $("#category").select2(); 
-              $("#sub_category").select2(); 
-        });
+        // $(document).ready(function(){
+        //   $("#business").select2(); 
+        //    $("#branch").select2(); 
+        //     $("#tag").select2(); 
+        //      $("#category").select2(); 
+        //       $("#sub_category").select2(); 
+        // });
         
 
     </script>
@@ -26,7 +26,7 @@
         var CategoryId = selectedNode.value;
          $('#example2').dataTable().fnDestroy();
 		   $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
+		   url: '../../Controller/deal/subcategoryfilter.php?subcategory_id='+CategoryId,
 		   type: 'POST',
 		   success: function(data) {
 		           //console.log(data);
@@ -54,7 +54,7 @@ $(document).ready(function(){
         var CategoryId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
         $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/categoryfilter.php?category_id='+CategoryId,
+		   url: '../../Controller/deal/categoryfilter.php?category_id='+CategoryId,
 		   type: 'POST',
 		   success: function(data) {
 		          // console.log(data);
@@ -76,7 +76,7 @@ function loadsubcategory(CategoryId){
     
         $.ajax({
             type: "POST",
-            url: '/doora/adminpanel/Controller/deal/subcategory.php?category_id='+CategoryId,
+            url: '../../Controller/deal/subcategory.php?category_id='+CategoryId,
             success:function(data1) { 
                 //console.log(data1);
                   $('#sub_category').html(data1);
@@ -97,7 +97,7 @@ $(document).ready(function(){
         var branchId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
         $.ajax({
-       url: '/doora/adminpanel/Controller/deal/branchfilter.php?branch_id='+branchId,
+       url: '../../Controller/deal/branchfilter.php?branch_id='+branchId,
        type: 'POST',
        success: function(data) {
                //console.log(data);
@@ -125,7 +125,7 @@ $(document).ready(function(){
          $('#example2').dataTable().fnDestroy();
 
         $.ajax({
-		   url: '/doora/adminpanel/Controller/deal/tagfilter.php?tag_id='+tagId,
+		   url: '../../Controller/deal/tagfilter.php?tag_id='+tagId,
 		   type: 'POST',
 		   success: function(data) {
 		           //console.log(data);
@@ -156,7 +156,7 @@ function loadbranch(UsersId){
        //console.log(UsersId);
             $.ajax({
                 type: "POST",
-                url: '/doora/adminpanel/Controller/deal/branch.php?branch_id='+UsersId,
+                url: '../../Controller/deal/branch.php?branch_id='+UsersId,
                
                 success:function(data1) { 
                     // console.log(data1);
@@ -172,7 +172,7 @@ function loadbranch(UsersId){
         var businessId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
         $.ajax({
-       url: '/doora/adminpanel/Controller/deal/businessfilter.php?business_id='+businessId,
+       url: '../../Controller/deal/businessfilter.php?business_id='+businessId,
        type: 'POST',
        success: function(data) {
                //console.log(data);
@@ -200,7 +200,7 @@ function loadfilter(){
       var category = $('#category').val();
         $('#example2').dataTable().fnDestroy();
         $.ajax({
-       url: '/doora/adminpanel/Controller/deal/loadfilter.php',
+       url: '../../Controller/deal/loadfilter.php',
        data : {business_id : business_id,branch : branch,tag : tag, category : category, sub_category : sub_category,radio : radio},
        type: 'POST',
        success: function(data) {
@@ -225,7 +225,7 @@ function loadfilter(){
                                     { 
                                         $('#example2').dataTable().fnDestroy();
                                            $.ajax({
-                                           url: '/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1',
+                                           url: '../../Controller/deal/alldatafilter.php?data=a1',
                                            type: 'POST',
                                            success: function(data) {
                                                    //console.log(data);
@@ -247,7 +247,7 @@ function loadfilter(){
       
     	//  $('#example2').dataTable().fnDestroy();
 		   // $.ajax({
-		   // url: '/doora/adminpanel/Controller/deal/alldatafilter.php?data=a1',
+		   // url: '/sprookr/adminpanel/Controller/deal/alldatafilter.php?data=a1',
 		   // type: 'POST',
 		   // success: function(data) {
 		   //         //console.log(data);
@@ -265,7 +265,7 @@ function loadfilter(){
       loadfilter()
     	// $('#example2').dataTable().fnDestroy();
      //  $.ajax({
-		   // url: '/doora/adminpanel/Controller/deal/activedatafilter.php?data=a2',
+		   // url: '/sprookr/adminpanel/Controller/deal/activedatafilter.php?data=a2',
 		   // type: 'POST',
 		   // success: function(data){
 		   //         //console.log(data);
@@ -283,7 +283,7 @@ function loadfilter(){
       loadfilter()
     	// $('#example2').dataTable().fnDestroy();
      //  $.ajax({
-		   // url: '/doora/adminpanel/Controller/deal/deactivedatafilter.php?data=a3',
+		   // url: '/sprookr/adminpanel/Controller/deal/deactivedatafilter.php?data=a3',
 		   // type: 'POST',
 		   // success: function(data){
 		   //         //console.log(data);
@@ -301,7 +301,7 @@ function loadfilter(){
       loadfilter()
     	// $('#example2').dataTable().fnDestroy();
      //  $.ajax({
-		   // url: '/doora/adminpanel/Controller/deal/expireddatafilter.php?data=a4',
+		   // url: '/sprookr/adminpanel/Controller/deal/expireddatafilter.php?data=a4',
 		   // type: 'POST',
 		   // success: function(data){
 		   //         //console.log(data);
@@ -318,7 +318,7 @@ function loadfilter(){
       loadfilter()
     	// $('#example2').dataTable().fnDestroy();
      //  $.ajax({
-		   // url: '/doora/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5',
+		   // url: '/sprookr/adminpanel/Controller/deal/purchaseddatafilter.php?data=a5',
 		   // type: 'POST',
 		   // success: function(data) {
 		   //         //console.log(data);
@@ -347,7 +347,7 @@ function loadfilter(){
                <div class="row">
                                 <label for="business" class="col-sm-1 control-label" style="margin-top: 10px;">Business</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
-                                    <select id="business" name="" class="form-control">
+                                    <select id="business" name="" class="form-control select2">
                                        <option value="0">Select Business</option> 
                                        
                                        <?php foreach ($getbusiness as  $data) {
@@ -433,4 +433,5 @@ function loadfilter(){
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+<?php 
+include "../../View/header/footer.php";?> 

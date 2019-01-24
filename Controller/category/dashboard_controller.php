@@ -1,9 +1,15 @@
-<?php
+<?php 
+
 class dashboard_controller{
+	
 	public function dashboard()
 	{
+		//include "./config.php";
+
 		//include_once('View/category/addcategory.php');
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/dashboard.php');
+		// include "./.dashboard.php";
+		include "./View/dashboard.php";
 	}
 	
 	}
+	?>

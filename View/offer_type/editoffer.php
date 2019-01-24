@@ -1,11 +1,10 @@
-<?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+<?php 
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+?> 
 
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/offer_type/offer_controller.php");
+        include_once("../../Controller/offer_type/offer_controller.php");
         $controller=new offer_controller();
         $controller->edit_offer();       
         ?>
@@ -20,10 +19,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Offer</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/offer_type/displayoffercontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <button style="float: right;" onclick="window.location.href='../../Controller/offer_type/displayoffercontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
 
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div>   
         <div class="row">
@@ -44,7 +43,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                             <?php } ?>                                             
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="offer_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="tag_submit"/>
-                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addoffer_form').reset();window.location.href='/doora/adminpanel/Controller/offer_type/displayoffercontroller.php'" value="Cancel"></button>
+                                    <input type="button" class="btn btn-default pull-right" onclick="document.getElementById('addoffer_form').reset();window.location.href='../../Controller/offer_type/displayoffercontroller.php'" value="Cancel"></button>
                             </div>  
                            </div>
                          </form>
@@ -55,8 +54,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ <?php 
+include "../../View/header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     var offer = document.getElementById("offer_title").value;

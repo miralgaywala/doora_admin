@@ -1,11 +1,10 @@
-<?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+   <?php 
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+?> 
  
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/sub_category/subcategory_controller.php");
+        include_once("../../Controller/sub_category/subcategory_controller.php");
         $controller=new subcategory_controller();
         $controller->edit_subcategorydata(); 
         ?>
@@ -20,10 +19,10 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Sub Category</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <button style="float: right;" onclick="window.location.href='../../Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
 
-           <!-- <a href="/doora/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div>      
         <div class="row">
@@ -77,7 +76,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                       </div> 
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-3" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/sub_category/".$data['sub_category_image']; ?>" style="width:186px;height:186px;" /></div>
+                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "../../../images/sub_category/".$data['sub_category_image']; ?>" style="width:186px;height:186px;" /></div>
                                       <input type="hidden" name="imagename" id="imagename" value='<?php echo $data['sub_category_image'];?>'/>
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
@@ -91,7 +90,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                                     
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" id="subcategory_submit" class="btn btn-primary pull-right"/>
-                                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default pull-right" onclick="window.location.href='/doora/adminpanel/Controller/sub_category/displaysubcategorycontroller.php'">
+                                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default pull-right" onclick="window.location.href='../../Controller/sub_category/displaysubcategorycontroller.php'">
                             </div>  
                            </div>
                          </form>
@@ -145,7 +144,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "/doora/adminpanel/View/sub-category/croppie.php",
+                        url: "../sub-category/croppie.php",
                         type: "POST",
                         data: {"sub_category_image":img},
                         success: function (data) {
@@ -162,8 +161,8 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
 
- <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ <?php 
+include "../../View/header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     //var category_name = document.getElementById["category_name"].value;

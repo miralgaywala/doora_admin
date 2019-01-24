@@ -11,7 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("contentmanagement_controller.php");
+         include ".././content_management/contentmanagement_controller.php";
+      
         $controller=new content_controller();   
         if(isset($_GET['id']))
         {

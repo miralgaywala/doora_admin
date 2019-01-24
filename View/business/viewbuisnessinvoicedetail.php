@@ -1,5 +1,5 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+include "../../View/header/sidemenu.php";
  ?>
 <section class="content">
    
@@ -48,9 +48,10 @@
         		</div>
                 <?php 
                     foreach ($view_deal_invoice_detail as $value) {
-                                    $start_date= $value[0]['deal_start_time'];
+                       
+                                    $start_date= $value['deal_start_time'];
                                     $start_date=date('jS F y', strtotime($start_date));    
-                                    $end_date = $value[0]['deal_end_time'];
+                                    $end_date = $value['deal_end_time'];
                                     $end_date=date('jS F y', strtotime($end_date));
                 ?>
                 <div class="box">
@@ -65,7 +66,7 @@
                         </thead>
                             <tr>
                                 <td>Deal:</td>
-                                <td><?php echo $value[0]['deal_title']; ?></td>
+                                <td><?php echo $value['deal_title']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -75,39 +76,39 @@
                             </tr>
                             <tr>
                                 <td>Total Quantity:</td>
-                                <td><?php echo $value[0]['overall_qty']; ?></td>
+                                <td><?php echo $value['overall_qty']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <?php $redeem_amount=$value[0]['offline_redeem'] * $price_per_redeem; ?>
+                                <?php $redeem_amount=$value['offline_redeem'] * $price_per_redeem; ?>
                                 <td>In store redeem:</td>
-                                <td><?php echo $value[0]['offline_redeem'];echo " Qty * $"; echo $price_per_redeem; ?></td>
+                                <td><?php echo $value['offline_redeem'];echo " Qty * $"; echo $price_per_redeem; ?></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $redeem_amount);?></td>
                             </tr>
                             <tr>
                                 <td>In Store Purchase:</td>
-                                <td><?php echo $value[0]['offline_purchase']; ?></td>
+                                <td><?php echo $value['offline_purchase']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <?php $redeem_online_amount=$value[0]['online_purchase'] * $price_per_redeem; ?>
+                                <?php $redeem_online_amount=$value['online_purchase'] * $price_per_redeem; ?>
                                 <td>Online redeem:</td>
-                                <td><?php echo $value[0]['online_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
+                                <td><?php echo $value['online_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $redeem_online_amount);?></td>
                             </tr>
                             <tr>
                                 <td>Online Purchase</td>
-                                <td><?php echo $value[0]['online_purchase']; ?></td>
+                                <td><?php echo $value['online_purchase']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Total Redeem</td>
-                                <td><?php echo $value[0]['offline_redeem'] + $value[0]['online_purchase']; ?></td>
+                                <td><?php echo $value['offline_redeem'] + $value['online_purchase']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Total Purchase</td>
-                                <td><?php echo $value[0]['offline_purchase'] + $value[0]['online_purchase']; ?></td>
+                                <td><?php echo $value['offline_purchase'] + $value['online_purchase']; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -126,4 +127,4 @@
        </div>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+  <?php include "../../View/header/footer.php";?>  

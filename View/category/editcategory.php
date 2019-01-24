@@ -1,6 +1,6 @@
 <?php 
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
 ?> 
  <?php
     foreach ($editcategorylist as $key => $data) 
@@ -8,7 +8,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
       $image=$data['category_image'];
  ?>
   <?php
-      include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
+      include_once("../../Controller/category/category_controller.php");
       $controller=new category_controller();
       $controller->editcategory_data();      
   ?>
@@ -18,7 +18,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>    
         <div class="col-md-2">
             <br/>   
-            <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
+            <button style="float: right;" onclick="window.location.href='../../Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
         </div>
       </div> 
         <div class="row">
@@ -47,7 +47,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
                                         <div class="col-md-2" style="margin-top: 10px;"> </div>
                                       <div class="col-md-5" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "/doora/images/category/".$data['category_image']; ?>" style="width:400px;height:170px;" /></div>
+                                        <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "../../../images/category/".$data['category_image']; ?>" style="width:400px;height:170px;" /></div>
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
                                           <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
@@ -109,7 +109,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "/doora/adminpanel/View/category/croppie.php",
+                        url: "../category/croppie.php",
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
@@ -125,7 +125,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         </script>                  
                                <div class="box-footer notranslate">
                                    <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
-                                     <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php'"> 
+                                     <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='/sprookr/adminpanel/Controller/category/displaycategorycontroller.php'"> 
                             </div>                         
                     </div>
                </form> 
@@ -135,7 +135,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
     </section>
 </div>
  <?php 
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+include "../../View/header/footer.php";?> 
  <script type="text/javascript">
                           function validateForm() {
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
@@ -152,7 +152,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   {
                     $.ajax({
                               type: 'post',
-                              url: '/doora/adminpanel/View/category/issuper.php',
+                              url: '../category/issuper.php',
                               data: {
                                 is_super_market:name
                               },
@@ -172,7 +172,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
             {
               $.ajax({
                               type: 'post',
-                              url: '/doora/adminpanel/View/category/issuper.php',
+                              url: '../category/issuper.php',
                               data: {
                                 is_super_market:name
                               },
@@ -214,5 +214,5 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                                   $_POST['is_super_market'];
                                    $_POST['imagename'];  
                                   }
-                                  if(isset($_POST['']))
+                                  
                                 ?>       

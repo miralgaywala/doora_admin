@@ -1,3 +1,16 @@
+<?php 
+  
+   if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+<?php
+        if($_SESSION == NULL)
+        {
+            echo "<script>location.href='../login.php'</script>";
+            exit;
+        }
+        ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +57,14 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+<style type="text/css">
+   .fancybox-is-open .fancybox-bg {
+    opacity: .7;
+}
+ </style>
+  
 <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -53,9 +74,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">SP</span>
+      <span class="logo-mini">Doora</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Sprookr</span>
+      <span class="logo-lg">Doora</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -63,7 +84,34 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
+       <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          
+      
+            <li class="dropdown user user-menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <img src="../images/profile/logo_user.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $_SESSION['admin_name']; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../images/profile/logo_user.png" class="img-circle" alt="User Image">
+               <p>
+                                    <?php echo $_SESSION['admin_name'] ?>
+                                </p>
+              <li class="user-footer">
+                <div class="pull-left">
+                
+                </div>
+                <div class="pull-right">
+                  <a href="./logout.php" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
       
     </nav>
   </header>

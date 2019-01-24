@@ -1,6 +1,7 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/category/category.php");
+include "../../Model/dbconfig.php";
+include"../../Model/category/category.php";
+
 class category_model{
     public function __construct() {
         $this->db=new dbconfig();
@@ -34,15 +35,21 @@ class category_model{
     public function getcategorylist()
     {
         $con=$this->db->connection();
+        $category = array();
         $getcategory=$con->query("select * from category where NOT is_deleted=1");
-        $category=mysqli_fetch_all($getcategory,MYSQLI_ASSOC);
+       while ($row = $getcategory->fetch_assoc()) {
+        $category[] = $row;
+      }
         return $category;
     }
     public function geteditcategorylist($category_id)
     {
         $con=$this->db->connection();
+        $editcategorylist = array();
         $geteditcategorylist=$con->query("select * from category where category_id=".$category_id);
-        $editcategorylist=mysqli_fetch_all($geteditcategorylist,MYSQLI_ASSOC);
+        while ($row = $geteditcategorylist->fetch_assoc()) {
+        $editcategorylist[] = $row;
+      }
         return $editcategorylist;
     }
     public function deletecategory($category_id)
@@ -81,8 +88,11 @@ class category_model{
     public function viewcategory($category_id)
     {
         $con= $this->db->connection();
-        $viewcategory=$con->query("select * from category where category_id=".$category_id);
-        $viewcategory=mysqli_fetch_all($viewcategory,MYSQLI_ASSOC);
+        $viewcategory = array();
+        $viewcategory1=$con->query("select * from category where category_id=".$category_id);
+       while ($row = $viewcategory1->fetch_assoc()) {
+        $viewcategory[] = $row;
+      }
         return $viewcategory;
     }
 }

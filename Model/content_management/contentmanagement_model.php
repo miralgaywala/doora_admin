@@ -1,5 +1,5 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
+include "../../Model/dbconfig.php";
 class content_model
 {
   public function __construct() {
@@ -9,7 +9,10 @@ class content_model
     {
        $con=$this->db->connection();
        $getcontent=$con->query("select * from content_management");
-       $content=mysqli_fetch_all($getcontent,MYSQLI_ASSOC);
+       $content = array();
+       while ($row = $getcontent->fetch_assoc()) {
+        $content[] = $row;
+      }
        return $content;
     }
     public function addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb)

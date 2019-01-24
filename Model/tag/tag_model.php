@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/tag/tag.php");
+include "../../Model/dbconfig.php";
+include"../../Model/tag/tag.php";
+
 class tag_model
 {
 	public function __construct() {
@@ -10,7 +11,10 @@ class tag_model
     {
        $con=$this->db->connection();
        $gettag=$con->query("select * from deal_tags where NOT is_deleted=1");
-       $tag=mysqli_fetch_all($gettag,MYSQLI_ASSOC);
+       $tag = array();
+      while ($row = $gettag->fetch_assoc()) {
+        $tag[] = $row;
+      }
        //echo "<pre>";print_r($tag);echo "</pre>";
        return $tag;
     }
@@ -39,15 +43,21 @@ class tag_model
     public function viewtag($tag_id)
     {
     	$con= $this->db->connection();
-        $viewtag=$con->query("select * from deal_tags where tag_id=".$tag_id);
-        $viewtag=mysqli_fetch_all($viewtag,MYSQLI_ASSOC);
+        $viewtag1=$con->query("select * from deal_tags where tag_id=".$tag_id);
+        $viewtag = array();
+      while ($row = $viewtag1->fetch_assoc()) {
+        $viewtag[] = $row;
+      }
         return $viewtag;
     }
     public function edittaglist($tag_id)
     {
     	$con= $this->db->connection();
         $edittag=$con->query("select * from deal_tags where tag_id=".$tag_id);
-        $edittagdata=mysqli_fetch_all($edittag,MYSQLI_ASSOC);
+        $edittagdata = array();
+      while ($row = $edittag->fetch_assoc()) {
+        $edittagdata[] = $row;
+      }
         return $edittagdata;
     }
     public function edittag_data($tag_id,$tag)

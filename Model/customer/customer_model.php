@@ -1,6 +1,7 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/customer/customer.php");
+include "../../Model/dbconfig.php";
+include"../../Model/customer/customer.php";
+
 class customer_model
 {
 	public function __construct() {
@@ -10,14 +11,20 @@ class customer_model
     {
        $con=$this->db->connection();
        $getcustomer=$con->query("select * from users where is_deleted=0 AND is_business=0 order by user_id desc");
-       $customer=mysqli_fetch_all($getcustomer,MYSQLI_ASSOC);
+      $customer = array();
+      while ($row = $getcustomer->fetch_assoc()) {
+        $customer[] = $row;
+      }
        return $customer;
     }
     public function getcustomerdetail($id)
     {
        $con=$this->db->connection();
        $getcustomerdetail=$con->query("select * from users where is_deleted=0 AND is_business=0 AND user_id=".$id);
-       $customeruser=mysqli_fetch_all($getcustomerdetail,MYSQLI_ASSOC);
+       $customeruser = array();
+      while ($row = $getcustomerdetail->fetch_assoc()) {
+        $customeruser[] = $row;
+      }
        return $customeruser;
     }
     public function updateactive($id,$data)

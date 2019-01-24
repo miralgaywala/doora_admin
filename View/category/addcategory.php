@@ -1,11 +1,11 @@
 <?php //include("View/header.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
+include "../header/header.php";
+// include($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/View/header/header.php");
  //include("View/sidemenu.php");
-include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+include "../header/sidemenu.php"; ?>
 
  <?php 
-        include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Controller/category/category_controller.php");
+        include_once("../../Controller/category/category_controller.php");
         $controller=new category_controller();
         $controller->add_category();       
         ?>
@@ -14,7 +14,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <button style="float: right;" onclick="window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="window.location.href='../../Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
         </div>
       </div>   
         <div class="row">
@@ -96,11 +96,11 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "/doora/adminpanel/View/category/croppie.php",
+                        url: "../category/croppie.php",
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
-                         	//alert(data);
+                        
                             html = '<img src="' + img + '" style="border-style:ridge;"/>';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
@@ -122,7 +122,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 
                              <div class="box-footer  notranslate">
                                     <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
-                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php'">Cancel</button>
+                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='../../Controller/category/displaycategorycontroller.php'">Cancel</button>
                             </div>  
                            </div>
                          </form>
@@ -134,7 +134,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
 </div>
 
  <?php //include("View/footer.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?> 
+ include "../header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     var categoryname = document.getElementById("category_name").value;
@@ -184,7 +184,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
                   {
                     $.ajax({
                               type: 'post',
-                              url: '/doora/adminpanel/View/category/issuper.php',
+                              url: '../category/issuper.php',
                               data: {
                                 is_super_market:name
                               },
@@ -207,7 +207,7 @@ include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
             {
             	$.ajax({
                               type: 'post',
-                              url: '/doora/adminpanel/View/category/issuper.php',
+                              url: '../category/issuper.php',
                               data: {
                                 is_super_market:name
                               },

@@ -1,5 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/category/category_model.php");
+// include_once($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/Model/category/category_model.php");
+include "../../Model/category/category_model.php";
 class category_controller{
 	public function __construct()
 	{
@@ -26,7 +27,7 @@ class category_controller{
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
 			if($add_category=="1")
 			{
-			echo '<script>window.location.href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=0";</script>';
+			echo '<script>window.location.href="../../Controller/category/displaycategorycontroller.php?id=0";</script>';
 			}
 			else
 			{
@@ -41,19 +42,21 @@ class category_controller{
 	public function display_category()
 	{
 		$displaycategory=$this->cat_model->getcategorylist();
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/displaycategory.php');
+		
+		include "../../View/category/displaycategory.php";
 		return $displaycategory;
 	}
 	public function display_category1($msg)
 	{
 		$displaycategory=$this->cat_model->getcategorylist();
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/displaycategory.php');
+		include "../../View/category/displaycategory.php";
 		return $displaycategory;
 	}
 	public function edit_category($category_id)
 	{
 		$editcategorylist=$this->cat_model->geteditcategorylist($category_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/editcategory.php');
+		
+		include "../../View/category/editcategory.php";
 		return $editcategorylist;
 	}
 	public function editcategory_data()
@@ -75,7 +78,7 @@ class category_controller{
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
 			if($edit_categorydata=="1")
 			{
-			echo '<script>window.location.href="/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=2";</script>';
+			echo '<script>window.location.href="../../Controller/category/displaycategorycontroller.php?id=2";</script>';
 			}
 			else
 			{
@@ -89,12 +92,13 @@ class category_controller{
 	public function delete_category($category_id)
 	{
 		$this->cat_model->deletecategory($category_id);
-		echo "<script>window.location.href='/doora/adminpanel/Controller/category/displaycategorycontroller.php?id=3';</script>";
+		echo "<script>window.location.href='../../Controller/category/displaycategorycontroller.php?id=3';</script>";
 	}
 	public function view_category($category_id)
 	{
 		$view_category=$this->cat_model->viewcategory($category_id);
-		include_once($_SERVER['DOCUMENT_ROOT'].'/doora/adminpanel/View/category/viewcategory.php');
+		
+		include "../../View/category/viewcategory.php";
 		return $view_category;
 	}
 }

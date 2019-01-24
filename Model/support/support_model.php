@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/dbconfig.php");
+include "../../Model/dbconfig.php";
 class support_model
 {
 	public function __construct() {
@@ -9,14 +9,20 @@ class support_model
     {
        $con=$this->db->connection();
        $getsupport=$con->query("select s.*,user.name from support as s left join users as user on s.user_id = user.user_id where NOT s.is_deleted=1 order by s.created_at desc");
-       $support=mysqli_fetch_all($getsupport,MYSQLI_ASSOC);
+      $support = array();
+      while ($row = $getsupport->fetch_assoc()) {
+        $support[] = $row;
+      }
        return $support;
     }
     public function getview_support($support_id)
     {
       $con=$this->db->connection();
        $getsupport=$con->query("select s.*,user.name from support as s left join users as user on s.user_id = user.user_id where s.support_id=".$support_id);
-       $support=mysqli_fetch_all($getsupport,MYSQLI_ASSOC);
+       $support = array();
+      while ($row = $getsupport->fetch_assoc()) {
+        $support[] = $row;
+      }
        return $support;
     }
     public function deletesupport($support_id)

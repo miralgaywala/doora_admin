@@ -78,5 +78,7 @@ $('select[name="category_name"]').on("change", function(event){
 <script src="dist/js/pages/dashboard.js"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script src="./dist/js/demo.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/arvgta/ajaxify@7.3.2/ajaxify.min.js"></script>
+
 </body>
 </html>

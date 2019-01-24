@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("offer_controller.php");
+       include ".././offer_type/offer_controller.php";
         $controller=new offer_controller();   
         if(isset($_GET['id']))
         {

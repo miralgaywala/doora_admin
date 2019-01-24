@@ -11,7 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("subscription_controller.php");
+        include ".././subscription_package/subscription_controller.php";
+        
         $controller=new subscription_controller();   
         if(isset($_GET['id']))
         {

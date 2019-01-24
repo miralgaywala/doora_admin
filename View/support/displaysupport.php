@@ -1,6 +1,7 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
- ?>
+<?php 
+include "../../View/header/header.php";
+ include "../../View/header/sidemenu.php";
+?> 
 <section class="content">
    
     	<div class="row">
@@ -44,9 +45,10 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Support id</th>
-                        <th style="text-align:center;" width="5%">User Name</th>
+			                  <th style="text-align:center;" width="10%">Support id</th>
+                        <th style="text-align:center;" width="10%">User Name</th>
 			                  <th style="text-align:center;">Message</th>
+                         <th style="text-align:center;">Status</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>
@@ -92,28 +94,35 @@
                                 <td style="text-align:center;"><?php echo $data['support_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['name']; ?></td>
                                 <td style="text-align:center;"><?php echo $html; ?></td>
-                                <td style="text-align:center;">
-                          
-                                    <div >
-                      
-                                        <a onclick="javascript: return confirm('Do you really want to delete this support request?');" <?php echo "href=/doora/adminpanel/Controller/support/deletesupport_controller.php?id=".$data['support_id'];?>  title="Delete" >
-                                        <i class="fa fa-trash-o fa-fw"></i>
-                                        </a>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/support/displaysupport_controller.php?id=".$data['support_id'];?> title="View all detail">
-                                          <i class="fa fa-eye"></i>
-                                        </a>
-                                        <br>
-                                        <a <?php $value=$data['is_open']; if($value == 1 ){ ?>
-                                        onclick="javascript: return confirm('Do you really want to close this support request?');"
-                                      <?php } else{ ?>
-                                        onclick="javascript: return confirm('Do you really want to open this support request?');"
-                                      <?php }?> <?php  $value=$data['is_open']; if($value == 1 ){ ?> style="color: red;" <?php } else {?> style="color: green;"<?php }?>
-                                      <?php echo "href=/doora/adminpanel/Controller/support/isopen_controller.php?id=".$data['support_id']."&value=".$data['is_open'];?>><?php $value=$data['is_open']; if($value == 1 ){
+                                <td style="text-align:center;"><?php $value=$data['is_open']; if($value == 1 ){
                                         echo "Open";
                                       }
                                       else
                                       {
                                         echo "Close"; 
+                                      } ?> </td>
+                                <td style="text-align:center;">
+                          
+                                    <div >
+                      
+                                        <a onclick="javascript: return confirm('Do you really want to delete this support request?');" <?php echo "href=../../Controller/support/deletesupport_controller.php?id=".$data['support_id'];?>  title="Delete" >
+                                        <i class="fa fa-trash-o fa-fw"></i>
+                                        </a>
+                                        <a <?php echo "href=../../Controller/support/displaysupport_controller.php?id=".$data['support_id'];?> title="View all detail">
+                                          <i class="fa fa-eye"></i>
+                                        </a>
+                                        <br>
+                                        <a <?php $value=$data['is_open']; if($value == 0 ){ ?>
+                                        onclick="javascript: return confirm('Do you really want to Open this support request?');"
+                                      <?php } else{ ?>
+                                        onclick="javascript: return confirm('Do you really want to Close this support request?');"
+                                      <?php }?> <?php  $value=$data['is_open']; if($value == 0 ){ ?>  <?php } else {?> <?php }?>
+                                      <?php echo "href=../../Controller/support/isopen_controller.php?id=".$data['support_id']."&value=".$data['is_open'];?>><?php $value=$data['is_open']; if($value == 0 ){
+                                        echo "Open Request";
+                                      }
+                                      else
+                                      {
+                                        echo "Close Request"; 
                                       } ?></a>
                                     </div>
                                 </td>
@@ -125,5 +134,5 @@
         	</div>	
        </div>
     </section>
-</div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+</div><?php 
+include "../../View/header/footer.php";?> 

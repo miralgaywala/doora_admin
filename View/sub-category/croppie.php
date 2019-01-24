@@ -4,10 +4,10 @@ list($type, $data) = explode(';', $data);
 list(, $data) = explode(',', $data);
 $data = base64_decode($data);
 //$imageName = mt_rand(1, 99999) . '.jpg';
-$count=count (glob ($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/*.jpg'));
+$count=count (glob ('../../../images/sub_category/*.jpg'));
 $imageName = $count + 1 . '.jpg';
 echo $imageName;
-file_put_contents($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/' . $imageName, $data);
+file_put_contents('../../../sprookr/images/sub_category/' . $imageName, $data);
 
 
 // if ((($data == "image/gif") || ($data == "image/jpeg") || ($data == "image/jpg") || ($data == "image/pjpeg") || ($data == "image/x-png") || ($data == "image/png"))) {
@@ -16,10 +16,10 @@ file_put_contents($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/' . $ima
 //         echo "No Picture upload";
 //     } else {
 
-//         if (file_exists("/doora/images/sub_category/" . $data)) {
+//         if (file_exists("/sprookr/images/sub_category/" . $data)) {
 //             echo 'This picture already exists';
 //         } else {
-//             file_put_contents('/doora/images/sub_category/' . $imageName, $data);
+//             file_put_contents('/sprookr/images/sub_category/' . $imageName, $data);
             
 //             }
 //         }
@@ -67,7 +67,7 @@ file_put_contents($_SERVER['DOCUMENT_ROOT'].'/doora/images/sub_category/' . $ima
     echo $image;
     $image_name = time().'.png';
     echo $image_name;
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/doora/images/sub_category/" .$image_name, $image);
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/sprookr/images/sub_category/" .$image_name, $image);
 }*/
 //echo "hii";
 ?>

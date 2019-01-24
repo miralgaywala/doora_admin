@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/Model/deal/deal_model.php");
+include "../../Model/deal/deal_model.php";
 class deal_controller
 {
 	public function __construct()
@@ -12,7 +12,8 @@ class deal_controller
 		$gettag = $this->deal_model->getdisplay_tag();
 		$getbusiness = $this->deal_model->getdisplay_business();
 		$getcategory = $this->deal_model->getdisplay_category();
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+        include "../../View/deal/viewdeal.php";
+	
 	}
 	public function viewdetail_deal($id)
 	{
@@ -25,7 +26,8 @@ class deal_controller
 		$instore_rdm = $this->deal_model->gettotalrdminstore($id);
 		$instore_pur= $this->deal_model->gettotalpurinstore($id);
 		$isonline_pur= $this->deal_model->gettotalonlinepur($id);
-		include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdealdetail.php");
+        include "../../View/deal/viewdealdetail.php";
+		
 	}
     public function subcategory_deal($id)
     {
@@ -127,7 +129,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -142,10 +144,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -232,7 +234,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -247,10 +249,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -337,7 +339,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -352,10 +354,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -442,7 +444,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -457,10 +459,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -548,7 +550,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -563,10 +565,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -654,7 +656,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -669,17 +671,17 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
                                 </td>
                                  </tr>";
 		}
-		//include_once($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/deal/viewdeal.php");
+		//include_once($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/View/deal/viewdeal.php");
 	}
 	public function activedatafilter_deal($msg)
 	{
@@ -760,7 +762,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -775,10 +777,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -865,7 +867,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -880,10 +882,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -970,7 +972,7 @@ class deal_controller
                  {
                   $value15 = "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                   $value15 = $data['deal_photo'];
                  }
                  else
@@ -985,10 +987,10 @@ class deal_controller
                                 <td style=\"text-align:center;\">".$html."</td>
                                 <td style=\"text-align:center;\">".$value7."</td>
                                 <td style=\"text-align:center;\">".$condition."</td>
-                                <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                 <td style=\"text-align:center;\">
                                     <div>
-                                   <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                   <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                           <i class=\"fa fa-eye\"></i>
                                         </a>
                                     </div>
@@ -1075,7 +1077,7 @@ class deal_controller
                          {
                           $value15 = "default.png";
                          }
-                        else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                        else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                           $value15 = $data['deal_photo'];
                          }
                          else
@@ -1090,10 +1092,10 @@ class deal_controller
                                         <td style=\"text-align:center;\">".$html."</td>
                                         <td style=\"text-align:center;\">".$value7."</td>
                                         <td style=\"text-align:center;\">".$condition."</td>
-                                        <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                        <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                         <td style=\"text-align:center;\">
                                             <div>
-                                           <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                           <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                                   <i class=\"fa fa-eye\"></i>
                                                 </a>
                                             </div>
@@ -1180,7 +1182,7 @@ class deal_controller
                          {
                           $value15 = "default.png";
                          }
-                        else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/deal/".$data['deal_photo'])) {
+                        else if(file_exists("../../../images/deal/".$data['deal_photo'])) {
                           $value15 = $data['deal_photo'];
                          }
                          else
@@ -1195,10 +1197,10 @@ class deal_controller
                                         <td style=\"text-align:center;\">".$html."</td>
                                         <td style=\"text-align:center;\">".$value7."</td>
                                         <td style=\"text-align:center;\">".$condition."</td>
-                                        <td style=\"text-align:center;\"><img src='/doora/images/deal/$value15' id=\"DealPicture\"/></td>
+                                        <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\"/></td>
                                         <td style=\"text-align:center;\">
                                             <div>
-                                           <a href=/doora/adminpanel/Controller/deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
+                                           <a href=../deal/viewdealdetail_controller.php?id=$value0 title=\"View all detail\">
                                                   <i class=\"fa fa-eye\"></i>
                                                 </a>
                                             </div>

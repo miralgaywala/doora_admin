@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        require_once("support_controller.php");
+        include ".././support/support_controller.php";
         $controller=new support_controller();   
         if(isset($_GET['id']))
         {

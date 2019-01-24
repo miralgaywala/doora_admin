@@ -1,5 +1,6 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/header.php");
- include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/sidemenu.php");
+<?php include "../../View/header/header.php";
+include "../../View/header/sidemenu.php";
+
  ?>
  <script>
         $(document).ready(function(){
@@ -18,7 +19,7 @@
         selectedNode = elem.options[elem.selectedIndex];
         var UserId = selectedNode.value;
         console.log(selectedNode.value);
-        window.location.href='/doora/adminpanel/Controller/business/businessfilter.php?user_id='+UserId;
+        window.location.href='../../Controller/business/businessfilter.php?user_id='+UserId;
 }
     </script>
 <section class="content">
@@ -108,7 +109,7 @@
                  {
                   $data['photo']= "default.png";
                  }
-                else if(file_exists($_SERVER['DOCUMENT_ROOT']."/doora/images/profile/".$data['photo'])) {
+                else if(file_exists("../../../images/profile/".$data['photo'])) {
                   $data['photo'] = $data['photo'];
                  }
                  else
@@ -119,7 +120,7 @@
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['business_name']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=/doora/images/profile/".$data['photo'];?> id="profilePicture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td>
                                 <td style="text-align:center;"><?php echo $data['stripe_customer_id'];?></td>
@@ -127,20 +128,20 @@
                                 <td style="text-align:center;">
                           
                                     <div>
-                                    	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data['user_id'];?> title="View all detail"><i class="fa fa-eye"></i></a>
+                                    	<a <?php echo "href=../../Controller/business/viewbusiness_controller.php?id=".$data['user_id'];?> title="View all detail"><i class="fa fa-eye"></i></a>
                                   
                                     	   <?php $value=$data['is_deleted']; if($value == 0 ){ ?> 
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=/doora/adminpanel/Controller/business/deletebusiness_controller.php?id=".$data['user_id'];?>  title="Delete" >
+                                        <a onclick="javascript: return confirm('Do you really want to delete this Business?');" <?php echo "href=../../Controller/business/deletebusiness_controller.php?id=".$data['user_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                            <?php } ?>
                                         <br/>
                                     	<a <?php $value=$data['is_active']; if($value == 1 ){ ?>
-                                    		onclick="javascript: return confirm('Do you really want to Deactivate This Business?');"
+                                    		onclick="javascript: return confirm('Do you really want to deactivate this Business?');"
                                     	<?php } else{ ?>
-                                    		onclick="javascript: return confirm('Do you really want to Activate This Business?');"
+                                    		onclick="javascript: return confirm('Do you really want to activate this Business?');"
                                     	<?php }?>
-                                    	<?php echo "href=/doora/adminpanel/Controller/business/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
+                                    	<?php echo "href=../../Controller/business/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
                                     		echo "Activate";
                                     	}
                                     	else
@@ -149,14 +150,14 @@
                                     	} ?></a>
                                     	<br/>
                                       
-                                    	<a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessbranch_controller.php?id=".$data['user_id'];?> title="View all detail" style="margin-right: 3px;">
+                                    	<a <?php echo "href=../../Controller/business/viewbusinessbranch_controller.php?id=".$data['user_id'];?> title="View all detail" style="margin-right: 3px;">
                                         	View Branch
                                         </a>
 
                                          <br/>
                                         <a href="#" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                         <br/>
-                                        <a <?php echo "href=/doora/adminpanel/Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail">View Invoices</a>
+                                        <a <?php echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail">View Invoices</a>
                                       </div>
 
                                 </td>
@@ -199,4 +200,4 @@ $("#category_name").on("change", function() {
 </script>
     </section>
 </div>
- <?php include($_SERVER['DOCUMENT_ROOT']."/doora/adminpanel/View/header/footer.php");?>  
+ <?php include "../../View/header/footer.php";?>  
