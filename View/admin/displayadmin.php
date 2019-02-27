@@ -1,7 +1,13 @@
-<?php include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+ <?php //include "../../View/header/header.php";
+//  include "../../View/header/sidemenu.php";
 
  ?>
+ <script type="text/javascript">
+  $(document).ready(function() {
+   $('#example1').DataTable( {
+    });
+} );
+</script>
 <section class="content">   
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Admin List</h2></div>
@@ -81,11 +87,12 @@
                                 <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['profile_image'];?> id="profilePicture"/></td>
                                 <td style="text-align:center;"><?php echo $data['email_address'];?></td> 
                                 <td style="text-align:center;">
+                                   <input type="hidden" name="id" id="id" value="<?php echo $data['admin_id']; ?>">
                                   <div >
                                         <a <?php echo "href=../../Controller/admin/editadmin_controller.php?id=".$data['admin_id']; ?> title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Admin?');" <?php echo "href=../../Controller/admin/deleteadmin_controller.php?id=".$data['admin_id'];?>  title="Delete" >
+                                        <a onclick="JSconfirm()" <?php //echo "href=../../Controller/admin/deleteadmin_controller.php?id=".$data['admin_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
                                         <a <?php echo "href=../../Controller/admin/viewadmin_controller.php?id=".$data['admin_id']; ?> title="View all detail">
@@ -103,4 +110,29 @@
        </div>
     </section>
 </div>
- <?php include "../../View/header/footer.php";?>  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript">
+
+function JSconfirm(){
+  var bla = $('#id').val();
+  $.confirm({
+    title:'Delete',
+    content: 'Are you sure you want to delete this admin ?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            window.location.href='../../Controller/admin/deleteadmin_controller.php?id='+bla;
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
+</script>
+
+ <?php //include "../../View/header/footer.php";?>  

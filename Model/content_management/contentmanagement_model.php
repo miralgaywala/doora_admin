@@ -22,8 +22,8 @@ class content_model
         $helpc=trim($helpc);
         $helpb=trim($helpb);
         $con= $this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select * from content_management");
         $count=$select->num_rows;
         $add="";

@@ -15,9 +15,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <link rel="shortcut icon" type="image/png" href="./../../../images/favicon.ico"/>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Doora| Dashboard</title>
+  <title>Doora| Admin Panel</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> 
@@ -60,14 +61,15 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheet" href="../../bower_components/jquery/dist/jquery.min.js">
+<!-- <link rel="stylesheet" href="../../bower_components/jquery/dist/jquery.min.js">
 <link rel="stylesheet" href="../../css/select2.min.css">
-<link rel="stylesheet" href="../../css/select2.full.min.js">
+<link rel="stylesheet" href="../../css/select2.full.min.js"> -->
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
 <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
 <style type="text/css">
@@ -84,9 +86,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">Doora</span>
+      <span class="logo-mini"><img src="./../../../images/doora_admin_logo.png" style="height: 22px;width: 35px;"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Doora</span>
+      <span class="logo-lg" style="font-size: 18px; "><img src="./../../../images/doora_admin_fulllogo.png" style="height: 22px;width: 100px;"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -95,7 +97,6 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
           
-         
           <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           
@@ -131,3 +132,17 @@
     $('.select2').select2();
   });
 </script>
+<style type="text/css">
+   .select2-container .select2-selection--single .select2-selection__rendered {
+    margin-top: -5px;
+}
+.select2-container .select2-selection--single {
+    
+    height: 32px;
+}
+.select2-container--default .select2-selection--single {
+     border-radius: 0px; 
+     padding-left: 0px;
+}
+
+</style>

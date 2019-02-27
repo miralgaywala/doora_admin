@@ -1,43 +1,85 @@
-<?php include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+<?php //include "../../View/header/header.php";
+ //include "../../View/header/sidemenu.php";
  ?>
+ <script type="text/javascript">
+   $(document).ready(function() {
+   $('#example1').DataTable( {
+    });
+} );
+   function listcategory(id)
+      {
+            hash_id = id;
+            $.ajax({
+                url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      } 
+   function addcategory()
+      {
+             
+        $.ajax({
+                 url:"../../View/category/addcategory.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function viewcategory(id)
+      {
+             
+        $.ajax({
+                 url:"../../Controller/category/viewcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function editcategory(id)
+      {
+             
+        $.ajax({
+                 url:"../../Controller/category/editcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+ </script>
     <section class="content">
    
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Category List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/category/addcategory.php';">+ Add Category</button>
+    		<button type="button" style="float: right;" class="btn btn-primary" onclick="addcategory()">+ Add Category</button>
     		</div>
     	</div> 
-        <?php 
-            if($msg==0)
-            {
-           $msg='<div class="alert alert-info alert-dismissible">
+      <div class="alert alert-info alert-dismissible" style="display: none;" id="add">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category Has been Added successfully
-            </div>';
-            echo $msg;
-          }
-          else if($msg==2)
-          {
-            $msg='<div class="alert alert-info alert-dismissible">
+            Category has been added successfully
+            </div>
+            <div class="alert alert-info alert-dismissible" style="display: none;" id="edit">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category Has been updated successfully
-            </div>';
-            echo $msg;
-           
-          }
-          else if($msg==3)
-          {
-            $msg='<div class="alert alert-info alert-dismissible">
+            Category has been edited successfully
+            </div>
+            <div class="alert alert-info alert-dismissible" style="display: none;" id="delete">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category Has been deleted successfully
-            </div>';
-            echo $msg;
-           
-          }
-           ?>
+            Category has been deleted successfully
+            </div>
         <div class="row">
         	<div class="col-xs-12">
         	
@@ -47,7 +89,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Id</th>
+			                  <th style="text-align:center;" width="5%">Category Id</th>
 			                  <th style="text-align:center;" width="25%">Image</th>
 			                  <th style="text-align:center;">Category Name</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
@@ -60,17 +102,18 @@
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['category_id']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=../../../images/category/".$data['category_image'];?> id="Picture"/></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/category/".$data['category_image'];?> id="Picture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['category_name']; ?></td>
                                 <td style="text-align:center;">
+                                     <input type="hidden" name="id" id="id" value="<?php echo $data['category_id']; ?>">
                                     <div>
-                                        <a <?php echo "href=../../Controller/category/editcategory_controller.php?id=".$data['category_id']; ?> title="Edit" >
+                                        <a onclick="editcategory(<?php echo $data['category_id']; ?>)" <?php //echo "href=../../Controller/category/editcategory_controller.php?id=".$data['category_id']; ?> title="Edit" style="cursor: pointer;">
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this Category?');" <?php echo "href=../../Controller/category/deletecategory_controller.php?id=".$data['category_id'];?>  title="Delete" >
+                                        <a onclick="JSconfirm(<?php echo $data['category_id']; ?>)" <?php //echo "href=../../Controller/category/deletecategory_controller.php?id=".$data['category_id'];?>  title="Delete" style="cursor: pointer;">
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=../../Controller/category/viewcategory_controller.php?id=".$data['category_id']; ?> title="View all detail">
+                                        <a onclick="viewcategory(<?php echo $data['category_id']; ?>)" <?php //echo "href=../../Controller/category/viewcategory_controller.php?id=".$data['category_id']; ?> title="View all detail" style="cursor: pointer;">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -84,4 +127,41 @@
        </div>
     </section>
 </div>
-<?php include "../../View/header/footer.php";?>  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript">
+
+function JSconfirm(id){
+  $.confirm({
+    title:'Delete',
+    content: 'Are you sure you want to delete this category ?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            var count_id = "delete";
+            $.ajax({
+                 url: '../../Controller/category/category_controller.php',
+                 method:"POST",
+                 data : {count_id:count_id,id:id},
+                 success:function(data)
+                 {
+                   listcategory(data);
+                 }
+              })
+           
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
+</script>
+
+
+
+<?php //include "../../View/header/footer.php";?>  

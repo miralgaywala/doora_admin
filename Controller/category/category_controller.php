@@ -1,42 +1,61 @@
 <?php
 // include_once($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/Model/category/category_model.php");
 include "../../Model/category/category_model.php";
+if(isset($_POST['count_id']))
+{
+		if($_POST['count_id'] == 'add')
+		{
+		$categoryname = $_POST['categoryname'];
+		$is_super_market = $_POST['is_super_market'];
+		$category_image = $_POST['imagename'];
+    	$category_controller=new category_controller();
+	 	$result=$category_controller->add_category($categoryname,$category_image,$is_super_market);
+	 	if($result == 1)
+	 	{
+	 		echo "#add";
+	 	}
+	 	else
+	 	{
+	 		echo "#exists";
+	 	}
+	}
+	if($_POST['count_id'] == 'edit')
+		{
+		$category_id = $_POST['category_id'];
+		$category_name = $_POST['categoryname'];
+		$is_super_market = $_POST['is_super_market'];
+		$category_image = $_POST['imagename'];
+		$category_id=$_POST['category_id'];
+    	$category_controller=new category_controller();
+	 	$result=$category_controller->editcategory_data($category_id,$category_name,$category_image,$is_super_market);
+	 	if($result == 1)
+	 	{
+	 		echo "#edit";
+	 	}
+	 	else
+	 	{
+	 		echo "#exists";
+	 	}
+	}
+	if($_POST['count_id'] == 'delete')
+	{
+		$category_id=$_POST['id'];
+		$category_controller=new category_controller();
+		$result=$category_controller->delete_category($category_id);
+		echo "#delete";
+	}
+}
 class category_controller{
 	public function __construct()
 	{
 		$this->cat_model=new category_model();
 	}
 	
-	public function add_category()
+	public function add_category($category_name,$category_image,$is_super_market)
 	{
-		if(isset($_POST['category_submit']) && !empty($_POST['category_submit']))
-		{
-			
-			$category_name=$_POST['category_name'];
-			$category_image=$_POST['imagename'];
-			if(isset($_POST['is_super_market']))
-                                  {
-                                    $_POST['is_super_market']=1;
-                                  }
-                                  else
-                                  {
-                                    $_POST['is_super_market']=0;
-                                  }
-                 $is_super_market=$_POST['is_super_market'];
 
 			$add_category=$this->cat_model->addcategory_data($category_name,$category_image,$is_super_market);
-			if($add_category=="1")
-			{
-			echo '<script>window.location.href="../../Controller/category/displaycategorycontroller.php?id=0";</script>';
-			}
-			else
-			{
-			echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category already Exists!!
-            </div>';         
-			}
-		}
+			return $add_category;
 
 	}
 	public function display_category()
@@ -59,40 +78,16 @@ class category_controller{
 		include "../../View/category/editcategory.php";
 		return $editcategorylist;
 	}
-	public function editcategory_data()
+	public function editcategory_data($category_id,$category_name,$category_image,$is_super_market)
 	{
-		if(isset($_POST['category_submit']) && !empty($_POST['category_submit']))
-		{
-			$category_id=$_POST['category_id'];
-			$category_name=$_POST['category_name'];
-			$category_image=$_POST['imagename'];
-			if(isset($_POST['is_super_market']))
-                                  {
-                                    $_POST['is_super_market']=1;
-                                  }
-                                  else
-                                  {
-                                    $_POST['is_super_market']=0;
-                                  }
-                 $is_super_market=$_POST['is_super_market'];
+		
 			$edit_categorydata=$this->cat_model->editcategorydata($category_id,$category_name,$category_image,$is_super_market);
-			if($edit_categorydata=="1")
-			{
-			echo '<script>window.location.href="../../Controller/category/displaycategorycontroller.php?id=2";</script>';
-			}
-			else
-			{
-			echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Category already Exists!!
-            </div>';         
-			}
-	}
+			return $edit_categorydata;
 }
 	public function delete_category($category_id)
 	{
 		$this->cat_model->deletecategory($category_id);
-		echo "<script>window.location.href='../../Controller/category/displaycategorycontroller.php?id=3';</script>";
+		return true;
 	}
 	public function view_category($category_id)
 	{

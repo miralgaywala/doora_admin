@@ -1,7 +1,21 @@
-<?php include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+ <?php //include "../../View/header/header.php";
+//  include "../../View/header/sidemenu.php";
  ?>
- 
+ <script type="text/javascript">
+   function backoffer()
+            {
+         
+            $.ajax({
+                 url:"../../Controller/offer_type/displayoffercontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                       $('.content-wrapper').html(data);
+                      
+                 }
+            })
+      }
+ </script>
 <!--Main Content -->
     <section class="content">
       <div class="row">
@@ -9,7 +23,7 @@
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='../../Controller/offer_type/displayoffercontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="backoffer()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
            <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
@@ -30,7 +44,7 @@
                   <td style="width: 20%">Offer Title</td>
                   <td><?php echo $data['offer_title'];?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                   <td style="width: 20%">Is Deleted</td>
                   <td><?php if($data['is_deleted'] == 0)
                   {
@@ -40,14 +54,30 @@
                     {
                       echo "Yes";
                     }?></td>
+                  </tr> -->
+                                    <tr>
+                   <td style="width: 20%">Created Date</td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["created_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo1").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo1"></div></td>
                   </tr>
                   <tr>
-                  <td style="width: 20%">Created Date</td>
-                  <td><?php echo $data['created_at'];?></td>
-                  </tr>
-                  <tr>
-                  <td style="width: 20%">Upadted Date</td>
-                  <td><?php echo $data['updated_at'];?></td>
+                   <td style="width: 20%">Updated Date</td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["updated_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo2").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo2"></div></td>
                   </tr>
                 <?php } ?>
                 </table>
@@ -59,7 +89,7 @@
     </section>
 </div>
 
-<?php include "../../View/header/footer.php";?>  
+<?php //include "../../View/header/footer.php";?>  
      
                        
  

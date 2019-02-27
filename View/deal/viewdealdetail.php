@@ -1,9 +1,35 @@
 <?php //include("View/header.php");
-include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+// include "../../View/header/header.php";
+//  include "../../View/header/sidemenu.php";
 
  ?>
- 
+ <script type="text/javascript">
+   function ViewDeal()
+      {
+            $.ajax({
+                 url:"../../Controller/deal/viewdeal_controller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                                          $('#example2').dataTable().fnDestroy();
+                                           $.ajax({
+                                           url: '../../Controller/deal/alldatafilter.php?data=a1',
+                                           type: 'POST',
+                                           success: function(data) {
+                                                   //console.log(data);
+                                                   $("#result_data").empty();
+                                                   $("#result_data").append(data);
+                                                     $('#example2').dataTable({
+                                                   
+                                                    "destroy":true,
+                                                });
+                                                 }
+                                          });
+                      $('.content-wrapper').html(data);
+                 }
+              })
+      }
+ </script>
  
 <!--Main Content -->
     <section class="content">
@@ -12,7 +38,7 @@ include "../../View/header/header.php";
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='../../Controller/deal/viewdeal_controller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="ViewDeal()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
            <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
       </div> 
@@ -61,7 +87,6 @@ include "../../View/header/header.php";
     $regex = '/\\\u([dD][89abAB][\da-fA-F]{2})\\\u([dD][c-fC-F][\da-fA-F]{2})
           |\\\u([\da-fA-F]{4})/sx';
     $condition= preg_replace_callback($regex, function($matches) {
-
         if (isset($matches[3])) {
             $cp = hexdec($matches[3]);
         } else {
@@ -113,18 +138,18 @@ include "../../View/header/header.php";
                  <td style="width: 20%">Business Name</td>
                   <td><?php echo $data['business_name'];?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                  <td style="width: 20%">Franchise Id</td>
                   <td><?php echo $data['franchise_id'];?></td>
-                  </tr>
+                  </tr> -->
                    <tr>
                   <td style="width: 20%">Franchise Address</td>
                   <td><?php echo $data['franchise_address'];?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                  <td style="width: 20%">Offer Id</td>
                   <td><?php echo $data['offer_id'];?></td>
-                  </tr>
+                  </tr> -->
 					        <tr>
                  <td style="width: 20%">Offer Title</td>
                   <td><?php echo $data['offer_title'];?></td>
@@ -136,6 +161,10 @@ include "../../View/header/header.php";
                   <tr>
                  <td style="width: 20%">Promocode</td>
                   <td><?php echo $data['promocode'];?></td>
+                  </tr>
+                  <tr>
+                  <td style="width: 20%">Terms and Condition</td>
+                  <td><?php echo $condition;?></td>
                   </tr>
                   <tr>
                   <td style="width: 20%"> In Store</td>
@@ -189,10 +218,7 @@ include "../../View/header/header.php";
                                     
                    ?><?php echo $pur['SUM(upd.quantity)']; }?><?php } ?></td>
                   </tr>
-                  <tr>
-                  <td style="width: 20%">Terms and Condition</td>
-                  <td><?php echo $condition;?></td>
-                  </tr>
+                  
                   <tr>
                   <td style="width: 20%">Overall Quantity</td>
                   <td><?php if($data['overall_qty'] == 0 ) 
@@ -215,7 +241,7 @@ include "../../View/header/header.php";
                   </tr>
                   <tr>
                   <td style="width: 20%">Deal Photo</td>
-                  <td><a data-fancybox="gallery" <?php echo "href=../../../images/deal/".$data['deal_photo'];?>><img <?php echo "src=../../../images/deal/".$data['deal_photo'];?> id="DealPicture"/></a></td>
+                  <td><a data-fancybox="gallery" <?php echo "href=../../../images/deal/".$data['deal_photo'];?>><img <?php echo "src=../../../images/deal/".$data['deal_photo'];?> id="DealPicture" style="object-fit:contain;"/></a></td>
                   </tr>
                    <?php if($data['deal_video'] == NULL)
                     {
@@ -233,17 +259,33 @@ include "../../View/header/header.php";
                
                   <tr>
                  <td style="width: 20%">Deal Start time</td>
-                  <td><?php echo $data['deal_start_time'];?></td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["deal_start_time"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo3").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo3"></div></td>
                   </tr>
                   <tr>
                  <td style="width: 20%">Deal End time</td>
-                  <td><?php echo $data['deal_end_time'];?></td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["deal_end_time"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo4").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo4"></div></td>
                   </tr>                 
-                  <tr>
+                  <!-- <tr>
                  <td style="width: 20%">Tag Id</td>
                   <td> <?php if($deal_tag == NULL) {echo "No";} else{ $count=count($deal_tag); $i=1; foreach ($deal_tag as $tag) {                   
                    ?><?php echo $tag['tag_id']; if($i<$count) { echo "  ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                   <td style="width: 20%">Tag</td>
                   <td> 
@@ -253,21 +295,21 @@ include "../../View/header/header.php";
                      
                    </td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                  <td style="width: 20%">Sub Catgeory Id</td>
                  <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                   
                    ?><?php echo $cat['sub_category_id']; if($i<$count) { echo " ,"; } $i=$i+1; ?>&nbsp;&nbsp;<?php } }?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                  <td style="width: 20%">Sub Category Name</td>
                  <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                  
                    ?><?php echo $cat['sub_category_name']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                   <td style="width: 20%">Category Id</td>
                   <td> <?php if($deal_category == NULL) {echo "No";} else{ $count=count($deal_category); $i=1; foreach ($deal_category as $category) {                    
                    ?><?php echo $category['category_id']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                   <td style="width: 20%">Category Name</td>
                  <td> <?php if($deal_category == NULL) {echo "No";} else{ $count=count($deal_category); $i=1; foreach ($deal_category as $category) {                    
@@ -275,12 +317,29 @@ include "../../View/header/header.php";
                   </tr>
                   
                   <tr>
-                 <td style="width: 20%">Created Date</td>
-                  <td><?php echo $data['created_at'];?></td>
+                   <td style="width: 20%">Created Date</td>
+                  <td>
+                    <script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["created_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo1").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo1"></div></td>
                   </tr>
                   <tr>
-                 <td style="width: 20%">Upadted Date</td>
-                  <td><?php echo $data['updated_at'];?></td>
+                   <td style="width: 20%">Updated Date</td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["updated_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo2").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo2"></div></td>
                   </tr>
                 <?php } ?>
                 </table>
@@ -292,4 +351,4 @@ include "../../View/header/header.php";
 </div>
 
  <?php 
-include "../../View/header/footer.php";?> 
+//include "../../View/header/footer.php";?> 

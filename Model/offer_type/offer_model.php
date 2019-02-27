@@ -21,8 +21,8 @@ class offer_model
     {
     	$offer=trim($offer);
     	$con= $this->db->connection();
-    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+    	//$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select * from offer_category where is_deleted=0 AND offer_title='".$offer."'");
         $count=$select->num_rows;
         $addoffer="";
@@ -33,7 +33,7 @@ class offer_model
         else
         {
        	//echo "insert into deal_tags(tag,created_at) values('".$tag."','".$date."')";    
-        $tag=$con->query("insert into offer_category (offer_title,created_at) values('".$offer."','".$date."')"); 
+        $tag=$con->query("insert into offer_category (offer_title,created_at,updated_at) values('".$offer."','".$date."','".$date."')"); 
        	$addoffer="1";
         }  
        return $addoffer;
@@ -62,8 +62,8 @@ class offer_model
     {
     	$offer=trim($offer);
     	$con= $this->db->connection();
-    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+    	//$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select offer_id from offer_category where is_deleted=0 AND offer_title='".$offer."' AND offer_id!=".$offer_id);
         $count=$select->num_rows;
         $editoffer="";
@@ -81,8 +81,8 @@ class offer_model
     public function deleteoffer($offer_id)
     {
     	$con=$this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         $delete=$con->query("update offer_category SET is_deleted=1,updated_at='".$date."' where offer_id=".$offer_id);
     }
 }

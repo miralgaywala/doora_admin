@@ -1,50 +1,59 @@
-<?php 
-include "../../View/header/header.php";
-include "../../View/header/sidemenu.php";
- ?>
-
- <?php 
-        include_once("../../Controller/content_management/contentmanagement_controller.php");
-        $controller=new content_controller();
-        $controller->add_content();       
-        ?>
-
-<!--Main Content -->
 <script src="https://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+        <script type="text/javascript">
+           function backcontent()
+            {
+         
+            $.ajax({
+                 url:"../../Controller/content_management/addcontentmanagement_controller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                       $('.content-wrapper').html(data);
+                      
+                 }
+            })
+      }
+      function listcontent(id)
+      {
+            hash_id = id;
+            $.ajax({
+                 url:"../../Controller/content_management/addcontentmanagement_controller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      }
+        </script>
+<!--Main Content -->
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Content Management</h2></div>
         <div class="col-md-2">
                 <br/>   
+               <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
+               <!-- <button style="float: right;" onclick="backtag()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button> -->
+           <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
-      </div> 
-      <?php
-      if($msg==0)
-            {
-           $msg='<div class="alert alert-info alert-dismissible">
+      </div>   
+      <div class="alert alert-info alert-dismissible" style="display: none;" id="add">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Content management has been Added successfully
-            </div>';
-            echo $msg;
-          }
-          else if($msg==2)
-          {
-            $msg='<div class="alert alert-info alert-dismissible">
+            Content management has been added successfully
+            </div>
+            <div class="alert alert-info alert-dismissible" style="display: none;" id="edit">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Content management has been updated successfully
-            </div>';
-            echo $msg;
-          }  
-          ?>
+            Content management has been edited successfully
+            </div>  
         <div class="row">
-        	<div class="col-xs-12">
-        		<div class="box">
-        			<br>
-        			<!-- box-header -->
-        			<div class="box-body">
-        				<form class="form-horizontal" name="addtag" id="addtag_form" role="form" action="" method="post" onsubmit="return validateForm();">
-        					<div class="form-group notranslate">
-                    <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data['content_management_id'];}?>">
+          <div class="col-xs-12">
+            <div class="box">
+              <br>
+              <!-- box-header -->
+              <div class="box-body">
+                <form class="form-horizontal" name="addtag" id="addtag" role="form" action="" method="post" enctype="multipart/form-data" >
+                 <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data['content_management_id'];}?>" id="content_id"> 
                                 <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
                                    <textarea class="ckeditor" cols="80" id="privacy_policy" name="privacy_policy" rows="10" >
@@ -58,14 +67,12 @@ include "../../View/header/sidemenu.php";
                                                  </textarea>
                                     <span id="privacy_error" class="show_required"></span><br>
                                 </div>
-                            </div>  
-                             <script language="Javascript">
+                                 <script language="Javascript">
                                             CKEDITOR.replace( 'privacy_policy' );
                                          </script> 
-                            <div class="form-group notranslate">
                                 <label for="term_condition" class="col-sm-3 control-label">Terms & Conditions<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
-                                    <textarea class="ckeditor" cols="80" id="term_condition" name="term_condition" rows="10" >
+                                   <textarea class="ckeditor" cols="80" id="term_condition" name="term_condition" rows="10" >
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
@@ -74,66 +81,64 @@ include "../../View/header/sidemenu.php";
 
                                                    ?>
                                                  </textarea>
-                                    <span id="term_error" class="show_required"></span><br>
+                                     <span id="term_error" class="show_required"></span><br>
                                 </div>
-                            </div> 
-                             <script language="Javascript">
+                                <script language="Javascript">
                                             CKEDITOR.replace( 'term_condition' );
                                          </script> 
-                                  <div class="form-group notranslate">
-                                             <label for="helpc" class="notranslate col-sm-3 control-label">Help(Customer)<span class="show_required">*</span></label>
-                                             <div class="col-sm-8 notranslate">
-                                                 <textarea class="ckeditor" cols="80" id="helpc" name="helpc" rows="10" >
+                                <label for="helpc" class="col-sm-3 control-label">Help(Customer)<span class="show_required">*</span></label>
+                                <div class="col-sm-8 notranslate">
+                                   <textarea class="ckeditor" cols="80" id="helpc" name="helpc" rows="10" >
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
                                                     echo $data['help_customer'];
                                                   }
+
                                                    ?>
                                                  </textarea>
-                                                 <span id="helpc_error" class="show_required"></span><br>
-                                             </div>
-                                         </div>   
-                                         <script language="Javascript">
+                                    <span id="helpc_error" class="show_required"></span><br>
+                                </div>
+                                 <script language="Javascript">
                                             CKEDITOR.replace( 'helpc' );
-                                         </script>   
-                                         <div class="form-group notranslate">
-                                             <label for="helpb" class="notranslate col-sm-3 control-label">Help(Business)<span class="show_required">*</span></label>
-                                             <div class="col-sm-8 notranslate">
-                                                 <textarea class="ckeditor" cols="80" id="helpb" name="helpb" rows="10" >
+                                         </script>  
+                                <label for="helpb" class="col-sm-3 control-label">Help(Business)<span class="show_required">*</span></label>
+                                <div class="col-sm-8 notranslate">
+                                   <textarea class="ckeditor" cols="80" id="helpb" name="helpb" rows="10" >
                                                   <?php 
                                                   foreach($display_content as $data)
                                                   {
                                                     echo $data['help_business'];
                                                   }
+
                                                    ?>
                                                  </textarea>
-                                                 <span id="helpb_error" class="show_required"></span><br>
-                                             </div>
-                                         </div>   
-                                         <script language="Javascript">
+                                   <span id="helpb_error" class="show_required"></span><br>
+                                </div>
+                                 <script language="Javascript">
                                             CKEDITOR.replace( 'helpb' );
-                                         </script>                                       
+                                         </script> 
+                             </div>                               
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="content_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="content_submit"/>
+                                    <input type="submit" name="tag_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="tag_submit" onclick="return validateForm();"/>
+                                    <button class="btn btn-default pull-right" onclick="backcontent()">Cancel</button>
                             </div>  
                            </div>
                          </form>
-        			</div>
-        		</div>
-        	</div>	
-       
+              </div>
+            </div>              
     </section>
 </div>
 
- <?php 
- include "../../View/header/footer.php";?> 
+  <?php //include "../../View/header/footer.php";?>
  <script type="text/javascript">
+                  
                       function validateForm() {
                                     var privacy = document.getElementById("privacy_policy").value;
                                     var term = document.getElementById("term_condition").value;
                                     var helpc = document.getElementById("helpc").value;
                                      var helpb = document.getElementById("helpb").value;
+                                     var content_id = document.getElementById("content_id").value;
                                     var count=0;
                                     if (privacy.trim() == "") {
                                         document.getElementById('privacy_error').innerHTML="Please Enter Privacy Policy";
@@ -170,24 +175,26 @@ include "../../View/header/sidemenu.php";
                                     {
                                       document.getElementById("helpb_error").innerHTML="";
                                     }
-                                   
-                                   if(count>0)
+                                    
+                                  if(count>0)
                                    {
                                     return false;
                                    }
                                    else
                                    {
-                                    return true;
+                              
+                                      var count_id = "add";
+                                      $.ajax({
+                                           url:"../../Controller/content_management/contentmanagement_controller.php",
+                                           method:"POST",
+                                           data : {count_id:count_id,privacy:privacy,term:term,helpc:helpc,helpb:helpb,content_id:content_id},
+                                           success:function(data)
+                                           {
+                                            listcontent(data);
+                                           }
+                                        })
                                    }
                                   }
+</script> 
+
  
-</script>
- <?php 
-                            if(isset($_POST['content_submit']) && !empty($_POST['content_submit'])){
-                                 $content_id =$_POST['content_id'];
-                                  $privacy_policy =$_POST['privacy_policy'];
-                                   $term_condition =$_POST['term_condition'];
-                                    $helpc =$_POST['helpc'];
-                                    $helpb =$_POST['helpb'];
-                              }
-                            ?>       

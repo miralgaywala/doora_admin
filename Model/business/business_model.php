@@ -11,7 +11,7 @@ class business_model
     {
        $con=$this->db->connection();
        $businessuser = array();
-       $getbusinessuser=$con->query("select * from users where is_deleted=0 AND is_business=1 order by user_id desc");
+       $getbusinessuser=$con->query("select * from users where is_business=1 order by user_id desc");
        while ($row = $getbusinessuser->fetch_assoc()) {
         $businessuser[] = $row;
       }
@@ -39,8 +39,8 @@ class business_model
     }
     public function updateactive($id,$data)
     {
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         $con=$this->db->connection();
         $success="";
         if($data==0)
@@ -58,8 +58,8 @@ class business_model
     public function deletebusiness($id)
     {
         $con=$this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         $delete=$con->query("update users SET is_deleted=1,updated_at='".$date."' where user_id=".$id);
     }
     public function getbusinessdetail($id)
@@ -148,14 +148,21 @@ class business_model
         $getbusinessdeal=$con->query("SELECT bd.*,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=1)as online_redeem,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=0 and is_cart=1)as offline_redeem,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=0)as online_purchase,(select count(*) from user_purchase_deal where business_deal_id=".$deal_id." and is_online=1 and is_cart=1)as offline_purchase FROM `business_deal` as bd WHERE bd.business_deal_id=".$deal_id." and bd.is_active = 1 GROUP BY bd.business_deal_id");
          while ($row = $getbusinessdeal->fetch_assoc()) {
         $businessinvoicedealdetail[] = $row;
-         
           }
-        
        }
-       $businessinvoicedealdetail[] = $businessinvoicedealdetail;
+       $businessinvoicedealdetail = $businessinvoicedealdetail;
        // echo "<pre>";print_r($businessinvoicedealdetail); echo "</pre>";
        return $businessinvoicedealdetail;
-       
+    }
+    public function getbusinessverificartiondetail($id)
+    {
+      $con=$this->db->connection();
+       $businessuser = array();
+       $getverificationdetail=$con->query("select bv.*,us.is_active,us.is_deleted from bussiness_verification as bv left join users as us on bv.business_id = us.user_id where bv.business_id=".$id);
+        while ($row = $getverificationdetail->fetch_assoc()) {
+        $businessuser[] = $row;
+      }
+       return $businessuser;
     }
 }
 ?>

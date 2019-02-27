@@ -1,6 +1,33 @@
 <?php
 include "../../Model/business/business_model.php";
+if(isset($_POST['count_id']))
+{
+	if($_POST['count_id'] == 'delete')
+	{
+		$id=$_POST['id'];
+		$business_controller=new business_controller();
+		$result=$business_controller->delete_business($id);
+		echo "#delete";
 
+	}
+	if($_POST['count_id'] == 'request')
+	{
+		$id=$_POST['id'];
+		$data=$_POST['value'];
+		$business_controller=new business_controller();
+		$result=$business_controller->is_active($id,$data);
+		if($result==1)
+		{
+			echo "#deactive";
+		}
+		else
+		{
+			echo "#active";
+		}
+
+	}
+	
+}
 class business_controller
 {
 	public function __construct()
@@ -29,19 +56,12 @@ class business_controller
 	public function is_active($id,$data)
 	{
 		$is_active=$this->business_model->updateactive($id,$data);
-		if($is_active=="1")
-		{
-			echo "<script>window.location.href='../../Controller/business/displaybusinesslist_controller.php?id=2';</script>";
-		}
-		else
-		{
-			echo "<script>window.location.href='../../Controller/business/displaybusinesslist_controller.php?id=1';</script>";			
-		}
+		return $is_active;
 	}
 	public function delete_business($id)
 	{
 		$this->business_model->deletebusiness($id);
-		echo "<script>window.location.href='../../Controller/business/displaybusinesslist_controller.php?id=3';</script>";
+		return true;
 	}
 	public function viewbusiness_detail($id)
 	{
@@ -85,8 +105,11 @@ class business_controller
 		$view_invoice_detail=$this->business_model->getinvoicedetail($invoice_id);
 		$view_deal_invoice_detail=$this->business_model->getdealinvoicedetail($invoice_id);
 		include "../../View/business/viewbuisnessinvoicedetail.php";
-		
-		return $view_invoice_detail;
+	}
+	public function viewverificationdetail($id)
+	{
+		$viewverification_detail=$this->business_model->getbusinessverificartiondetail($id);
+		include "../../View/business/viewbuisnessverificationdetail.php";
 	}
 }
 ?>

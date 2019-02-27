@@ -10,8 +10,8 @@ class category_model{
     {
         $category_name=trim($category_name);
     	$con= $this->db->connection();
-    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+    	//$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         if($is_super_market==1)
         {
             $con->query("update category set is_super_market=0");
@@ -26,7 +26,7 @@ class category_model{
         }
         else
         {
-        $add_category=$con->query("insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")"); 
+        $add_category=$con->query("insert into category (category_name,category_image,created_at,updated_at,is_super_market) values('".$category_name."','".$category_image."','".$date."','".$date."',".$is_super_market.")"); 
        $add_category="1";
         //echo "insert into category (category_name,category_image,created_at,is_super_market) values('".$category_name."','".$category_image."','".$date."',".$is_super_market.")";    
         }  
@@ -55,8 +55,8 @@ class category_model{
     public function deletecategory($category_id)
     {
         $con=$this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         $delete=$con->query("update category SET is_deleted=1,updated_at='".$date."' where category_id=".$category_id);
         //echo "update category SET is_deleted=1 where category_id=".$category_id;   
     }
@@ -64,8 +64,8 @@ class category_model{
     {
         $category_name=trim($category_name);
         $con= $this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
         if($is_super_market == 1)
         {
             $con->query("update category set is_super_market=0");

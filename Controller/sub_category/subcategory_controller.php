@@ -1,12 +1,55 @@
 <?php
 include "../../Model/sub_category/subcategory_model.php";
+if(isset($_POST['count_id']))
+{
+		if($_POST['count_id'] == 'add')
+		{
+		$category_id = $_POST['category_name'];
+		$subcategory_name = $_POST['subcategoryname'];
+		$subcategory_image = $_POST['imagename'];
+    	$subcategory_controller=new subcategory_controller();
+	 	$result=$subcategory_controller->add_subcategory($category_id,$subcategory_name,$subcategory_image);
+	 	if($result == 1)
+	 	{
+	 		echo "#add";
+	 	}
+	 	else
+	 	{
+	 		echo "#exists";
+	 	}
+	}
+	if($_POST['count_id'] == 'edit')
+		{
+		$category_id = $_POST['category_name'];
+		$subcategory_name = $_POST['subcategoryname'];
+		$subcategory_image = $_POST['imagename'];
+		$subcategory_id=$_POST['sub_category_id'];
+    	$subcategory_controller=new subcategory_controller();
+	 	$result=$subcategory_controller->edit_subcategorydata($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
+	 	if($result == 1)
+	 	{
+	 		echo "#edit";
+	 	}
+	 	else
+	 	{
+	 		echo "#exists";
+	 	}
+	}
+	if($_POST['count_id'] == 'delete')
+	{
+		$subcategory_id=$_POST['id'];
+		$subcategory_controller=new subcategory_controller();
+		$result=$subcategory_controller->delete_subcategory($subcategory_id);
+		echo "#delete";
+	}
+}
 class subcategory_controller{
 	
 	public function __construct()
 	{
+		// parent::__construct();
 		$this->subcat_model=new subcategory_model();
 	}
-	
 	public function display_subcategory1($msg)
 	{
 		//echo "from sub-categpry1    ".$msg;
@@ -30,7 +73,6 @@ class subcategory_controller{
 	public function delete_subcategory($subcategory_id)
 	{
 		$this->subcat_model->deletesubcategory($subcategory_id);
-		echo '<script>window.location.href="../../Controller/sub_category/displaysubcategorycontroller.php?id=m3";</script>';
 	}
 	public function bind_category()
 	{
@@ -38,30 +80,10 @@ class subcategory_controller{
 		include "../../View/sub-category/addsubcategory.php";
 		return $category;
 	}
-	public function add_subcategory()
+	public function add_subcategory($category_id,$subcategory_name,$subcategory_image)
 	{
-		//echo "hii";
-		if(isset($_POST['subcategory_submit']) && !empty($_POST['subcategory_submit']))
-		{
-			
-			$subcategory_name=$_POST['sub_category_name'];
-			//echo $subcategory_name;
-			$subcategory_image=$_POST['imagename'];
-			//echo $subcategory_image;
-			$category_id=$_POST['category_name'];
 			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
-			if($add_subcategory=="1")
-			{
-			echo '<script>window.location.href="../../Controller/sub_category/displaysubcategorycontroller.php?id=m0";</script>';
-			}
-			else
-			{
-			echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub Category already Exists!!
-            </div>';         
-			}
-		}
+			return $add_subcategory;
 	}
 	public function edit_subcategory($subcategory_id)
 	{
@@ -70,32 +92,11 @@ class subcategory_controller{
 		include "../../View/sub-category/editsubcategory.php";
 		
 	}
-	public function edit_subcategorydata()
+	public function edit_subcategorydata($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
 	{
-		if(isset($_POST['subcategory_submit']) && !empty($_POST['subcategory_submit']))
-		{
-			$subcategory_id=$_POST['sub_category_id'];
-			//echo $subcategory_id;
-			$subcategory_name=$_POST['sub_category_name'];
-			//echo $subcategory_name;
-			$subcategory_image=$_POST['imagename'];
-			//echo $subcategory_image;
-			$category_id=$_POST['category_name'];
-			//echo $category_id;
+		
 			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
-			if($edit_subcategory=="1")
-			{
-				echo '<script>window.location.href="../../Controller/sub_category/displaysubcategorycontroller.php?id=m2";</script>';
-			}
-			else
-			{
-			echo '<div class="alert alert-info alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub Category already Exists!!
-            </div>';         
-			}
-			
-		}
+			return $edit_subcategory;
 	}
 	public function filter_subcategory($msg)
 	{

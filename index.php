@@ -18,9 +18,7 @@
         }
         else
         {
-           include 'Controller/category/dashboard_controller.php';
-            $controller=new dashboard_controller();
-            $controller->dashboard();
+            echo "<script>location.href='./View/header/dashboard.php'</script>";
         }
         ?>
     </body>

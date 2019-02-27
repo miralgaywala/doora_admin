@@ -23,8 +23,8 @@ class tag_model
     {
     	$tag=trim($tag);
     	$con= $this->db->connection();
-    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+    	//$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+         $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select * from deal_tags where is_deleted=0 AND tag='".$tag."'");
         $count=$select->num_rows;
         $addtag="";
@@ -35,7 +35,7 @@ class tag_model
         else
         {
        	//echo "insert into deal_tags(tag,created_at) values('".$tag."','".$date."')";    
-        $tag=$con->query("insert into deal_tags (tag,created_at) values('".$tag."','".$date."')"); 
+        $tag=$con->query("insert into deal_tags (tag,created_at,updated_at) values('".$tag."','".$date."','".$date."')"); 
        	$addtag="1";   
         }  
        return $addtag;
@@ -64,8 +64,8 @@ class tag_model
     {
     	$tag=trim($tag);
     	$con= $this->db->connection();
-    	$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+    	//$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+         $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select tag_id from deal_tags where is_deleted=0 AND tag='".$tag."' AND tag_id!=".$tag_id);
         $count=$select->num_rows;
         $edittag="";
@@ -83,8 +83,8 @@ class tag_model
     public function deletetag($tag_id)
     {
     	$con=$this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+         $date = gmdate("Y-m-d\TH:i:s\Z");
         $delete=$con->query("update deal_tags SET is_deleted=1,updated_at='".$date."' where tag_id=".$tag_id);
     }
 }

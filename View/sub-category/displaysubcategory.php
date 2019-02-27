@@ -1,10 +1,19 @@
  <?php 
- include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+ // include "../../View/header/header.php";
+ // include "../../View/header/sidemenu.php";
 
  ?>
      
     <script>
+
+$(document).ready(function() {
+   $('#example1').DataTable( {
+            
+    } );
+   
+
+} );
+
         $(document).ready(function(){
             $("#category_name").select2(); 
         });
@@ -20,46 +29,90 @@
         var elem = document.getElementById("category_name");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
-        console.log(selectedNode.value);
-        window.location.href='../../Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId;
+       // window.location.href='../../Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId;
+        $('#example2').dataTable().fnDestroy();
+       $.ajax({
+       url: '../../Controller/sub_category/subcategoryfilter.php?category_id='+CategoryId,
+       type: 'POST',
+       success: function(data) {
+         $('.content-wrapper').html(data);
+       }
+      });
 }
+function subcategory()
+      {
+      
+            $.ajax({
+                 url:"../../Controller/sub_category/addsubcategory_controller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                         $('.content-wrapper').html(data);
+                 }
+              })
+      }
+ function Viewsubcategory(id)
+      {
+            $.ajax({
+                 url: "../../Controller/sub_category/viewsubcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                       $('.content-wrapper').html(data);
+                 }
+              })
+      }     
+      function Editsubcategory(id)
+      {
+           
+            $.ajax({
+                 url: "../../Controller/sub_category/editsubcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                       $('.content-wrapper').html(data);
+                     
+                 }
+              })
+      }   
+      function listsubcategory(id)
+      {
+            hash_id = id;
+            $.ajax({
+                 url:"../../Controller/sub_category/displaysubcategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      } 
+
     </script>
     <section class="content">
-      <div id='msg'></div>
+      
         <div class="row">
             <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Sub Category List</h2></div>
             <div class="col-md-2">
                 <br/>   
-            <button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../Controller/sub_category/addsubcategory_controller.php';">+ Add Sub Category</button>          
+            <button type="button" style="float: right;" class="btn btn-primary" onclick="subcategory()" >+ Add Sub Category</button>          
             </div>
+            
         </div> 
-        <?php 
-            if($msg=="m0")
-            {
-           $msg='<div class="alert alert-info alert-dismissible">
+        <div class="alert alert-info alert-dismissible" id="add" style="display: none;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub Category Has been Added successfully
-            </div>';
-            echo $msg;
-          }
-          else if($msg=="m2")
-          {
-            $msg='<div class="alert alert-info alert-dismissible">
+            Sub Category has been added successfully
+            </div>
+            <div class="alert alert-info alert-dismissible" id="edit" style="display: none;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub Category Has been updated successfully
-            </div>';
-            echo $msg;
-           
-          }
-          else if($msg=="m3")
-          {
-            $msg='<div class="alert alert-info alert-dismissible">
+            Sub Category has been edited successfully
+            </div>
+            <div class="alert alert-info alert-dismissible" id="delete" style="display: none;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Sub Category Has been deleted successfully
-            </div>';
-            echo $msg;
-          }
-           ?>
+            Sub Category has been deleted successfully
+            </div>
+        
         <div class="row">
             <div class="col-xs-12">
             
@@ -68,10 +121,10 @@
                         <div class="box-body">
                           <form class="form-horizontal" name="addsubcategory" id="addsubcategory_form" role="form" action="" method="post" enctype="multipart/form-data">
                              <div class="form-group">
-                                <label for="category_name" class="col-sm-1 control-label">Category</label>
+                                <label for="category_name" class="col-sm-1 control-label" style="margin-top: 5px;">Category</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control select2" aria-invalid="false" >
-                                        <option value="0">Select Category</option>
+                                        <option value="0">All Category</option>
                                     <?php 
                                     if($_GET['category_id'])
                                     {
@@ -98,8 +151,9 @@
                             <tr>
                               <th style="text-align:center;" width="5%">#</th>
                               <th style="text-align:center;" width="15%">Sub Category Id</th>
-                              <th style="text-align:center;">Sub Category Name</th>
                               <th style="text-align:center;" width="15%">Sub Category Image</th>
+                              <th style="text-align:center;">Sub Category Name</th>
+                              
                               <th style="text-align:center;" width="10%">Action</th>
                             </tr>
                              </thead>
@@ -111,17 +165,19 @@
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['sub_category_id']; ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['sub_category_name']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture"/></td>
+                                
                                 <td style="text-align:center;">
+                                  <input type="hidden" name="id" id="id" value="<?php echo $data['sub_category_id']; ?>">
                                     <div >
-                                        <a <?php echo "href=../../Controller/sub_category/editsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Edit" >
+                                        <a onclick="Editsubcategory(<?php echo $data['sub_category_id']; ?>)" <?php //echo "href=../../Controller/sub_category/editsubcategory_controller.php?id=".$data['sub_category_id']; ?> style="cursor: pointer;" title="Edit" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="return confirm('Do you really want to delete this sub-category ?');" <?php echo "href=../../Controller/sub_category/deletesubcategory_controller.php?id=".$data['sub_category_id']; ?> title="Delete" >
+                                        <a onclick="JSconfirm(<?php echo $data['sub_category_id']; ?>)" <?php //echo "href=../../Controller/sub_category/deletesubcategory_controller.php?id=".$data['sub_category_id']; ?> style="cursor: pointer;" title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=../../Controller/sub_category/viewsubcategory_controller.php?id=".$data['sub_category_id']; ?> title="View all detail">
+                                        <a onclick="Viewsubcategory(<?php echo $data['sub_category_id']; ?>)" <?php //echo "href=../../Controller/sub_category/viewsubcategory_controller.php?id=".$data['sub_category_id']; ?> style="cursor: pointer;" title="View all detail">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -136,5 +192,42 @@
        </div>
     </section>
 </div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript">
+
+function JSconfirm(id){
+  var bla = id;
+  $.confirm({
+    title:'Delete',
+    content: 'Are you sure you want to delete this sub-category ?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            var count_id = "delete";
+            $.ajax({
+                  url: '../../Controller/sub_category/subcategory_controller.php',
+                 method:"POST",
+                 data : {count_id:count_id,id:bla},
+                 success:function(data)
+                 {
+                      listsubcategory(data);
+                 }
+              })
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
+
+</script>
+
   <?php 
-   include "../../View/header/footer.php";?>  
+    //include "../../View/header/footer.php";?>  

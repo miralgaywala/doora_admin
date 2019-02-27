@@ -1,13 +1,30 @@
-<?php include "../../View/header/header.php";
-include "../../View/header/sidemenu.php";
+<?php 
+// include "../../View/header/header.php";
+// include "../../View/header/sidemenu.php";
  ?>
+ <script type="text/javascript">
+     function backbusinessinvoice(id)
+      {
+        $.ajax({
+                 url:"../../Controller/business/viewbusinessinvoice_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+ </script>
 <section class="content">
-   
+   <?php foreach ($view_invoice_detail as $data)
+                                {
+                                    ?>
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Business Invoice detail</h2></div>
     		<div class="col-md-2">
                 <br/>   
-                <button style="float: right;" onclick="window.history.go(-1);" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+                <button style="float: right;" onclick="backbusinessinvoice(<?php echo $data['business_id']; ?>)" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
     		</div>
     	</div> 
         <div class="row">
@@ -15,15 +32,14 @@ include "../../View/header/sidemenu.php";
         	
         		<div class="box">
         				<div class="box-body">
-                            <?php foreach ($view_invoice_detail as $data)
-                                {
+                            <?php
                                     $price_per_redeem=$data['price_per_redeem'];
                                     $invoice_month=$data['month'];
                                     $invoice_month=date('F', mktime(0, 0, 0, $invoice_month, 1, 2000));
                                     $start_date= $data['month_start_date'];
-                                    $start_date=date('jS F Y', strtotime($start_date));    
+                                    $start_date=date('jS M Y', strtotime($start_date));    
                                     $end_date = $data['month_end_date'];
-                                    $end_date=date('jS F y', strtotime($end_date));
+                                    $end_date=date('jS M Y', strtotime($end_date));
                             ?>
         				<table style="width: 100%;">
                             <tr>
@@ -40,7 +56,21 @@ include "../../View/header/sidemenu.php";
                             </tr>
                             <tr>
                                 <td><b>Total Amount:</b></td>
-                                <td><?php echo $data['total_amount'];?></td>
+                                <td><?php echo "$ ".$data['total_amount'];?></td>
+                            </tr>
+                            <?php if($data['bill_pending'] == 0)
+                                {
+                                  $status = "Paid";
+                                   $style="style=\"\"";
+                                }
+                                else
+                                {
+                                  $status = "Due";
+                                   $style="style=\"color:red;\"";
+                                } ?>
+                             <tr>
+                                <td><b>status:</b></td>
+                                <td <?php echo $style; ?>><?php echo $status;?></td>
                             </tr>
                         </table>
                     <?php  }?>
@@ -50,9 +80,9 @@ include "../../View/header/sidemenu.php";
                     foreach ($view_deal_invoice_detail as $value) {
                        
                                     $start_date= $value['deal_start_time'];
-                                    $start_date=date('jS F y', strtotime($start_date));    
+                                    $start_date=date('jS M Y', strtotime($start_date));    
                                     $end_date = $value['deal_end_time'];
-                                    $end_date=date('jS F y', strtotime($end_date));
+                                    $end_date=date('jS M Y', strtotime($end_date));
                 ?>
                 <div class="box">
                     <div class="box-body">
@@ -63,7 +93,7 @@ include "../../View/header/sidemenu.php";
                                 <th></th>
                                 <th>Total Amount</th>
                             </tr>
-                        </thead>
+                            </thead>
                             <tr>
                                 <td>Deal:</td>
                                 <td><?php echo $value['deal_title']; ?></td>
@@ -76,39 +106,44 @@ include "../../View/header/sidemenu.php";
                             </tr>
                             <tr>
                                 <td>Total Quantity:</td>
-                                <td><?php echo $value['overall_qty']; ?></td>
+                                <td><?php echo $value['overall_qty']; echo " Qty"; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <?php $redeem_amount=$value['offline_redeem'] * $price_per_redeem; ?>
-                                <td>In store redeem:</td>
-                                <td><?php echo $value['offline_redeem'];echo " Qty * $"; echo $price_per_redeem; ?></td>
-                                <td><?php echo " $";echo sprintf("%.2f", $redeem_amount);?></td>
+                               
+                                <td>In Store redeem:</td>
+                                <td><?php echo $value['offline_redeem']; echo " Qty";?></td>
+
                             </tr>
                             <tr>
                                 <td>In Store Purchase:</td>
-                                <td><?php echo $value['offline_purchase']; ?></td>
-                                <td></td>
+                                <?php $redeem_amount=$value['offline_purchase'] * $price_per_redeem; ?>
+                                <td><?php echo $value['offline_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
+                                <td><?php echo " $";echo sprintf("%.2f", $redeem_amount);?></td>
+                                
+                               
                             </tr>
                             <tr>
-                                <?php $redeem_online_amount=$value['online_purchase'] * $price_per_redeem; ?>
+                               
                                 <td>Online redeem:</td>
+                                <td><?php echo $value['online_purchase']; echo " Qty";?></td>
+                            </tr>
+                            <tr>
+                                <td>Online Purchase:</td>
+                                <?php $redeem_online_amount=$value['online_purchase'] * $price_per_redeem; ?>
                                 <td><?php echo $value['online_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $redeem_online_amount);?></td>
-                            </tr>
-                            <tr>
-                                <td>Online Purchase</td>
-                                <td><?php echo $value['online_purchase']; ?></td>
-                                <td></td>
+                                
+                                
                             </tr>
                             <tr>
                                 <td>Total Redeem</td>
-                                <td><?php echo $value['offline_redeem'] + $value['online_purchase']; ?></td>
+                                <td><?php echo $value['offline_redeem'] + $value['online_purchase']; echo " Qty";?></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Total Purchase</td>
-                                <td><?php echo $value['offline_purchase'] + $value['online_purchase']; ?></td>
+                                <td><?php echo $value['offline_purchase'] + $value['online_purchase']; echo " Qty"; ?></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -117,7 +152,7 @@ include "../../View/header/sidemenu.php";
                                 <td></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $total_amount);  ?></td>
                             </tr>
-                         </table>   
+                         </table> 
                     </div>
                 </div>
                 <?php 
@@ -127,4 +162,4 @@ include "../../View/header/sidemenu.php";
        </div>
     </section>
 </div>
-  <?php include "../../View/header/footer.php";?>  
+  <?php //include "../../View/header/footer.php";?>  

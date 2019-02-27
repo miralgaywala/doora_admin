@@ -1,42 +1,81 @@
-<?php include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+  <script type="text/javascript">
+  $(document).ready(function() {
+   $('#example1').DataTable( {
+    });
+} );
 
- ?>
+  function addsubscription()
+      {
+            $.ajax({
+                 url:"../../View/subscription_package/addsubscription.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                       // pageurl = "../../View/tag/addtag.php";
+                       // window.history.pushState({path:pageurl},'',pageurl);  
+                 }
+              })
+      }
+      function viewsubscription(id)
+      {
+            $.ajax({
+                 url:"../../Controller/subscription_package/viewsubscription_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                        
+                 }
+              })
+      }
+      function editsubscription(id)
+      {
+            $.ajax({
+                 url:"../../Controller/subscription_package/editsubscription_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function listsubscription(data)
+      {
+            hash_id = data;
+            $.ajax({
+                 url:"../../Controller/subscription_package/displaysubscription_controller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      }
+</script>
 <section class="content">
    
     	<div class="row">
     		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Subscription List</h2></div>
     		<div class="col-md-2">
                 <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='../../View/subscription_package/addsubscription.php';">+ Add Subscription plan</button>
+    		<button type="button" style="float: right;" class="btn btn-primary" onclick="addsubscription()">+ Add Subscription plan</button>
     		</div>
     	</div> 
-        <?php 
-            if($msg==0)
-            {
-               $msg='<div class="alert alert-info alert-dismissible">
+       <div class="alert alert-info alert-dismissible" id="delete" style="display: none;">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Subscription Package has been deleted successfully
+                 </div>
+                <div class="alert alert-info alert-dismissible" id="add" style="display: none">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Subscription plan has been added successfully
-                </div>';
-                echo $msg;
-          }
-          else if($msg==2)
-          {
-                $msg='<div class="alert alert-info alert-dismissible">
+                Subscription Package has been added successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" id="edit" style="display: none">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Subscription has been updated successfully
-                </div>';
-                echo $msg;           
-          }
-          else if($msg==3)
-          {
-                $msg='<div class="alert alert-info alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Subscription plan has been deleted successfully
-                </div>';
-                echo $msg;           
-          }
-           ?>
+                Subscription Package has been edited successfully
+                </div>
         <div class="row">
         	<div class="col-xs-12">
         	
@@ -46,10 +85,10 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="15%">subscription plan id</th>
-			                  <th style="text-align:center;">price</th>
-                        <th style="text-align:center;">per deal redeem price</th>
-                        <th style="text-align:center;">free days</th>
+			                  <th style="text-align:center;" width="15%">Subscription Plan Id</th>
+			                  <th style="text-align:center;">Price</th>
+                        <th style="text-align:center;">Per Deal Redeem Price</th>
+                        <th style="text-align:center;">Free Days</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>
@@ -64,15 +103,15 @@
                                  <td style="text-align:center;"><?php echo $data['per_deal_redeem_price']; ?></td>
                                   <td style="text-align:center;"><?php echo $data['free_days']; ?></td>
                                 <td style="text-align:center;">
-                          
+                              
                                     <div >
-                                        <a <?php echo "href=../../Controller/subscription_package/editsubscription_controller.php?id=".$data['subscription_plan_id']; ?> title="Edit" >
+                                        <a onclick="editsubscription(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/editsubscription_controller.php?id=".$data['subscription_plan_id']; ?> title="Edit" style="cursor: pointer;" >
                                           <i class="fa fa-pencil-square-o fa-fw"></i>
                                         </a>
-                                        <a onclick="javascript: return confirm('Do you really want to delete this subscription plan?');" <?php echo "href=../../Controller/subscription_package/deletesubscription_controller.php?id=".$data['subscription_plan_id'];?>  title="Delete" >
+                                        <a onclick="JSconfirm(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/deletesubscription_controller.php?id=".$data['subscription_plan_id'];?>  title="Delete" style="cursor: pointer;">
                                         <i class="fa fa-trash-o fa-fw"></i>
                                         </a>
-                                        <a <?php echo "href=../../Controller/subscription_package/viewsubscription_controller.php?id=".$data['subscription_plan_id'];?> title="View all detail">
+                                        <a onclick="viewsubscription(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/viewsubscription_controller.php?id=".$data['subscription_plan_id'];?> title="View all detail" style="cursor: pointer;">
                                           <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -86,4 +125,37 @@
        </div>
     </section>
 </div>
- <?php include "../../View/header/footer.php";?>  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript">
+function JSconfirm(id){
+  var bla = id;
+  $.confirm({
+    title:'Delete',
+    content: 'Are you sure you want to delete this subscription package?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+             var count_id = "delete";
+            $.ajax({
+                   url:"../../Controller/subscription_package/subscription_controller.php",
+                 method:"POST",
+                 data : {count_id:count_id,id:bla},
+                 success:function(data)
+                 {
+                      listsubscription(data);
+                 }
+              })
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+        }
+    }
+});
+}
+</script>
+
+ <?php //include "../../View/header/footer.php";?>  

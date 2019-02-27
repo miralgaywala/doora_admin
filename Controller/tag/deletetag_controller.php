@@ -5,4 +5,5 @@ $tag_id=$_GET['id'];
         
         $controller=new tag_controller();
         $controller->delete_tag($tag_id);
+        
         ?>

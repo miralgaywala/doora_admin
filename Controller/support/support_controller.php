@@ -1,5 +1,33 @@
 <?php
 include "../../Model/support/support_model.php";
+if(isset($_POST['count_id']))
+{
+	if($_POST['count_id'] == 'delete')
+	{
+		$support_id=$_POST['id'];
+		$support_controller=new support_controller();
+		$result=$support_controller->delete_support($support_id);
+		echo "#delete";
+
+	}
+	if($_POST['count_id'] == 'request')
+	{
+		$id=$_POST['id'];
+		$data=$_POST['value'];
+		$support_controller=new support_controller();
+		$result=$support_controller->is_open($id,$data);
+		if($result==2)
+		{
+			echo "#open";
+		}
+		else
+		{
+			echo "#close";
+		}
+
+	}
+	
+}
 class support_controller
 {
 	public function __construct()
@@ -24,20 +52,18 @@ class support_controller
 	public function delete_support($support_id)
 	{
 		$this->support_model->deletesupport($support_id);
-
-		echo '<script>window.location.href="../../Controller/support/viewsupport_controller.php?id=3";</script>';
 	}
 	public function is_open($id,$data)
 	{
-
 		$is_open=$this->support_model->updateopen($id,$data);
-		if($is_open=="2")
-		{
-			echo "<script>window.location.href='../../Controller/support/viewsupport_controller.php?id=2';</script>";
-		}
-		else
-		{
-			echo "<script>window.location.href='../../Controller/support/viewsupport_controller.php?id=0';</script>";			
-		}
+		return $is_open;
+	}
+	public function support_filter($support)
+	{
+		 $support_filter=$this->support_model->support_filter($support);
+
+		include "../../View/support/filter_data.php";
+	
+		return $support_filter;
 	}
 }

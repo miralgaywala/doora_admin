@@ -1,33 +1,75 @@
 <?php 
-include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+// include "../../View/header/header.php";
+//  include "../../View/header/sidemenu.php";
 ?> 
+<script type="text/javascript">
+   function backcategory()
+      {
+              
+        $.ajax({
+                 url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function existcategory(id,data)
+      {
+         hash_id = data;
+            $.ajax({
+                url:"../../Controller/category/editcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                      
+                 }
+              })
+      } 
+      function listcategory(id)
+      {
+            hash_id = id;
+            $.ajax({
+                url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      } 
+ </script>
  <?php
     foreach ($editcategorylist as $key => $data) 
     {
       $image=$data['category_image'];
  ?>
-  <?php
-      include_once("../../Controller/category/category_controller.php");
-      $controller=new category_controller();
-      $controller->editcategory_data();      
-  ?>
+
 <!--Main Content -->
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>    
         <div class="col-md-2">
             <br/>   
-            <button style="float: right;" onclick="window.location.href='../../Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
+            <button style="float: right;" onclick="backcategory()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>          
         </div>
       </div> 
+      <div class="alert alert-info alert-dismissible" id="exists" style="display: none;">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                   Catgeory has been alredy exists
+                 </div>    
         <div class="row">
         	<div class="col-xs-12">
         		<div class="box">
         			<br>
         			<!-- box-header -->
         			<div class="box-body">
-        				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+        				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" >
         					<input type="hidden" name="category_id" value="<?php echo $data['category_id'];?>"" id="category_id"/>
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
@@ -58,6 +100,7 @@ include "../../View/header/header.php";
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
                                         <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data['is_super_market'] == 1) echo 'checked="checked"';?>/>
+                                        <input name="is_super_market1" type="hidden" id="is_super_market1" value="<?php echo $data['is_super_market']; ?>" />
                                          <br> <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
                              </div>  
@@ -113,7 +156,7 @@ include "../../View/header/header.php";
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
-                          alert(data);
+                        
                             html = '<img src="' + img + '" />';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
@@ -124,8 +167,8 @@ include "../../View/header/header.php";
             });
         </script>                  
                                <div class="box-footer notranslate">
-                                   <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
-                                     <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='/sprookr/adminpanel/Controller/category/displaycategorycontroller.php'"> 
+                                   <input type="button" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit" onclick="return validateForm();"/>
+                                     <input type="button" name="cancel" value="Cancel" class="btn btn-default pull-right" onclick="backcategory()"> 
                             </div>                         
                     </div>
                </form> 
@@ -135,15 +178,48 @@ include "../../View/header/header.php";
     </section>
 </div>
  <?php 
-include "../../View/header/footer.php";?> 
+//include "../../View/header/footer.php";?> 
  <script type="text/javascript">
                           function validateForm() {
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
                                     var categoryimage = document.getElementById("category_image").value;
+                                    var imagename = document.getElementById("imagename").value;
+                                    var is_super_market = document.getElementById("is_super_market1").value;
+                                    var category_id = document.getElementById("category_id").value;
+                                    var count=0;
+                                    alert(imagename);
                                     if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
-                                        return false;
+                                       count++;
                                       }
+                                      else
+                                      {
+                                         document.getElementById('category_nameerror').innerHTML="";
+                                      }
+                                      if(count>0)
+                                   {
+                                    return false;
+                                   }
+                                   else
+                                   {
+                                    var count_id = "edit";
+                                      $.ajax({
+                                        type: 'POST',
+                                        url: '../../Controller/category/category_controller.php',
+                                        data: {count_id:count_id,categoryname:categoryname,imagename:imagename,is_super_market:is_super_market,category_id:category_id},
+                                        success: function (data) {
+                                        
+                                         if(data == "#edit")
+                                          {
+                                              listcategory(data);
+                                            }
+                                            else
+                                            {
+                                              existcategory(category_id,data);
+                                            }
+                                     }
+                                      });
+                                   }  
                                       
                                   }
          function validate() {
@@ -197,22 +273,3 @@ include "../../View/header/footer.php";?>
               } 
             }
 </script>
- <?php 
-                         if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
-                                  $category_name =$_POST['category_name'];            
-                                                           
-                                  $category_id=$_POST['category_id'];
-                               
-                                  if(isset($_POST['is_super_market']))
-                                  {
-                                    $_POST['is_super_market']=1;
-                                  }
-                                  else
-                                  {
-                                    $_POST['is_super_market']=0;
-                                  }
-                                  $_POST['is_super_market'];
-                                   $_POST['imagename'];  
-                                  }
-                                  
-                                ?>       

@@ -10,7 +10,7 @@ class subcategory_model
     public function getsubcategorylist()
     {
         $con=$this->db->connection();
-        $getsubcategory=$con->query("select * from sub_category where NOT is_deleted=1");
+        $getsubcategory=$con->query("select sc.* from category as cat,sub_category as sc where cat.category_id=sc.category_id and cat.is_deleted=0 and sc.is_deleted=0");
        $subcategory = array();
       while ($row = $getsubcategory->fetch_assoc()) {
         $subcategory[] = $row;
@@ -54,8 +54,8 @@ class subcategory_model
     public function deletesubcategory($subcategory_id)
     {
         $con=$this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         //echo "update sub_category SET is_deleted=1,updated_at='".$date."' where sub_category_id=".$subcategory_id;
         $con->query("update sub_category SET is_deleted=1,updated_at='".$date."' where sub_category_id=".$subcategory_id);
     }
@@ -73,8 +73,8 @@ class subcategory_model
     {
         $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select * from sub_category where sub_category_name='".$subcategory_name."' AND category_id=".$category_id." AND is_deleted=0 ");
         $count=$select->num_rows;
        $add_subcategory="";
@@ -84,7 +84,7 @@ class subcategory_model
         }
         else
         {
-        $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')"); 
+        $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at,updated_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."','".$date."')"); 
         //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
         $add_subcategory="1";
         }
@@ -105,8 +105,8 @@ class subcategory_model
     {
         $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
-        $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-        $date=$date->format('y-m-d H:i:s');
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date = gmdate("Y-m-d\TH:i:s\Z");
         $select=$con->query("select * from sub_category where is_deleted=0 AND category_id=".$category_id." AND sub_category_name='".$subcategory_name."' AND sub_category_id!=".$subcategory_id);
         $count=$select->num_rows;
         $edit_category="";

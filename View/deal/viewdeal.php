@@ -1,5 +1,6 @@
-<?php include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
+  <?php 
+  //include "../../View/header/header.php";
+ // include "../../View/header/sidemenu.php";
  ?>
  <script>
         // $(document).ready(function(){
@@ -9,18 +10,37 @@
         //      $("#category").select2(); 
         //       $("#sub_category").select2(); 
         // });
-        
+
 
     </script>
+    <style type="text/css">
+     
+    </style>
     <script> 
+
+      $(document).ready(function(){
+            $(".select2").select2(); 
+        });
+      function viewdeal(id)
+      {
+            $.ajax({
+                 url:"../../Controller/deal/viewdealdetail_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                        
+                 }
+              })
+      }
     $(document).ready(function(){
-      $('#sub_category').change(function(){
+      $('#sub_category_deal').change(function(){
         // loadsubcategoryfilter($(this).find(':selected').val())
         loadfilter()
       })
     })   
     function loadsubcategoryfilter(CategoryId){
-         	var elem = document.getElementById("sub_category");
+         	var elem = document.getElementById("sub_category_deal");
 		//alert("hiii");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
@@ -33,14 +53,15 @@
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
+                "autoWidth": false,
                 "destroy":true,
             });
 		   }
       });
 }             
 $(document).ready(function(){
-      $('#category').change(function(){
-   
+      $('#category_deal').change(function(){
+
         // loadcategoryfilter($(this).find(':selected').val())
         loadsubcategory($(this).find(':selected').val())
              loadfilter()
@@ -49,7 +70,7 @@ $(document).ready(function(){
         function loadcategoryfilter(CategoryId){
       
         //var UsersId = $('#category').val(); 
-        var elem = document.getElementById("category");
+        var elem = document.getElementById("category_deal");
         selectedNode = elem.options[elem.selectedIndex];
         var CategoryId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
@@ -61,16 +82,16 @@ $(document).ready(function(){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		          
+		            "autoWidth": false,
 		            "destroy":true,
 		    		});
 		   }
     });
 }
 function loadsubcategory(CategoryId){
-        $("#sub_category").children().remove()
+        $("#sub_category_deal").children().remove()
         //var UsersId = $('#category').val(); 
-    var elem = document.getElementById("category");
+    var elem = document.getElementById("category_deal");
       selectedNode = elem.options[elem.selectedIndex];
       var CategoryId = selectedNode.value;
     
@@ -79,12 +100,12 @@ function loadsubcategory(CategoryId){
             url: '../../Controller/deal/subcategory.php?category_id='+CategoryId,
             success:function(data1) { 
                 //console.log(data1);
-                  $('#sub_category').html(data1);
+                  $('#sub_category_deal').html(data1);
             }
             });
 }
 $(document).ready(function(){
-      $('#branch').change(function(){
+      $('#branch_deal').change(function(){
         loadfilter()
         // loadbranchfilter($(this).find(':selected').val())
       })
@@ -92,7 +113,7 @@ $(document).ready(function(){
         function loadbranchfilter(branchId){
       
         //var UsersId = $('#category').val(); 
-        var elem = document.getElementById("branch");
+        var elem = document.getElementById("branch_deal");
         selectedNode = elem.options[elem.selectedIndex];
         var branchId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
@@ -104,21 +125,21 @@ $(document).ready(function(){
                $("#result_data").empty();
                $("#result_data").append(data);
         				$('#example2').dataTable({
-        		           
+        		           "autoWidth": false,
         		            "destroy":true,
         		    		});
        }
       });
 }
 $(document).ready(function(){
-      $('#tag').change(function(){
+      $('#tag_deal').change(function(){
         loadfilter()
         // loadtagfilter($(this).find(':selected').val())
       })
     })
         function loadtagfilter(tagId){
         //var UsersId = $('#category').val(); 
-        var elem = document.getElementById("tag");
+        var elem = document.getElementById("tag_deal");
         selectedNode = elem.options[elem.selectedIndex];
         var tagId = selectedNode.value;
        
@@ -133,14 +154,14 @@ $(document).ready(function(){
 		           $("#result_data").empty();
 		           $("#result_data").append(data);
 		           $('#example2').dataTable({
-		           
+		           "autoWidth": false,
 		            "destroy":true,
 		    		});
 			 }
       });
 }
 $(document).ready(function(){
-      $('#business').change(function(){
+      $('#business_deal').change(function(){
       
         loadbranch($(this).find(':selected').val())
           loadfilter()
@@ -148,9 +169,9 @@ $(document).ready(function(){
       })
     })
 function loadbranch(UsersId){
-            $("#branch").children().remove()
+            $("#branch_deal").children().remove()
             //var UsersId = $('#business').val(); 
-        var elem = document.getElementById("business"),
+        var elem = document.getElementById("business_deal"),
           selectedNode = elem.options[elem.selectedIndex];
           var UsersId = selectedNode.value;
        //console.log(UsersId);
@@ -160,14 +181,14 @@ function loadbranch(UsersId){
                
                 success:function(data1) { 
                     // console.log(data1);
-                      $('#branch').html(data1);
+                      $('#branch_deal').html(data1);
                 }
                 });
     }
         function loadbusinessfilter(businessId){
       
         //var UsersId = $('#category').val();
-        var elem = document.getElementById("business");
+        var elem = document.getElementById("business_deal");
         selectedNode = elem.options[elem.selectedIndex];
         var businessId = selectedNode.value;
         $('#example2').dataTable().fnDestroy();
@@ -179,7 +200,7 @@ function loadbranch(UsersId){
                $("#result_data").empty();
                $("#result_data").append(data);
               $('#example2').dataTable({
-		           
+		            "autoWidth": false,
 		            "destroy":true,
 		    		});
       		 }
@@ -193,11 +214,11 @@ function loadfilter(){
       //  console.log($('#category').val()); 
       var radio=$("input[name='optradio']:checked").val();
 
-      var business_id = $('#business').val();
-      var branch = $('#branch').val();
-      var tag = $('#tag').val();
-      var sub_category = $('#sub_category').val();
-      var category = $('#category').val();
+      var business_id = $('#business_deal').val();
+      var branch = $('#branch_deal').val();
+      var tag = $('#tag_deal').val();
+      var sub_category = $('#sub_category_deal').val();
+      var category = $('#category_deal').val();
         $('#example2').dataTable().fnDestroy();
         $.ajax({
        url: '../../Controller/deal/loadfilter.php',
@@ -209,7 +230,7 @@ function loadfilter(){
                $("#result_data").empty();
                $("#result_data").append(data);
               $('#example2').dataTable({
-               
+               "autoWidth": false,
                 "destroy":true,
             });
            }
@@ -232,7 +253,7 @@ function loadfilter(){
                                                    $("#result_data").empty();
                                                    $("#result_data").append(data);
                                                      $('#example2').dataTable({
-                                                   
+                                                   "bAutoWidth": false,
                                                     "destroy":true,
                                                 });
                                                  }
@@ -347,8 +368,8 @@ function loadfilter(){
                <div class="row">
                                 <label for="business" class="col-sm-1 control-label" style="margin-top: 10px;">Business</label>
                                 <div class="col-sm-4" style="padding-top: 6px">
-                                    <select id="business" name="" class="form-control select2">
-                                       <option value="0">Select Business</option> 
+                                    <select id="business_deal" name="" class="form-control select2">
+                                       <option value="0">All Business</option> 
                                        
                                        <?php foreach ($getbusiness as  $data) {
                                           ?> <option value="<?php echo $data['user_id']; ?>"><?php echo $data['business_name']; ?></option> <?php }?>                             
@@ -356,8 +377,8 @@ function loadfilter(){
                                 </div> 
                                 <label for="branch" class="col-sm-2 control-label" style="margin-top: 10px;">Business Branch</label>
                                 <div class="col-sm-5" style="padding-top: 6px;">
-                                    <select id="branch" name="" class="form-control">
-                                       <option value="0">Select Business Branch</option>
+                                    <select id="branch_deal" name="" class="form-control select2">
+                                       <option value="0">All Business Branch</option>
                                       
                                   </select>
                                 </div> 
@@ -365,8 +386,8 @@ function loadfilter(){
                               <div class="row">
                                 <label for="tag" class="col-sm-1 control-label" style="margin-top: 25px">Tag</label>
                                 <div class="col-sm-2" style="padding-top: 20px">
-                                    <select id="tag" name="" class="form-control">
-                                       <option value="0">Select tag</option>
+                                    <select id="tag_deal" name="" class="form-control select2">
+                                       <option value="0">All tag</option>
                                        <?php 
                                        foreach ($gettag as  $data) {
                                           ?> <option value="<?php echo $data['tag_id']; ?>"><?php echo $data['tag']; ?></option> <?php }?>
@@ -374,8 +395,8 @@ function loadfilter(){
                                 </div> 
                                 <label for="category" class="col-sm-1 control-label" style="margin-top: 25px">Catgeory</label>
                                 <div class="col-sm-3" style="padding-top: 20px">
-                                    <select id="category" name="" class="form-control">
-                                       <option value="0">Select Catgeory</option>
+                                    <select id="category_deal" name="" class="form-control select2">
+                                       <option value="0">All Catgeory</option>
                                         <?php 
                                         foreach ($getcategory as $data) {
                                           ?> <option value="<?php echo $data['category_id']; ?>"><?php echo $data['category_name']; ?></option> <?php }?>       
@@ -383,8 +404,8 @@ function loadfilter(){
                                 </div> 
                                 <label for="sub_category" class="col-sm-2 control-label" style="margin-top: 25px;">Sub Category</label>
                                 <div class="col-sm-3" style="padding-top: 20px;padding-left: 5px;">
-                                    <select id="sub_category" name="" class="form-control">
-                                       <option value="0">Select Sub Category</option>
+                                    <select id="sub_category_deal" name="" class="form-control select2">
+                                       <option value="0">All Sub Category</option>
                                        <?php 
                                        foreach ($getsubcategory as $data) {
                                           ?> <option value="<?php echo $data[0]; ?>" ><?php echo $data[1]; ?></option> <?php }?>
@@ -434,4 +455,4 @@ function loadfilter(){
     </section>
 </div>
 <?php 
-include "../../View/header/footer.php";?> 
+//include "../../View/header/footer.php";?> 

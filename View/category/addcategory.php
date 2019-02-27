@@ -1,29 +1,77 @@
-<?php //include("View/header.php");
-include "../header/header.php";
-// include($_SERVER['DOCUMENT_ROOT']."/sprookr/adminpanel/View/header/header.php");
- //include("View/sidemenu.php");
-include "../header/sidemenu.php"; ?>
-
- <?php 
-        include_once("../../Controller/category/category_controller.php");
-        $controller=new category_controller();
-        $controller->add_category();       
-        ?>
+<script type="text/javascript">
+   function backcategory()
+      {
+              
+        $.ajax({
+                 url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function backcategorydata()
+      {
+              
+        $.ajax({
+                 url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
+      function existcategory(data)
+      {
+         hash_id = data;
+            $.ajax({
+                  url:"../../View/category/addcategory.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                      
+                 }
+              })
+      } 
+      function listcategory(id)
+      {
+            hash_id = id;
+            $.ajax({
+                url:"../../Controller/category/displaycategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      } 
+ </script>
     <section class="content">
       <div class="row">
         <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Category</h2></div>
         <div class="col-md-2">
                 <br/>   
-               <button style="float: right;" onclick="window.location.href='../../Controller/category/displaycategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button style="float: right;" onclick="backcategory()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
         </div>
-      </div>   
+      </div> 
+       <div class="alert alert-info alert-dismissible" id="exists" style="display: none;">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                   Catgeory has been alredy exists
+                 </div>    
         <div class="row">
-        	<div class="col-xs-12">
-        		<div class="box">
-        			<br>
-        			<div class="box-body">
-        				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
-        					<div class="form-group notranslate">
+          <div class="col-xs-12">
+            <div class="box">
+              <br>
+              <div class="box-body">
+                <form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" >
+                  <div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <input name="category_name" type="text" id="category_name" class="form-control"/>
@@ -47,9 +95,27 @@ include "../header/sidemenu.php"; ?>
                                        <div class="col-md-2" style="margin-top: 10px;"> 
                                           <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
                                       </div>                     
-                               
-                           </div> 
-        <script type="text/javascript">
+                           </div>                                                 
+                             <div class="form-group notranslate">
+                                <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
+                                    <div class="col-sm-8" style="padding-top: 6px">
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" onclick="return validate();"/><br>
+                                        <input name="is_super_market1" type="hidden" id="is_super_market1" value="0" />
+                                        <span id="issuper_market_error" class="show_required"></span> 
+                                    </div>
+                             </div>  
+                             <div class="box-footer  notranslate">
+                                    <input type="button" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit" onclick="return validateForm();"/>
+                                    <button type="button" class="btn btn-default pull-right" onclick="backcategorydata()">Cancel</button>
+                            </div>  
+                           </div>
+                         </form>
+              </div>
+            </div>
+          </div>  
+    </section>
+</div>
+<script type="text/javascript">
             var resize = $('#upload-demo').croppie({
                 enableExif: true,
                 enableOrientation: true,    
@@ -96,11 +162,11 @@ include "../header/sidemenu.php"; ?>
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "../category/croppie.php",
+                        url: "../../View/category/croppie.php",
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
-                        
+                          //alert(data);
                             html = '<img src="' + img + '" style="border-style:ridge;"/>';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
@@ -110,36 +176,12 @@ include "../header/sidemenu.php"; ?>
               }
             });
         </script>
-                                                                                       
-                             <div class="form-group notranslate">
-                                <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
-                                    <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" value="1" onclick="return validate();"/><br>
-                                        <span id="issuper_market_error" class="show_required"></span> 
-                                    </div>
-                                   
-                             </div>  
-
-                             <div class="box-footer  notranslate">
-                                    <input type="submit" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit"/>
-                                    <button class="btn btn-default pull-right" onclick="document.getElementById('addcategory_form').reset();window.location.href='../../Controller/category/displaycategorycontroller.php'">Cancel</button>
-                            </div>  
-                           </div>
-                         </form>
-        			</div>
-        		</div>
-        	</div>	
-       
-    </section>
-</div>
-
- <?php //include("View/footer.php");
- include "../header/footer.php";?> 
  <script type="text/javascript">
                       function validateForm() {
                                     var categoryname = document.getElementById("category_name").value;
                                     var categoryimage = document.getElementById("category_image").value;
                                     var imagename = document.getElementById("imagename").value;
+                                    var is_super_market = document.getElementById("is_super_market1").value;
                                     var count=0;
                                     if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
@@ -147,7 +189,7 @@ include "../header/sidemenu.php"; ?>
                                       }
                                       else
                                       {
-                                      	document.getElementById('category_nameerror').innerHTML="";
+                                        document.getElementById('category_nameerror').innerHTML="";
                                       }
                                     if(categoryimage == "")
                                       {
@@ -156,26 +198,42 @@ include "../header/sidemenu.php"; ?>
                                       }
                                       else
                                       {
-                                      	document.getElementById("category_imageerror").innerHTML="";
+                                        document.getElementById("category_imageerror").innerHTML="";
                                       }
                                      if(imagename == "")
                                     {
-                                    	document.getElementById("category_imageerror").innerHTML="Please Select Image";
+                                      document.getElementById("category_imageerror").innerHTML="Please Select Image";
                                         count++;
                                     }
                                     else
                                     {
-                                    	document.getElementById("category_imageerror").innerHTML="";
+                                      document.getElementById("category_imageerror").innerHTML="";
                                     }
                                    
                                    if(count>0)
                                    {
-                                   	return false;
+                                    return false;
                                    }
                                    else
                                    {
-                                   	return true;
-                                   }
+                                    var count_id = "add";
+                                      $.ajax({
+                                        type: 'POST',
+                                        url: '../../Controller/category/category_controller.php',
+                                        data: {count_id:count_id,categoryname:categoryname,imagename:imagename,is_super_market:is_super_market},
+                                        success: function (data) {
+                                       
+                                         if(data == "#add")
+                                          {
+                                              listcategory(data);
+                                            }
+                                            else
+                                            {
+                                              existcategory(data);
+                                            }
+                                     }
+                                      });
+                                   }  
                                   }
                                   
          function validate() {
@@ -184,17 +242,17 @@ include "../header/sidemenu.php"; ?>
                   {
                     $.ajax({
                               type: 'post',
-                              url: '../category/issuper.php',
+                              url: '../../View/category/issuper.php',
                               data: {
                                 is_super_market:name
                               },
                               success: function (data1) {
 
                                //$('#issuper_market_error').html(data1);
-                               
-                               	 $('#issuper_market_error').html(data1);
+                               document.getElementById("is_super_market1").value = "1";
+                                 $('#issuper_market_error').html(data1);
 
-                             	}
+                              }
                             });
                         }          
                   else
@@ -205,32 +263,19 @@ include "../header/sidemenu.php"; ?>
             }
             else
             {
-            	$.ajax({
+              $.ajax({
                               type: 'post',
-                              url: '../category/issuper.php',
+                              url: '../../View/category/issuper.php',
                               data: {
                                 is_super_market:name
                               },
                               success: function (data1) {
+                                 document.getElementById("is_super_market1").value = "0";
                                     $('#issuper_market_error').hide();
-                             	}
+                              }
                             });
             } 
         }  
         
 </script>
- <?php 
-                            if(isset($_POST['category_submit']) && !empty($_POST['category_submit'])){
-                                  $category_name =$_POST['category_name'];
-                                  if(isset($_POST['is_super_market']))
-                                  {                                 	
-                                    $_POST['is_super_market']=1;
-                                  }
-                                  else
-                                  {
-                                    $_POST['is_super_market']=0;
-                                  }
-                                  $_POST['is_super_market'];
-                                  $_POST['imagename'];               
-                              }
-                            ?>       
+ 

@@ -1,15 +1,30 @@
 <?php //include("View/header.php");
-include "../../View/header/header.php";
+// include "../../View/header/header.php";
 
- //include("View/sidemenu.php");
-include "../../View/header/sidemenu.php";
+//  //include("View/sidemenu.php");
+// include "../../View/header/sidemenu.php";
  ?>
  
  <?php
        foreach ($view_branch as $key => $data) 
                   {
                     $id=$data['franchise_id'];
+
                ?>
+               <script type="text/javascript">
+                 function backbranch(id)
+                  {
+                    $.ajax({
+                             url:"../../Controller/business/viewbusinessbranch_controller.php?id="+id,
+                             method:"POST",
+                             success:function(data)
+                             {
+                                  $('.content-wrapper').html(data);
+                                  
+                             }
+                          })
+                  }
+               </script>
 <!--Main Content -->
     <section class="content">
       <div class="row">
@@ -17,7 +32,7 @@ include "../../View/header/sidemenu.php";
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/doora/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button type="button" style="float: right;" onclick="window.history.go(-1); return false;" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+               <button type="button" style="float: right;" onclick="backbranch(<?php echo $data['business_user_id']; ?>)" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
   
         </div>
       </div> 
@@ -38,14 +53,14 @@ include "../../View/header/sidemenu.php";
                    <td style="width: 20%">Frenchise Address</td>
                   <td><?php echo $data['franchise_address'];?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                    <td style="width: 20%">Latitude</td>
                   <td><?php echo $data['latitude'];?></td>
                   </tr>
                   <tr>
                    <td style="width: 20%">Longitude</td>
                   <td><?php echo $data['longitude'];?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                  <td style="width: 20%">Branch Activate</td>
                   <td><?php if($data['is_branch_active'] == 0)
@@ -57,7 +72,7 @@ include "../../View/header/sidemenu.php";
                       echo "Yes";
                     }?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                   <td style="width: 20%">Deleted</td>
                   <td><?php if($data['is_deleted'] == 0)
                   {
@@ -67,14 +82,30 @@ include "../../View/header/sidemenu.php";
                     {
                       echo "Yes";
                     }?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                    <td style="width: 20%">Created Date</td>
-                  <td><?php echo $data['created_at'];?></td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["created_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo1").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo1"></div></td>
                   </tr>
                   <tr>
-                  <td style="width: 20%">Upadted Date</td>
-                  <td><?php echo $data['updated_at'];?></td>
+                   <td style="width: 20%">Updated Date</td>
+                  <td><script type="text/javascript">
+                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
+                      var testDateUtc = moment.utc('<?php echo $data["updated_at"] ?>');
+                      //alert(testDateUtc);
+                      var localDate = testDateUtc.local();
+                      // console.log(localDate.format(dateFormat));
+                      document.getElementById("demo2").innerHTML = localDate.format(dateFormat);
+                    </script>
+                   <div id="demo2"></div></td>
                   </tr>
                 <?php } ?>
                 </table>
@@ -86,7 +117,7 @@ include "../../View/header/sidemenu.php";
     </section>
 </div>
 
-   <?php include "../../View/header/footer.php";?>  
+   <?php //include "../../View/header/footer.php";?>  
  
      
                        

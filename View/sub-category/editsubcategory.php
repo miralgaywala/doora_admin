@@ -1,18 +1,49 @@
-   <?php 
-include "../../View/header/header.php";
- include "../../View/header/sidemenu.php";
-?> 
- 
- <?php 
-        include_once("../../Controller/sub_category/subcategory_controller.php");
-        $controller=new subcategory_controller();
-        $controller->edit_subcategorydata(); 
-        ?>
-<script>
-        $(document).ready(function(){
-            $("#category_name").select2(); 
-        });
-    </script>
+
+        <script type="text/javascript">
+           $(document).ready(function(){
+        $('#category_name').select2();
+      });
+           function backsubcategory()
+            {
+         
+            $.ajax({
+                 url:"../../Controller/sub_category/displaysubcategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                       $('.content-wrapper').html(data);
+                       
+                 }
+            })
+      }
+      function existsubcategory(id,data)
+      {
+         hash_id = data;
+            $.ajax({
+                   url:"../../Controller/sub_category/editsubcategory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                      
+                 }
+              })
+      } 
+      function listsubcategory(id)
+      {
+            hash_id = id;
+            $.ajax({
+                 url:"../../Controller/sub_category/displaysubcategorycontroller.php",
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      $(hash_id).show();
+                 }
+              })
+      } 
+        </script>
 <!--Main Content -->
     <section class="content">
       <div class="row">
@@ -20,30 +51,32 @@ include "../../View/header/header.php";
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
-               <button style="float: right;" onclick="window.location.href='../../Controller/sub_category/displaysubcategorycontroller.php'" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
-
+               <button style="float: right;" onclick="backsubcategory()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
            <!-- <a href="/sprookr/adminpanel/View/category/addcategory.php" class="btn btn-primary">+ Add Category</a>-->
         </div>
-      </div>      
+      </div>    
+      <div class="alert alert-info alert-dismissible" id="exists" style="display: none;">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Sub Catgeory has been alredy exists
+                 </div>     
         <div class="row">
-        	<div class="col-xs-12">
-        		<div class="box">
-        			<br>
-        			<!-- box-header -->
-
-        			<div class="box-body">
-        				<form class="form-horizontal" name="addsubcategory" id="addsubcategory_form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
-                  <div class="form-group notranslate">
-                       <?php
+          <div class="col-xs-12">
+            <div class="box">
+              <br>
+              <!-- box-header -->
+              <div class="box-body">
+                <form class="form-horizontal" name="addsubcategory" id="addsubcategory_form" role="form" action="" method="post" enctype="multipart/form-data" >
+                    <?php
                                         foreach ($editdisplaycategory as $key => $data) 
                                       { ?>
+                  <div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
-                                       <!-- <option value="<?php echo $data[2];?>"><?php echo $data[0];?></option> -->
-                                       <?php if($data['category_id'])
+                                       <option value="0">Select category</option>
+                                      <?php if($data['category_id'])
                                        {
-                                       	$selected = $data['category_id'];
+                                        $selected = $data['category_id'];
                                        }
                                        else
                                     {
@@ -55,49 +88,49 @@ include "../../View/header/header.php";
                                       { ?>
                                          <option value="<?php echo $data1['category_id'];?>" <?php if($data1['category_id'] == $selected ) { ?> selected  <?php } ?>><?php echo $data1['category_name'];?></option>
                                     <?php   } ?>
-                                    </select>
-                                    <span id="cat_nameerror" class="show_required"></span><br>
+                                  </select>
+                                  <span id="categoryerror" class="show_required"></span>
                                 </div> 
                             </div>
-                             
-                  <input type="hidden" name="sub_category_id" value='<?php echo $data['sub_category_id'];?>' id="sub_category_id"/>
-        					   <div class="form-group notranslate">
+
+                            <div class="form-group notranslate">
+                              <input type="hidden" name="sub_category_id" value='<?php echo $data['sub_category_id'];?>' id="sub_category_id"/>
                                 <label for="sub_category_name" class="col-sm-3 control-label">Sub Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data['sub_category_name'];?>' onblur="subcategoryname();"/>
-                                    <span id="category_nameerror" class="show_required"></span><br>
+                                    <input name="sub_category_name" type="text" id="sub_category_name" class="form-control" value='<?php echo $data['sub_category_name'];?>'/>
+                                    <span id="category_nameerror" class="show_required"></span>
                                 </div>
                             </div>
                             <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
-                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" style="margin-top: 10px;"><span id="category_imageerror" class="show_required"></span><br>
-                                       <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload" style="margin-top:2%">
-                                      </div> 
+                                        <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" style="margin-top: 10px;">
+                                        <span id="category_imageerror" class="show_required"></span><br><br>
+                                      <input type="button" id="btn-upload" class="btn btn-success" value="Upload Image" name="btn-upload">
+                                      </div>
                                         <div class="col-md-3" style="margin-top: 10px;"> </div>
                                       <div class="col-md-3" style="margin-top: 10px;">
-                                        <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "../../../images/sub_category/".$data['sub_category_image']; ?>" style="width:186px;height:186px;" /></div>
+                                       
+                                     
+                                      <div id="preview-crop-image" style="width:188px;height:188px; border-style: groove;border-width: thin;"><img src="<?php echo "../../../images/sub_category/".$data['sub_category_image']; ?>" style="width:186px;height:186px;" /></div>
                                       <input type="hidden" name="imagename" id="imagename" value='<?php echo $data['sub_category_image'];?>'/>
                                       </div>  
                                        <div class="col-md-1" style="margin-top: 10px;"> 
                                           <div id="upload-demo" style="width:201px;height:201px; border-style: groove;border-width: thin;"></div>
                                       </div>                     
-                               
-                           </div>
-                                  
-                                    <?php
-                                  }?>
-                                                    
+                                  </div> 
+                             </div>                               
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" id="subcategory_submit" class="btn btn-primary pull-right"/>
-                                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default pull-right" onclick="window.location.href='../../Controller/sub_category/displaysubcategorycontroller.php'">
+                                    <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit" onclick="return validateForm();"/>
+                                    <button class="btn btn-default pull-right" onclick="backsubcategory()">Cancel</button>
                             </div>  
                            </div>
+                            <?php
+                                  }?>
                          </form>
-        			</div>
-        		</div>
-        	</div>	
-       <script type="text/javascript">
+              </div>
+            </div>
+            <script type="text/javascript">
             var resize = $('#upload-demo').croppie({
                 enableExif: true,
                 enableOrientation: true,    
@@ -144,12 +177,12 @@ include "../../View/header/header.php";
                     size: 'viewport'
                 }).then(function (img) {
                     $.ajax({
-                        url: "../sub-category/croppie.php",
+                        url: "../../View/sub-category/croppie.php",
                         type: "POST",
                         data: {"sub_category_image":img},
                         success: function (data) {
                             html = '<img src="' + img + '" />';
-                            //alert(data);
+                            // alert(data);
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
                         }
@@ -161,60 +194,57 @@ include "../../View/header/header.php";
     </section>
 </div>
 
- <?php 
-include "../../View/header/footer.php";?> 
+  <?php //include "../../View/header/footer.php";?>
  <script type="text/javascript">
+                  
                       function validateForm() {
-                                    //var category_name = document.getElementById["category_name"].value;
-                                    var subcategoryname = document.forms["addsubcategory"]["sub_category_name"].value;
+                                    var subcategoryname = document.getElementById("sub_category_name").value;
+                                    var sub_category_id = document.getElementById("sub_category_id").value;
                                     var subcategoryimage = document.getElementById("sub_category_image").value;
-                                    if(category_name == "0" && subcategoryname.trim() == "" && subcategoryimage == "")
-                                    {
-                                       document.getElementById('categoryerror').innerHTML="Please Select Category Name";
-                                       document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
-                                       document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
-                                    }
+                                    var category_name = document.getElementById("category_name").value;
+                                      var imagename = document.getElementById("imagename").value;
+                                    var count=0;
                                     if(category_name == "0")
                                     {
                                       document.getElementById('categoryerror').innerHTML="Please Enter Category Name";
-                                        return false;
+                                       count++;
                                     }
-                                    if (subcategoryname.trim() == "") {
-                                        document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
-                                        return false;
-                                      }
-                                   /* if(subcategoryimage == "")
+                                    else
                                       {
-                                        document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                        return false;
-                                      }*/
+                                        document.getElementById('categoryerror').innerHTML="";
+                                      }
+                                    if (subcategoryname.trim() == "") {
+                                        document.getElementById('category_nameerror').innerHTML="Please Enter Sub-Category Name";
+                                        count++;
+                                      }
+                                      else
+                                      {
+                                        document.getElementById('category_nameerror').innerHTML="";
+                                      }
+                                  if(count>0)
+                                   {
+                                    return false;
+                                   }
+                                   else
+                                   {
+                                      var count_id = "edit";
+                                      $.ajax({
+                                        type: 'POST',
+                                        url: '../../Controller/sub_category/subcategory_controller.php',
+                                        data: {count_id:count_id,sub_category_id:sub_category_id,subcategoryname:subcategoryname,category_name:category_name,imagename:imagename},
+                                        success: function (data) {
+                                          
+                                         if(data == "#edit")
+                                          {
+                                              listsubcategory(data);
+                                            }
+                                            else
+                                            {
+                                              existsubcategory(sub_category_id,data);
+                                            }
+                                     }
+                                      });
+                                   }
                                   }
-
-       
-         function ImagePreview() { 
-             var PreviewIMG = document.getElementById('SubcatPicture'); 
-             var UploadFile    =  document.getElementById('sub_category_image').files[0]; 
-             var ReaderObj  =  new FileReader(); 
-             ReaderObj.onloadend = function () { 
-                PreviewIMG.style.backgroundImage  = "url("+ ReaderObj.result+")";
-              }
-             if (UploadFile) { 
-                ReaderObj.readAsDataURL(UploadFile);
-              } else { 
-                 PreviewIMG.style.backgroundcolor  = "";
-              } 
-            }
-</script>
- <?php 
-                            if(isset($_POST['subcategory_submit']) && !empty($_POST['subcategory_submit'])){
-                                  $category_name =$_POST['sub_category_name'];
-                                  $_POST['imagename'];
-                                   $category_id=$_POST['category_name'];                                  
-                                   $sub_category_id=$_POST['sub_category_id'];
-                                  //echo $sub_category_id;
-                   
-                              }
-                            ?>       
-                       
+</script> 
  

@@ -1,5 +1,26 @@
 <?php
 include "../../Model/content_management/contentmanagement_model.php";
+if(isset($_POST['count_id']))
+{
+	if($_POST['count_id'] == 'add')
+	{
+		$content_id = $_POST['content_id'];
+		$privacy_policy = $_POST['privacy'];
+		$term_condition = $_POST['term'];
+		$helpc = $_POST['helpc'];
+		$helpb = $_POST['helpb'];
+    	$content_controller=new content_controller();
+	 	$result=$content_controller->addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb);
+	 	if($result == 0)
+	 	{
+	 		echo "#edit";
+	 	}
+	 	else
+	 	{
+	 		echo "#add";
+	 	}
+	}
+}
 class content_controller
 {
 	public function __construct()
@@ -13,25 +34,9 @@ class content_controller
 		
 		return $display_content;
 	}
-	public function add_content()
+	public function addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb)
 	{
-		if(isset($_POST['content_submit']) && !empty($_POST['content_submit']))
-		{
-                     $content_id =$_POST['content_id'];
-                     $privacy_policy =$_POST['privacy_policy'];
-                     $term_condition =$_POST['term_condition'];
-                     $helpc =$_POST['helpc'];
-                     $helpb =$_POST['helpb'];
-                     $add_content=$this->content_model->addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb);
-                     	if($add_content=="0")
-						{
-						echo '<script>window.location.href="../../Controller/content_management/addcontentmanagement_controller.php?id=0";</script>';
-						}
-						else
-						{
-						echo '<script>window.location.href="../../Controller/content_management/addcontentmanagement_controller.php?id=2";</script>';
-						}	
-        }
+        $add_content=$this->content_model->addcontent_data($content_id,$privacy_policy,$term_condition,$helpc,$helpb);
 	}
 }
  ?>

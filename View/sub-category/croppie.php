@@ -7,7 +7,7 @@ $data = base64_decode($data);
 $count=count (glob ('../../../images/sub_category/*.jpg'));
 $imageName = $count + 1 . '.jpg';
 echo $imageName;
-file_put_contents('../../../sprookr/images/sub_category/' . $imageName, $data);
+file_put_contents('../../../images/sub_category/' . $imageName, $data);
 
 
 // if ((($data == "image/gif") || ($data == "image/jpeg") || ($data == "image/jpg") || ($data == "image/pjpeg") || ($data == "image/x-png") || ($data == "image/png"))) {
