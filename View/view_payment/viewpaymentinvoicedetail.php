@@ -21,7 +21,7 @@
                                 {
                                     ?>
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Business Invoice detail</h2></div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Business Receipts detail</h2></div>
     		<div class="col-md-2">
                 <br/>   
                 <button style="float: right;" onclick="backpayment()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
@@ -55,7 +55,7 @@
                                 <td><?php echo $start_date." <b>  to  </b> ".$end_date; ?></td>
                             </tr>
                             <tr>
-                                <td><b>Card details:</b></td>
+                                <td><b>Payment details:</b></td>
                                 <td>************<?php echo $data['last_four_digit'];?></td>
                             </tr>
                             <tr>
@@ -100,7 +100,7 @@
                             </thead>
                             <tr>
                                 <td>Deal:</td>
-                                <td><?php echo $value['deal_title']; ?></td>
+                                <td><?php echo json_decode('"'.$value['deal_title'].'"'); ?></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -124,7 +124,7 @@
                                 <td><?php echo $value['offline_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $redeem_amount);?></td>
                                 
-                                <td></td>
+                               
                             </tr>
                             <tr>
                                
@@ -137,7 +137,7 @@
                                 <td><?php echo $value['online_purchase'];echo " Qty * $"; echo $price_per_redeem; ?></td>
                                 <td><?php echo " $";echo sprintf("%.2f", $redeem_online_amount);?></td>
                                 
-                                <td></td>
+                                
                             </tr>
                             <tr>
                                 <td>Total Redeem</td>

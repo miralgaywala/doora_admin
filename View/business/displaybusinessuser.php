@@ -5,6 +5,10 @@
  <script>
   $(document).ready(function() {
    $('#example1').DataTable( {
+    "columnDefs": [ {
+            "targets": [3,8],
+            "orderable": false
+            } ]
     });
 } );
   function viewbusinessinvoice(id)
@@ -84,7 +88,7 @@
         var elem = document.getElementById("user");
         selectedNode = elem.options[elem.selectedIndex];
         var UserId = selectedNode.value;
-        console.log(selectedNode.value);
+       
          $.ajax({
                  url:"../../Controller/business/businessfilter.php?user_id="+UserId,
                  method:"POST",
@@ -124,7 +128,7 @@
         					<form class="form-horizontal" name="displayuser" id="displayuser" role="form" action="" method="post" enctype="multipart/form-data">
                              <div class="form-group">
                                 <label for="user" class="col-sm-3 control-label" style="margin-top: 5px;">Business User</label>
-                                <div class="col-sm-7" style="padding-top: 6px">
+                                <div class="col-sm-5" style="padding-top: 6px">
                                     <select id="user" name="user" class="form-control" aria-invalid="false">
                                         <?php 
                                             if($_GET['user_id'])
@@ -142,6 +146,7 @@
                                      <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option>
                                     </select>
                                 </div> 
+                                <div class="col-sm-4"></div>
                             </div>
                           </form>
                           <hr>
@@ -154,9 +159,9 @@
                         <th style="text-align:center;">Photo</th>
                         <th style="text-align:center;">Email Id</th>
                         <th style="text-align:center;">Contact No</th>
-                        <th style="text-align:center;" width="5%">Stripe Customer Id</th>
-                        <th style="text-align:center;" width="5%">Super Market</th>
-			                  <th style="text-align:center;" width="15%">Action</th>
+                        <th style="text-align:center;">Stripe Customer Id</th>
+                        <th style="text-align:center;">Super Market</th>
+			                  <th style="text-align:center;" width="13%">Action</th>
 			                </tr>
 							 </thead>
                 <?php
@@ -212,11 +217,11 @@
                                     		onclick="Jsopenalrt(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
                                     	<?php }?>
                                     	<?php //echo "href=../../Controller/business/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
-                                    		echo "Deactive";
+                                    		echo "Deactivate";
                                     	}
                                     	else
                                     	{
-                                    		echo "Active"; 
+                                    		echo "Activate"; 
                                     	} ?></a>
                                         <?php } ?>
                                     	<br/>
@@ -227,7 +232,7 @@
                                          <br/>
                                         <a onclick="viewverificationdetail(<?php echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                         <br/>
-                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Invoices</a>
+                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a>
                                       </div>
                                 </td>
                                  </tr>
@@ -285,7 +290,7 @@
                                          <br/>
                                         <a onclick="viewverificationdetail(<?php echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                         <br/>
-                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Invoices</a>
+                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a>
                                       </div>
                                 </td>
                                  </tr>
@@ -319,7 +324,7 @@
 
 function Jsopenalrt(value,id){
   $.confirm({
-    title:'Open Request',
+    title:'Activate',
     content: 'Are you sure you want to activate this business ?',
     buttons: {
       Yes: {

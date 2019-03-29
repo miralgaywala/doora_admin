@@ -16,7 +16,7 @@
 <!--Main Content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Support</h2></div>
+        <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>View Customer Support</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->

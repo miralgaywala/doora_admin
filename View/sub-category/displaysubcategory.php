@@ -8,7 +8,10 @@
 
 $(document).ready(function() {
    $('#example1').DataTable( {
-            
+           "columnDefs": [ {
+            "targets": [2,4],
+            "orderable": false
+            } ] 
     } );
    
 

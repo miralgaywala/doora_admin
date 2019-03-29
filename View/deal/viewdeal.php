@@ -225,13 +225,17 @@ function loadfilter(){
        data : {business_id : business_id,branch : branch,tag : tag, category : category, sub_category : sub_category,radio : radio},
        type: 'POST',
        success: function(data) {
-        console.log("filter");
-               console.log(data);
+        // console.log("filter");
+        //        console.log(data);
                $("#result_data").empty();
                $("#result_data").append(data);
               $('#example2').dataTable({
                "autoWidth": false,
                 "destroy":true,
+                 "columnDefs": [ {
+            "targets": [6,7],
+            "orderable": false
+            } ]
             });
            }
 
@@ -435,13 +439,13 @@ function loadfilter(){
                   <table id="example2" class="table table-bordered table-condensed table-hover" style="width:100%">
                             <thead>
                             <tr>
-                              <th style="text-align:center;" width="10%">#</th>
-                              <th style="text-align:center;" width="10%">Deal Id</th>
+                              <th style="text-align:center;" width="5%">#</th>
+                              <th style="text-align:center;" width="8%">Deal Id</th>
                               <th style="text-align:center;" width="20%">Franchise Address</th>
-                              <th style="text-align:center;" width="20%">Deal Title</th>
+                              <th style="text-align:center;" width="15%">Deal Title</th>
                               <th style="text-align:center;" width="10%">Promocode</th>
                               <th style="text-align:center;" width="10%">Terms and Condition</th>
-                              <th style="text-align:center;" width="10%">Deal Photo</th>
+                              <th style="text-align:center;" width="13%">Deal Photo</th>
                               <th style="text-align:center;" width="10%">Action</th>
                             </tr>
                              </thead>

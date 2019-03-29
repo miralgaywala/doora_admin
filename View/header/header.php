@@ -21,6 +21,7 @@
   <title>Doora| Admin Panel</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script> 
@@ -60,7 +61,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-<link rel="stylesheet" href="../../css/style.css">
+
 <!-- <link rel="stylesheet" href="../../bower_components/jquery/dist/jquery.min.js">
 <link rel="stylesheet" href="../../css/select2.min.css">
 <link rel="stylesheet" href="../../css/select2.full.min.js"> -->
@@ -72,6 +73,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="../../css/style.css">
 <style type="text/css">
    .fancybox-is-open .fancybox-bg {
     opacity: .7;
@@ -110,7 +112,7 @@
               <li class="user-header">
                 <img src="../../../images/profile/logo_user.png" class="img-circle" alt="User Image">
                 <p>
-                <?php echo $_SESSION['admin_name'] ?>
+                <?php echo $_SESSION['admin_name']; ?>
                  </p>
               <li class="user-footer">
                 <div class="pull-left">
@@ -144,5 +146,57 @@
      border-radius: 0px; 
      padding-left: 0px;
 }
-
+ a
+ {
+  color: #252838;
+  text-decoration-color: #252838;
+ }
+ a:hover { 
+  color: #252838;
+  text-decoration-color: #252838;
+}
+ .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
+ {
+  background-color: #f66867;
+  border-color:#f66867;
+ }
+ .btn-primary {
+    background-color: #f66867;
+    border-color: #f66867;
+}
+.btn.btn-primary:hover
+{
+   background-color: #f66867;
+    border-color: #f66867;
+}
+.btn .btn-primary .pull-right
+{
+  background-color: #f66867;
+    border-color: #f66867;  
+}
+.btn .btn-primary .pull-right:hover
+{
+  background-color: #f66867;
+    border-color: #f66867;
+}
+.bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
+    background-color: #f66867 !important;
+}
+.alert-info {
+    border-color: #f66867;
+}
+ h2 {
+     font-size: 20px; 
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    color: #fff;}
+.btn-default
+    {
+      color: #6c757d;
+   background-color: transparent;
+   background-image: none;
+   border-color: #6c757d;
+    }
+    table {table-layout:fixed;}
+       table td {word-wrap:break-word;}
 </style>

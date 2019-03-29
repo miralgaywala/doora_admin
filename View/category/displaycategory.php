@@ -4,6 +4,10 @@
  <script type="text/javascript">
    $(document).ready(function() {
    $('#example1').DataTable( {
+     "columnDefs": [ {
+            "targets": [2,4],
+            "orderable": false
+            } ]
     });
 } );
    function listcategory(id)
@@ -89,7 +93,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Category Id</th>
+			                  <th style="text-align:center;" width="8%">Category Id</th>
 			                  <th style="text-align:center;" width="25%">Image</th>
 			                  <th style="text-align:center;">Category Name</th>
 			                  <th style="text-align:center;" width="10%">Action</th>

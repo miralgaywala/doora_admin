@@ -124,7 +124,9 @@
                  else
                  {
                   $data['deal_photo']= "default.png";
-                 }     
+                 }    
+                 $html = nl2br($html);
+                         $condition = nl2br($condition); 
                ?>
                   <tr>
                   <td style="width: 20%">Business Deal Id</td>

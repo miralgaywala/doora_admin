@@ -4,6 +4,10 @@
  <script type="text/javascript">
   $(document).ready(function() {
    $('#example1').DataTable( {
+     "columnDefs": [ {
+            "targets": [3,6],
+            "orderable": false
+            } ]
     });
 } );
   $(document).ready(function(){
@@ -87,9 +91,9 @@
                   <form class="form-horizontal" name="displayuser" id="displayuser" role="form" action="" method="post" enctype="multipart/form-data">
                              <div class="form-group">
                                 <label for="user" class="col-sm-3 control-label" style="margin-top: 5px;">Customer</label>
-                                <div class="col-sm-7" style="padding-top: 6px">
+                                <div class="col-sm-5" style="padding-top: 6px">
                                     <select id="user" name="user" class="form-control select2" aria-invalid="false">
-                                        <?php 
+                                        <?php   
                                             if($_GET['user_id'])
                                             {
                                               $selected = $_GET['user_id'];
@@ -105,6 +109,8 @@
                                      <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option>
                                     </select>
                                 </div> 
+                                <div class="col-sm-4">
+                                </div>
                             </div>
                           </form>
                           <hr>
@@ -112,7 +118,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">User Id</th>
+			                  <th style="text-align:center;" width="8%">User Id</th>
 			                  <th style="text-align:center;">Customer Name</th>
                               <th style="text-align:center;">Photo</th>
                               <th style="text-align:center;">Email Id</th>

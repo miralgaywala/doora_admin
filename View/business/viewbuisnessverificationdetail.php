@@ -89,10 +89,10 @@
                    <td style="width: 20%">Instagram Link</td>
                   <td><?php echo $data['instagram_link'];?></td>
                   </tr>
-                  <tr>
+                 <!--  <tr>
                    <td style="width: 20%">Doc Name</td>
                   <td><?php echo $data['doc_name'];?></td>
-                  </tr>
+                  </tr> -->
                   <!-- <tr>
                   <td style="width: 20%">Verified</td>
                   <td><?php if($data['is_verified'] == 0)
@@ -129,27 +129,25 @@
                   <tr>
                    <td style="width: 20%">Created Date</td>
                   <td>
-                   <script type="text/javascript">
-                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
-                      var testDateUtc = moment.utc('<?php echo $data["created_at"] ?>');
-                      //alert(testDateUtc);
-                      var localDate = testDateUtc.local();
-                      // console.log(localDate.format(dateFormat));
-                      document.getElementById("demo1").innerHTML = localDate.format(dateFormat);
-                    </script>
-                   <div id="demo1"></div></td>
+                   <?php if($data['created_at'] == date('0000-00-00 00:00:00')){
+                          //echo "No";
+                      } 
+                      else
+                        {
+                          $newDate = date("d-m-Y H:i:s", strtotime($data['created_at']));
+                          echo $newDate;
+                        }?></td>
                   </tr>
                   <tr>
                    <td style="width: 20%">Updated Date</td>
-                  <td><script type="text/javascript">
-                      var dateFormat = 'DD-MM-YYYY HH:mm:ss';
-                      var testDateUtc = moment.utc('<?php echo $data["updated_at"] ?>');
-                      //alert(testDateUtc);
-                      var localDate = testDateUtc.local();
-                      // console.log(localDate.format(dateFormat));
-                      document.getElementById("demo2").innerHTML = localDate.format(dateFormat);
-                    </script>
-                   <div id="demo2"></div></td>
+                  <td><?php if($data['updated_at'] == date('0000-00-00 00:00:00')){
+                          //echo "No";
+                      } 
+                      else
+                        {
+                          $newDate = date("d-m-Y H:i:s", strtotime($data['updated_at']));
+                          echo $newDate;
+                        }?></td>
                   </tr>
                 
                 </table>

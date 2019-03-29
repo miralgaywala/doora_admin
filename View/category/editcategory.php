@@ -187,7 +187,7 @@
                                     var is_super_market = document.getElementById("is_super_market1").value;
                                     var category_id = document.getElementById("category_id").value;
                                     var count=0;
-                                    alert(imagename);
+                                    
                                     if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
                                        count++;

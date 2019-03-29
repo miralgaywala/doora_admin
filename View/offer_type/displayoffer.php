@@ -4,6 +4,10 @@
  <script type="text/javascript">
   $(document).ready(function() {
    $('#example1').DataTable( {
+     "columnDefs": [ {
+            "targets": [3],
+            "orderable": false
+            } ]
     });
 } );
   function addoffer()
@@ -85,7 +89,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Offer Id</th>
+			                  <th style="text-align:center;" width="8%">Offer Id</th>
 			                  <th style="text-align:center;">Offer Title</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>

@@ -1,6 +1,10 @@
 <script type="text/javascript">
   $(document).ready(function() {
    $('#example2').DataTable( {
+    "columnDefs": [ {
+            "targets": [5],
+            "orderable": false
+            } ]
     });
 } );
   function listsupport(data)
@@ -70,22 +74,22 @@ else
 <section class="content">
    
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Support List</h2></div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Customer Support List</h2></div>
     		<div class="col-md-2">
                 <br/>   
     		</div>
     	</div> 
                 <div class="alert alert-info alert-dismissible" style="display: none;" id="open">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
-                Support request has been close successfully
+                Customer Support request has been close successfully
                 </div>
                 <div class="alert alert-info alert-dismissible" style="display: none;" id="close">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Support request has been open successfully
+                Customer Support request has been open successfully
                 </div>
                 <div class="alert alert-info alert-dismissible"  style="display: none;" id="delete">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Support request has been deleted successfully
+                Customer Support request has been deleted successfully
                 </div>
         <div class="row">
         	<div class="col-xs-12">
@@ -114,7 +118,7 @@ else
 			                  <th style="text-align:center;" width="10%">Support Id</th>
                         <th style="text-align:center;" width="10%">User Name</th>
 			                  <th style="text-align:center;">Message</th>
-                         <th style="text-align:center;">Status</th>
+                         <th style="text-align:center;" width="10%">Status</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>

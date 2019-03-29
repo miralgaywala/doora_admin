@@ -20,6 +20,10 @@ if (!isset($_SESSION)) {
             $user="leocamq9_spr_usr";
             $pass="spk123!@#";
             $database="leocamq9_sprookr_db";
+            // $host="localhost";
+            // $user="root";
+            // $pass="de!1@2#al";
+            // $database="doora_db";
             $db= mysqli_connect($host, $user, $pass, $database);
 
 if (isset($_POST['sign_in'])) {
@@ -72,7 +76,43 @@ if (isset($_POST['sign_in'])) {
  
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<style type="text/css">
+.login-box-body, .register-box-body {
 
+   background: #fff;
+   padding: 20px;
+   border-top: 0;
+   color: #666;
+   border-radius: 2rem;
+   box-shadow: 0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23);
+
+}
+    .btn-primary {
+    background-color: #f66867;
+    border-color: #f66867;
+}
+.btn.btn-primary:hover
+{
+   background-color: #f66867;
+    border-color: #f66867;
+}
+.btn .btn-primary .pull-right
+{
+  background-color: #f66867;
+    border-color: #f66867;
+}
+.btn .btn-primary .pull-right:hover
+{
+  background-color: #f66867;
+    border-color: #f66867;
+}
+.bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
+    background-color: #f66867 !important;
+}
+.alert-info {
+    border-color: #f66867;
+}
+</style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

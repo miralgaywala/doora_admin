@@ -46,11 +46,13 @@ class business_model
         if($data==0)
         {
            $active=$con->query("update users SET is_active='1',updated_at='".$date."' WHERE user_id=".$id);
+           $active=$con->query("update bussiness_verification SET is_verified='1',updated_at='".$date."' WHERE business_id=".$id);
            $success="1";
         }
         else
         {
             $active=$con->query("update users SET is_active='0',updated_at='".$date."' WHERE user_id=".$id);
+            $active=$con->query("update bussiness_verification SET is_verified='0',updated_at='".$date."' WHERE business_id=".$id);
             $success="2";
         }
         return $success;

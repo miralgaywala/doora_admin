@@ -137,7 +137,9 @@ class deal_controller
                  else
                  {
                   $value15= "default.png";
-                 }        
+                 }  
+                 $html = nl2br($html);
+                         $condition = nl2br($condition);      
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                         <td style=\"text-align:center;\">".$i."</td>
@@ -243,15 +245,18 @@ class deal_controller
                          else
                          {
                           $value15= "default.png";
-                         }     
+                         }    
+                         $html = nl2br($html);
+                         $condition = nl2br($condition);
+                         
                 //generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
                     echo "<tr>
                                         <td style=\"text-align:center;\">".$i."</td>
                                         <td style=\"text-align:center;\">".$value0."</td>
                                         <td style=\"text-align:center;\">".$value21."</td>
-                                        <td style=\"text-align:center;\">".$html."</td>
+                                        <td style=\"text-align:center;word-wrap:break-word;\">".$html."</td>
                                         <td style=\"text-align:center;\">".$value7."</td>
-                                        <td style=\"text-align:center;\">".$condition."</td>
+                                        <td style=\"text-align:center;word-wrap:break-word;\">".$condition."</td>
                                         <td style=\"text-align:center;\"><img src='../../../images/deal/$value15' id=\"DealPicture\" style=\"object-fit:contain;\"/></td>
                                         <td style=\"text-align:center;\">
                                             <div>

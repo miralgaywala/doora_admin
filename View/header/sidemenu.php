@@ -1,5 +1,11 @@
 <script>
-  
+  function topFunction() {
+// document.body.scrollTop = 0;
+ //document.documentElement.scrollTop = 0;
+ //$("html, body").animate({ scrollTop: 0 }, "slow");
+  var $target = $('html,body');
+  $target.animate({scrollTop:0}, 500);
+}
      function opensubcategory()
       {
               $('li').removeClass('active');
@@ -66,6 +72,10 @@
                                                      $('#example2').dataTable({
                                                    
                                                     "destroy":true,
+                                                     "columnDefs": [ {
+                                                      "targets": [6,7],
+                                                      "orderable": false
+                                                      } ]
                                                 });
                                                  }
                                           });
@@ -212,6 +222,19 @@
                        }
                     })
       }
+      function sendcode()
+      {
+        $('li').removeClass('active');
+              $('#sendcode').parents("li").addClass('active');
+               $.ajax({
+                       url:"../../View/send_code/viewsendcode.php",
+                       method:"POST",
+                       success:function(data)
+                       {
+                            $('.content-wrapper').html(data);
+                       }
+                    })
+      }
   </script>
 <?php
 $base_name_page = basename($_SERVER['PHP_SELF']);
@@ -219,131 +242,73 @@ $base_name_page = basename($_SERVER['PHP_SELF']);
 <body class="hold-transition skin-blue sidebar-mini">
 
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); ">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="<?php if($base_name_page == "displaycategorycontroller.php" || $base_name_page == "addcategory.php" || $base_name_page == "editcategory_controller.php" || $base_name_page == "viewcategory_controller.php") { echo 'active';} ?>">
-           <a onclick="opendashboard()" rel="tab" style="cursor: pointer;" id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span>
+        <li style="padding-top: 10px; ">
+           <a onclick="opendashboard(); topFunction();" rel="tab" style="cursor: pointer;" id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/category/displaycategorycontroller.php">
-            <i class="fa fa-plus-square"></i><span>Category</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-         <li class="treeview <?php if($base_name_page == "displaybusinesslist_controller.php" || $base_name_page == "businessfilter.php" || $base_name_page == "viewbusiness_controller.php" || $base_name_page == "viewbusinessbranch_controller.php" || $base_name_page == "viewbranchdetail_controller.php" || $base_name_page == "viewbusinessinvoice_controller.php" || $base_name_page == "viewinvoicedetail_controller.php" || $base_name_page == "displaycustomerlist_controller.php" || $base_name_page == "viewcustomer_controller.php" || $base_name_page == "displayadminlist_controller.php" || $base_name_page == "editadmin_controller.php" || $base_name_page == "addadmin.php" || $base_name_page == "viewadmin_controller.php") { echo 'menu-open active';} ?>">
-          <a>
-            <i class="fa fa-user"></i> <span>User</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php if($base_name_page == "displaybusinesslist_controller.php" || $base_name_page == "businessfilter.php" || $base_name_page == "viewbusiness_controller.php" || $base_name_page == "viewbusinessbranch_controller.php" || $base_name_page == "viewbranchdetail_controller.php" || $base_name_page == "viewbusinessinvoice_controller.php" || $base_name_page == "viewinvoicedetail_controller.php") { echo 'active';} ?>">
-              <a onclick="openbusiness()" rel="tab" style="cursor: pointer;" id="business"><i class="fa fa-circle-o"></i> <span>Business</span></a>
-              <!-- <a href="../../Controller/business/displaybusinesslist_controller.php" ><i class="fa fa-circle-o"></i> Business</a> -->
+         
+         <hr>
+            <li style="padding-top: 10px; ">
+              <a onclick="openbusiness(); topFunction();" rel="tab" style="cursor: pointer;" id="business"><i class="fa fa-user"></i> <span>Business</span></a>
             </li>
-            <li class="<?php if($base_name_page == "displaycustomerlist_controller.php" || $base_name_page == "viewcustomer_controller.php") { echo 'active';} ?>">
-              <a onclick="opencustomer()" rel="tab" style="cursor: pointer;" id="customer"><i class="fa fa-circle-o"></i> <span>Customer</span></a>
-              <!-- <a href="../../Controller/customer/displaycustomerlist_controller.php" ><i class="fa fa-circle-o"></i> Customer</a> -->
+            <li style="padding-top: 10px; ">
+              <a onclick="opencustomer(); topFunction();" rel="tab" style="cursor: pointer;" id="customer"><i class="fa fa-users"></i> <span>Customer</span></a>
+              
             </li>
-            <!-- <li class="<?php if($base_name_page == "displayadminlist_controller.php" || $base_name_page == "editadmin_controller.php" || $base_name_page == "addadmin.php" || $base_name_page == "viewadmin_controller.php") { echo 'active';} ?>">
-              <a onclick="openadmin()" rel="tab" style="cursor: pointer;" id="admin"><i class="fa fa-circle-o"></i> <span>Admin</span></a>
-              <a href="../../Controller/admin/displayadminlist_controller.php" ><i class="fa fa-circle-o"></i> Admin</a> -->
-            <!-- </li> --> 
-          </ul>
-        </li>
-       <li class="<?php if($base_name_page == "displaysubcategorycontroller.php" || $base_name_page == "addsubcategory_controller.php" || $base_name_page == "editsubcategory_controller.php" || $base_name_page == "subcategoryfilter.php" || $base_name_page == "viewsubcategory_controller.php" || $base_name_page == "deletesubcategory_controller.php ") { echo 'active';} ?>">
-          <a onclick="opensubcategory()" rel="tab" style="cursor: pointer;" id="sub_category"><i class="fa fa-minus-square"></i> <span>Sub category</span>
+         
+       <hr>
+       <li style="padding-top: 10px; ">
+          <a onclick="opensubcategory(); topFunction();" rel="tab" style="cursor: pointer;" id="sub_category"><i class="fas fa-sitemap"></i>&nbsp;&nbsp;<span>Sub category</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/sub_category/displaysubcategorycontroller.php" rel="tab">
-            <i class="fa fa-minus-square"></i> <span>Sub category</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
-          <script type="text/javascript"></script>
       </li>
-        <li class="<?php if($base_name_page == "displaycategorycontroller.php" || $base_name_page == "addcategory.php" || $base_name_page == "editcategory_controller.php" || $base_name_page == "viewcategory_controller.php") { echo 'active';} ?>">
-        	 <a onclick="opencategory()" rel="tab" style="cursor: pointer;" id="category"><i class="fa fa-plus-square"></i><span>Category</span>
+        <li style="padding-top: 10px; ">
+        	 <a onclick="opencategory(); topFunction();" rel="tab" style="cursor: pointer;" id="category"><i class="fas fa-layer-group"></i>&nbsp;&nbsp;<span>Category</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/category/displaycategorycontroller.php">
-            <i class="fa fa-plus-square"></i><span>Category</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "displaytagcontroller.php" || $base_name_page == "addtag.php" || $base_name_page == "edittag_controller.php" || $base_name_page == "viewtag_controller.php") { echo 'active';} ?>">
-          <a onclick="opentag()" rel="tab" style="cursor: pointer;" id="tag"><i class="fa fa-clipboard"></i><span>Tag</span>
+        <li style="padding-top: 10px;">
+          <a onclick="opentag(); topFunction();" rel="tab" style="cursor: pointer;" id="tag"><i class="fa fa-hashtag"></i><span>Tag</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/tag/displaytagcontroller.php">
-            <i class="fa fa-clipboard"></i> <span>Tag</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "displayoffercontroller.php" || $base_name_page == "addoffer.php" || $base_name_page == "editoffer_controller.php" || $base_name_page == "viewoffer_controller.php") { echo 'active';} ?>">
-          <a onclick="openoffer()" rel="tab" style="cursor: pointer;" id="offer_type"><i class="fa fa-circle-o"></i><span>Offer Type</span>
+        <li style="padding-top: 10px;">
+          <a onclick="openoffer(); topFunction();" rel="tab" style="cursor: pointer;" id="offer_type"><i class="fa fa-percent"></i><span>Offer Type</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/offer_type/displayoffercontroller.php">
-            <i class="fa fa-circle-o"></i> <span>Offer type</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "viewdeal_controller.php" || $base_name_page == "viewdealdetail_controller.php") { echo 'active';} ?>">
-          <a onclick="openDeal()" rel="tab" style="cursor: pointer;" id="deal"><i class="fa fa-handshake-o"></i><span> Deal</span>
+        <li style="padding-top: 10px; ">
+          <a onclick="openDeal(); topFunction();" rel="tab" style="cursor: pointer;" id="deal"><i class="fa fa-handshake-o"></i><span> Deal</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/deal/viewdeal_controller.php">
-            <i class="fa fa-handshake-o"></i> <span>Deal</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "displaysubscription_controller.php" || $base_name_page == "addsubscription.php" || $base_name_page == "editsubscription_controller.php" || $base_name_page == "viewsubscription_controller.php") { echo 'active';} ?>">
-          <a onclick="opensubscription()" rel="tab" style="cursor: pointer;" id="subscription"><i class="fa fa-clipboard"></i><span>Subscription packages</span>
+        <li style="padding-top: 10px; ">
+          <a onclick="opensubscription(); topFunction();" rel="tab" style="cursor: pointer;" id="subscription"><i class="fa fa-money"></i><span>Subscription packages</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/subscription_package/displaysubscription_controller.php">
-            <i class="fa fa-clipboard"></i> <span>Subscription packages</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li>
-          <a onclick="openpayment()" rel="tab" style="cursor: pointer;" id="payment"><i class="fa fa-inr"></i></i><span>View Payment</span>
+        <li style="padding-top: 10px;">
+          <a onclick="openpayment(); topFunction();" rel="tab" style="cursor: pointer;" id="payment"><i class="fa fa-usd"></i></i><span>View Payment</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
-        <li class="<?php if($base_name_page == "addcontentmanagement_controller.php") { echo 'active';} ?>">
-          <a onclick="opencontent()" rel="tab" style="cursor: pointer;" id="content_management"><i class="fa fa-group"></i><span>Content Management</span>
+        <li style="padding-top: 10px; ">
+          <a onclick="opencontent(); topFunction();" rel="tab" style="cursor: pointer;" id="content_management"><i class="fa fa-info-circle"></i><span>Content Management</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/content_management/addcontentmanagement_controller.php">
-            <i class="fa fa-group"></i> <span>Content management</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "viewsupport_controller.php" || $base_name_page == "displaysupport_controller.php" || $base_name_page == "editsubscription_controller.php" || $base_name_page == "viewsubscription_controller.php") { echo 'active';} ?>">
-          <a onclick="opensupport()" rel="tab" style="cursor: pointer;" id="support"><i class="fa fa-support"></i><span>Support</span>
+        <li style="padding-top: 10px; ">
+          <a onclick="opensupport(); topFunction();" rel="tab" style="cursor: pointer;" id="support"><i class="fa fa-support"></i><span>Customer Support</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/support/viewsupport_controller.php">
-            <i class="fa fa-support"></i> <span>Support</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
         </li>
-        <li class="<?php if($base_name_page == "viewsupport_controller.php" || $base_name_page == "displaysupport_controller.php" || $base_name_page == "editsubscription_controller.php" || $base_name_page == "viewsubscription_controller.php") { echo 'active';} ?>">
-          <a onclick="openreport()" rel="tab" style="cursor: pointer;" id="support"><i class="fa fa-bar-chart"></i><span>Report</span>
+        <li style="padding-top: 10px; ">
+          <a onclick="sendcode(); topFunction();" rel="tab" style="cursor: pointer;" id="sendcode"><i class="fa fa-envelope"></i><span>Send Verification Email</span>
             <span class="pull-right-container"></span></a>
-          <!-- <a href="../../Controller/support/viewsupport_controller.php">
-            <i class="fa fa-support"></i> <span>Support</span>
-            <span class="pull-right-container">
-            </span>
-          </a> -->
+        </li>
+        <li style="padding-top: 10px; ">
+          <a onclick="openreport(); topFunction();" rel="tab" style="cursor: pointer;" id="report"><i class="fa fa-bar-chart"></i><span>Report</span>
+            <span class="pull-right-container"></span></a>
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="min-height: 580px;">

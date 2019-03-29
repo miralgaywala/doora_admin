@@ -1,6 +1,10 @@
   <script type="text/javascript">
   $(document).ready(function() {
    $('#example1').DataTable( {
+    "columnDefs": [ {
+            "targets": [5],
+            "orderable": false
+            } ]
     });
 } );
 

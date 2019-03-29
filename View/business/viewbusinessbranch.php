@@ -5,6 +5,10 @@
  <script type="text/javascript">
      $(document).ready(function() {
    $('#example1').DataTable( {
+    "columnDefs": [ {
+            "targets": [3],
+            "orderable": false
+            } ]
     });
 } );
      function backbusiness()
@@ -51,7 +55,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Franchise id</th>
+			                  <th style="text-align:center;" width="8%">Franchise id</th>
 			                  <th style="text-align:center;">Franchise Address</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>

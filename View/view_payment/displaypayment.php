@@ -4,6 +4,10 @@
  <script>
   $(document).ready(function() {
    $('#example1').DataTable( {
+    "columnDefs": [ {
+            "targets": [8],
+            "orderable": false
+            } ]
     });
 } );
      
@@ -120,11 +124,11 @@ $(document).ready(function(){
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="5%">Invoice id</th>
-                        	  <th style="text-align:center;" width="5%">Business Name</th>
-			                  <th style="text-align:center;">Invoice</th>
-                        	  <th style="text-align:center;">Invoice start date</th>	  
-                        	  <th style="text-align:center;">Invoice end date</th>
+			                  <th style="text-align:center;" width="8%">Receipts id</th>
+                        	  <th style="text-align:center;">Business Name</th>
+			                      <th style="text-align:center;">Receipts</th>
+                        	  <th style="text-align:center;">Receipts start date</th>	  
+                        	  <th style="text-align:center;">Receipts end date</th>
                         	  <th style="text-align:center;">Payment</th>
                         	  <th style="text-align:center;">Status</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
