@@ -69,7 +69,7 @@
                     <?php
                                         foreach ($editdisplaycategory as $key => $data) 
                                       { ?>
-                  <div class="form-group notranslate">
+                              <div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <select id="category_name" name="category_name" class="form-control">
@@ -101,7 +101,7 @@
                                     <span id="category_nameerror" class="show_required"></span>
                                 </div>
                             </div>
-                            <div class="form-group notranslate">
+                           <!--  <div class="form-group notranslate">
                                 <label for="sub_category_image" class="col-sm-3 control-label">Sub Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="sub_category_image" type="file" id="sub_category_image" accept="image/*" style="margin-top: 10px;">
@@ -119,9 +119,9 @@
                                           <div id="upload-demo" style="width:201px;height:201px; border-style: groove;border-width: thin;"></div>
                                       </div>                     
                                   </div> 
-                             </div>                               
+                             </div>        -->                        
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="subcategory_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit" onclick="return validateForm();"/>
+                                    <input type="button" name="subcategory_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="subcategory_submit" onclick="return validateForm();"/>
                                     <button class="btn btn-default pull-right" onclick="backsubcategory()">Cancel</button>
                             </div>  
                            </div>
@@ -174,14 +174,14 @@
               {
                 resize.croppie('result', {
                     type: 'canvas',
-                    size: 'viewport'
+                    size: 'original'
                 }).then(function (img) {
                     $.ajax({
                         url: "../../View/sub-category/croppie.php",
                         type: "POST",
                         data: {"sub_category_image":img},
                         success: function (data) {
-                            html = '<img src="' + img + '" />';
+                            html = '<img src="' + img + '" style="width:188px;height:188px;border-style:ridge;"/>';
                             // alert(data);
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
@@ -200,9 +200,9 @@
                       function validateForm() {
                                     var subcategoryname = document.getElementById("sub_category_name").value;
                                     var sub_category_id = document.getElementById("sub_category_id").value;
-                                    var subcategoryimage = document.getElementById("sub_category_image").value;
+                                   // var subcategoryimage = document.getElementById("sub_category_image").value;
                                     var category_name = document.getElementById("category_name").value;
-                                      var imagename = document.getElementById("imagename").value;
+                                     // var imagename = document.getElementById("imagename").value;
                                     var count=0;
                                     if(category_name == "0")
                                     {
@@ -231,7 +231,7 @@
                                       $.ajax({
                                         type: 'POST',
                                         url: '../../Controller/sub_category/subcategory_controller.php',
-                                        data: {count_id:count_id,sub_category_id:sub_category_id,subcategoryname:subcategoryname,category_name:category_name,imagename:imagename},
+                                        data: {count_id:count_id,sub_category_id:sub_category_id,subcategoryname:subcategoryname,category_name:category_name},
                                         success: function (data) {
                                           
                                          if(data == "#edit")

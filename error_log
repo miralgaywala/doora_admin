@@ -1,0 +1,31 @@
+[16-Jan-2019 11:58:54 Etc/GMT] PHP Warning:  include_once(/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[16-Jan-2019 11:58:54 Etc/GMT] PHP Warning:  include_once(): Failed opening '/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[17-Jan-2019 04:19:20 Etc/GMT] PHP Warning:  include_once(/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[17-Jan-2019 04:19:20 Etc/GMT] PHP Warning:  include_once(): Failed opening '/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[17-Jan-2019 05:07:39 Etc/GMT] PHP Warning:  include_once(/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[17-Jan-2019 05:07:39 Etc/GMT] PHP Warning:  include_once(): Failed opening '/home/leocamq9/public_html/doora/adminpanel/View/dashboard.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/Controller/category/dashboard_controller.php on line 6
+[25-Jan-2019 13:04:00 Etc/GMT] PHP Warning:  include(Controller/category/dashboard_controller.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:04:00 Etc/GMT] PHP Warning:  include(): Failed opening 'Controller/category/dashboard_controller.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:04:00 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'dashboard_controller' not found in /home/leocamq9/public_html/sprookr/adminpanel/index.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 22
+[25-Jan-2019 13:05:52 Etc/GMT] PHP Warning:  include(./Controller/category/dashboard_controller.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:05:52 Etc/GMT] PHP Warning:  include(): Failed opening './Controller/category/dashboard_controller.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:05:52 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'dashboard_controller' not found in /home/leocamq9/public_html/sprookr/adminpanel/index.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 22
+[25-Jan-2019 13:05:53 Etc/GMT] PHP Warning:  include(./Controller/category/dashboard_controller.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:05:53 Etc/GMT] PHP Warning:  include(): Failed opening './Controller/category/dashboard_controller.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:05:53 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'dashboard_controller' not found in /home/leocamq9/public_html/sprookr/adminpanel/index.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 22
+[25-Jan-2019 13:06:06 Etc/GMT] PHP Warning:  include(./Controller/category/dashboard_controller.php): failed to open stream: No such file or directory in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:06:06 Etc/GMT] PHP Warning:  include(): Failed opening './Controller/category/dashboard_controller.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 21
+[25-Jan-2019 13:06:06 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'dashboard_controller' not found in /home/leocamq9/public_html/sprookr/adminpanel/index.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/leocamq9/public_html/sprookr/adminpanel/index.php on line 22
+[01-Apr-2019 04:43:27 Etc/GMT] PHP Notice:  Undefined index: admin_id in /home/leocamq9/public_html/sprookr/adminpanel/Changepassword.php on line 28

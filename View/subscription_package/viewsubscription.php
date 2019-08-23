@@ -46,10 +46,10 @@
                   <td style="width: 20%">Per Deal Redeem Price</td>
                   <td><?php echo $data['per_deal_redeem_price'];?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                  <td style="width: 20%">Free Days</td>
                   <td><?php echo $data['free_days'];?></td>
-                  </tr>
+                  </tr> -->
                   <!-- <tr>
                   <td style="width: 20%">Is Deleted</td>
                   <td><?php if($data['is_deleted'] == 0)

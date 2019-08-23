@@ -153,7 +153,14 @@
                 </table>
                 <?php $value=$data['is_deleted']; if($value == 0 ){ ?> 
                 <br/>
-                                      <a class="btn btn-primary pull-right" style="cursor: pointer;" <?php $value=$data['is_active']; if($value == 1 ){ ?> onclick="Jsclosealrt(<?php echo $value; ?>,<?php echo $data['business_id']; ?>)"<?php } else{ ?> onclick="Jsopenalrt(<?php echo $value; ?>,<?php echo $data['business_id']; ?>)"<?php }?>><?php $value=$data['is_active']; if($value == 1 ){ echo "Deactivate"; }else{echo "Activate"; } ?></a>
+                                      <a class="btn btn-primary pull-right" style="cursor: pointer;" <?php $value=$data['is_active']; if($value == 1 ){ ?> onclick="Jsclosealrt(<?php echo $value; ?>,<?php echo $data['business_id']; ?>)"
+                                      <?php } else if($data['is_free_trial_started'] == 0 && $value == 0)
+                                      {?>
+
+                                        onclick="Jsclosealrtwithfree(<?php echo $value; ?>,<?php echo $data['business_id']; ?>)"
+                                        <?php
+                                      } else{ ?> onclick="Jsopenalrt(<?php echo $value; ?>,<?php echo $data['business_id']; ?>)"<?php }?>>
+                                      <?php $value=$data['is_active']; if($value == 1 ){ echo "Deactivate"; }else{echo "Activate"; } ?></a>
                                        <?php } ?>
                                       <br/>
         			</div>
@@ -166,10 +173,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script type="text/javascript">
 
-function Jsopenalrt(value,id){
+function Jsclosealrtwithfree(value,id){
   $.confirm({
-    title:'Open Request',
-    content: 'Are you sure you want to activate this business ?',
+    title:'Activate',
+    content: 'Are you sure you want to activate this business?',
     buttons: {
       Yes: {
             btnClass: 'btn-red any-other-class', 
@@ -181,7 +188,36 @@ function Jsopenalrt(value,id){
                  data : {count_id:count_id,value:value,id:id},
                  success:function(data)
                  {
+        
+                   listbusiness(data);
+                 }
+              })
+            // window.location.href='../../Controller/business/isactive_controller.php?id='+id+'&value='+value;
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
 
+function Jsopenalrt(value,id){
+  $.confirm({
+    title:'Activate',
+    content: 'Are you sure you want to activate this business?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            var count_id = "request";
+            $.ajax({
+                 url:"../../Controller/business/business_controller.php",
+                 method:"POST",
+                 data : {count_id:count_id,value:value,id:id},
+                 success:function(data)
+                 {
                    listbusiness(data);
                  }
               })

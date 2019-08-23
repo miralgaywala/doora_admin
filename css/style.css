@@ -36,10 +36,8 @@
         }
         #SubcatPicture
         {
-            width: 186px;
-            height: 186px;
-            object-fit: cover;
-            overflow: hidden;
+            width: 62px;
+            height: 62px;
             background-position: center center;
             background-size: cover;
             -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);

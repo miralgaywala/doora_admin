@@ -3,11 +3,28 @@ $data=$_POST['sub_category_image'];
 list($type, $data) = explode(';', $data);
 list(, $data) = explode(',', $data);
 $data = base64_decode($data);
-//$imageName = mt_rand(1, 99999) . '.jpg';
-$count=count (glob ('../../../images/sub_category/*.jpg'));
-$imageName = $count + 1 . '.jpg';
-echo $imageName;
-file_put_contents('../../../images/sub_category/' . $imageName, $data);
+
+$im = imagecreatefromstring($data);
+        $t=time();
+     $imageName = "subcate_".$t. '.jpg';
+    $destination = "../../../images/sub_category/".$imageName;
+    echo $imageName;
+  imagejpeg($im, $destination,90); //Will save image to new path and filename.
+  imagedestroy($im);
+
+
+
+
+// $data=$_POST['sub_category_image'];
+// list($type, $data) = explode(';', $data);
+// list(, $data) = explode(',', $data);
+// $data = base64_decode($data);
+// $t=time();
+// //$imageName = mt_rand(1, 99999) . '.jpg';
+// $count=count (glob ('../../../images/sub_category/*.jpg'));
+// $imageName = "subcate_".$t. '.jpg';
+// echo $imageName;
+// file_put_contents('../../../images/sub_category/' . $imageName, $data);
 
 
 // if ((($data == "image/gif") || ($data == "image/jpeg") || ($data == "image/jpg") || ($data == "image/pjpeg") || ($data == "image/x-png") || ($data == "image/png"))) {

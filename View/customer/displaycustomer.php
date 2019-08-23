@@ -106,7 +106,7 @@
                                      <option value="f0">All Customer</option>
                                      <option value="f1" <?php if("f1" == $selected ) { ?> selected  <?php } ?>>Active</option>
                                      <option value="f2" <?php if("f2" == $selected ) { ?> selected  <?php } ?>>Deactive</option>
-                                     <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option>
+                                    <!--  <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option> -->
                                     </select>
                                 </div> 
                                 <div class="col-sm-4">
@@ -145,7 +145,7 @@
                    <?php $value=$data['is_deleted']; if($value == 0 ){ ?>  <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['name']; ?></td>
+                                <td style="text-align:center;"><?php echo htmlentities($data['name'], ENT_QUOTES); ?></td>
                                 <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture" style="object-fit: contain;border: none;"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td> 
@@ -182,7 +182,7 @@
                               <tr style="color:red;">
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['name']; ?></td>
+                                <td style="text-align:center;"><?php echo htmlentities($data['name'], ENT_QUOTES); ?></td>
                                 <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td> 

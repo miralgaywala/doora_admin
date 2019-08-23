@@ -25,6 +25,7 @@ if(isset($_POST['count_id']))
 		$category_name = $_POST['categoryname'];
 		$is_super_market = $_POST['is_super_market'];
 		$category_image = $_POST['imagename'];
+		
 		$category_id=$_POST['category_id'];
     	$category_controller=new category_controller();
 	 	$result=$category_controller->editcategory_data($category_id,$category_name,$category_image,$is_super_market);

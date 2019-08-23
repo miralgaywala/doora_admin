@@ -5,7 +5,7 @@
   $(document).ready(function() {
    $('#example1').DataTable( {
      "columnDefs": [ {
-            "targets": [7],
+            "targets": [6],
             "orderable": false
             } ]
     });
@@ -55,7 +55,7 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="8%">Receipts id</th>
+			                  <!-- <th style="text-align:center;" width="8%">Receipts id</th> -->
 			                  <th style="text-align:center;">Receipts</th>
                               <th style="text-align:center;">Receipts start date</th>
                               <th style="text-align:center;">Receipts end date</th>
@@ -73,7 +73,7 @@
                 $invoice_month=date('M', mktime(0, 0, 0, $invoice_month, 1, 2000));
                 $start_date= $data['month_start_date'];
                 $start_date=date('jS M, Y', strtotime($start_date));    
-                $end_date = $data['month_end_date'];
+                $end_date = $data['bill_paid_date'];
                 $end_date=date('jS M, Y', strtotime($end_date));
                 if($data['bill_pending'] == 0)
                 {
@@ -87,7 +87,7 @@
                 }
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data['business_invoice_id']; ?></td>
+                                <!-- <td style="text-align:center;"><?php echo $data['business_invoice_id']; ?></td> -->
                                 <td style="text-align:center;"><?php echo $invoice_month.",".$invoice_year; ?></td>
                                 <td style="text-align:center;"><?php echo $start_date; ?></td>
                                 <td style="text-align:center;"><?php echo $end_date; ?></td>

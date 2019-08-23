@@ -261,10 +261,10 @@ $base_name_page = basename($_SERVER['PHP_SELF']);
             </li>
          
        <hr>
-       <li style="padding-top: 10px; ">
+      <!--  <li style="padding-top: 10px; ">
           <a onclick="opensubcategory(); topFunction();" rel="tab" style="cursor: pointer;" id="sub_category"><i class="fas fa-sitemap"></i>&nbsp;&nbsp;<span>Sub category</span>
             <span class="pull-right-container"></span></a>
-      </li>
+      </li> -->
         <li style="padding-top: 10px; ">
         	 <a onclick="opencategory(); topFunction();" rel="tab" style="cursor: pointer;" id="category"><i class="fas fa-layer-group"></i>&nbsp;&nbsp;<span>Category</span>
             <span class="pull-right-container"></span></a>

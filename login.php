@@ -16,21 +16,22 @@ if (!isset($_SESSION)) {
 
 </script>
 <?php
-            $host="leocan.co";
-            $user="leocamq9_spr_usr";
-            $pass="spk123!@#";
-            $database="leocamq9_sprookr_db";
-            // $host="localhost";
-            // $user="root";
-            // $pass="de!1@2#al";
-            // $database="doora_db";
-            $db= mysqli_connect($host, $user, $pass, $database);
+include 'config.php';
+            // $host="leocan.co";
+            // $user="leocamq9_spr_usr";
+            // $pass="spk123!@#";
+            // $database="leocamq9_sprookr_db";
+            // // $host="localhost";
+            // // $user="root";
+            // // $pass="de!1@2#al";
+            // // $database="doora_db";
+            // $db= mysqli_connect($host, $user, $pass, $database);
 
 if (isset($_POST['sign_in'])) {
             
     if (!empty($_POST['user_name']) && !empty($_POST['user_pass'])) {
       
-        $sql = "select * from admin where is_deleted=0 AND username= '" . $_POST['user_name'] . "' " .
+        $sql = "select * from admin where is_deleted=0 AND email_address= '" . $_POST['user_name'] . "' " .
             "AND password = '" . md5($_POST['user_pass']) . "' ";
     
      $data= mysqli_query($db,$sql);
@@ -56,7 +57,7 @@ if (isset($_POST['sign_in'])) {
 <html>
 <head>
     <meta charset="utf-8">
-   
+    <link rel="shortcut icon" type="image/png" href="./../images/favicon.ico"/>
     <title>Doora | Admin Panel</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -113,26 +114,74 @@ if (isset($_POST['sign_in'])) {
     border-color: #f66867;
 }
 </style>
+ <style>
+#snackbar {
+ visibility: hidden;
+ min-width: 350px;
+ margin-left: -240px;
+ background-color: #252838;
+ color: #fff;
+ text-align: center;
+ border-radius: 2px;
+ padding: 16px;
+ position: fixed;
+ z-index: 1;
+ left: 55%;
+ right: 45%;
+ top: 60px;
+ font-size: 17px;
+}
+
+#snackbar.show {
+ visibility: visible;
+ -webkit-animation: fadein 0.5s, fadeout 1.5s 5.0s;
+ animation: fadein 0.5s, fadeout 1.5s 5.0s;
+}
+
+@-webkit-keyframes fadein {
+ from {top: 0; opacity: 0;}
+ to {top: 60px; opacity: 1;}
+}
+
+@keyframes fadein {
+ from {top: 0; opacity: 0;}
+ to {top: 60px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+ from {top: 60px; opacity: 1;}
+ to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+ from {top: 60px; opacity: 1;}
+ to {top: 0; opacity: 0;}
+}
+</style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-
-    <?php
+     <?php
     if (isset($_GET['msg']) && $_GET['msg'] != "") {
         $alert_msg = str_replace("_", " ", $_GET['msg']);
         $alert_msg = ucwords(strtolower($alert_msg));
         ?>
-        <div id="alert" class="alert alert-info" style="margin-left:0;" role="alert">
-            <?php echo $alert_msg; ?>
-        </div>
-        <?php
+<div id='snackbar'><?php echo $alert_msg; ?></div>
+    <script>
+$(function() {
+   var x = document.getElementById("snackbar");
+ x.className = "show";
+ setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+});
+</script>
+   <?php
     }
     ?>
     <div class="login-logo">
         <b>Doora</b>
     </div>
     <!-- /.login-logo -->
-    <div class="login-box-body" id="login">
+    <div class="login-box-body" id="login" style="padding-bottom: 0px;">
         <p class="login-box-msg">Sign In</p>
         <form action="" method="post">
             <div class="form-group has-feedback">
@@ -152,6 +201,7 @@ if (isset($_POST['sign_in'])) {
                     <button type="submit" class="btn btn-primary btn-block btn-flat" name="sign_in">Sign In</button>
                 </div>
             </div>
+            <a onclick='forgotPassword();' style='color: #3c8dbc; cursor:pointer;'><u>Forgot Password</u></a><br>
         </form>
         <br/>
     </div>
@@ -159,3 +209,8 @@ if (isset($_POST['sign_in'])) {
 <!-- /.login-box -->
 </body>
 </html>
+<script type="text/javascript">
+    function forgotPassword (){
+        window.location.href='forgotPassword.php';
+}
+</script>

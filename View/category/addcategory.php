@@ -12,19 +12,6 @@
                  }
               })
       }
-      function backcategorydata()
-      {
-              
-        $.ajax({
-                 url:"../../Controller/category/displaycategorycontroller.php",
-                 method:"POST",
-                 success:function(data)
-                 {
-                      $('.content-wrapper').html(data);
-                      
-                 }
-              })
-      }
       function existcategory(data)
       {
          hash_id = data;
@@ -82,6 +69,7 @@
                                 <label for="category_image" class="col-sm-3 control-label">Category Image<span class="show_required">*</span></label>
                                     <div class="col-sm-8">
                                         <input name="category_image" type="file" id="category_image" accept="image/*" style="margin-top: 10px;" />
+                                        <span id="category_imageerror12" class="show_required"></span>
                                         <span id="category_imageerror" class="show_required"></span><br>
                                           <input type="hidden" name="imagename" id="imagename">
                                           <br>
@@ -93,62 +81,90 @@
                                      
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
-                                          <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
+                                          <div id="upload-demo" style="width:396px;height:402px;border-style: groove;border-width: thin;"></div>
                                       </div>                     
-                           </div>                                                 
-                             <div class="form-group notranslate">
-                                <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
-                                    <div class="col-sm-8" style="padding-top: 6px">
-                                        <input name="is_super_market" type="checkbox" id="is_super_market" onclick="return validate();"/><br>
-                                        <input name="is_super_market1" type="hidden" id="is_super_market1" value="0" />
-                                        <span id="issuper_market_error" class="show_required"></span> 
-                                    </div>
-                             </div>  
-                             <div class="box-footer  notranslate">
-                                    <input type="button" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit" onclick="return validateForm();"/>
-                                    <button type="button" class="btn btn-default pull-right" onclick="backcategorydata()">Cancel</button>
-                            </div>  
-                           </div>
-                         </form>
-              </div>
-            </div>
-          </div>  
-    </section>
-</div>
-<script type="text/javascript">
+                               
+                           </div> 
+        <script type="text/javascript">
             var resize = $('#upload-demo').croppie({
                 enableExif: true,
-                enableOrientation: true,    
+                enableOrientation: true, 
+                enforceBoundary:true,
                 viewport: { 
-                     width: 400,
+                     width: 394,
                     height: 170,
                     type: 'square' 
                 },
                 boundary: {
-                     width: 400,
+                     width: 394,
                     height: 400,
-                }
+                },
+
             });
-            
+            console.log(resize);
+            var image_height;
+            var image_width;
+            var image_mb_size;
             $('#category_image').on('change', function () { 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    resize.croppie('bind',{
-                        url: e.target.result
-                    }).then(function(){
-                        console.log('Complete');
-                    });
+                  var i = new Image(); 
+                  i.onload = function(){
+
+                    image_height = i.height;
+                    image_width = i.width;
+
+                    if(image_width <= 3500 && image_height <= 1500)
+                   {
+                    if(image_mb_size <= 4718592)
+                    {
+                      resize.croppie('bind',{
+                        url: e.target.result,
+                        zoom: 0
+                      }).then(function(){
+                           resize.croppie('setZoom', 0);
+                          console.log('Complete');
+                      });
+                    }
+                    else
+                    {
+                      $.confirm({
+                                title:'Alert',
+                                content: 'Please upload image smaller than 4.5mb in size.',
+                                buttons: {
+                                  OK: function(){
+                                    $("#category_image").val("");
+                                    }
+                                }
+                            });
+                    }
+                   }
+                   else
+                   {
+                      $.confirm({
+                                title:'Alert',
+                                content: 'Please upload image smaller than 3500x1500 px dimension.',
+                                buttons: {
+                                  OK: function(){
+                                     $("#category_image").val("");
+                                    }
+                                }
+                            });
+                   }
+                  };
+
+                  i.src = e.target.result; 
                 },
                 reader.readAsDataURL(this.files[0]);
+                image_mb_size = this.files[0].size;
             });
             
             $('#btn-upload').on('click', function (ev) {
               if(document.getElementById("category_image").value == "") {
                 var categoryimage = document.getElementById("category_image").value;
-                if(categoryimage == "")
+                              if(categoryimage == "")
                                       {
                                         document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                       count++;
                                       }
                                       else
                                       {
@@ -157,31 +173,111 @@
               }
               else
               {
+                image_size = "original";
+                // if(image_height <= 510 && image_width <= 1182)
+                // {
+                //   image_size = "original";
+                // }
+                // else
+                // {
+                //   image_size = {height:510,width:1182};
+                // }
                 resize.croppie('result', {
-                    type: 'canvas',
-                    size: 'viewport'
+                   type: 'canvas',
+                    size:image_size,
+
+                    
                 }).then(function (img) {
+                  // var base64ImageContent = img.replace(/^data:image\/(png|jpg);base64,/, "");
+                  // var blob = base64ToBlob(base64ImageContent, 'image/png');                
+                  // var formData = new FormData();
+                  // formData.append('picture', blob);
                     $.ajax({
                         url: "../../View/category/croppie.php",
                         type: "POST",
-                        data: {"category_image":img},
+                       //  cache: false,
+                       //  contentType: false,
+                       //  processData: false,
+                       //  data:formData,
+                       data: {"category_image":img},
                         success: function (data) {
-                          //alert(data);
-                            html = '<img src="' + img + '" style="border-style:ridge;"/>';
+                         if(data == "not")
+                         {
+                              $.confirm({
+                                title:'Alert',
+                                content: 'something went wrong with image uploading, Please try again !!',
+                                buttons: {
+                                  OK: {
+                                    }
+                                }
+                            });
+                         }
+                         else
+                         {
+                          html = '<img src="' + img + '" style="border-style:ridge;width:400px;height:170px;"/>';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
+                         }
+                          //   alert(data);
+                            
                         }
                     });
                 });
               }
             });
+            // function base64ToBlob(base64, mime) 
+            //   {
+            //       mime = mime || '';
+            //       var sliceSize = 1024;
+            //       var byteChars = window.atob(base64);
+            //       var byteArrays = [];
+
+            //       for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+            //           var slice = byteChars.slice(offset, offset + sliceSize);
+
+            //           var byteNumbers = new Array(slice.length);
+            //           for (var i = 0; i < slice.length; i++) {
+            //               byteNumbers[i] = slice.charCodeAt(i);
+            //           }
+
+            //           var byteArray = new Uint8Array(byteNumbers);
+
+            //           byteArrays.push(byteArray);
+            //       }
+
+            //       return new Blob(byteArrays, {type: mime});
+            //   }
         </script>
+                                                                                       
+                             <!-- <div class="form-group notranslate">
+                                <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
+                                    <div class="col-sm-8" style="padding-top: 6px">
+                                        <input name="is_super_market" type="checkbox" id="is_super_market" onclick="return validate();"/><br>
+                                        <input name="is_super_market1" type="hidden" id="is_super_market1" value="0" />
+                                        <span id="issuper_market_error" class="show_required"></span> 
+                                    </div>
+                                   
+                             </div>  
+ -->
+                             <div class="box-footer  notranslate">
+                                    <input type="button" name="category_submit" style="margin-left: 5px;" class="btn btn-primary pull-right" value="Submit" id="category_submit" onclick="return validateForm();"/>
+                                    <button type="button" class="btn btn-default pull-right" onclick="backcategory()">Cancel</button>
+                            </div>  
+                           </div>
+                         </form>
+              </div>
+            </div>
+          </div>  
+       
+    </section>
+</div>
+
  <script type="text/javascript">
                       function validateForm() {
                                     var categoryname = document.getElementById("category_name").value;
                                     var categoryimage = document.getElementById("category_image").value;
                                     var imagename = document.getElementById("imagename").value;
-                                    var is_super_market = document.getElementById("is_super_market1").value;
+                                    var is_super_market = 0;
                                     var count=0;
                                     if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
@@ -191,15 +287,7 @@
                                       {
                                         document.getElementById('category_nameerror').innerHTML="";
                                       }
-                                    if(categoryimage == "")
-                                      {
-                                        document.getElementById("category_imageerror").innerHTML="Please Select Image";
-                                       count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById("category_imageerror").innerHTML="";
-                                      }
+                                    
                                      if(imagename == "")
                                     {
                                       document.getElementById("category_imageerror").innerHTML="Please Select Image";
@@ -209,7 +297,6 @@
                                     {
                                       document.getElementById("category_imageerror").innerHTML="";
                                     }
-                                   
                                    if(count>0)
                                    {
                                     return false;

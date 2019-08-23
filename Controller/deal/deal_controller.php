@@ -1,5 +1,62 @@
 <?php
 include "../../Model/deal/deal_model.php";
+if(isset($_POST['count_id']))
+{
+    if($_POST['count_id'] == 'request')
+    {
+        $id=$_POST['id'];
+        $data=$_POST['value'];
+        $deal_controller=new deal_controller();
+        if($data == 0)
+        {
+            $result=$deal_controller->active_deal($id,$data);
+            if($result==1)
+            {
+                echo "#deactive";
+            }
+            else
+            {
+                echo "#active";
+            }
+        }
+        else
+        {
+             $result=$deal_controller->deactive_deal($id,$data);
+             if($result==1)
+            {
+                echo "#active";
+            }
+            else
+            {
+                echo "#deactive";
+            }
+        }
+        
+
+    }
+    if($_POST['count_id'] == "delete")
+    {
+        $id=$_POST['id'];
+        $deal_controller=new deal_controller();
+            $result=$deal_controller->delete_deal($id);
+            if($result == 1)
+            {
+                echo "#delete";
+            }
+            else
+            {
+                echo "#not";
+            }
+    }
+    if($_POST['count_id'] == "request_rdm_deal")
+    {
+         $id=$_POST['id'];
+            $deal_controller=new deal_controller();
+            $result=$deal_controller->get_rdm_deal($id);
+            echo $result;
+    }
+    
+}
 class deal_controller
 {
 	public function __construct()
@@ -29,6 +86,17 @@ class deal_controller
         include "../../View/deal/viewdealdetail.php";
 		
 	}
+    public function get_rdm_deal($id)
+    {
+        $deal_rdm=$this->deal_model->getdealreedeamalert($id);
+       if($deal_rdm == 0){
+                      echo "0";
+                  } else {
+                    foreach ($deal_rdm as $rdm) {               
+                    echo $rdm['total_count'];
+            }
+         }
+    }
     public function subcategory_deal($id)
     {
         $sub_category=$this->deal_model->getsubcategorylist($id);
@@ -50,6 +118,21 @@ class deal_controller
         $retval=$retval."<option value='".$data['franchise_id']."'>".$data['franchise_address']."</option>";
         }
         echo $retval;
+    }
+    public function active_deal($id,$data)
+    {
+        $result=$this->deal_model->active_deal($id,$data);
+        return $result;
+    }
+    public function deactive_deal($id,$data)
+    {
+        $result=$this->deal_model->deactive_deal($id,$data);
+        return $result;
+    }
+    public function delete_deal($id)
+    {
+        $result=$this->deal_model->delete_deal($id);
+        return $result;
     }
 	public function alldatafilter_deal($msg)
 	{
@@ -140,6 +223,20 @@ class deal_controller
                  }  
                  $html = nl2br($html);
                          $condition = nl2br($condition);      
+                         if($data['is_active'] == 1)
+                         {
+                            $active_value = "<br/>
+                                                <a onclick=deactivatedeal(".$data['business_deal_id'].",".$data['is_active'].") title=\"Active/Deactive\" style=\"cursor:pointer;\">
+                                                  Deactive
+                                                </a>";
+                         }
+                         else
+                         {
+                                $active_value = "<br/>
+                                                <a onclick=activatedeal(".$data['business_deal_id'].",".$data['is_active'].") title=\"Active/Deactive\" style=\"cursor:pointer;\">
+                                                  Active
+                                                </a>";
+                         }
 		//generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
     		echo "<tr>
                                         <td style=\"text-align:center;\">".$i."</td>
@@ -154,6 +251,11 @@ class deal_controller
                                            <a onclick=viewdeal(".$data['business_deal_id'].") title=\"View all detail\" style=\"cursor:pointer;\">
                                                   <i class=\"fa fa-eye\"></i>
                                                 </a>
+                                                <a onclick=deletedeal(".$data['business_deal_id'].") title=\"View all detail\" style=\"cursor:pointer;\">
+                                                  <i class=\"fa fa-trash-o fa-fw\"></i>
+                                                </a>
+                                                ".$active_value."
+                                                
                                             </div>
                                         </td>
                                          </tr>";
@@ -248,7 +350,20 @@ class deal_controller
                          }    
                          $html = nl2br($html);
                          $condition = nl2br($condition);
-                         
+                         if($data['is_active'] == 1)
+                         {
+                            $active_value = "<br/>
+                                                <a onclick=deactivatedeal(".$data['business_deal_id'].",".$data['is_active'].") title=\"Active/Deactive\" style=\"cursor:pointer;\">
+                                                  Deactive
+                                                </a>";
+                         }
+                         else
+                         {
+                                $active_value = "<br/>
+                                                <a onclick=activatedeal(".$data['business_deal_id'].",".$data['is_active'].") title=\"Active/Deactive\" style=\"cursor:pointer;\">
+                                                  Active
+                                                </a>";
+                         }
                 //generaterow($i,$value0,$value21,$html,$value7,$condition,$value15);
                     echo "<tr>
                                         <td style=\"text-align:center;\">".$i."</td>
@@ -263,6 +378,11 @@ class deal_controller
                                            <a onclick=viewdeal(".$data['business_deal_id'].") title=\"View all detail\" style=\"cursor:pointer;\">
                                                   <i class=\"fa fa-eye\"></i>
                                                 </a>
+                                                <a onclick=deletedeal(".$data['business_deal_id'].") title=\"View all detail\" style=\"cursor:pointer;\">
+                                                  <i class=\"fa fa-trash-o fa-fw\"></i>
+                                                </a>
+                                                 ".$active_value."
+                                                 
                                             </div>
                                         </td>
                                          </tr>";

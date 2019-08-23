@@ -10,7 +10,7 @@ class customer_model
     public function getdisplay_customer()
     {
        $con=$this->db->connection();
-       $getcustomer=$con->query("select * from users where is_business=0 order by user_id desc");
+       $getcustomer=$con->query("select * from users where is_business=0 AND is_deleted=0 order by user_id desc");
       $customer = array();
       while ($row = $getcustomer->fetch_assoc()) {
         $customer[] = $row;

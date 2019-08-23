@@ -21,6 +21,7 @@
   <title>Doora| Admin Panel</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
@@ -104,21 +105,27 @@
           
             <li class="dropdown user user-menu">
             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="../../../images/profile/logo_user.png" class="user-image" alt="User Image">
                <span class="hidden-xs"><?php echo $_SESSION['admin_name']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
+              <style type="text/css">
+                .navbar-nav>.user-menu>.dropdown-menu>li.user-header>img
+                {
+                  border: none;
+
+                }
+              </style>
               <li class="user-header">
-                <img src="../../../images/profile/logo_user.png" class="img-circle" alt="User Image">
-                <p>
-                <?php echo $_SESSION['admin_name']; ?>
+                <img src="./../../../images/doora_logout.png" alt="User Image" style="object-fit: contain;">
+                <p style="color: #f66867;">
+                <?php echo $_SESSION['admin_name'] ?>
                  </p>
               <li class="user-footer">
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">
-                  <a href="../../logout.php" class="btn btn-default btn-flat">Sign out</a>
+                  <a onclick="Jslogoutalrt();" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -133,6 +140,28 @@
   {
     $('.select2').select2();
   });
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript">
+function Jslogoutalrt(){
+  $.confirm({
+    title:'Logout',
+    content: 'Are you sure you want to log out?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            window.location.href='../../logout.php';
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
 </script>
 <style type="text/css">
    .select2-container .select2-selection--single .select2-selection__rendered {
@@ -199,4 +228,7 @@
     }
     table {table-layout:fixed;}
        table td {word-wrap:break-word;}
+       .skin-blue .main-header li.user-header {
+    background-color: #fff;
+}
 </style>

@@ -2,7 +2,7 @@
   $(document).ready(function() {
    $('#example1').DataTable( {
     "columnDefs": [ {
-            "targets": [5],
+            "targets": [4],
             "orderable": false
             } ]
     });
@@ -92,7 +92,7 @@
 			                  <th style="text-align:center;" width="15%">Subscription Plan Id</th>
 			                  <th style="text-align:center;">Price</th>
                         <th style="text-align:center;">Per Deal Redeem Price</th>
-                        <th style="text-align:center;">Free Days</th>
+                        <!-- <th style="text-align:center;">Free Days</th> -->
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>
@@ -105,7 +105,7 @@
                                 <td style="text-align:center;"><?php echo $data['subscription_plan_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['price']; ?></td>
                                  <td style="text-align:center;"><?php echo $data['per_deal_redeem_price']; ?></td>
-                                  <td style="text-align:center;"><?php echo $data['free_days']; ?></td>
+                                  <!-- <td style="text-align:center;"><?php echo $data['free_days']; ?></td> -->
                                 <td style="text-align:center;">
                               
                                     <div >

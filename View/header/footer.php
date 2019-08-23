@@ -70,6 +70,72 @@
 <script src="dist/js/pages/dashboard.js"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script type="text/javascript">
+  function initMap()
+
+              {
+
+                  // The location of Uluru
+
+                  if (document.getElementById('map') != null && document.getElementById('map1') != null) {
+
+                      var uluru = {
+
+                          lat: parseFloat($("#map").attr("data-lat")),
+
+                          lng: parseFloat($("#map").attr("data-long"))
+
+                      };
+
+                      // The map, centered at Uluru
+
+                      var map = new google.maps.Map(
+
+                          document.getElementById('map'), {
+
+                              zoom: 18,
+
+                              center: uluru
+
+                          });
+
+                      // The marker, positioned at Uluru
+
+                      var marker = new google.maps.Marker({
+
+                          position: uluru,
+
+                          map: map
+
+                      });
+
+
+
+                      var map1 = new google.maps.Map(
+
+                          document.getElementById('map1'), {
+
+                              zoom: 18,
+
+                              center: uluru
+
+                          });
+
+                      // The marker, positioned at Uluru
+
+                      var marker = new google.maps.Marker({
+
+                          position: uluru,
+
+                          map: map1
+
+                      });
+
+                  }
+
+              }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBedpqcCEDvsH5O71U78g_gQzhh2a3cwk&callback=initMap&libraries=places"></script>
 </body>
 </html>
 <script>

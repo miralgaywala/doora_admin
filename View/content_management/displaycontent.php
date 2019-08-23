@@ -1,4 +1,4 @@
-<script src="https://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+
         <script type="text/javascript">
            function backcontent()
             {
@@ -27,6 +27,18 @@
               })
       }
         </script>
+        <script type="text/javascript">
+                                            CKEDITOR.replace( 'helpb' );
+                                         </script> 
+                                         <script type="text/javascript">
+                                            CKEDITOR.replace( 'privacy_policy' );
+                                         </script> 
+                                         <script type="text/javascript">
+                                            CKEDITOR.replace( 'term_condition' );
+                                         </script> 
+                                         <script type="text/javascript">
+                                            CKEDITOR.replace( 'helpc' );
+                                         </script> 
 <!--Main Content -->
     <section class="content">
       <div class="row">
@@ -52,75 +64,46 @@
               <br>
               <!-- box-header -->
               <div class="box-body">
-                <form class="form-horizontal" name="addtag" id="addtag" role="form" action="" method="post" enctype="multipart/form-data" >
-                 <input type="hidden" name="content_id" value="<?php foreach($display_content as $data) { echo $data['content_management_id'];}?>" id="content_id"> 
-                                <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy<span class="show_required">*</span></label>
-                                <div class="col-sm-8 notranslate">
-                                   <textarea class="ckeditor" cols="80" id="privacy_policy" name="privacy_policy" rows="10" >
-                                                  <?php 
+                <form class="form-horizontal" name="addtag" id="addtag" enctype="multipart/form-data" >
+                  <?php 
                                                   foreach($display_content as $data)
                                                   {
-                                                    echo $data['privacy_policy'];
-                                                  }
-
-                                                   ?>
+                                                    ?>
+                 <input type="hidden" name="content_id" value="<?php echo $data['content_management_id'];?>" id="content_id"> 
+                                <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy<span class="show_required">*</span></label>
+                                <div class="col-sm-8 notranslate">
+                                   <textarea class="ckeditor" cols="80" id="privacy_policy" name="privacy_policy" rows="10" ><?php echo stripslashes($data['privacy_policy']);?>
                                                  </textarea>
                                     <span id="privacy_error" class="show_required"></span><br>
                                 </div>
-                                 <script language="Javascript">
-                                            CKEDITOR.replace( 'privacy_policy' );
-                                         </script> 
+                                 
                                 <label for="term_condition" class="col-sm-3 control-label">Terms & Conditions<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
-                                   <textarea class="ckeditor" cols="80" id="term_condition" name="term_condition" rows="10" >
-                                                  <?php 
-                                                  foreach($display_content as $data)
-                                                  {
-                                                    echo $data['terms_and_condition'];
-                                                  }
-
-                                                   ?>
-                                                 </textarea>
+                                   <textarea type="text" class="ckeditor" cols="80" id="term_condition" name="term_condition" rows="10"> <?php echo stripslashes($data['terms_and_condition']); ?> </textarea>
                                      <span id="term_error" class="show_required"></span><br>
                                 </div>
-                                <script language="Javascript">
-                                            CKEDITOR.replace( 'term_condition' );
-                                         </script> 
+                                
                                 <label for="helpc" class="col-sm-3 control-label">Help(Customer)<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
-                                   <textarea class="ckeditor" cols="80" id="helpc" name="helpc" rows="10" >
-                                                  <?php 
-                                                  foreach($display_content as $data)
-                                                  {
-                                                    echo $data['help_customer'];
-                                                  }
-
-                                                   ?>
+                                   <textarea class="ckeditor" cols="80" id="helpc" name="helpc" rows="10" ><?php echo stripslashes($data['help_customer']);?>
                                                  </textarea>
                                     <span id="helpc_error" class="show_required"></span><br>
                                 </div>
-                                 <script language="Javascript">
-                                            CKEDITOR.replace( 'helpc' );
-                                         </script>  
+                                  
                                 <label for="helpb" class="col-sm-3 control-label">Help(Business)<span class="show_required">*</span></label>
                                 <div class="col-sm-8 notranslate">
-                                   <textarea class="ckeditor" cols="80" id="helpb" name="helpb" rows="10" >
-                                                  <?php 
-                                                  foreach($display_content as $data)
-                                                  {
-                                                    echo $data['help_business'];
-                                                  }
-
-                                                   ?>
+                                   <textarea class="ckeditor" cols="80" id="helpb" name="helpb" rows="10"><?php  echo stripslashes($data['help_business']);?>
                                                  </textarea>
                                    <span id="helpb_error" class="show_required"></span><br>
                                 </div>
-                                 <script language="Javascript">
-                                            CKEDITOR.replace( 'helpb' );
-                                         </script> 
-                             </div>                               
+                                 
+                             </div>    
+                             <?php 
+                             }
+
+                                                   ?>                           
                              <div class="box-footer  notranslate">
-                                    <input type="submit" name="tag_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="tag_submit" onclick="return validateForm();"/>
+                                    <input type="button" name="tag_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="tag_submit" onclick="validateFormcontent()"/>
                                     <button class="btn btn-default pull-right" onclick="backcontent()">Cancel</button>
                             </div>  
                            </div>
@@ -133,12 +116,13 @@
   <?php //include "../../View/header/footer.php";?>
  <script type="text/javascript">
                   
-                      function validateForm() {
-                                    var privacy = document.getElementById("privacy_policy").value;
-                                    var term = document.getElementById("term_condition").value;
-                                    var helpc = document.getElementById("helpc").value;
-                                     var helpb = document.getElementById("helpb").value;
-                                     var content_id = document.getElementById("content_id").value;
+                      function validateFormcontent() {
+                                    var privacy = CKEDITOR.instances['privacy_policy'].getData();//$("#privacy_policy").val();//document.getElementById("privacy_policy").value;
+                                    var term = CKEDITOR.instances['term_condition'].getData();//$("#term_condition").val();
+                                    var helpc = CKEDITOR.instances['helpc'].getData();//$("#helpc").val();//document.getElementById("helpc").value;
+                                     var helpb = CKEDITOR.instances['helpb'].getData();//$("#helpb").val();//document.getElementById("helpb").value;
+                                     var content_id = $("#content_id").val()//;document.getElementById("content_id").value;
+                                     console.log(term);
                                     var count=0;
                                     if (privacy.trim() == "") {
                                         document.getElementById('privacy_error').innerHTML="Please Enter Privacy Policy";
@@ -148,7 +132,7 @@
                                       {
                                         document.getElementById('privacy_error').innerHTML="";
                                       }
-                                    if(term.trim() == "")
+                                    if (term.trim() == "")
                                       {
                                         document.getElementById("term_error").innerHTML="Please Enter Terms And Condition";
                                        count++;
@@ -190,7 +174,12 @@
                                            data : {count_id:count_id,privacy:privacy,term:term,helpc:helpc,helpb:helpb,content_id:content_id},
                                            success:function(data)
                                            {
+                                            console.log(data);
                                             listcontent(data);
+                                           },
+                                           error:function(data)
+                                           {
+                                            console.log(data);
                                            }
                                         })
                                    }

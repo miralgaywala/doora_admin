@@ -69,7 +69,7 @@ class subcategory_model
         }
         return $getcategory;
     }
-    public function addsubcategory_data($category_id,$subcategory_name,$subcategory_image)
+    public function addsubcategory_data($category_id,$subcategory_name)
     {
         $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
@@ -84,7 +84,7 @@ class subcategory_model
         }
         else
         {
-        $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,sub_category_image,created_at,updated_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."','".$date."')"); 
+        $add_subcategory=$con->query("insert into sub_category (category_id,sub_category_name,created_at,updated_at) values(".$category_id.",'".$subcategory_name."','".$date."','".$date."')"); 
         //echo "insert into sub_category (category_id,sub_category_name,sub_category_image,created_at) values(".$category_id.",'".$subcategory_name."','".$subcategory_image."','".$date."')";
         $add_subcategory="1";
         }
@@ -101,7 +101,7 @@ class subcategory_model
         }
         return $geteditdata;
     }
-    public function editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
+    public function editsubcategory_data($category_id,$subcategory_name,$subcategory_id)
     {
         $subcategory_name=trim($subcategory_name);
         $con= $this->db->connection();
@@ -116,7 +116,7 @@ class subcategory_model
         }
         else
         {
-           $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' ,sub_category_image='".$subcategory_image."' where sub_category_id=".$subcategory_id); 
+           $edit_category=$con->query("update sub_category SET category_id=".$category_id." , sub_category_name='".$subcategory_name."' , updated_at='".$date."' where sub_category_id=".$subcategory_id); 
             $edit_category="1";
         }
        return $edit_category;

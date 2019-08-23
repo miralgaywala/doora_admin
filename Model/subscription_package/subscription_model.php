@@ -17,15 +17,15 @@ class subscription_model
       }
        return $subscription;
     }
-    public function addsubscription_data($price,$per_deal_redeem_price,$free_days)
+    public function addsubscription_data($price,$per_deal_redeem_price)
     {
       $price=trim($price);
       $per_deal_redeem_price=trim($per_deal_redeem_price);
-      $free_days=trim($free_days);
+      // $free_days=trim($free_days);
       $con= $this->db->connection();
       //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
       $date = gmdate("Y-m-d\TH:i:s\Z");
-        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price." AND free_days=".$free_days);
+        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price);
         $count=$select->num_rows;
         $addsubscription="";
         if($count > 0)
@@ -34,7 +34,7 @@ class subscription_model
         }
         else
         {
-      $subscription=$con->query("insert into subscription_plans (price,per_deal_redeem_price,free_days,created_at,updated_at) values(".$price.",".$per_deal_redeem_price.",".$free_days.",'".$date."','".$date."')"); 
+      $subscription=$con->query("insert into subscription_plans (price,per_deal_redeem_price,created_at,updated_at) values(".$price.",".$per_deal_redeem_price.",'".$date."','".$date."')"); 
       $addsubscription="1"; 
       }  
       return $addsubscription;
@@ -49,15 +49,15 @@ class subscription_model
       }
        return $subscription;
     }
-    public function editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price,$free_days)
+    public function editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price)
     {
       $price=trim($price);
       $per_deal_redeem_price=trim($per_deal_redeem_price);
-      $free_days=trim($free_days);
+      // $free_days=trim($free_days);
       $con= $this->db->connection();
       //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
        $date = gmdate("Y-m-d\TH:i:s\Z");
-        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price." AND free_days=".$free_days." AND subscription_plan_id!=".$subscription_plan_id);
+        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price." AND subscription_plan_id!=".$subscription_plan_id);
         $count=$select->num_rows;
         $addsubscription="";
         if($count > 0)
@@ -66,7 +66,7 @@ class subscription_model
         }
         else
         {
-      $subscription=$con->query("update subscription_plans set price=".$price.",per_deal_redeem_price=".$per_deal_redeem_price.",free_days=".$free_days.",updated_at='".$date."' where subscription_plan_id=".$subscription_plan_id); 
+      $subscription=$con->query("update subscription_plans set price=".$price.",per_deal_redeem_price=".$per_deal_redeem_price.",updated_at='".$date."' where subscription_plan_id=".$subscription_plan_id); 
       $addsubscription="1";   
     }
       return $addsubscription;

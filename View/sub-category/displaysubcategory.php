@@ -9,7 +9,7 @@
 $(document).ready(function() {
    $('#example1').DataTable( {
            "columnDefs": [ {
-            "targets": [2,4],
+            "targets": [3],
             "orderable": false
             } ] 
     } );
@@ -154,7 +154,7 @@ function subcategory()
                             <tr>
                               <th style="text-align:center;" width="5%">#</th>
                               <th style="text-align:center;" width="15%">Sub Category Id</th>
-                              <th style="text-align:center;" width="15%">Sub Category Image</th>
+                              <!-- <th style="text-align:center;" width="15%">Sub Category Image</th> -->
                               <th style="text-align:center;">Sub Category Name</th>
                               
                               <th style="text-align:center;" width="10%">Action</th>
@@ -168,7 +168,7 @@ function subcategory()
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['sub_category_id']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture" style="object-fit: contain;"/></td>
+                               <!--  <td style="text-align:center;"><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture" style="object-fit: contain;"/></td> -->
                                 <td style="text-align:center;"><?php echo $data['sub_category_name']; ?></td>
                                 
                                 <td style="text-align:center;">

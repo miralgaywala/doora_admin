@@ -14,9 +14,9 @@ if(isset($_POST['count_id']))
 	{
 		$price =$_POST['price'];
         $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
-        $free_days =$_POST['free_days'];
+        // $free_days =$_POST['free_days'];
     	$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->add_subscription($price,$per_deal_redeem_price,$free_days);
+	 	$result=$subscription_controller->add_subscription($price,$per_deal_redeem_price);
 	 	if($result == 1)
 	 	{
 	 		echo "#add";
@@ -31,9 +31,9 @@ if(isset($_POST['count_id']))
 		$subscription_plan_id= $_POST['subscription_plan_id'];
         $price =$_POST['price'];
         $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
-        $free_days =$_POST['free_days'];
+        // $free_days =$_POST['free_days'];
     	$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price,$free_days);
+	 	$result=$subscription_controller->edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price);
 	 	if($result == 1)
 	 	{
 	 		echo "#edit";
@@ -56,10 +56,10 @@ class subscription_controller
 		include "../../View/subscription_package/displaysubscription.php";
 		return $display_subscription;
 	}
-	public function add_subscription($price,$per_deal_redeem_price,$free_days)
+	public function add_subscription($price,$per_deal_redeem_price)
 	{
 		
-            $add_subscription=$this->subscription_model->addsubscription_data($price,$per_deal_redeem_price,$free_days);
+            $add_subscription=$this->subscription_model->addsubscription_data($price,$per_deal_redeem_price);
             return $add_subscription;
 	}
 	public function editlist_subscription($subscription_id)
@@ -68,10 +68,10 @@ class subscription_controller
 		include "../../View/subscription_package/editsubscription.php";
 		
 	}
-	public function edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price,$free_days)
+	public function edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price)
 	{
 		
-            $add_subscription=$this->subscription_model->editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price,$free_days);
+            $add_subscription=$this->subscription_model->editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price);
             return $add_subscription;
 	}
 	public function delete_subscription($subscription_id)

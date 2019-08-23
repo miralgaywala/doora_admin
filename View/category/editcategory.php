@@ -70,11 +70,11 @@
         			<!-- box-header -->
         			<div class="box-body">
         				<form class="form-horizontal" name="addcategory" id="addcategory_form" role="form" action="" method="post" enctype="multipart/form-data" >
-        					<input type="hidden" name="category_id" value="<?php echo $data['category_id'];?>"" id="category_id"/>
+        					<input type="hidden" name="category_id" value="<?php echo $data['category_id'];?>" id="category_id"/>
         					<div class="form-group notranslate">
                                 <label for="category_name" class="col-sm-3 control-label">Category Name<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="category_name" type="text" id="category_name" class="form-control" value="<?php echo $data["category_name"];?>"" onblur="categoryname();"/>
+                                    <input name="category_name" type="text" id="category_name" class="form-control" value="<?php echo $data["category_name"];?>" />
                                      <span id="category_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
@@ -92,44 +92,90 @@
                                         <div id="preview-crop-image" style="width:402px;height:172px;border-style: groove;border-width: thin;"><img src="<?php echo "../../../images/category/".$data['category_image']; ?>" style="width:400px;height:170px;" /></div>
                                       </div>  
                                        <div class="col-md-2" style="margin-top: 10px;"> 
-                                          <div id="upload-demo" style="width:402px;height:402px;border-style: groove;border-width: thin;"></div>
+                                          <div id="upload-demo" style="width:396px;height:402px;border-style: groove;border-width: thin;"></div>
                                       </div>                     
                                </div>
                         
-                           <div class="form-group notranslate">
+                          <!--  <div class="form-group notranslate">
                                 <label for="is_super_market" class="col-sm-3 control-label">Is Super Market</label>
                                     <div class="col-sm-8" style="padding-top: 6px">
                                         <input name="is_super_market" type="checkbox" id="is_super_market" <?php if($data['is_super_market'] == 1) echo 'checked="checked"';?>/>
                                         <input name="is_super_market1" type="hidden" id="is_super_market1" value="<?php echo $data['is_super_market']; ?>" />
                                          <br> <span id="issuper_market_error" class="show_required"></span> 
                                     </div>
-                             </div>  
+                             </div>   -->
                              <?php } ?>
         <script type="text/javascript">
             var resize = $('#upload-demo').croppie({
                 enableExif: true,
-                enableOrientation: true,    
+                enableOrientation: true, 
+                enforceBoundary:true,   
                 viewport: { 
-                     width: 400,
+                     width: 394,
                     height: 170,
                     type: 'square' 
                 },
                 boundary: {
-                     width: 400,
+                     width: 394,
                     height: 400
                 }
             });
             
+             var image_height;
+            var image_width;
+               var image_mb_size;
             $('#category_image').on('change', function () { 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    resize.croppie('bind',{
-                        url: e.target.result
-                    }).then(function(){
-                        console.log('Complete');
-                    });
+                  var i = new Image(); 
+                  i.onload = function(){
+
+                    image_height = i.height;
+                    image_width = i.width;
+
+                    if(image_width <= 3500 && image_height <= 1500)
+                   {
+                      if(image_mb_size <= 4718592)
+                    {
+                      resize.croppie('bind',{
+                        url: e.target.result,
+                        zoom: 0
+                      }).then(function(){
+                           resize.croppie('setZoom', 0);
+                          console.log('Complete');
+                      });
+                    }
+                    else
+                    {
+                      $.confirm({
+                                title:'Alert',
+                                content: 'Please upload image smaller than 4.5mb in size.',
+                                buttons: {
+                                  OK: function(){
+                                    $("#category_image").val("");
+                                    }
+                                }
+                            });
+                    }
+                   }
+                   else
+                   {
+                      $.confirm({
+                                title:'Alert',
+                                content: 'Please upload image smaller than 3500x1500 px dimension.',
+                                buttons: {
+                                  OK: function(){
+                                    $("#category_image").val("");
+                                    }
+                                }
+                            });
+                   }
+                  };
+
+                  i.src = e.target.result; 
                 },
                 reader.readAsDataURL(this.files[0]);
+                image_mb_size = this.files[0].size;
             });
             
             $('#btn-upload').on('click', function (ev) {
@@ -147,19 +193,48 @@
               }
               else
               {
+                image_size = "original";
+              // {
+              //   if(image_height <= 510 && image_width <= 1182)
+              //   {
+              //     image_size = "original";
+              //   }
+              //   else
+              //   {
+              //     image_size = {height:510,width:1182};
+              //   }
                 resize.croppie('result', {
                     type: 'canvas',
-                    size: 'viewport'
-                }).then(function (img) {
+                    //size:'original',
+                    size:image_size,
+                    // quality:0.1
+                    //   size: {
+                    //   // height:510,
+                    //   // width:1182                                       
+                    // },
+                }).then(function (img) { 
                     $.ajax({
                         url: "../category/croppie.php",
                         type: "POST",
                         data: {"category_image":img},
                         success: function (data) {
-                        
-                            html = '<img src="' + img + '" />';
+                           if(data == "not")
+                         {
+                              $.confirm({
+                                title:'Alert',
+                                content: 'something went wrong with image uploading, Please try again !!',
+                                buttons: {
+                                  OK: {
+                                    }
+                                }
+                            });
+                         }
+                         else
+                         {
+                          html = '<img src="' + img + '" style="border-style:ridge;width:400px;height:170px;"/>';
                             $('#imagename').val(data);
                             $("#preview-crop-image").html(html);
+                         }
                         }
                     });
                 });
@@ -184,10 +259,10 @@
                                     var categoryname = document.forms["addcategory"]["category_name"].value;
                                     var categoryimage = document.getElementById("category_image").value;
                                     var imagename = document.getElementById("imagename").value;
-                                    var is_super_market = document.getElementById("is_super_market1").value;
+                                    var is_super_market = 0;
                                     var category_id = document.getElementById("category_id").value;
+                                 
                                     var count=0;
-                                    
                                     if (categoryname.trim() == "") {
                                         document.getElementById('category_nameerror').innerHTML="Please Enter Category Name";
                                        count++;
@@ -208,7 +283,7 @@
                                         url: '../../Controller/category/category_controller.php',
                                         data: {count_id:count_id,categoryname:categoryname,imagename:imagename,is_super_market:is_super_market,category_id:category_id},
                                         success: function (data) {
-                                        
+                                       
                                          if(data == "#edit")
                                           {
                                               listcategory(data);
@@ -258,7 +333,7 @@
                             });
             } 
         }  
-         document.getElementById('is_super_market').addEventListener('change', validate);
+         // document.getElementById('is_super_market').addEventListener('change', validate);
          function ImagePreview() { 
              var PreviewIMG = document.getElementById('PreviewPicture'); 
              var UploadFile    =  document.getElementById('category_image').files[0]; 

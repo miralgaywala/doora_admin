@@ -1,12 +1,14 @@
- <?php //include "../../View/header/header.php";
+ <?php 
+ //include "../../View/header/header.php";
 // include "../../View/header/sidemenu.php";
 
  ?>
  <script>
+
   $(document).ready(function() {
    $('#example1').DataTable( {
     "columnDefs": [ {
-            "targets": [3,8],
+            "targets": [3,7],
             "orderable": false
             } ]
     });
@@ -73,6 +75,18 @@
                  }
               })
       }
+      function viewfreetrialdates(id)
+      {
+        $.ajax({
+                 url:"../../Controller/business/viewfreedayscontroller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      topFunction();
+                 }
+              })
+      }
         $(document).ready(function(){
             $("#user").select2(); 
         });
@@ -109,9 +123,13 @@
     		<!--<button type="button" style="float: right;" class="btn btn-primary" onclick="window.location.href='/doora/adminpanel/View/tag/addtag.php';">+ Add Tag</button>-->
     		</div>
     	</div> 
-      <div class="alert alert-info alert-dismissible" style="display: none;" id="deactive">
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="deactive">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Business has been activated successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="notdeactive">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Business has not proper activated successfully
                 </div>
                 <div class="alert alert-info alert-dismissible" style="display: none;" id="active">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -120,6 +138,22 @@
                 <div class="alert alert-info alert-dismissible" style="display: none;" id="delete">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Business has been deleted successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="add">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Free days has been updated successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="update">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Business user has been updated successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="notupdate">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Business user has been not updated successfully
+                </div>
+                <div class="alert alert-info alert-dismissible" style="display: none;" id="not">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                You can not update free trial days
                 </div>
         <div class="row">
         	<div class="col-xs-12">
@@ -140,10 +174,10 @@
                                               $selected = ' ';
                                             }
                                         ?>
-                                     <option value="f0">All Business User</option>
+                                     <option value="f0">All Business</option>
                                      <option value="f1" <?php if("f1" == $selected ) { ?> selected  <?php } ?>>Active</option>
                                      <option value="f2" <?php if("f2" == $selected ) { ?> selected  <?php } ?>>Deactive</option>
-                                     <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option>
+                                    <!--  <option value="f3" <?php if("f3" == $selected ) { ?> selected  <?php } ?>>Deleted</option> -->
                                     </select>
                                 </div> 
                                 <div class="col-sm-4"></div>
@@ -155,12 +189,12 @@
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
 			                  <th style="text-align:center;" width="5%">User Id</th>
-			                  <th style="text-align:center;">Buisness Name</th>
+			                  <th style="text-align:center;">Business Name</th>
                         <th style="text-align:center;">Photo</th>
                         <th style="text-align:center;">Email Id</th>
                         <th style="text-align:center;">Contact No</th>
                         <th style="text-align:center;">Stripe Customer Id</th>
-                        <th style="text-align:center;">Super Market</th>
+                        <!-- <th style="text-align:center;">Super Market</th> -->
 			                  <th style="text-align:center;" width="13%">Action</th>
 			                </tr>
 							 </thead>
@@ -178,34 +212,43 @@
                  else
                  {
                   $data['photo']= "default.png";
-                 }            
+                 } 
+                 $name1 = addslashes($data['business_name']);
+                           $name = stripslashes($name1);           
                   ?>  
-                          <?php $value=$data['is_deleted']; if($value == 0 ){ ?> 
+                          <?php $value=$data['is_deleted']; if($value == 0 ){
+
+                            $time = date("H:i:s");
+
+                           ?> 
                             <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['business_name']; ?></td>
-                                <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture" style="object-fit: contain;"/></td>
+                                <td style="text-align:center;"><?php echo $name; ?></td>
+                                <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo']."?time=$time";?> id="profilePicture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td>
                                 <td style="text-align:center;"><?php echo $data['stripe_customer_id'];?></td>
-                                <td style="text-align:center;"><?php if($data['is_super_market'] == 0)
+                               <!--  <td style="text-align:center;"><?php if($data['is_super_market'] == 0)
                                                                 {
                                                                   echo "No";
                                                                 }
                                                                 else
                                                                   {
                                                                     echo "Yes";
-                                                                  }?></td>
+                                                                  }?></td> -->
                                 <td style="text-align:center;">
                                       <input type="hidden" name="id" id="id" value="<?php echo $data['user_id']; ?>">
                                         <input type="hidden" name="open" id="open" value="<?php echo $data['is_active']; ?>">
                                     <div>
-                                    	<a onclick="viewbusinessuserdetail(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusiness_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;"><i class="fa fa-eye"></i></a>
+                                    	<a onclick="viewbusinessuserdetail(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusiness_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;"><i class="fa fa-eye fa-fw"></i></a>
                                   
                                     	   <?php $value=$data['is_deleted']; if($value == 0 ){ ?> 
                                         <a onclick="JSconfirm(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/deletebusiness_controller.php?id=".$data['user_id'];?>  title="Delete" >
                                         <i class="fa fa-trash-o fa-fw"></i>
+                                        </a>
+                                        <a onclick="business_edit(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/deletebusiness_controller.php?id=".$data['user_id'];?>  title="edit" style="cursor: pointer;">
+                                        <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                            <?php } ?>
                                             <?php $value=$data['is_deleted']; if($value == 0 ){ ?> 
@@ -213,7 +256,12 @@
                                        
                                     	<a style="cursor: pointer;" <?php $value=$data['is_active']; if($value == 1 ){ ?>
                                     		onclick="Jsclosealrt(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
-                                    	<?php } else{ ?>
+                                    	 <?php } else if($data['is_free_trial_started'] == 0 && $value == 0)
+                                      {?>
+
+                                        onclick="Jsclosealrtwithfree(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
+                                        <?php
+                                      } else{ ?>
                                     		onclick="Jsopenalrt(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
                                     	<?php }?>
                                     	<?php //echo "href=../../Controller/business/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
@@ -232,7 +280,18 @@
                                          <br/>
                                         <a onclick="viewverificationdetail(<?php echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                         <br/>
-                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a>
+                                        <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a><br/>
+                                        <?php
+                                        $date = date('Y-m-d H:i:s');
+                                       if($data['free_trial_exp_date'] >  $date || $data['free_trial_exp_date'] == "0000-00-00 00:00:00")
+                                        { ?>
+                                        <a onclick="viewfreetrialdates(<?php echo $data['user_id']; ?>);" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="" style="cursor: pointer;">Free Trial Days</a>
+                                      <?php }
+                                      else{
+                                        ?>
+                                         <a <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="" style="cursor: pointer;pointer-events: none;color:#D3D3D3; ">Free Trial Days</a>
+                                        <?php
+                                      } ?>
                                       </div>
                                 </td>
                                  </tr>
@@ -242,7 +301,7 @@
                               <tr style="color: red;">
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['user_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['business_name']; ?></td>
+                                <td style="text-align:center;"><?php echo "$name"; ?></td>
                                 <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo'];?> id="profilePicture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td>
@@ -271,7 +330,12 @@
                                        
                                       <a style="cursor: pointer;" <?php $value=$data['is_active']; if($value == 1 ){ ?>
                                         onclick="Jsclosealrt(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
-                                      <?php } else{ ?>
+                                      <?php } else if($data['is_free_trial_started'] == 0 && $value == 0)
+                                      {?>
+
+                                        onclick="Jsclosealrtwithfree(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
+                                        <?php
+                                      } else{ ?>
                                         onclick="Jsopenalrt(<?php echo $value; ?>,<?php echo $data['user_id']; ?>)"
                                       <?php }?>
                                       <?php //echo "href=../../Controller/business/isactive_controller.php?id=".$data['user_id']."&value=".$data['is_active'];?>><?php $value=$data['is_active']; if($value == 1 ){
@@ -291,6 +355,7 @@
                                         <a onclick="viewverificationdetail(<?php echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
                                         <br/>
                                         <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a>
+                                      </div>
                                       </div>
                                 </td>
                                  </tr>
@@ -322,10 +387,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script type="text/javascript">
 
-function Jsopenalrt(value,id){
+function Jsclosealrtwithfree(value,id){
   $.confirm({
     title:'Activate',
-    content: 'Are you sure you want to activate this business ?',
+    content: 'Are you sure you want to activate this business?',
     buttons: {
       Yes: {
             btnClass: 'btn-red any-other-class', 
@@ -337,7 +402,37 @@ function Jsopenalrt(value,id){
                  data : {count_id:count_id,value:value,id:id},
                  success:function(data)
                  {
+                  console.log(data);
+                   listbusiness(data);
+                 }
+              })
+            // window.location.href='../../Controller/business/isactive_controller.php?id='+id+'&value='+value;
+          }
+        },
+        No: {
+            btnClass: 'btn-blue'
+            
+        }
+    }
+});
+}
 
+function Jsopenalrt(value,id){
+  $.confirm({
+    title:'Activate',
+    content: 'Are you sure you want to activate this business?',
+    buttons: {
+      Yes: {
+            btnClass: 'btn-red any-other-class', 
+          action: function(){
+            var count_id = "request";
+            $.ajax({
+                 url:"../../Controller/business/business_controller.php",
+                 method:"POST",
+                 data : {count_id:count_id,value:value,id:id},
+                 success:function(data)
+                 {
+                  console.log(data);
                    listbusiness(data);
                  }
               })
@@ -366,7 +461,7 @@ function Jsclosealrt(value,id){
                  data : {count_id:count_id,value:value,id:id},
                  success:function(data)
                  {
-                
+                  console.log(data);
                    listbusiness(data);
                  }
               })
@@ -395,7 +490,6 @@ function JSconfirm(id){
                  data : {count_id:count_id,id:id},
                  success:function(data)
                  {
-                
                    listbusiness(data);
                  }
               })
@@ -409,6 +503,23 @@ function JSconfirm(id){
     }
 });
 }
+
+function business_edit(id)
+{
+  var count_id = "edit_value";
+  $.ajax({
+                 url:"../../Controller/business/business_controller.php",
+                 method:"POST",
+                 data : {count_id:count_id,id:id},
+                 success:function(data)
+                 {
+                  // console.log(data);
+                   $('.content-wrapper').html(data);
+                 }
+              })
+            //window.location.href='../../Controller/business/deletebusiness_controller.php?id='+bla;
+}
+
 </script>
 
 

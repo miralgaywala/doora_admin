@@ -10,6 +10,22 @@ if(isset($_POST['count_id']))
 		echo "#delete";
 
 	}
+	if($_POST['count_id'] == 'free_add')
+	{
+		$id=$_POST['user_id'];
+		$free_days=$_POST['free_days'];
+		$new_day = $_POST['new_day'];
+		$business_controller=new business_controller();
+		$result=$business_controller->add_business_free_days($id,$free_days,$new_day);
+		if($result == 1)
+		{
+			echo "#add";
+		}
+		else
+		{
+			echo "#not";
+		}
+	}
 	if($_POST['count_id'] == 'request')
 	{
 		$id=$_POST['id'];
@@ -20,11 +36,70 @@ if(isset($_POST['count_id']))
 		{
 			echo "#deactive";
 		}
+		else if($result == 0)
+		{
+			echo "#notdeactive";
+		}
 		else
 		{
 			echo "#active";
 		}
 
+	}
+	if($_POST['count_id'] == 'edit_value')
+	{
+		$id=$_POST['id'];
+		$business_controller=new business_controller();
+		$result=$business_controller->getedituservalue($id);
+		include "../../View/business/editbusinessuser.php";
+
+	}
+	if($_POST['count_id'] == 'edit_business')
+	{
+		
+		
+		$profile_img = $_FILES['profile_image'];
+		if($_FILES['profile_image']['name'] == "")
+		{
+			$profile_pic = $_POST['profile_pic'];
+			
+			// $address = $_POST['address'];
+			// $lat = $_POST['lat'];
+			// $log = $_POST['log'];
+			
+		}
+		else
+		{
+			// $company_name = $_POST['company_name'];
+			// $contact_number = $_POST['contact_number'];
+			// $website_url = $_POST['website_url'];
+			// $address = $_POST['address'];
+			// $lat = $_POST['lat'];
+			// $log = $_POST['log'];
+			// $super_market = $_POST['super_market'];
+			// $pet_friendly = $_POST['pet_friendly'];
+			$user_id = $_POST['user_id'];
+			$ext = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
+			$profile_pic = $user_id.".".$ext;
+			move_uploaded_file($_FILES["profile_image"]["tmp_name"], "../../../images/profile/" . $profile_pic);
+		}
+		$company_name = $_POST['company_name'];
+			$contact_number = $_POST['contact_number'];
+			$website_url = $_POST['website_url'];
+			$user_id = $_POST['user_id'];
+			$super_market = $_POST['super_market'];
+			$pet_friendly = $_POST['pet_friendly'];
+			// $abn_acn = $_POST['abn_acn'];
+		$business_controller=new business_controller();
+		$result=$business_controller->edit_business($profile_pic,$company_name,$contact_number,$website_url,$user_id,$super_market,$pet_friendly);
+		if($result == 1)
+		{
+			echo "#update";
+		}
+		else
+		{
+			echo "#notupdate";
+		}
 	}
 	
 }
@@ -33,6 +108,16 @@ class business_controller
 	public function __construct()
 	{
 		$this->business_model=new business_model();
+	}
+	public function edit_business($profile_pic,$company_name,$contact_number,$website_url,$user_id,$super_market,$pet_friendly)
+	{
+		$display_businessuser=$this->business_model->edit_business($profile_pic,$company_name,$contact_number,$website_url,$user_id,$super_market,$pet_friendly);
+		return $display_businessuser;
+	}
+	public function getedituservalue($id)
+	{
+		$display_businessuser=$this->business_model->getbusinessdetail($id);
+		return $display_businessuser;
 	}
 	public function display_businessuser($msg)
 	{
@@ -110,6 +195,16 @@ class business_controller
 	{
 		$viewverification_detail=$this->business_model->getbusinessverificartiondetail($id);
 		include "../../View/business/viewbuisnessverificationdetail.php";
+	}
+	public function viewfreedaysdetail($id)
+	{
+		$viewverification_detail=$this->business_model->viewfreedaysdetail($id);
+		include "../../View/business/viewbuisnessfreedays.php";
+	}
+	public function add_business_free_days($id,$free_days,$new_day)
+	{
+		$add_business_free_days=$this->business_model->add_business_free_days($id,$free_days,$new_day);
+		return $add_business_free_days;
 	}
 }
 ?>

@@ -11,6 +11,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+       // $content_id=$_GET['id'];
+        //var_dump($content_id);
          include ".././content_management/contentmanagement_controller.php";
       
         $controller=new content_controller();   

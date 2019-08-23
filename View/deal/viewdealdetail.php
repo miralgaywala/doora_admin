@@ -302,11 +302,11 @@
                  <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                   
                    ?><?php echo $cat['sub_category_id']; if($i<$count) { echo " ,"; } $i=$i+1; ?>&nbsp;&nbsp;<?php } }?></td>
                   </tr> -->
-                  <tr>
+                 <!--  <tr>
                  <td style="width: 20%">Sub Category Name</td>
                  <td> <?php if($deal_cat == NULL) {echo "No";} else{ $count=count($deal_cat); $i=1; foreach ($deal_cat as $cat) {                  
                    ?><?php echo $cat['sub_category_name']; if($i<$count) { echo " ,"; } $i=$i+1;?>&nbsp;&nbsp;<?php } }?></td>
-                  </tr>
+                  </tr> -->
                   <!-- <tr>
                   <td style="width: 20%">Category Id</td>
                   <td> <?php if($deal_category == NULL) {echo "No";} else{ $count=count($deal_category); $i=1; foreach ($deal_category as $category) {                    

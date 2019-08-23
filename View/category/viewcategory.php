@@ -61,7 +61,7 @@
                       echo "Yes";
                     }?></td>
                   </tr> -->
-                  <tr>
+                 <!--  <tr>
                    <td style="width: 20%">Super Market</td>
                   <td><?php if($data['is_super_market'] == 0)
                   {
@@ -71,7 +71,7 @@
                     {
                       echo "Yes";
                     }?></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                    <td style="width: 20%">Created Date</td>
                   <td>

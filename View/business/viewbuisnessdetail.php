@@ -143,6 +143,10 @@
                     }?></td>
                   </tr>
                   <tr>
+                  <td style="width: 20%">Free Trial Days</td>
+                  <td><?php echo $data['free_trail_days']; ?></td>
+                  </tr>
+                  <tr>
                    <td style="width: 20%">Notification Allowed</td>
                   <td><?php if($data['is_notification'] == 0)
                   {
@@ -199,14 +203,14 @@
                    <td style="width: 20%">Start Subscription</td>
                   <td><?php if($data['is_start_subscription'] == 0)
                   {
-                    //echo "No";
+                    echo "No";
                   }
                   else
                     {
                       echo "Yes";
                     }?></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                    <td style="width: 20%">Subscription End Date</td>
                   <td><script type="text/javascript">
                       var dateFormat = 'DD-MM-YYYY HH:mm:ss';
@@ -225,12 +229,12 @@
                       }
                     </script>
                    <div id="demo3"></div></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                    <td style="width: 20%">Free Trial Started</td>
                   <td><?php if($data['is_free_trial_started'] == 0)
                   {
-                    // echo "No";
+                     echo "No";
                   }
                   else
                     {
@@ -238,7 +242,7 @@
                     }?></td>
                   </tr>
                   <tr>
-                   <td style="width: 20%">Free trial Expiry Date</td>
+                   <td style="width: 20%">Free Trial Expiry Date</td>
                   <td><script type="text/javascript">
                       var dateFormat = 'DD-MM-YYYY HH:mm:ss';
                       var testDateUtc = moment.utc('<?php echo $data["free_trial_exp_date"] ?>');
@@ -261,7 +265,7 @@
                   </tr>
                   <tr>
                    <td style="width: 20%">Monthly Bill Pending</td>
-                  <td><?php if($data['is_monthly_bill_pending'] == 1)
+                  <td><?php if($data['is_monthly_bill_pending'] == 0)
                   {
                     echo "No";
                   }
@@ -276,7 +280,7 @@
                   <td><?php echo $data['access_token'];?></td>
                   </tr> -->
                   
-                  <tr>
+                  <!-- <tr>
                    <td style="width: 20%">Super Store</td>
                   <td><?php if($data['is_super_market'] == 0)
                   {
@@ -286,7 +290,22 @@
                     {
                       echo "Yes";
                     }?></td>
+                  </tr> -->
+                  <tr>
+                   <td style="width: 20%">Pet Friendly</td>
+                  <td><?php if($data['is_pet_friendly'] == 0)
+                  {
+                    echo "No";
+                  }
+                  else
+                    {
+                      echo "Yes";
+                    }?></td>
                   </tr>
+                 <!--   <tr>
+                   <td style="width: 20%">ABN or ACN Number</td>
+                  <td><?php echo $data['abn_number'];?></td>
+                  </tr> -->
                   <tr>
                    <td style="width: 20%">Website Url</td>
                   <td><?php echo $data['website_url'];?></td>

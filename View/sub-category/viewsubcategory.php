@@ -55,11 +55,11 @@
                   <td><?php echo $data['sub_category_id'];?></td>
                   </tr>
                   
-                  <tr>
+                  <!-- <tr>
                   <td style="width: 20%">Sub Category Image</td>
 
                   <td><a data-fancybox="gallery" <?php echo "href=../../../images/sub_category/".$data['sub_category_image'];?>><img <?php echo "src=../../../images/sub_category/".$data['sub_category_image'];?> id="SubCategoryPicture" style="object-fit: contain;"/></a></td>
-                  </tr>
+                  </tr> -->
                   <!-- <tr>
                   <td style="width: 20%">Is Deleted</td>
                   <td><?php if($data['is_deleted'] == 0)

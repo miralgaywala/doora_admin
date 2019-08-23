@@ -38,7 +38,7 @@
                                     $invoice_month=date('F', mktime(0, 0, 0, $invoice_month, 1, 2000));
                                     $start_date= $data['month_start_date'];
                                     $start_date=date('jS M Y', strtotime($start_date));    
-                                    $end_date = $data['month_end_date'];
+                                    $end_date = $data['bill_paid_date'];
                                     $end_date=date('jS M Y', strtotime($end_date));
                             ?>
         				<table style="width: 100%;">

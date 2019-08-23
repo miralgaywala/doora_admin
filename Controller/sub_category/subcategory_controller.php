@@ -6,9 +6,9 @@ if(isset($_POST['count_id']))
 		{
 		$category_id = $_POST['category_name'];
 		$subcategory_name = $_POST['subcategoryname'];
-		$subcategory_image = $_POST['imagename'];
+		//$subcategory_image = $_POST['imagename'];
     	$subcategory_controller=new subcategory_controller();
-	 	$result=$subcategory_controller->add_subcategory($category_id,$subcategory_name,$subcategory_image);
+	 	$result=$subcategory_controller->add_subcategory($category_id,$subcategory_name);
 	 	if($result == 1)
 	 	{
 	 		echo "#add";
@@ -22,10 +22,10 @@ if(isset($_POST['count_id']))
 		{
 		$category_id = $_POST['category_name'];
 		$subcategory_name = $_POST['subcategoryname'];
-		$subcategory_image = $_POST['imagename'];
+		//$subcategory_image = $_POST['imagename'];
 		$subcategory_id=$_POST['sub_category_id'];
     	$subcategory_controller=new subcategory_controller();
-	 	$result=$subcategory_controller->edit_subcategorydata($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
+	 	$result=$subcategory_controller->edit_subcategorydata($category_id,$subcategory_name,$subcategory_id);
 	 	if($result == 1)
 	 	{
 	 		echo "#edit";
@@ -80,9 +80,9 @@ class subcategory_controller{
 		include "../../View/sub-category/addsubcategory.php";
 		return $category;
 	}
-	public function add_subcategory($category_id,$subcategory_name,$subcategory_image)
+	public function add_subcategory($category_id,$subcategory_name)
 	{
-			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name,$subcategory_image);
+			$add_subcategory=$this->subcat_model->addsubcategory_data($category_id,$subcategory_name);
 			return $add_subcategory;
 	}
 	public function edit_subcategory($subcategory_id)
@@ -92,10 +92,10 @@ class subcategory_controller{
 		include "../../View/sub-category/editsubcategory.php";
 		
 	}
-	public function edit_subcategorydata($category_id,$subcategory_name,$subcategory_image,$subcategory_id)
+	public function edit_subcategorydata($category_id,$subcategory_name,$subcategory_id)
 	{
 		
-			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_image,$subcategory_id);
+			$edit_subcategory=$this->subcat_model->editsubcategory_data($category_id,$subcategory_name,$subcategory_id);
 			return $edit_subcategory;
 	}
 	public function filter_subcategory($msg)

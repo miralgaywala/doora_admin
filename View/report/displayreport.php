@@ -167,7 +167,7 @@ $(document).ready(function(){
       })
     })
         function loadcategory(){
-      	var category = $('#category_list').val();
+      	var category ="category";
       	var year_time = $('#year_time_categry').val();
       	console.log(category);
       	console.log(year_time);
@@ -254,6 +254,7 @@ function loadbusinessreport(){
 		   type: 'POST',
 		   data:{business_list:business_list,business_year:business_year},
 		   success: function(data) {
+		   	console.log(data);
 		  	var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 			var today = new Date();
@@ -405,6 +406,7 @@ function loadbusinessreport(){
 		   type: 'POST',
 		   data:{business_list:business_list,business_year:business_year},
 		   success: function(data) {
+		   	console.log(data);
 		  //  	if(data == '[]')
 		  //  	{
 		  //  		var pieChartContent = document.getElementById('pieChartContent4');
@@ -546,6 +548,7 @@ function loadbusinessreport(){
 		   type: 'POST',
 		   data:{business_list:business_list,business_year:business_year},
 		   success: function(data) {
+		   	console.log(data);
 		   	//console.log(data);
 		  //  	if(data == '[]')
 		  //  	{
@@ -966,12 +969,12 @@ function loadagereport(){
           <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title" style="font-size: 14px;">Catgeory & Sub-category wise purchased deals</h3>
+              <h3 class="box-title" style="font-size: 14px;">Catgeory wise purchased deals</h3>
               <div class="box-tools">
-               <select name="category_list" class="form-control select2" style="width: 100px;padding-left: 0px;" id="category_list">
-	               	<option value="category" selected>Category</option>
-	                <option value="sub-category">Sub-category</option>
-              </select>
+              <!--  <select name="category_list" class="form-control select2" style="width: 100px;padding-left: 0px;" id="category_list">
+	               	<option value="category" selected>Category</option> -->
+	               <!--  <option value="sub-category">Sub-category</option> -->
+              <!-- </select> -->
                <select name="year_time_categry" class="form-control select2" style="width: 125px;" id="year_time_categry">
                 <option value="last 24 hours">Last 24 hours</option>
                 <option value="last 7 days">Last 7 days</option>

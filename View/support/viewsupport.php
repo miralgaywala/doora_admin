@@ -64,6 +64,15 @@
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
+    $html = nl2br($html);
+    if($data['is_business'] == '1')
+{
+  $name = $data['business_name'];
+}
+else
+{
+  $name = $data['name'];
+}
                ?>
                   <tr>
                   <td style="width: 20%">Support Id </td>
@@ -75,7 +84,7 @@
                   </tr>
                    <tr>
                   <td style="width: 20%">User Name </td>
-                  <td><?php echo $data['name'];?></td>
+                  <td><?php echo $name;?></td>
                   </tr>
                   <tr>
                   <td style="width: 20%">Message </td>

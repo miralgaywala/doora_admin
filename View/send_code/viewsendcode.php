@@ -51,8 +51,18 @@
                                     <span id="email_nameerror" class="show_required"></span><br>
                                 </div>
                             </div>
-                           
-                             </div>                               
+                             <div class="form-group notranslate">
+                              <label for="tag_name" class="col-sm-3 control-label">Customer/Business<span class="show_required">*</span></label>
+                               <div class="col-sm-8">
+                                 <label class="radio-inline">
+                                <input type="radio" name="optbuscu" value="1">Business
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" name="optbuscu" value="0">Customer
+                              </label><br>
+                              <span id="option_nameerror" class="show_required"></span><br>   
+                               </div>   
+                               </div>                      
                              <div class="box-footer  notranslate">
                                     <input type="button" name="sendcode_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="sendcode_submit" onclick="return validateemail();"/>
                                    
@@ -70,7 +80,7 @@
                       function validateemail() {
                                     var email_name = document.getElementById("email_name").value;
                                     var count=0;
-                                    var reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+                                    var reg = /^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$/;
                                     if (email_name.trim() == "") {
                                         document.getElementById('email_nameerror').innerHTML="Please Enter Email Address";
                                         count++;
@@ -87,7 +97,15 @@
                                                 count++;
                                               } 
                                       }
-                                    
+                                    if($('input:radio[name=optbuscu]').is(':checked')){
+                                         document.getElementById('option_nameerror').innerHTML="";
+                                    }
+                                    else
+                                    {
+                                       
+                                        document.getElementById('option_nameerror').innerHTML="Please Select Business Or Customer";
+                                        count++;
+                                    }
                                   if(count>0)
                                    {
                                     return false;
@@ -95,10 +113,11 @@
                                    else
                                    {
                                       var count_id = "add";
+                                      var radioValue = $("input:radio[name=optbuscu]:checked").val();
                                       $.ajax({
                                            url:"../../Controller/send_code/sendcode_controller.php",
                                            method:"POST",
-                                           data : {count_id:count_id,email_name:email_name},
+                                           data : {count_id:count_id,email_name:email_name,radioValue:radioValue},
                                            success:function(data)
                                            {
                                             console.log(data);

@@ -224,7 +224,7 @@ class report_model
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 80 THEN '70-80'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 90 THEN '80-90'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 100 THEN '100+'
-     END AS age, count(*) as users FROM users WHERE is_active=1 AND DATE_FORMAT(created_at, '%m-%Y') AND NOT date_of_birth = '0000-00-00' group by age");
+     END AS age, count(*) as users FROM users WHERE is_active=1 AND DATE_FORMAT(last_visited_time, '%m-%Y') AND NOT date_of_birth = '0000-00-00' group by age");
 
         }
         else if($age_year == "last 30 days")
@@ -240,7 +240,7 @@ class report_model
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 80 THEN '70-80'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 90 THEN '80-90'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 100 THEN '100+'
-     END AS age, count(*) as users FROM users WHERE is_active=1 AND created_at > (NOW() - INTERVAL 1 MONTH) AND NOT date_of_birth = '0000-00-00' group by age");
+     END AS age, count(*) as users FROM users WHERE is_active=1 AND last_visited_time > (NOW() - INTERVAL 1 MONTH) AND NOT date_of_birth = '0000-00-00' group by age");
         }
         else if($age_year == "last 7 days")
         {
@@ -255,7 +255,7 @@ class report_model
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 80 THEN '70-80'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 90 THEN '80-90'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 100 THEN '100+'
-     END AS age, count(*) as users FROM users WHERE is_active=1 AND created_at > (NOW() - INTERVAL 7 DAY) AND NOT date_of_birth = '0000-00-00' group by age");
+     END AS age, count(*) as users FROM users WHERE is_active=1 AND last_visited_time > (NOW() - INTERVAL 7 DAY) AND NOT date_of_birth = '0000-00-00' group by age");
         }
         else
         {
@@ -270,7 +270,7 @@ class report_model
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 80 THEN '70-80'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 90 THEN '80-90'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 100 THEN '100+'
-     END AS age, count(*) as users FROM users WHERE is_active=1 AND created_at > (NOW() - INTERVAL 1 DAY) AND NOT date_of_birth = '0000-00-00' group by age");
+     END AS age, count(*) as users FROM users WHERE is_active=1 AND last_visited_time > (NOW() - INTERVAL 1 DAY) AND NOT date_of_birth = '0000-00-00' group by age");
         }
                $category = array();
               while ($row = $getcategory->fetch_assoc()) {
@@ -293,7 +293,7 @@ class report_model
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 80 THEN '70-80'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 90 THEN '80-90'
      WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(date_of_birth, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(date_of_birth, '00-%m-%d'))) <= 100 THEN '100+'
-     END AS age, count(*) as users FROM users WHERE is_active=1 AND DATE_FORMAT(created_at, '%m-%Y') AND NOT date_of_birth = '0000-00-00' group by age");
+     END AS age, count(*) as users FROM users WHERE is_active=1 AND DATE_FORMAT(last_visited_time, '%m-%Y') AND NOT date_of_birth = '0000-00-00' group by age");
                $category = array();
               while ($row = $getcategory->fetch_assoc()) {
                 $category[] = $row;

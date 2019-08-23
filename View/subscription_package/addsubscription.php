@@ -79,13 +79,13 @@
                                     <span id="per_deal_redeem_price_error" class="show_required"></span><br>
                                 </div>
                             </div>    
-                            <div class="form-group notranslate">
+                           <!--  <div class="form-group notranslate">
                                 <label for="free_days" class="col-sm-3 control-label">Free days<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
                                     <input name="free_days" type="text" id="free_days" class="form-control"/>
                                     <span id="free_days_error" class="show_required"></span><br>
                                 </div>
-                            </div>                 
+                            </div>      -->            
                            
                              </div>                               
                              <div class="box-footer  notranslate">
@@ -105,7 +105,7 @@
                       function validateForm() {
                                      var price = document.getElementById("price").value;
                                     var per_deal_redeem_price = document.getElementById("per_deal_redeem_price").value;
-                                    var free_days = document.getElementById("free_days").value;
+                                    // var free_days = document.getElementById("free_days").value;
                                     var count=0;
                                     if (price.trim() == "") {
                                         document.getElementById('price_error').innerHTML="Please Enter Price";
@@ -123,14 +123,14 @@
                                       {
                                         document.getElementById('per_deal_redeem_price_error').innerHTML="";
                                       }
-                                      if (free_days.trim() == "") {
-                                        document.getElementById('free_days_error').innerHTML="Please Enter Free Days";
-                                        count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById('free_days_error').innerHTML="";
-                                      }
+                                      // if (free_days.trim() == "") {
+                                      //   document.getElementById('free_days_error').innerHTML="Please Enter Free Days";
+                                      //   count++;
+                                      // }
+                                      // else
+                                      // {
+                                      //   document.getElementById('free_days_error').innerHTML="";
+                                      // }
                                     
                                   if(count>0)
                                    {
@@ -143,9 +143,10 @@
                                       $.ajax({
                                            url:"../../Controller/subscription_package/subscription_controller.php",
                                            method:"POST",
-                                           data : {count_id:count_id,price:price,per_deal_redeem_price:per_deal_redeem_price,free_days:free_days},
+                                           data : {count_id:count_id,price:price,per_deal_redeem_price:per_deal_redeem_price},
                                            success:function(data)
                                            {
+                                            console.log(data);
                                             if(data == "#add")
                                             {
                                                 listsubscription(data);

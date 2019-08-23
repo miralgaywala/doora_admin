@@ -148,11 +148,19 @@
 
         return html_entity_decode('&#' . $cp . ';');
     }, $str);
-
+$html = nl2br($html);
+if($data['is_business'] == '1')
+{
+  $name = $data['business_name'];
+}
+else
+{
+  $name = $data['name'];
+}
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['support_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['name']; ?></td>
+                                <td style="text-align:center;"><?php echo $name; ?></td>
                                 <td style="text-align:center;"><?php echo $html; ?></td>
                                 <td style="text-align:center;"><?php $value=$data['is_open']; if($value == 1 ){
                                         echo "Open";

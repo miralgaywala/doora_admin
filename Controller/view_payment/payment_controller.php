@@ -10,7 +10,7 @@ class payment_controller
 	{
 		$business_name=$this->payment_model->getbusiness_name();
 		$year = $this->payment_model->getyear();
-    $month = $this->payment_model->getmonthyear();
+        $month = $this->payment_model->getmonthyear();
 		$display_payment=$this->payment_model->getdisplay_payment();
 		include "../../View/view_payment/displaypayment.php";
 		return $display_payment;

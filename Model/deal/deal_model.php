@@ -8,7 +8,7 @@ class deal_model
     public function getdisplay_deal()
     {
        $con=$this->db->connection();
-       $getdeal=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id group by business_deal_id order by bd.business_deal_id desc");
+       $getdeal=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join users as us on bf.business_user_id = us.user_id where us.is_deleted=0 group by business_deal_id order by bd.business_deal_id desc");
       $deal = array();
       while ($row = $getdeal->fetch_assoc()) {
         $deal[] = $row;
@@ -23,6 +23,7 @@ class deal_model
       while ($row = $getdealdetail->fetch_assoc()) {
         $dealdetail[] = $row;
       }
+      
        return $dealdetail;
     }
     public function getdealtag($id)
@@ -34,6 +35,130 @@ class deal_model
         $deal_tag[] = $row;
       }
       return $deal_tag;
+    }
+    public function active_deal($id,$data)
+    {
+      $con=$this->db->connection();
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
+        $result=$con->query("update business_deal SET is_active=1,updated_at='".$date."' where business_deal_id=".$id);
+        $result = 1;
+        return $result;
+    }
+    public function deactive_deal($id,$data)
+    { 
+      $con=$this->db->connection();
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $date=gmdate("Y-m-d\TH:i:s\Z");
+        $result=$con->query("update business_deal SET is_active=0,updated_at='".$date."' where business_deal_id=".$id);
+        $retrive_deal_info=$con->query("SELECT * FROM users WHERE user_id=(SELECT business_user_id FROM business_franchise WHERE franchise_id=(SELECT franchise_id FROM business_deal WHERE business_deal_id=".$id."))");
+        $deal_info = array();
+        while ($row = $retrive_deal_info->fetch_assoc()) {
+          $deal_info[] = $row;
+        }
+         $deal_id = $id;
+         $user_id = $deal_info[0]['user_id'];
+         $user_photo = $deal_info[0]['photo'];
+          $deal_information=$con->query("SELECT * FROM business_deal  WHERE business_deal_id=".$deal_id);
+        $deal = array();
+        while ($row = $deal_information->fetch_assoc()) {
+          $deal[] = $row;
+        }
+        $name = "\"".$deal[0]['deal_title']."\"";
+         $not_id=8; 
+          $deal = $deal;
+          $message=array(
+              'message'=>"Your "."'".json_decode($name)."'"." deal is not available anymore.",
+              'id'=>$not_id,
+              'deal'=>$deal
+          );
+          $deal_info1=$con->query("SELECT u.* from user_purchase_deal as upd LEFT JOIN users as u ON u.user_id=upd.user_id WHERE upd.business_deal_id=".$deal_id." AND upd.is_cart=1 GROUP BY u.user_id");
+          $deal_info_user = array();
+          while ($row = $deal_info1->fetch_assoc()) {
+            $deal_info_user[] = $row;
+          }
+          foreach ($deal_info_user as $value12) {
+            $u_id = $value12['user_id'];
+            $sender_user_id = $user_id;
+            $deal_id = $deal_id;
+            $noti_type_id = $not_id;
+            $img = $user_photo;
+            $is_send = 1;
+            $time = gmmktime();
+            $date = date("Y-m-d H:i:s", $time); 
+            // echo "INSERT INTO `user_notification`( `user_id`, `sender_user_id`,`business_deal_id`, `notification_type_id`,`noti_image`,`is_send`,`created_at`)VALUES (".$u_id.",".$sender_user_id.",".$deal_id.",".$noti_type_id.",'".$img."',".$is_send.",'".$date."')";
+            $result=$con->query("INSERT INTO `user_notification`( `user_id`, `sender_user_id`,`business_deal_id`, `notification_type_id`,`noti_image`,`is_send`,`created_at`)VALUES (".$u_id.",".$sender_user_id.",".$deal_id.",".$noti_type_id.",'".$img."',".$is_send.",'".$date."')");
+              $sendcode=$this->sendPushMessage($message, $u_id);
+          }
+         $result = 1;
+        return $result;
+    }
+    public function sendPushMessage($message, $user_id) {
+      $con=$this->db->connection();
+      $is_iphone = 0;
+      $device_id = "";
+    $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$user_id." AND is_deleted = 0");
+  $users = array();
+    while ($row = $stmt->fetch_assoc()) {
+      $users[] = $row;
+    }
+    $is_iphone = $users[0]['is_iphone'];
+    $device_id = $users[0]['device_id'];
+      if(strcmp($is_iphone, '0') == 0 ) {
+        
+        require_once '../../../api/sendNotification/GCM.php';  
+        $gcm = new GCM();
+        
+        $registration_ids = array();
+        $registration_ids[] = $device_id;
+        $my= $gcm->send_notification($registration_ids, $message);
+      } else if(strcmp($is_iphone, '1') == 0 ) {
+        require_once '../../../api/sendNotification/IOSNoti.php'; 
+        $IOSNotif = new IOSNoti();
+        $result = $IOSNotif->sendPushNotification($message, $device_id, true);
+
+      }
+  }
+    public function delete_deal($id)
+    {
+       $con=$this->db->connection();
+        //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+        $time = gmmktime();
+            $date = date("Y-m-d H:i:s", $time); 
+        $result=$con->query("DELETE FROM business_deal WHERE business_deal_id='".$id."'");
+        $result = 1;
+        // $retrive_deal_info=$con->query("SELECT * FROM users WHERE user_id=(SELECT business_user_id FROM business_franchise WHERE franchise_id=(SELECT franchise_id FROM business_deal WHERE business_deal_id=".$id."))");
+        // $deal_info = array();
+        // while ($row = $retrive_deal_info->fetch_assoc()) {
+        //   $deal_info[] = $row;
+        // }
+        //  $deal_id = $id;
+        //  $user_id = $deal_info[0]['user_id'];
+        //  $user_photo = $deal_info[0]['photo'];
+        //   $deal_information=$con->query("SELECT * FROM business_deal  WHERE business_deal_id=".$deal_id);
+        // $deal = array();
+        // while ($row = $deal_information->fetch_assoc()) {
+        //   $deal[] = $row;
+        // }
+        // $name = "\"".$deal[0]['deal_title']."\"";
+        //  $not_id=8; 
+        //   $deal = $deal;
+        //   $message=array(
+        //       'message'=>"Your "."'".json_decode($name)."'"." deal is not available anymore.",
+        //       'id'=>$not_id,
+        //       'deal'=>$deal
+        //   );
+        //   $deal_info1=$con->query("SELECT u.* from user_purchase_deal as upd LEFT JOIN users as u ON u.user_id=upd.user_id WHERE upd.business_deal_id=".$deal_id." AND upd.is_cart=1 GROUP BY u.user_id");
+        //   $deal_info_user = array();
+        //   while ($row = $deal_info1->fetch_assoc()) {
+        //     $deal_info_user[] = $row;
+        //   }
+        //   foreach ($deal_info_user as $value12) {
+        //     $u_id = $value12['user_id'];
+        //       $sendcode=$this->sendPushMessage($message, $u_id);
+        //   }
+       
+        return $result;
     }
     public function getdealcat($id)
     {
@@ -60,6 +185,21 @@ class deal_model
        {
           $con=$this->db->connection();
           $getdealrdm=$con->query("select bd.business_deal_id,upd.is_cart,upd.is_online,SUM(upd.quantity),COALESCE(SUM(upd.quantity),0) from business_deal as bd left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 OR upd.is_online=1) AND upd.business_deal_id=".$id." group by bd.business_deal_id");
+          if ($getdealrdm->num_rows > 0) {
+            $deal_rdm = array();
+            while ($row = $getdealrdm->fetch_assoc()) {
+              $deal_rdm[] = $row;
+            }
+      } else {
+           $deal_rdm = 0;
+      }
+          
+          return $deal_rdm;   
+       }
+       public function getdealreedeamalert($id)
+       {
+          $con=$this->db->connection();
+          $getdealrdm=$con->query("SELECT count(*) as total_count FROM user_purchase_deal WHERE business_deal_id=".$id);
           if ($getdealrdm->num_rows > 0) {
             $deal_rdm = array();
             while ($row = $getdealrdm->fetch_assoc()) {
@@ -131,43 +271,6 @@ class deal_model
               }
               return $online_pur;
        }
-    // public function getsubcategory_filter($msg)
-    // {
-    //       $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id where sc.sub_category_id=".$msg." order by bd.business_deal_id desc");
-    //           $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getbranch_filter($msg)
-    // {
-    //       $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.franchise_id=".$msg." order by bd.business_deal_id desc");
-    //           $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getcategory_filter($msg)
-    // {
-    //       $con=$this->db->connection();
-    //       if($msg == 0)
-    //       {
-    //          $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id group by bd.business_deal_id order by bd.business_deal_id desc");
-    //       }
-    //         else
-    //         {
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_subcategory as dps on bd.business_deal_id=dps.deal_id left join sub_category as sc on dps.sub_cat_id=sc.sub_category_id left join category as ca on sc.category_id=ca.category_id where ca.category_id=".$msg." order by bd.business_deal_id desc");
-    //         }  
-    //            $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
     public function getsubcategorylist($id)
     {
               $con=$this->db->connection();
@@ -178,22 +281,6 @@ class deal_model
               }
               return $category;
     }
-    // public function gettag_filter($msg)
-    // {
-    //       $con=$this->db->connection();
-    //       if($msg == 0 )
-    //       {
-    //         $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id group by bd.business_deal_id order by bd.business_deal_id desc");
-    //       }
-    //          else
-    //          { $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join deal_post_tag as dpt on bd.business_deal_id=dpt.deal_id left join deal_tags as dt on dpt.tag_id=dt.tag_id where dpt.tag_id=".$msg." order by bd.business_deal_id desc");
-    //      }
-    //          $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
     public function getbranchlist($id)
     {
               $con=$this->db->connection();
@@ -204,64 +291,6 @@ class deal_model
               }
               return $branch;
     }
-    // public function getbusiness_filter($msg)
-    // {
-    //       $con=$this->db->connection();
-    //       if($msg == 0)
-    //       {
-    //             $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id order by bd.business_deal_id desc");
-    //       }
-    //       else
-    //       {
-
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bf.business_user_id=".$msg." order by bd.business_deal_id desc");
-    //       }
-    //           $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getdisplay_activedeal($msg)
-    // {
-    //   $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=1 order by bd.business_deal_id desc");
-    //          $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getdisplay_deactivedeal($msg)
-    // {
-    //   $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.is_active=0 order by bd.business_deal_id desc");
-    //           $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getdisplay_expireddeal($msg)
-    // {
-    //   $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id where bd.deal_end_time < now() order by bd.business_deal_id desc");
-    //            $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
-    // public function getdisplay_purchaseddeal($msg)
-    // {
-    //   $con=$this->db->connection();
-    //           $getonlinepur=$con->query("select bd.*,bf.franchise_address from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id where (upd.is_cart=1 OR upd.is_online=1) group by bd.business_deal_id order by bd.business_deal_id desc");
-    //             $deal = array();
-    //           while ($row = $getonlinepur->fetch_assoc()) {
-    //             $deal[] = $row;
-    //           }
-    //           return $deal;
-    // }
     public function getdisplay_tag()
     {
       $con=$this->db->connection();
@@ -306,6 +335,7 @@ class deal_model
     if ($radio == 'deactive') $whereClauses[] ="bd.is_active=0"; 
     if ($radio == 'expired') $whereClauses[] ="bd.deal_end_time < now()"; 
     if ($radio == 'purchased') $whereClauses[] ="(upd.is_cart=1 OR upd.is_online=1)"; 
+    if ($radio == 'all') $whereClauses[] ="us.is_deleted = 0"; 
     $where = ''; 
     if (count($whereClauses) > 0) { $where = ' WHERE '.implode(' AND ',$whereClauses); }
      $getonlinepur=$con->query("select bd.*,bf.franchise_address,bf.business_user_id,us.user_id,us.business_name,dpt.tag_id,dt.tag,dps.sub_cat_id,sc.sub_category_name,ca.category_id,ca.category_name,oc.offer_title,upd.is_cart,upd.is_online from business_deal as bd left join business_franchise as bf on bd.franchise_id = bf.franchise_id left join user_purchase_deal as upd on bd.business_deal_id=upd.business_deal_id left join users as us on bf.business_user_id = us.user_id left join deal_post_tag as dpt on bd.business_deal_id = dpt.deal_id left join deal_tags as dt on dpt.tag_id = dt.tag_id left join offer_category as oc on bd.offer_id = oc.offer_id left join deal_post_subcategory as dps on bd.business_deal_id = dps.deal_id left join sub_category as sc on dps.sub_cat_id = sc.sub_category_id left join category as ca on sc.category_id = ca.category_id" .$where. " group by business_deal_id desc");  
