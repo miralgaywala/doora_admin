@@ -235,6 +235,32 @@
                        }
                     })
       }
+      function business_image()
+      {
+        $('li').removeClass('active');
+              $('#buis_img').parents("li").addClass('active');
+               $.ajax({
+                       url:"../../View/business_image/business_image.php",
+                       method:"POST",
+                       success:function(data)
+                       {
+                            $('.content-wrapper').html(data);
+                       }
+                    })
+      }
+      function customer_image()
+      {
+        $('li').removeClass('active');
+              $('#cus_img').parents("li").addClass('active');
+               $.ajax({
+                       url:"../../View/customer_image/customer_image.php",
+                       method:"POST",
+                       success:function(data)
+                       {
+                            $('.content-wrapper').html(data);
+                       }
+                    })
+      }
   </script>
 <?php
 $base_name_page = basename($_SERVER['PHP_SELF']);
@@ -301,6 +327,14 @@ $base_name_page = basename($_SERVER['PHP_SELF']);
         </li>
         <li style="padding-top: 10px; ">
           <a onclick="sendcode(); topFunction();" rel="tab" style="cursor: pointer;" id="sendcode"><i class="fa fa-envelope"></i><span>Send Verification Email</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px; ">
+          <a onclick="customer_image(); topFunction();" rel="tab" style="cursor: pointer;" id="cus_img"><i class="fa fa-file-image-o"></i><span>Customer Default image</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px; ">
+          <a onclick="business_image(); topFunction();" rel="tab" style="cursor: pointer;" id="buis_img"><i class="fa fa-file-image-o"></i><span>Business Default image</span>
             <span class="pull-right-container"></span></a>
         </li>
         <li style="padding-top: 10px; ">
