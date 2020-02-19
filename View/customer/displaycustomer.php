@@ -25,6 +25,18 @@
                  }
               })
       }
+      function viewcustomerhistory(id)
+      {
+        $.ajax({
+                 url:"../../Controller/customer/viewcustomerhistory_controller.php?id="+id,
+                 method:"POST",
+                 success:function(data)
+                 {
+                      $('.content-wrapper').html(data);
+                      
+                 }
+              })
+      }
       function listbusiness(data)
       {
             hash_id = data;
@@ -173,6 +185,8 @@
                                     	{
                                     		echo "Active"; 
                                     	} ?></a>
+                                      <br>
+                                      <a onclick="viewcustomerhistory(<?php echo $data['user_id']; ?>)" title="View all detail" style="cursor: pointer;">Customer Points History</a>
                                        <?php } ?>
                                      </div>
                                 </td>

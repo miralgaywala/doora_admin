@@ -261,6 +261,68 @@
                        }
                     })
       }
+      function sendnotification() {
+        $('li').removeClass('active');
+              $('#sendnoti').parents("li").addClass('active');
+               $.ajax({
+                       url:"../../View/send_noti/send_noti.php",
+                       method:"POST",
+                       success:function(data)
+                       {
+                            $('.content-wrapper').html(data);
+                       }
+                    })
+      }
+      function doora_dollor_points() {
+        $('li').removeClass('active');
+              $('#doora_dollor_points').parents("li").addClass('active');
+              $.ajax({
+                  url:"../../Controller/doorapoints/displaydoora_points.php",
+                  method:"POST",
+                  success:function(data)
+                  {
+                    $('.content-wrapper').html(data);
+                  }
+              })
+      }
+      function points_offer() {
+         $('li').removeClass('active');
+              $('#points_offer').parents("li").addClass('active');
+              $.ajax({
+                  url:"../../Controller/points_offer/displaypoints_offer.php",
+                  method:"POST",
+                  success:function(data)
+                  {
+                    $('.content-wrapper').html(data);
+                  }
+              })
+      }
+      function doora_dollor_value()
+      {
+           $('li').removeClass('active');
+              $('#doora_dollor_value').parents("li").addClass('active');
+              $.ajax({
+                  url:"../../Controller/doora_dollor_value/displaydoora_dollor_value.php",
+                  method:"POST",
+                  success:function(data)
+                  {
+                    $('.content-wrapper').html(data);
+                  }
+              })
+      }
+      function doora_dollor_terms() 
+      {
+        $('li').removeClass('active');
+              $('#doora_dollor_terms').parents("li").addClass('active');
+              $.ajax({
+                  url:"../../Controller/doora_dollor_terms/displaydoora_dollor_terms.php",
+                  method:"POST",
+                  success:function(data)
+                  {
+                    $('.content-wrapper').html(data);
+                  }
+              })
+      }
   </script>
 <?php
 $base_name_page = basename($_SERVER['PHP_SELF']);
@@ -329,6 +391,10 @@ $base_name_page = basename($_SERVER['PHP_SELF']);
           <a onclick="sendcode(); topFunction();" rel="tab" style="cursor: pointer;" id="sendcode"><i class="fa fa-envelope"></i><span>Send Verification Email</span>
             <span class="pull-right-container"></span></a>
         </li>
+         <li style="padding-top: 10px; ">
+          <a onclick="sendnotification(); topFunction();" rel="tab" style="cursor: pointer;" id="sendnoti"><i class="fa fa-envelope"></i><span>Send Notification</span>
+            <span class="pull-right-container"></span></a>
+        </li>
         <li style="padding-top: 10px; ">
           <a onclick="customer_image(); topFunction();" rel="tab" style="cursor: pointer;" id="cus_img"><i class="fa fa-file-image-o"></i><span>Customer Default image</span>
             <span class="pull-right-container"></span></a>
@@ -339,6 +405,22 @@ $base_name_page = basename($_SERVER['PHP_SELF']);
         </li>
         <li style="padding-top: 10px; ">
           <a onclick="openreport(); topFunction();" rel="tab" style="cursor: pointer;" id="report"><i class="fa fa-bar-chart"></i><span>Report</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px;">
+          <a onclick="doora_dollor_points(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_points"><i class="fa fa-support"></i><span>Doora dollor points</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px;">
+          <a onclick="points_offer(); topFunction();" rel="tab" style="cursor: pointer;" id="points_offer"><i class="fa fa-support"></i><span>Points offer</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px;">
+          <a onclick="doora_dollor_value(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_value"><i class="fa fa-support"></i><span>Doora Dollor Value</span>
+            <span class="pull-right-container"></span></a>
+        </li>
+        <li style="padding-top: 10px;">
+          <a onclick="doora_dollor_terms(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_terms"><i class="fa fa-support"></i><span>Doora Dollor Terms</span>
             <span class="pull-right-container"></span></a>
         </li>
       </ul>

@@ -48,6 +48,13 @@ class customer_controller
 		
 		return $viewcustomer_detail;
 	}
+	public function viewcustomerhistory_detail($id)
+	{
+		$customer_earn_points=$this->customer_model->customer_earn_points($id);
+		$customer_reward_points=$this->customer_model->customer_reward_points($id);
+		$customer_earned_cashback = $this->customer_model->customer_earned_cashback($id);
+		include "../../View/customer/viewcustomerhistory_detail.php";
+	}
 	public function is_active($id,$data)
 	{
 		$is_active=$this->customer_model->updateactive($id,$data);
@@ -80,6 +87,11 @@ class customer_controller
 			include "../../View/customer/displaycustomer.php";
 		}
 		
+	}
+	public function viewcustomerearnedhistory_detail($id)
+	{
+		$customer_earn_points=$this->customer_model->customer_earn_points($id);
+		include "../../View/customer/viewcustomerearnhistory_detail.php";
 	}
 }
 ?>

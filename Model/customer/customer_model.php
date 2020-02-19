@@ -82,5 +82,35 @@ class customer_model
       }
        return $customerdelete;
     }
+    public function customer_earn_points($id)
+    {
+      $con=$this->db->connection();
+       $customerpoints = array();
+       $customer_earn_points=$con->query("select * from customer_earn_points where is_deleted=0 AND customer_id=".$id);
+        while ($row = $customer_earn_points->fetch_assoc()) {
+        $customerpoints[] = $row;
+      }
+       return $customerpoints;
+    }
+    public function customer_reward_points($id)
+    {
+       $con=$this->db->connection();
+       $customerpoints = array();
+       $customer_reward_points=$con->query("select * from customer_rewards_point where is_deleted=0 AND customer_id=".$id);
+        while ($row = $customer_reward_points->fetch_assoc()) {
+        $customerpoints[] = $row;
+      }
+       return $customerpoints;
+    }
+    public function customer_earned_cashback($id)
+    {
+      $con=$this->db->connection();
+       $customerpoints = array();
+       $customer_cashback=$con->query("select * from customer_cashback where is_deleted=0 AND customer_id=".$id);
+        while ($row = $customer_cashback->fetch_assoc()) {
+        $customerpoints[] = $row;
+      }
+       return $customerpoints;
+    }
 }
 ?>
