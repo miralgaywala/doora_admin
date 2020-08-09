@@ -1,0 +1,101 @@
+<style>
+        .ui-autocomplete { 
+            cursor:pointer; 
+            height:120px; 
+            overflow-y:scroll;
+        }  
+        .show_required{
+          color: red;
+        }  
+        #PreviewPicture{
+            width: 250px;
+            height: 108px;
+            background-position: center center;
+            background-size: cover;
+            -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+            display: inline-block;
+        }
+        #AdminPicture
+        {
+            width: 150px;
+            height: 150px;
+            background-position: center center;
+            background-size: cover;
+            -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+            display: inline-block;
+        }
+        #Picture{
+                    width: 150px;
+                    height: 65px;
+        }
+       
+         #SubCategoryPicture
+        {
+                    width: 62px;
+                    height: 62px;
+        }
+        #SubcatPicture
+        {
+            width: 186px;
+            height: 186px;
+            object-fit: cover;
+            overflow: hidden;
+            background-position: center center;
+            background-size: cover;
+            -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+            display: inline-block;
+        }
+        #profilePicture
+        {
+            width: 75px;
+            height: 75px;
+            background-position: center center;
+            background-size: cover;
+            display: inline-block;
+        }
+        #crop_wrapper{
+            position:relative;
+            margin-left:150px;
+            margin-top:50px;
+            width:600px;
+            height:400px;
+        }
+        #crop_wrapper img{
+            width:600px;
+            height:400px;
+            display: none;
+        }
+        #crop_div{
+            width:300px;
+            height:200px;
+            border:1px dashed white;
+            position:absolute;
+            top:0px;
+            box-sizing:border-box;
+        }
+        .cr-slider-wrap
+        {
+            display: none;
+        }
+        .croppie-container
+        {
+           height:200px;
+        }
+        .croppie-container
+        {
+            height:150px;
+        }
+        .content
+        {
+            padding-top: 0px;
+        }
+        .alert
+        {
+            margin-bottom: 0px;
+        }
+         #DealPicture
+        {
+                    width: 100px;
+                    height: 100px;
+        }
+    </style>
