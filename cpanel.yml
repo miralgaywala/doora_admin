@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/leocamq9/public_html/
+    - /bin/cp -R doora_webapp_dev $DEPLOYPATH
