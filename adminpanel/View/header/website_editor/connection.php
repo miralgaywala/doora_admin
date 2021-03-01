@@ -1,7 +1,7 @@
 <?php
 
 // $cn = mysqli_connect("localhost","root","","content_management");
-$cn = mysqli_connect("localhost","root","de!1@2#al","doora_db");
+$cn = mysqli_connect("localhost","root","","doora_db_staging");
 
 define('RANDOM_IMAGE_NUMBER', rand(1,32000));
 
