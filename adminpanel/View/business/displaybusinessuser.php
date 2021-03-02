@@ -187,7 +187,10 @@
                         <th style="text-align:center;">Photo</th>
                         <th style="text-align:center;">Email Id</th>
                         <th style="text-align:center;">Contact No</th>
-                        <th style="text-align:center;">Stripe Customer Id</th>
+                        <th style="text-align:center;">Free Trial Days</th>
+                        <th style="text-align:center;">Trial End Date</th>
+                        <th style="text-align:center;">Is Billing Started</th>
+                        
                         <!-- <th style="text-align:center;">Super Market</th> -->
 			                  <th style="text-align:center;" width="13%">Action</th>
 			                </tr>
@@ -236,15 +239,19 @@
                                 <td style="text-align:center;"><img <?php echo "src=../../../images/profile/".$data['photo']."?time=$time";?> id="profilePicture" style="object-fit: contain;"/></td>
                                 <td style="text-align:center;"><?php echo $data['email'];?></td>
                                 <td style="text-align:center;"><?php echo $data['mobile_no'];?></td>
-                                <td style="text-align:center;"><?php echo $data['stripe_customer_id'];?></td>
-                               <!--  <td style="text-align:center;"><?php if($data['is_super_market'] == 0)
+                                <td style="text-align:center;"><?php echo $data['free_trail_days'];?></td>
+                                <td style="text-align:center;"><?php echo $data['free_trial_exp_date'];?></td>
+                                <!-- <td style="text-align:center;"><?php echo "No"?></td> -->
+                               <td style="text-align:center;"><?php 
+                               if($data['is_start_subscription'] == 0)
                                                                 {
                                                                   echo "No";
                                                                 }
                                                                 else
                                                                   {
                                                                     echo "Yes";
-                                                                  }?></td> -->
+                                                                  }
+                                                                  ?></td>
                                 <td style="text-align:center;">
                                       <input type="hidden" name="id" id="id" value="<?php echo $data['user_id']; ?>">
                                         <input type="hidden" name="open" id="open" value="<?php echo $data['is_active']; ?>">

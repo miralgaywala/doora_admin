@@ -75,7 +75,8 @@
                                     <span id="free_dayserror" class="show_required"></span>
                                 </div>
                             </div>
-                            <input type="hidden" name="free_min_date" id="free_min_date" value="<?php echo $data['free_trail_days']; ?>">
+                            <input type="hidden" name="freetrail_start_dt" id="freetrail_start_dt" value="<?php echo $data['created_at']; ?>">
+                            
                              </div>                          
                              <div class="box-footer  notranslate">
                                     <input type="button" name="free_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="free_submit" onclick="return validateForm();"/>
@@ -97,16 +98,27 @@
                       function validateForm() {
                                     var free_days = document.getElementById("free_days").value;
                                     var user_id = document.getElementById("user_id").value;
-                                    var free_min_date = document.getElementById("free_min_date").value;
-                                    var new_day = free_days - free_min_date;
+                                    var freetrail_start_dt = document.getElementById("freetrail_start_dt").value;
+                                  
+                                    var trial_end_date =freetrail_start_dt;
+
+                                 //  let trial_end_date = new Date(freetrail_start_dt);
+                                    
+                                    console.log("free days", free_days);
+                                    console.log("trial end date beofre", freetrail_start_dt);
+                                   // trial_end_date.setDate(trial_end_date.getDate() + 32);
+                                   //var  trial_end_date=new Date(trial_end_date.getTime() + (free_days * 24 * 60 * 60 * 1000));
+
+                                    // console.log("trial end date after", trial_end_date);
+
                                     var count=0;
                                     if (free_days.trim() == "") {
                                         document.getElementById('free_dayserror').innerHTML="Please Enter Free Days";
                                         count++;
                                       }
-                                      else if(free_days <= free_min_date)
+                                      else if(free_days <= 30)
                                       {
-                                         document.getElementById('free_dayserror').innerHTML="Please Enter More Then "+free_min_date+" Days";
+                                         document.getElementById('free_dayserror').innerHTML="Please Enter More Then 30 Days";
                                         count++;
                                       }
                                       else
@@ -125,10 +137,10 @@
 							            $.ajax({
 							                 url:"../../Controller/business/business_controller.php",
 							                 method:"POST",
-							                 data : {count_id:count_id,free_days:free_days,user_id,user_id,new_day:new_day},
+							                 data : {count_id:count_id,free_days:free_days,user_id,user_id,new_day:trial_end_date},
 							                 success:function(data)
 							                 {
-                                console.log(data);
+                                console.log("free trial result ",data);
 							                 	if(data == "#add")
 							                 	{
 							                    	listbusiness(data);

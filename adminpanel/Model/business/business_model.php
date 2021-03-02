@@ -1,4 +1,7 @@
 <?php 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 include "../../Model/dbconfig.php";
 include"../../Model/business/businessuser.php";
 
@@ -332,99 +335,152 @@ class business_model
       }
        return $businessuser;
     }
-    public function add_business_free_days($id,$free_days,$new_day)
+
+    public function add_business_free_days($id,$free_days,$free_trial_exp_date)
     {
         $free_days=trim($free_days);
         $con= $this->db->connection();
-        $date = gmdate("Y-m-d\TH:i:s\Z");
-        $businessinvoicedeal = array();
-        $getbusinessdeactivate=$con->query("select * from users where is_business=1 AND user_id=".$id);
-         while ($row = $getbusinessdeactivate->fetch_assoc()) {
-          $businessinvoicedeal[] = $row;
-        }
-        foreach ($businessinvoicedeal as $value) {
-          $is_active = $value['is_active'];
-          $free_trail_days = $value['is_free_trial_started'];
-           $free_trial_exp_date = $value['free_trial_exp_date'];
-            $date1 = date('Y-m-d H:i:s');
+        $date = gmdate("Y-m-d H:i:s");
+
+        $date1 = date('Y-m-d H:i:s');
+        $free_trial_exp_date = strtotime($free_trial_exp_date);
+        $free_trial_exp_date = date('Y-m-d H:i:s',$free_trial_exp_date); //get trial end date
+        $free_trial_exp_date= date('Y-m-d H:i:s', strtotime($free_trial_exp_date.''.$free_days.' days')); //add trial days in trial end date
+
+        if($free_trial_exp_date >  $date1) 
+        {
+            $freedays=$con->query("update users SET free_trail_days=".$free_days." , free_trial_exp_date='".$free_trial_exp_date."' , updated_at='".$date."' where user_id=".$id); 
+            $not_id=10; 
+
+              $message=array(
+                'message'=>"Your free trial days has been upgraded.",
+                'user_id'=>$id
+                );
+              $is_iphone = 0;
+              $device_id = "";
+            $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$id." AND is_deleted = 0");
+            $users = array();
+            while ($row = $stmt->fetch_assoc()) {
+              $users[] = $row;
+            }
+            $is_iphone = $users[0]['is_iphone'];
+            $device_id = $users[0]['device_id'];
+              if(strcmp($is_iphone, '0') == 0 ) {
+                
+                require_once '../../../api/sendNotification/GCM.php';  
+                $gcm = new GCM();
+                
+                $registration_ids = array();
+                $registration_ids[] = $device_id;
+                $my= $gcm->send_notification($registration_ids, $message);
+              } else if(strcmp($is_iphone, '1') == 0 ) {
+                require_once '../../../api/sendNotification/IOSNoti.php'; 
+                $IOSNotif = new IOSNoti();
+                $result = $IOSNotif->sendPushNotification($message, $device_id, true);
+
+              }
+            $freedays = 1;
           }
          
-          if($free_trial_exp_date >  $date1) 
-          {
-            $new_exp_date = date('Y-m-d H:i:s', strtotime($free_trial_exp_date . ' +'.$new_day.' day'));
-            $freedays=$con->query("update users SET free_trail_days=".$free_days." , free_trial_exp_date='".$new_exp_date."' , updated_at='".$date."' where user_id=".$id); 
-            $not_id=10; 
-
-              $message=array(
-                'message'=>"Your free trial days has been upgraded.",
-                'id'=>$not_id,
-                'user_id'=>$id
-                );
-              $is_iphone = 0;
-              $device_id = "";
-            $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$id." AND is_deleted = 0");
-            $users = array();
-            while ($row = $stmt->fetch_assoc()) {
-              $users[] = $row;
-            }
-            $is_iphone = $users[0]['is_iphone'];
-            $device_id = $users[0]['device_id'];
-              if(strcmp($is_iphone, '0') == 0 ) {
-                
-                require_once '../../../api/sendNotification/GCM.php';  
-                $gcm = new GCM();
-                
-                $registration_ids = array();
-                $registration_ids[] = $device_id;
-                $my= $gcm->send_notification($registration_ids, $message);
-              } else if(strcmp($is_iphone, '1') == 0 ) {
-                require_once '../../../api/sendNotification/IOSNoti.php'; 
-                $IOSNotif = new IOSNoti();
-                $result = $IOSNotif->sendPushNotification($message, $device_id, true);
-
-              }
-            $freedays = 1;
-          }
-          elseif($free_trial_exp_date == "0000-00-00 00:00:00")
-          {
-            $freedays=$con->query("update users SET free_trail_days=".$free_days." , updated_at='".$date."' where user_id=".$id); 
-            $not_id=10; 
-
-              $message=array(
-                'message'=>"Your free trial days has been upgraded.",
-                'id'=>$not_id,
-                'user_id'=>$id
-                );
-              $is_iphone = 0;
-              $device_id = "";
-            $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$id." AND is_deleted = 0");
-            $users = array();
-            while ($row = $stmt->fetch_assoc()) {
-              $users[] = $row;
-            }
-            $is_iphone = $users[0]['is_iphone'];
-            $device_id = $users[0]['device_id'];
-              if(strcmp($is_iphone, '0') == 0 ) {
-                
-                require_once '../../../api/sendNotification/GCM.php';  
-                $gcm = new GCM();
-                
-                $registration_ids = array();
-                $registration_ids[] = $device_id;
-                $my= $gcm->send_notification($registration_ids, $message);
-              } else if(strcmp($is_iphone, '1') == 0 ) {
-                require_once '../../../api/sendNotification/IOSNoti.php'; 
-                $IOSNotif = new IOSNoti();
-                $result = $IOSNotif->sendPushNotification($message, $device_id, true);
-
-              }
-            $freedays = 1;
-          }
           else
           {
             $freedays = 0;
           }
         return $freedays;
     }
+    // public function add_business_free_days($id,$free_days,$new_day)
+    // {
+    //     $free_days=trim($free_days);
+    //     $con= $this->db->connection();
+    //     $date = gmdate("Y-m-d\TH:i:s\Z");
+    //     $businessinvoicedeal = array();
+    //     $getbusinessdeactivate=$con->query("select * from users where is_business=1 AND user_id=".$id);
+    //      while ($row = $getbusinessdeactivate->fetch_assoc()) {
+    //       $businessinvoicedeal[] = $row;
+    //     }
+    //     foreach ($businessinvoicedeal as $value) {
+    //       $is_active = $value['is_active'];
+    //       $free_trail_days = $value['is_free_trial_started'];
+    //        $free_trial_exp_date = $value['free_trial_exp_date'];
+    //         $date1 = date('Y-m-d H:i:s');
+    //       }
+         
+    //       if($free_trial_exp_date >  $date1) 
+    //       {
+    //         $new_exp_date = date('Y-m-d H:i:s', strtotime($free_trial_exp_date . ' +'.$new_day.' day'));
+    //         $freedays=$con->query("update users SET free_trail_days=".$free_days." , free_trial_exp_date='".$new_exp_date."' , updated_at='".$date."' where user_id=".$id); 
+    //         $not_id=10; 
+
+    //           $message=array(
+    //             'message'=>"Your free trial days has been upgraded.",
+    //             'id'=>$not_id,
+    //             'user_id'=>$id
+    //             );
+    //           $is_iphone = 0;
+    //           $device_id = "";
+    //         $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$id." AND is_deleted = 0");
+    //         $users = array();
+    //         while ($row = $stmt->fetch_assoc()) {
+    //           $users[] = $row;
+    //         }
+    //         $is_iphone = $users[0]['is_iphone'];
+    //         $device_id = $users[0]['device_id'];
+    //           if(strcmp($is_iphone, '0') == 0 ) {
+                
+    //             require_once '../../../api/sendNotification/GCM.php';  
+    //             $gcm = new GCM();
+                
+    //             $registration_ids = array();
+    //             $registration_ids[] = $device_id;
+    //             $my= $gcm->send_notification($registration_ids, $message);
+    //           } else if(strcmp($is_iphone, '1') == 0 ) {
+    //             require_once '../../../api/sendNotification/IOSNoti.php'; 
+    //             $IOSNotif = new IOSNoti();
+    //             $result = $IOSNotif->sendPushNotification($message, $device_id, true);
+
+    //           }
+    //         $freedays = 1;
+    //       }
+    //       elseif($free_trial_exp_date == "0000-00-00 00:00:00")
+    //       {
+    //         $freedays=$con->query("update users SET free_trail_days=".$free_days." , updated_at='".$date."' where user_id=".$id); 
+    //         $not_id=10; 
+
+    //           $message=array(
+    //             'message'=>"Your free trial days has been upgraded.",
+    //             'id'=>$not_id,
+    //             'user_id'=>$id
+    //             );
+    //           $is_iphone = 0;
+    //           $device_id = "";
+    //         $stmt = $con->query("SELECT device_id, is_iphone from users WHERE user_id = ".$id." AND is_deleted = 0");
+    //         $users = array();
+    //         while ($row = $stmt->fetch_assoc()) {
+    //           $users[] = $row;
+    //         }
+    //         $is_iphone = $users[0]['is_iphone'];
+    //         $device_id = $users[0]['device_id'];
+    //           if(strcmp($is_iphone, '0') == 0 ) {
+                
+    //             require_once '../../../api/sendNotification/GCM.php';  
+    //             $gcm = new GCM();
+                
+    //             $registration_ids = array();
+    //             $registration_ids[] = $device_id;
+    //             $my= $gcm->send_notification($registration_ids, $message);
+    //           } else if(strcmp($is_iphone, '1') == 0 ) {
+    //             require_once '../../../api/sendNotification/IOSNoti.php'; 
+    //             $IOSNotif = new IOSNoti();
+    //             $result = $IOSNotif->sendPushNotification($message, $device_id, true);
+
+    //           }
+    //         $freedays = 1;
+    //       }
+    //       else
+    //       {
+    //         $freedays = 0;
+    //       }
+    //     return $freedays;
+    // }
 }
 ?>
