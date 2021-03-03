@@ -402,6 +402,66 @@ function about1() {
     });
 }
 
+function home_getmore_section() {
+    $.ajax({
+        url: "website_editor/home_getmore_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+    });
+}
+
+function home_notification_section() {
+    $.ajax({
+        url: "website_editor/home_notification_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+    });
+}
+
+function home_stories_section() {
+    $.ajax({
+        url: "website_editor/home_stories_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+    });
+}
+
+function home_customer_section() {
+    $.ajax({
+        url: "website_editor/home_customer_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+    });
+}
+
+function home_merchant_section() {
+    $.ajax({
+        url: "website_editor/home_merchant_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+    });
+}
+
 function home() {
     $.ajax({
         url: "website_editor/home_about_web_list.php",
@@ -426,34 +486,22 @@ function home_customer() {
     });
 }
 
-function merchant() {
-
-    $.ajax({
-        url: "website_editor/home_merchant_web_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
-function home_dd() {
-    $.ajax({
-        url: "website_editor/home_doora_dollars_web_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
 function home_footer() {
     $.ajax({
         url: "website_editor/home_footer_list.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function footer() {
+    $.ajax({
+        url: "website_editor/home_footer.php",
         method: "post",
         success: function(res) {
             gototop();
@@ -685,13 +733,15 @@ $.ajax({
           </a>
 
         <ul class="treeview-menu">
-          <li><a class="btn1" href="javaScript:void(0);" onclick="home_header();" ><i class="fa fa-circle" style="font-size: 12px"></i>Header</a></li>
-          <!-- <li ><a class="btn1" href="javaScript:void(0);" onclick="header_im();" ><i class="fa fa-circle" style="font-size: 12px"></i>Header Image</a></li> -->
-          <li><a href="javaScript:void(0);" onclick="about1();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>About</a></li>
-          <li><a href="javaScript:void(0);" onclick="home();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>About Image</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_customer();"class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Cutomer</a></li>
-          <li><a href="javaScript:void(0);" onclick="merchant();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_dd();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Doora Dollars</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+          <li><a href="javaScript:void(0);" onclick="about1();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
+          <li><a href="javaScript:void(0);" onclick="home_customer();"class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
           <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
         </ul> 
       </li>
