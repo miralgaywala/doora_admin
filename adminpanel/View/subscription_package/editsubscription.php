@@ -1,3 +1,7 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
 
         <script type="text/javascript">
            function backsubscription()
@@ -68,19 +72,28 @@
                     ?>
                      <input type="hidden" name="subscription_plan_id" value="<?php echo $data['subscription_plan_id']; ?>" id="subscription_plan_id">
                            <div class="form-group notranslate">
-                                <label for="price" class="col-sm-3 control-label">Price<span class="show_required">*</span></label>
+                                <label for="price" class="col-sm-3 control-label">Type<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="price" type="text" id="price" class="form-control" value="<?php echo $data['price']; ?>"/>
-                                    <span id="price_error" class="show_required"></span><br>
+                                    <input name="stype" type="text" id="stype" class="form-control" value="<?php echo $data['subscription_name']; ?>"/>
+                                    <span id="stype_error" class="show_required"></span><br>
                                 </div>
                             </div>  
                             <div class="form-group notranslate">
-                                <label for="per_deal_redeem_price" class="col-sm-3 control-label">Per deal redeem price<span class="show_required">*</span></label>
+                                <label for="price" class="col-sm-3 control-label">Price<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="per_deal_redeem_price" type="text" id="per_deal_redeem_price" class="form-control" value="<?php echo $data['per_deal_redeem_price']; ?>"/>
-                                    <span id="per_deal_redeem_price_error" class="show_required"></span><br>
+                                    <input name="sprice" type="text" id="sprice" class="form-control" value="<?php echo $data['price']; ?>"/>
+                                    <span id="price_error" class="show_required"></span><br>
                                 </div>
-                            </div>    
+                            </div>  
+
+                            <div class="form-group notranslate">
+                                <label for="price" class="col-sm-3 control-label">Description<span class="show_required">*</span></label>
+                                <div class="col-sm-8" style="padding-top: 6px">
+                                    <input name="sdesc" type="text" id="sdesc" class="form-control" value="<?php echo $data['description']; ?>"/>
+                                    <span id="sdesc_error" class="show_required"></span><br>
+                                </div>
+                            </div>  
+
                             <!-- <div class="form-group notranslate">
                                 <label for="free_days" class="col-sm-3 control-label">Free days<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
@@ -105,35 +118,41 @@
  <script type="text/javascript">
                   
                       function validateForm() {
-                                     var price = document.getElementById("price").value;
-                                    var per_deal_redeem_price = document.getElementById("per_deal_redeem_price").value;
+                                    
+                                     var stype = document.getElementById("stype").value;
+                                     var sprice = document.getElementById("sprice").value;
+                                     var sdesc = document.getElementById("sdesc").value;
+                                    // echo "sfdfdf "+stype;
                                     // var free_days = document.getElementById("free_days").value;
                                     var subscription_plan_id = document.getElementById("subscription_plan_id").value;
                                     var count=0;
-                                    if (price.trim() == "") {
-                                        document.getElementById('price_error').innerHTML="Please Enter Price";
+                                    if (stype.trim() == "") {
+                                        document.getElementById('stype_error').innerHTML="Please Enter Type";
+                                        count++;
+                                      }
+                                      else
+                                      {
+                                        document.getElementById('stype_error').innerHTML="";
+                                      }
+                                     
+                                      if (sprice.trim() == "") {
+                                        document.getElementById('price_error').innerHTML="Please Enter price";
                                         count++;
                                       }
                                       else
                                       {
                                         document.getElementById('price_error').innerHTML="";
                                       }
-                                   if (per_deal_redeem_price.trim() == "") {
-                                        document.getElementById('per_deal_redeem_price_error').innerHTML="Please Enter Per Deal Redeem Price";
+                                      
+                                      if (sdesc.trim() == "") {
+                                        document.getElementById('sdesc_error').innerHTML="Please Enter short description";
                                         count++;
                                       }
                                       else
                                       {
-                                        document.getElementById('per_deal_redeem_price_error').innerHTML="";
+                                        document.getElementById('sdesc_error').innerHTML="";
                                       }
-                                      // if (free_days.trim() == "") {
-                                      //   document.getElementById('free_days_error').innerHTML="Please Enter Free Days";
-                                      //   count++;
-                                      // }
-                                      // else
-                                      // {
-                                      //   document.getElementById('free_days_error').innerHTML="";
-                                      // }
+                                     
                                     
                                   if(count>0)
                                    {
@@ -141,15 +160,14 @@
                                    }
                                    else
                                    {
-                                      
                                       var count_id = "edit";
                                       $.ajax({
                                            url:"../../Controller/subscription_package/subscription_controller.php",
                                            method:"POST",
-                                           data : {count_id:count_id,price:price,per_deal_redeem_price:per_deal_redeem_price,subscription_plan_id:subscription_plan_id},
+                                           data : {count_id:count_id,subscription_plan_id:subscription_plan_id,price:sprice,type:stype, desc:sdesc},
                                            success:function(data)
                                            {
-                                     
+                                            
                                             if(data == "#edit")
                                             {
                                                 listsubscription(data);

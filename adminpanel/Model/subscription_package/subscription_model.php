@@ -1,4 +1,6 @@
 <?php 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include "../../Model/dbconfig.php";
 include"../../Model/subscription_package/subscription.php";
 
@@ -17,15 +19,19 @@ class subscription_model
       }
        return $subscription;
     }
-    public function addsubscription_data($price,$per_deal_redeem_price)
+    public function addsubscription_data($price,$type, $desc)
     {
       $price=trim($price);
-      $per_deal_redeem_price=trim($per_deal_redeem_price);
+      $type=trim($type);
+      $desc=trim($desc);
+
+    
+
       // $free_days=trim($free_days);
       $con= $this->db->connection();
       //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-      $date = gmdate("Y-m-d\TH:i:s\Z");
-        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price);
+      $date = gmdate("Y-m-d H:i:s");
+        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price);
         $count=$select->num_rows;
         $addsubscription="";
         if($count > 0)
@@ -34,7 +40,8 @@ class subscription_model
         }
         else
         {
-      $subscription=$con->query("insert into subscription_plans (price,per_deal_redeem_price,created_at,updated_at) values(".$price.",".$per_deal_redeem_price.",'".$date."','".$date."')"); 
+      $subscription=$con->query("insert into subscription_plans (subscription_name,price,description,created_at,updated_at) values('".$type."',".$price.",'".$desc."','".$date."','".$date."')"); 
+     // echo "insert into subscription_plans (subscription_name,price,description,created_at,updated_at) values('".$type."',".$price.",'".$desc."','".$date."','".$date."')";
       $addsubscription="1"; 
       }  
       return $addsubscription;
@@ -43,21 +50,24 @@ class subscription_model
     { 
       $con=$this->db->connection();
        $getsubscription=$con->query("select * from subscription_plans where subscription_plan_id=".$subscription_id);
+    
        $subscription = array();
       while ($row = $getsubscription->fetch_assoc()) {
         $subscription[] = $row;
       }
        return $subscription;
     }
-    public function editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price)
+    public function editsubscription_data($subscription_plan_id,$price,$type,$desc)
     {
       $price=trim($price);
-      $per_deal_redeem_price=trim($per_deal_redeem_price);
+      $type=trim($type);
+      $desc=trim($desc);
       // $free_days=trim($free_days);
       $con= $this->db->connection();
       //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-       $date = gmdate("Y-m-d\TH:i:s\Z");
-        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND per_deal_redeem_price=".$per_deal_redeem_price." AND subscription_plan_id!=".$subscription_plan_id);
+       $date = gmdate("Y-m-d H:i:s");
+        $select=$con->query("select subscription_plan_id from subscription_plans where is_deleted=0 AND price=".$price." AND subscription_plan_id!=".$subscription_plan_id);
+       
         $count=$select->num_rows;
         $addsubscription="";
         if($count > 0)
@@ -66,7 +76,8 @@ class subscription_model
         }
         else
         {
-      $subscription=$con->query("update subscription_plans set price=".$price.",per_deal_redeem_price=".$per_deal_redeem_price.",updated_at='".$date."' where subscription_plan_id=".$subscription_plan_id); 
+      $subscription=$con->query("update subscription_plans set price=".$price.",subscription_name='".$type."',description='".$desc."', updated_at='".$date."' where subscription_plan_id=".$subscription_plan_id); 
+     
       $addsubscription="1";   
     }
       return $addsubscription;
@@ -75,7 +86,7 @@ class subscription_model
   {
         $con=$this->db->connection();
         //$date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-         $date = gmdate("Y-m-d\TH:i:s\Z");
+         $date = gmdate("Y-m-d H:i:s ");
         $delete=$con->query("update subscription_plans SET is_deleted=1,updated_at='".$date."' where subscription_plan_id=".$subscription_id);
   }
   public function getview_subscription($subscription_id)

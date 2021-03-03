@@ -89,10 +89,13 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="15%">Subscription Plan Id</th>
-			                  <th style="text-align:center;">Price</th>
-                        <th style="text-align:center;">Per Deal Redeem Price</th>
-                       <!--  <th style="text-align:center;">Free Days</th> -->
+			                  <th style="text-align:center;" width="15%">Plan Id</th>
+                        <th style="text-align:center;">Subscription Type</th>
+                        <th style="text-align:center;">Price per month</th>
+                        <th style="text-align:center;">Description</th>
+			                  
+                        
+                       
 			                  <th style="text-align:center;" width="10%">Action</th>
 			                </tr>
 							 </thead>
@@ -103,9 +106,13 @@
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['subscription_plan_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['subscription_name']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['price']; ?></td>
-                                 <td style="text-align:center;"><?php echo $data['per_deal_redeem_price']; ?></td>
-                                  <!-- <td style="text-align:center;"><?php echo $data['free_days']; ?></td> -->
+                                <td style="text-align:center;"><?php echo $data['description']; ?></td>
+                                
+                                
+                                
+                                  
                                 <td style="text-align:center;">
                               
                                     <div >
@@ -146,7 +153,7 @@ function JSconfirm(id){
             $.ajax({
                    url:"../../Controller/subscription_package/subscription_controller.php",
                  method:"POST",
-                 data : {count_id:count_id,id:bla},
+                 data : {count_id:count_id,id:id},
                  success:function(data)
                  {
                       listsubscription(data);

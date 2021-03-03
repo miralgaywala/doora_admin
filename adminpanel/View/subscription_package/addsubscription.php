@@ -66,17 +66,24 @@
                  
 
                            <div class="form-group notranslate">
+                                <label for="price" class="col-sm-3 control-label">Type<span class="show_required">*</span></label>
+                                <div class="col-sm-8" style="padding-top: 6px">
+                                    <input name="stype" type="text" id="stype" class="form-control"/>
+                                    <span id="stype_error" class="show_required"></span><br>
+                                </div>
+                            </div> 
+                            <div class="form-group notranslate">
                                 <label for="price" class="col-sm-3 control-label">Price<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="price" type="text" id="price" class="form-control"/>
-                                    <span id="price_error" class="show_required"></span><br>
+                                    <input name="sprice" type="text" id="sprice" class="form-control"/>
+                                    <span id="sprice_error" class="show_required"></span><br>
                                 </div>
                             </div>  
                             <div class="form-group notranslate">
-                                <label for="per_deal_redeem_price" class="col-sm-3 control-label">Per deal redeem price<span class="show_required">*</span></label>
+                                <label for="per_deal_redeem_price" class="col-sm-3 control-label">Short Description<span class="show_required">*</span></label>
                                 <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="per_deal_redeem_price" type="text" id="per_deal_redeem_price" class="form-control"/>
-                                    <span id="per_deal_redeem_price_error" class="show_required"></span><br>
+                                    <input name="sdesc" type="text" id="sdesc" class="form-control"/>
+                                    <span id="sdesc_error" class="show_required"></span><br>
                                 </div>
                             </div>    
                            <!--  <div class="form-group notranslate">
@@ -103,25 +110,35 @@
  <script type="text/javascript">
                   
                       function validateForm() {
-                                     var price = document.getElementById("price").value;
-                                    var per_deal_redeem_price = document.getElementById("per_deal_redeem_price").value;
+                                     var stype = document.getElementById("stype").value;
+                                     var sprice = document.getElementById("sprice").value;
+                                     var sdesc = document.getElementById("sdesc").value;
+                                    // var per_deal_redeem_price = document.getElementById("per_deal_redeem_price").value;
                                     // var free_days = document.getElementById("free_days").value;
                                     var count=0;
-                                    if (price.trim() == "") {
-                                        document.getElementById('price_error').innerHTML="Please Enter Price";
+                                    if (stype.trim() == "") {
+                                        document.getElementById('stype').innerHTML="Please Enter Type";
                                         count++;
                                       }
                                       else
                                       {
-                                        document.getElementById('price_error').innerHTML="";
+                                        document.getElementById('stype').innerHTML="";
                                       }
-                                   if (per_deal_redeem_price.trim() == "") {
-                                        document.getElementById('per_deal_redeem_price_error').innerHTML="Please Enter Per Deal Redeem Price";
+                                      if (sprice.trim() == "") {
+                                        document.getElementById('sprice').innerHTML="Please Enter price";
                                         count++;
                                       }
                                       else
                                       {
-                                        document.getElementById('per_deal_redeem_price_error').innerHTML="";
+                                        document.getElementById('sprice').innerHTML="";
+                                      }
+                                      if (sdesc.trim() == "") {
+                                        document.getElementById('sdesc').innerHTML="Please Enter short description";
+                                        count++;
+                                      }
+                                      else
+                                      {
+                                        document.getElementById('sdesc').innerHTML="";
                                       }
                                       // if (free_days.trim() == "") {
                                       //   document.getElementById('free_days_error').innerHTML="Please Enter Free Days";
@@ -143,7 +160,7 @@
                                       $.ajax({
                                            url:"../../Controller/subscription_package/subscription_controller.php",
                                            method:"POST",
-                                           data : {count_id:count_id,price:price,per_deal_redeem_price:per_deal_redeem_price},
+                                           data : {count_id:count_id,price:sprice,type:stype, desc:sdesc},
                                            success:function(data)
                                            {
                                             console.log(data);

@@ -1,4 +1,6 @@
 <?php 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include "../../Model/subscription_package/subscription_model.php";
 if(isset($_POST['count_id']))
 {
@@ -12,11 +14,28 @@ if(isset($_POST['count_id']))
 	}
 	if($_POST['count_id'] == 'add')
 	{
+		// $price =$_POST['price'];
+        // $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
+        // // $free_days =$_POST['free_days'];
+    	// $subscription_controller=new subscription_controller();
+	 	// $result=$subscription_controller->add_subscription($price,$per_deal_redeem_price);
+	 	// if($result == 1)
+	 	// {
+	 	// 	echo "#add";
+	 	// }
+	 	// else
+	 	// {
+	 	// 	echo "#exists";
+	 	// }
+
+
 		$price =$_POST['price'];
-        $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
+		$type =$_POST['type'];
+		$desc =$_POST['desc'];
+        // $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
         // $free_days =$_POST['free_days'];
     	$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->add_subscription($price,$per_deal_redeem_price);
+	 	$result=$subscription_controller->add_subscription($price,$type,$desc);
 	 	if($result == 1)
 	 	{
 	 		echo "#add";
@@ -29,11 +48,17 @@ if(isset($_POST['count_id']))
 	if($_POST['count_id'] == 'edit')
 	{
 		$subscription_plan_id= $_POST['subscription_plan_id'];
-        $price =$_POST['price'];
-        $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
+		$price =$_POST['price'];
+		$type =$_POST['type'];
+		$desc =$_POST['desc'];
+
+		// echo "price: "+$price;
+		// echo "type: "+$type;
+		// echo "desc: "+$desc;
         // $free_days =$_POST['free_days'];
-    	$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price);
+    	
+		$subscription_controller=new subscription_controller();
+	 	$result=$subscription_controller->edit_subscription($subscription_plan_id,$price,$type,$desc);
 	 	if($result == 1)
 	 	{
 	 		echo "#edit";
@@ -56,10 +81,10 @@ class subscription_controller
 		include "../../View/subscription_package/displaysubscription.php";
 		return $display_subscription;
 	}
-	public function add_subscription($price,$per_deal_redeem_price)
+	public function add_subscription($price,$type,$desc)
 	{
 		
-            $add_subscription=$this->subscription_model->addsubscription_data($price,$per_deal_redeem_price);
+            $add_subscription=$this->subscription_model->addsubscription_data($price,$type,$desc);
             return $add_subscription;
 	}
 	public function editlist_subscription($subscription_id)
@@ -68,10 +93,10 @@ class subscription_controller
 		include "../../View/subscription_package/editsubscription.php";
 		
 	}
-	public function edit_subscription($subscription_plan_id,$price,$per_deal_redeem_price)
+	public function edit_subscription($subscription_plan_id,$price,$type,$desc)
 	{
 		
-            $add_subscription=$this->subscription_model->editsubscription_data($subscription_plan_id,$price,$per_deal_redeem_price);
+            $add_subscription=$this->subscription_model->editsubscription_data($subscription_plan_id,$price,$type,$desc);
             return $add_subscription;
 	}
 	public function delete_subscription($subscription_id)
