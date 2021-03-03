@@ -293,8 +293,8 @@
                                         	View Branch
                                         </a>
                                          <br/>
-                                        <a onclick="viewverificationdetail(<?php echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
-                                        <br/>
+                                        <!-- <a onclick="viewverificationdetail(<?php //echo $data['user_id']; ?>)" style="cursor: pointer;" <?php //echo "href=/doora/adminpanel/Controller/business/viewbusiness_controller.php?id=".$data[0];?> title="View all detail">Verification Detail</a>
+                                        <br/> -->
                                         <a onclick="viewbusinessinvoice(<?php echo $data['user_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessinvoice_controller.php?id=".$data['user_id'];?> title="View all detail" style="cursor: pointer;">View Receipts</a><br/>
                                         <?php
                                         $date = date('Y-m-d H:i:s');
