@@ -1,12 +1,12 @@
 <?php
 require_once "connection.php";
-$str = "select * from home_section";
+$str = "select * from customer_section";
 $str1 = mysqli_query($cn,$str);
 $row=mysqli_fetch_array($str1);
 ?>
 
 <section class="content-header" id="app_div1"> 
-  <h4>Update Home Footer</h4>
+  <h4>Update Customer Footer</h4>
     <ol class="breadcrumb"></ol>
 </section>
 
@@ -77,7 +77,7 @@ function update()
   var fr = $("#has1")[0];
   var frdata = new FormData(fr);
   $.ajax({
-      url : "website_editor/update_home_footer1.php",
+      url : "website_editor/update_customer_footer.php",
       data:frdata,
       method:"post",
       processData:false,
@@ -86,7 +86,7 @@ function update()
       {
         console.log(res);
         $.ajax({
-          url : "website_editor/home_footer.php",
+          url : "website_editor/customer_footer.php",
           method:"post",
           success:function(res)
           {

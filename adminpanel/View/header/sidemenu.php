@@ -449,7 +449,7 @@ function home_merchant_section() {
     });
 }
 
-function footer() {
+function home_footer() {
     $.ajax({
         url: "website_editor/home_footer.php",
         method: "post",
@@ -491,6 +491,19 @@ function customer_image_section() {
 function customer_themost_section() {
     $.ajax({
         url: "website_editor/customer_themost_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function customer_footer() {
+    $.ajax({
+        url: "website_editor/customer_footer.php",
         method: "post",
         success: function(res) {
             gototop();
@@ -698,12 +711,12 @@ $.ajax({
           </a>
 
         <ul class="treeview-menu">
-          <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
         </ul> 
       </li>
 
@@ -715,10 +728,11 @@ $.ajax({
             </span>
           </a>
          
-         <ul class="treeview-menu">
-          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
-          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
-          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
+        <ul class="treeview-menu">
+            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
+            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
+            <li><a href="javaScript:void(0);" onclick="customer_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
         </ul> 
       </li>
 

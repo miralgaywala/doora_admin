@@ -6,7 +6,7 @@ $row=mysqli_fetch_array($str1);
 ?>
 
 <section class="content-header" id="app_div1"> 
-  <h4>Update Customer Section</h4>
+  <h4>Update Customer Image Section</h4>
     <ol class="breadcrumb"></ol>
 </section>
 
