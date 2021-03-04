@@ -74,19 +74,10 @@ $row=mysqli_fetch_array($str1);
 
 function update()
 {
-  // var title = CKEDITOR.instances.editor1.getData();
-  var desc = CKEDITOR.instances.editor2.getData();
-  // var btn = CKEDITOR.instances.editor3.getData();
-
   var fr = $("#has1")[0];
   var frdata = new FormData(fr);
-  // frdata.append('title', title);
-  frdata.append('desc', desc);
-  // frdata.append('btnname',btn);
-
-
   $.ajax({
-      url : "website_editor/update_home_getmore_section.php",
+      url : "website_editor/update_home_footer1.php",
       data:frdata,
       method:"post",
       processData:false,
@@ -117,16 +108,10 @@ function resetForm(myFormId)
                myForm.elements[i].checked = false;
                myForm.elements[i].value = '';
                myForm.elements[i].selectedIndex = 0;
-               // CKEDITOR.instances.editor1.setData('');
-               CKEDITOR.instances.editor2.setData('');
-               // CKEDITOR.instances.editor3.setData('');
            }
        }
    }
 
 </script>
  <script>
-// CKEDITOR.replace( 'editor1' );
-CKEDITOR.replace( 'editor2' );
-// CKEDITOR.replace( 'editor3' );
 </script>

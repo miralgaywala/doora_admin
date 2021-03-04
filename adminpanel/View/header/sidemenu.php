@@ -389,19 +389,6 @@ function doora_dollor_terms() {
     })
 }
 
-
-function about1() {
-    $.ajax({
-        url: "website_editor/home_about1_section.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
 function home_getmore_section() {
     $.ajax({
         url: "website_editor/home_getmore_section.php",
@@ -462,43 +449,6 @@ function home_merchant_section() {
     });
 }
 
-function home() {
-    $.ajax({
-        url: "website_editor/home_about_web_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
-function home_customer() {
-    $.ajax({
-        url: "website_editor/home_customer_web_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
-function home_footer() {
-    $.ajax({
-        url: "website_editor/home_footer_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-
-    });
-}
-
 function footer() {
     $.ajax({
         url: "website_editor/home_footer.php",
@@ -512,33 +462,48 @@ function footer() {
     });
 }
 
+function customer_searchless_section() {
+    $.ajax({
+        url: "website_editor/customer_searchless_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function customer_image_section() {
+    $.ajax({
+        url: "website_editor/customer_image_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function customer_themost_section() {
+    $.ajax({
+        url: "website_editor/customer_themost_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
 function home_header() {
     $.ajax({
         url: "website_editor/home_header_web_list.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
-function customer_intro() {
-    $.ajax({
-        url: "website_editor/customer_intro_web.php",
-        method: "post",
-        success: function(res) {
-            gototop();
-
-            $(".content-wrapper").html(res);
-        }
-    });
-}
-
-function customer_web() {
-    $.ajax({
-        url: "website_editor/customer_about_web_list.php",
         method: "post",
         success: function(res) {
             gototop();
@@ -739,10 +704,6 @@ $.ajax({
           <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
           <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
           <li><a href="javaScript:void(0);" onclick="footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
-          <li><a href="javaScript:void(0);" onclick="about1();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_customer();"class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
-          <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
         </ul> 
       </li>
 
@@ -755,8 +716,9 @@ $.ajax({
           </a>
          
          <ul class="treeview-menu">
-          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_intro();"><i class="fa fa-circle" style="font-size: 12px"></i>Introduction</a></li>
-          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_web();"><i class="fa fa-circle" style="font-size: 12px"></i>About</a></li>
+          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
+          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+          <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
         </ul> 
       </li>
 

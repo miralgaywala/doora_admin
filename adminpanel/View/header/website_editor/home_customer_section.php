@@ -18,12 +18,35 @@ $row=mysqli_fetch_array($str1);
         <div class="form-group">
           <label for="category">Title</label>
           <input type="text" name="title" class="form-control" value="<?php echo $row['customer_section_title']; ?>">
-          <!-- <textarea id="editor1" name="btnname" rows="10" cols="80"><?php echo $row['title']; ?></textarea> -->
         </div>
 
         <div class="form-group">
           <label for="category">Description</label>
           <textarea id="editor2" name="desc" rows="10" cols="80"><?php echo $row['customer_section_description']; ?></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Image</label>
+          <input type="file" name="image1" class="form-control" value="<?php echo $row['customer_section_image']; ?>" id="cimg1">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <?php
+             if($row['customer_section_image']=="")
+             {
+              ?>
+                <img src="<?= NO_IMAGE_PATH ?>" width="100px" height="170px"  class="cimg1">
+              <?php
+             }
+             else
+             {
+              ?>
+                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['customer_section_image']; ?>?<?=rand(1,32000)?>" width="100px" height="170px"  class="cimg1">
+              <?php
+             }
+            ?>
+          </div>
         </div>
 
         <div class="form-group">
@@ -43,16 +66,10 @@ $row=mysqli_fetch_array($str1);
 
 function update()
 {
-  // var title = CKEDITOR.instances.editor1.getData();
   var desc = CKEDITOR.instances.editor2.getData();
-  // var btn = CKEDITOR.instances.editor3.getData();
-
   var fr = $("#has1")[0];
   var frdata = new FormData(fr);
-  // frdata.append('title', title);
   frdata.append('desc', desc);
-  // frdata.append('btnname',btn);
-
 
   $.ajax({
       url : "website_editor/update_home_customer_section.php",
@@ -64,7 +81,7 @@ function update()
       {
         console.log(res);
         $.ajax({
-          url : "website_editor/home_about1_section.php",
+          url : "website_editor/home_customer_section.php",
           method:"post",
           success:function(res)
           {
@@ -86,16 +103,17 @@ function resetForm(myFormId)
                myForm.elements[i].checked = false;
                myForm.elements[i].value = '';
                myForm.elements[i].selectedIndex = 0;
-               // CKEDITOR.instances.editor1.setData('');
                CKEDITOR.instances.editor2.setData('');
-               // CKEDITOR.instances.editor3.setData('');
            }
        }
    }
 
+$('#cimg1').change(function() {            
+  var imagePath = $("#cimg1").val();           
+  $(".cimg1").attr("src",URL.createObjectURL(event.target.files[0]));           
+});
+
 </script>
  <script>
-// CKEDITOR.replace( 'editor1' );
 CKEDITOR.replace( 'editor2' );
-// CKEDITOR.replace( 'editor3' );
 </script>

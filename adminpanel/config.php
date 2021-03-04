@@ -6,7 +6,7 @@
             // $database="leocamq9_sprookr_db";
             $host="localhost";
             $user="root";
-            $pass="de!1@2#al";
-            $database="doora_db";
+            $pass="";
+            $database="doora_db_staging";
             $db= mysqli_connect($host, $user, $pass, $database);
             ?>
