@@ -165,6 +165,19 @@ function opensubscription() {
     })
 }
 
+function openbenefits() {
+    $('li').removeClass('active');
+    $('#subscription').parents("li").addClass('active');
+    $.ajax({
+        url: "../../Controller/subscription_benefits/displaysubscription_controller.php",
+        method: "POST",
+        success: function(data) {
+            $('.content-wrapper').html(data);
+
+        }
+    })
+}
+
 function opensupport() {
     $('li').removeClass('active');
     $('#support').parents("li").addClass('active');
@@ -172,6 +185,21 @@ function opensupport() {
         url: "../../Controller/support/viewsupport_controller.php",
         method: "POST",
         success: function(data) {
+            gototop();
+            $('.content-wrapper').html(data);
+
+        }
+    })
+}
+
+function openwebsupport() {
+    $('li').removeClass('active');
+    $('#support').parents("li").addClass('active');
+    $.ajax({
+        url: "../../Controller/web_support/viewsupport_controller.php",
+        method: "POST",
+        success: function(data) {
+            gototop();
             $('.content-wrapper').html(data);
 
         }
@@ -514,6 +542,97 @@ function customer_footer() {
     });
 }
 
+function merchant_makestories_section() {
+    $.ajax({
+        url: "website_editor/merchant_makestories_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function merchant_image_section() {
+    $.ajax({
+        url: "website_editor/merchant_image_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function merchant_noapp_section() {
+    $.ajax({
+        url: "website_editor/merchant_noapp_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function merchant_technology_section() {
+    $.ajax({
+        url: "website_editor/merchant_technology_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function merchant_footer() {
+    $.ajax({
+        url: "website_editor/merchant_footer.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function pricing_pricedto_section() {
+    $.ajax({
+        url: "website_editor/pricing_pricedto_section.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
+function pricing_footer() {
+    $.ajax({
+        url: "website_editor/pricing_footer.php",
+        method: "post",
+        success: function(res) {
+            gototop();
+
+            $(".content-wrapper").html(res);
+        }
+
+    });
+}
+
 function home_header() {
     $.ajax({
         url: "website_editor/home_header_web_list.php",
@@ -605,181 +724,214 @@ $.ajax({
 <?php $base_name_page = basename($_SERVER['PHP_SELF']); ?>
 
 <body class="hold-transition skin-blue sidebar-mini">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); ">
+    
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); ">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <ul class="sidebar-menu" data-widget="tree">
-        <li style="padding-top: 10px; ">
-           <a onclick="opendashboard(); topFunction();" rel="tab" style="cursor: pointer;" id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span>
-            <span class="pull-right-container"></span></a>
-        </li>
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li style="padding-top: 10px; ">
+                    <a onclick="opendashboard(); topFunction();" rel="tab" style="cursor: pointer;" id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
          
-         <hr>
-            <li style="padding-top: 10px; ">
-              <a onclick="openbusiness(); topFunction();" rel="tab" style="cursor: pointer;" id="business"><i class="fa fa-user"></i> <span>Business</span></a>
-            </li>
-            <li style="padding-top: 10px; ">
-              <a onclick="opencustomer(); topFunction();" rel="tab" style="cursor: pointer;" id="customer"><i class="fa fa-users"></i> <span>Customer</span></a>
-              
-            </li>
+                <hr>
+                <li style="padding-top: 10px; ">
+                    <a onclick="openbusiness(); topFunction();" rel="tab" style="cursor: pointer;" id="business"><i class="fa fa-user"></i> <span>Business</span></a>
+                </li>
+
+                <li style="padding-top: 10px; ">
+                    <a onclick="opencustomer(); topFunction();" rel="tab" style="cursor: pointer;" id="customer"><i class="fa fa-users"></i> <span>Customer</span></a>
+                </li>
+
+                <hr>
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#">
+                        <i class="fa fa-money"></i> <span>Subscription</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="opensubscription(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Packages</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="openbenefits(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Benefits</a></li>
+                    </ul> 
+                </li>
+
+                <hr>
+                <!--  <li style="padding-top: 10px; ">
+                <a onclick="opensubcategory(); topFunction();" rel="tab" style="cursor: pointer;" id="sub_category"><i class="fas fa-sitemap"></i>&nbsp;&nbsp;<span>Sub category</span>
+                <span class="pull-right-container"></span></a>
+                </li> -->
+                
+                <li style="padding-top: 10px; ">
+        	        <a onclick="opencategory(); topFunction();" rel="tab" style="cursor: pointer;" id="category"><i class="fas fa-layer-group"></i>&nbsp;&nbsp;<span>Category</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="opentag(); topFunction();" rel="tab" style="cursor: pointer;" id="tag"><i class="fa fa-hashtag"></i><span>Tag</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="openoffer(); topFunction();" rel="tab" style="cursor: pointer;" id="offer_type"><i class="fa fa-percent"></i><span>Offer Type</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="openDeal(); topFunction();" rel="tab" style="cursor: pointer;" id="deal"><i class="fa fa-handshake-o"></i><span> Deal</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="openpayment(); topFunction();" rel="tab" style="cursor: pointer;" id="payment"><i class="fa fa-usd"></i></i><span>View Payment</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                </li>
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="opencontent(); topFunction();" rel="tab" style="cursor: pointer;" id="content_management"><i class="fa fa-info-circle"></i><span>Content Management</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="sendcode(); topFunction();" rel="tab" style="cursor: pointer;" id="sendcode"><i class="fa fa-envelope"></i><span>Send Verification Email</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="sendnotification(); topFunction();" rel="tab" style="cursor: pointer;" id="sendnoti"><i class="fa fa-envelope"></i><span>Send Notification</span>
+                        <span class="pull-right-container"></span></a>
+                </li> 
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="customer_image(); topFunction();" rel="tab" style="cursor: pointer;" id="cus_img"><i class="fa fa-file-image-o"></i><span>Customer Default Image</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px; ">
+                    <a onclick="business_image(); topFunction();" rel="tab" style="cursor: pointer;" id="buis_img"><i class="fa fa-file-image-o"></i><span>Business Default Image</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+            
+                <li style="padding-top: 10px; ">
+                    <a onclick="openreport(); topFunction();" rel="tab" style="cursor: pointer;" id="report"><i class="fa fa-bar-chart"></i><span>Report</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="doora_dollor_points(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_points"><i class="fa fa-support"></i><span>Doora dollor points</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="points_offer(); topFunction();" rel="tab" style="cursor: pointer;" id="points_offer"><i class="fa fa-support"></i><span>Points offer</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="doora_dollor_value(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_value"><i class="fa fa-support"></i><span>Doora Dollor Value</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+        
+                <li style="padding-top: 10px;">
+                    <a onclick="doora_dollor_terms(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_terms"><i class="fa fa-support"></i><span>Doora Dollor Terms</span>
+                        <span class="pull-right-container"></span></a>
+                </li>
+
+                <hr>
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#" class="btn1">
+                        <i class="fa fa-home"></i> <span>Home</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    </ul> 
+                </li>
+
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>Customer</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
          
-       <hr>
-      <!--  <li style="padding-top: 10px; ">
-          <a onclick="opensubcategory(); topFunction();" rel="tab" style="cursor: pointer;" id="sub_category"><i class="fas fa-sitemap"></i>&nbsp;&nbsp;<span>Sub category</span>
-            <span class="pull-right-container"></span></a>
-      </li> -->
-        <li style="padding-top: 10px; ">
-        	 <a onclick="opencategory(); topFunction();" rel="tab" style="cursor: pointer;" id="category"><i class="fas fa-layer-group"></i>&nbsp;&nbsp;<span>Category</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="opentag(); topFunction();" rel="tab" style="cursor: pointer;" id="tag"><i class="fa fa-hashtag"></i><span>Tag</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="openoffer(); topFunction();" rel="tab" style="cursor: pointer;" id="offer_type"><i class="fa fa-percent"></i><span>Offer Type</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="openDeal(); topFunction();" rel="tab" style="cursor: pointer;" id="deal"><i class="fa fa-handshake-o"></i><span> Deal</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="opensubscription(); topFunction();" rel="tab" style="cursor: pointer;" id="subscription"><i class="fa fa-money"></i><span>Subscription Packages</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="openpayment(); topFunction();" rel="tab" style="cursor: pointer;" id="payment"><i class="fa fa-usd"></i></i><span>View Payment</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="opencontent(); topFunction();" rel="tab" style="cursor: pointer;" id="content_management"><i class="fa fa-info-circle"></i><span>Content Management</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="opensupport(); topFunction();" rel="tab" style="cursor: pointer;" id="support"><i class="fa fa-support"></i><span>Customer Support</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="sendcode(); topFunction();" rel="tab" style="cursor: pointer;" id="sendcode"><i class="fa fa-envelope"></i><span>Send Verification Email</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="sendnotification(); topFunction();" rel="tab" style="cursor: pointer;" id="sendnoti"><i class="fa fa-envelope"></i><span>Send Notification</span>
-            <span class="pull-right-container"></span></a>
-        </li> 
-        <li style="padding-top: 10px; ">
-          <a onclick="customer_image(); topFunction();" rel="tab" style="cursor: pointer;" id="cus_img"><i class="fa fa-file-image-o"></i><span>Customer Default Image</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="business_image(); topFunction();" rel="tab" style="cursor: pointer;" id="buis_img"><i class="fa fa-file-image-o"></i><span>Business Default Image</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px; ">
-          <a onclick="openreport(); topFunction();" rel="tab" style="cursor: pointer;" id="report"><i class="fa fa-bar-chart"></i><span>Report</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="doora_dollor_points(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_points"><i class="fa fa-support"></i><span>Doora dollor points</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="points_offer(); topFunction();" rel="tab" style="cursor: pointer;" id="points_offer"><i class="fa fa-support"></i><span>Points offer</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="doora_dollor_value(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_value"><i class="fa fa-support"></i><span>Doora Dollor Value</span>
-            <span class="pull-right-container"></span></a>
-        </li>
-        <li style="padding-top: 10px;">
-          <a onclick="doora_dollor_terms(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_terms"><i class="fa fa-support"></i><span>Doora Dollor Terms</span>
-            <span class="pull-right-container"></span></a>
-        </li>
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
+                        <li><a href="javaScript:void(0);" onclick="customer_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    </ul> 
+                </li>
 
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>Merchant</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
 
- <li class="treeview" style="padding-top: 10px;">
-        <a href="#" class="btn1">
-          <i class="fa fa-home"></i> <span>Home</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_makestories_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Makestories-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_noapp_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Noapp-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_technology_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Technology-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    </ul> 
+                </li>
 
-        <ul class="treeview-menu">
-            <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
-        </ul> 
-      </li>
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#">
+                        <i class="fa fa-usd"></i> <span>Pricing</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="pricing_pricedto_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Pricedto-section</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="pricing_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    </ul> 
+                </li>
 
-      <li class="treeview" style="padding-top: 10px;">
-        <a href="#">
-          <i class="fa fa-user"></i> <span>Customer</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-         
-        <ul class="treeview-menu">
-            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
-            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
-            <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
-            <li><a href="javaScript:void(0);" onclick="customer_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
-        </ul> 
-      </li>
+                <hr>
+                <li class="treeview" style="padding-top: 10px;">
+                    <a href="#">
+                        <i class="fa fa-support"></i> <span>Support</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="opensupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Customer Support</a></li>
+                        <li><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Web Customer Support</a></li>
+                    </ul> 
+                </li>
 
-      <li class="treeview" style="padding-top: 10px;">
-        <a href="#">
-          <i class="fa fa-user"></i> <span>Merchant</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
-         <ul class="treeview-menu">
-          <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_intro();"><i class="fa fa-circle" style="font-size: 12px"></i>Introduction</a></li>
-          <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_web();"><i class="fa fa-circle" style="font-size: 12px"></i>About</a></li>
-           <li><a href="javaScript:void(0);" class="btn1" onclick="mer_gst_sec();"><i class="fa fa-circle" style="font-size: 12px"></i>GST Section</a></li>
-          <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_do_web();"><i class="fa fa-circle" style="font-size: 12px"></i>What can doora do</a></li>
-        </ul> 
-      </li>
+    <div class="spinner" id="loader" style="display: none;">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
 
-       <li class="treeview" style="padding-top: 10px;">
-        <a href="#">
-          <i class="fa fa-user"></i> <span>Doora Dollars</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-         <ul class="treeview-menu">
-          <li><a href="javaScript:void(0);" class="btn1" onclick="dd_about();"><i class="fa fa-circle" style="font-size: 12px"></i>About</a></li>
-        </ul> 
-      </li>
-
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-
-
-
-<div class="spinner" id="loader" style="display: none;">
-  <div class="bounce1"></div>
-  <div class="bounce2"></div>
-  <div class="bounce3"></div>
-</div>
-
-
-  <div class="content-wrapper" id="content" style="min-height: 580px;">
+    <div class="content-wrapper" id="content" style="min-height: 580px;">
 
 
 
