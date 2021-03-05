@@ -752,9 +752,9 @@ $.ajax({
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="opensubscription(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Packages</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="openbenefits(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Benefits</a></li>
+                    <ul class="treeview-menu" style="padding-top: 10px;">
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="opensubscription(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Packages</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="openbenefits(); topFunction();"><i class="fa fa-circle" style="font-size: 12px"></i>Benefits</a></li>
                     </ul> 
                 </li>
 
@@ -850,13 +850,13 @@ $.ajax({
                         </span>
                     </a>
 
-                    <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    <ul class="treeview-menu" style="padding-top: 10px;">
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_getmore_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Getmore-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_notification_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Notification-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_stories_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Stories-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_customer_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Customer-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_merchant_section();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="home_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
                     </ul> 
                 </li>
 
@@ -868,11 +868,11 @@ $.ajax({
                         </span>
                     </a>
          
-                    <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
-                        <li><a href="javaScript:void(0);" onclick="customer_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    <ul class="treeview-menu" style="padding-top: 10px;">
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="customer_searchless_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Searchless-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="customer_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="customer_themost_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Themost-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" onclick="customer_footer();" class="btn1"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
                     </ul> 
                 </li>
 
@@ -884,12 +884,12 @@ $.ajax({
                         </span>
                     </a>
 
-                    <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_makestories_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Makestories-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_noapp_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Noapp-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_technology_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Technology-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="merchant_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    <ul class="treeview-menu" style="padding-top: 10px;">
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="merchant_makestories_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Makestories-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="merchant_image_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Image-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="merchant_noapp_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Noapp-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="merchant_technology_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Technology-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="merchant_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
                     </ul> 
                 </li>
 
@@ -900,9 +900,9 @@ $.ajax({
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="pricing_pricedto_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Pricedto-section</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="pricing_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
+                    <ul class="treeview-menu" style="padding-top: 10px;">
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="pricing_pricedto_section();"><i class="fa fa-circle" style="font-size: 12px"></i>Pricedto-section</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="pricing_footer();"><i class="fa fa-circle" style="font-size: 12px"></i>Footer</a></li>
                     </ul> 
                 </li>
 
@@ -914,7 +914,7 @@ $.ajax({
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                     </a>
-                    <ul class="treeview-menu">
+                    <ul class="treeview-menu" style="padding-top: 10px;">
                         <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="opensupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Customer Support</a></li>
                         <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Web Customer Support</a></li>
                     </ul> 
