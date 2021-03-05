@@ -907,7 +907,7 @@ $.ajax({
                 </li>
 
                 <hr>
-                <li class="treeview" style="padding-top: 10px;">
+                <li class="treeview" style="padding-top: 10px;padding-bottom: 20px;">
                     <a href="#">
                         <i class="fa fa-support"></i> <span>Support</span>
                             <span class="pull-right-container">
@@ -915,8 +915,8 @@ $.ajax({
                             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="opensupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Customer Support</a></li>
-                        <li><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Web Customer Support</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="opensupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Customer Support</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Web Customer Support</a></li>
                     </ul> 
                 </li>
 
