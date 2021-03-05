@@ -8,7 +8,7 @@ error_reporting(E_ALL);
             {
          
             $.ajax({
-                 url:"../../Controller/subscription_package/displaysubscription_controller.php",
+                 url:"../../Controller/subscription_benefits/displaysubscription_controller.php",
                  method:"POST",
                  success:function(data)
                  {
@@ -21,7 +21,7 @@ error_reporting(E_ALL);
       {
             hash_id = id;
             $.ajax({
-                  url:"../../Controller/subscription_package/displaysubscription_controller.php",
+                  url:"../../Controller/subscription_benefits/displaysubscription_controller.php",
                  method:"POST",
                  success:function(data)
                  {
@@ -48,7 +48,7 @@ error_reporting(E_ALL);
 <!--Main Content -->
     <section class="content">
       <div class="row">
-       <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Subscription</h2></div>
+       <div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Add/Edit Benefit</h2></div>
         <div class="col-md-2">
                 <br/>   
                <!-- <a href="http://localhost/sprookr/adminpanel/Controller/category/displaycategorycontroller.php" class="btn btn-default"><b><- Back</b></a>-->
@@ -66,49 +66,57 @@ error_reporting(E_ALL);
               <br>
               <!-- box-header -->
               <div class="box-body">
-                <form class="form-horizontal" name="addsubscription" id="addsubscription_form" role="form" action="" method="post">
-                 
-                   <?php foreach ($edit_subscription as $key => $data) {
-                    ?>
-                     <input type="hidden" name="subscription_plan_id" value="<?php echo $data['subscription_plan_id']; ?>" id="subscription_plan_id">
-                           <div class="form-group notranslate">
-                                <label for="price" class="col-sm-3 control-label">Type<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="stype" type="text" id="stype" class="form-control" value="<?php echo $data['subscription_name']; ?>"/>
-                                    <span id="stype_error" class="show_required"></span><br>
-                                </div>
-                            </div>  
-                            <div class="form-group notranslate">
-                                <label for="price" class="col-sm-3 control-label">Price<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sprice" type="text" id="sprice" class="form-control" value="<?php echo $data['price']; ?>"/>
-                                    <span id="price_error" class="show_required"></span><br>
-                                </div>
-                            </div>  
+                <form class="form-horizontal" name="addsubscription" id="addsubscription_form" role="form" action="" method="post" enctype="multipart/form-data">
+                <?php
+                    $i=0;
+                    foreach ($edit_subscription as $key => $data1) 
+                    {                    
+                  ?>
+                <input type="hidden" name="benefit_id" value="<?php echo $data1['benefit_id']; ?>" id="benefit_id">
+            <div class="form-group notranslate">
+              <label for="user" style="margin-top: 5px;" class="col-sm-3 control-label"></label>
+              <div class="col-sm-8" style="padding-top: 6px">
+                <span id="error" class="show_required"></span><br>  
+              </div>
+            </div>
+          
+            <div class="form-group notranslate">
+              <label for="subscription" style="margin-top: 5px;" class="col-sm-3 control-label">Subscription Plan</label>
+              <div class="col-sm-8" style="padding-top: 6px">
+                <select id="subscription" name="subscription" class="form-control" aria-invalid="false">
+                  <?php
+                    $i=0;
+                    foreach ($subscription as $key => $data) 
+                    {                    
+                  ?>
+                    <option value=<?php echo $data['subscription_plan_id'];?> <?php if($data['subscription_plan_id'] == $data1['subscription_plan_id'] ) { ?> selected  <?php } ?>><?php echo $data['subscription_name'];?></option>
+                  <?php  } ?>
+                </select>
+              </div> 
+            </div>  
 
-                            <div class="form-group notranslate">
-                                <label for="price" class="col-sm-3 control-label">Description<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="sdesc" type="text" id="sdesc" class="form-control" value="<?php echo $data['description']; ?>"/>
-                                    <span id="sdesc_error" class="show_required"></span><br>
-                                </div>
-                            </div>  
+            <div class="form-group notranslate">
+              <label for="title" class="col-sm-3 control-label">Title<span class="show_required">*</span></label>
+              <div class="col-sm-8" style="padding-top: 6px">
+                <input name="title" type="text" id="title" class="form-control" value="<?php echo $data1['title'];?>"/>
+              </div>
+            </div>   
 
-                            <!-- <div class="form-group notranslate">
-                                <label for="free_days" class="col-sm-3 control-label">Free days<span class="show_required">*</span></label>
-                                <div class="col-sm-8" style="padding-top: 6px">
-                                    <input name="free_days" type="text" id="free_days" class="form-control" value="<?php echo $data['free_days']; ?>"/>
-                                    <span id="free_days_error" class="show_required"></span><br>
-                                </div>
-                            </div>   -->               
-                           <?php }?>  
-                             </div>                               
-                             <div class="box-footer  notranslate">
-                                    <input type="submit" name="subscription_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="tag_submit" onclick="return validateForm();"/>
-                                    <button class="btn btn-default pull-right" onclick="backsubscription()">Cancel</button>
-                            </div>  
-                           </div>
-                         </form>
+            <div class="form-group notranslate">
+              <label for="pet_friedly" class="col-sm-3 control-label" >Is Main?</label>
+              <div class="col-sm-8" style="padding-top: 6px">
+                <input name="is_main" type="checkbox" id="is_main" <?php if($data1['is_main'] == 1) echo 'checked="checked"';?> /><br>
+              </div>
+            </div>
+          </div> 
+
+          <div class="box-footer  notranslate">
+            <input type="submit" name="tag_submit" style="margin-left: 5px;" value="Submit" class="btn btn-primary pull-right" id="tag_submit" onclick="return validateForm();"/>
+            <button class="btn btn-default pull-right" onclick="backsubscription()">Cancel</button>
+          </div>  
+        </div>
+        <?php  } ?>
+      </form>
               </div>
             </div>              
     </section>
@@ -116,43 +124,32 @@ error_reporting(E_ALL);
 
   <?php //include "../../View/header/footer.php";?>
  <script type="text/javascript">
-                  
-                      function validateForm() {
-                                    
-                                     var stype = document.getElementById("stype").value;
-                                     var sprice = document.getElementById("sprice").value;
-                                     var sdesc = document.getElementById("sdesc").value;
-                                    // echo "sfdfdf "+stype;
-                                    // var free_days = document.getElementById("free_days").value;
-                                    var subscription_plan_id = document.getElementById("subscription_plan_id").value;
+
+function validateForm() {
+                                     var title = document.getElementById("title").value;
+                                     var benefit_id = document.getElementById("benefit_id").value;
+                            
                                     var count=0;
-                                    if (stype.trim() == "") {
-                                        document.getElementById('stype_error').innerHTML="Please Enter Type";
+
+                                    var is_main = 0;
+
+                                     if ($('#is_main').is(":checked"))
+
+                                    {
+
+                                      is_main = 1;
+
+                                    }
+
+                                    var sid = $('#subscription option:selected').attr('value');
+                                    if (title.trim() == "") {
+                                        document.getElementById('error').innerHTML="Please Enter Title";
                                         count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById('stype_error').innerHTML="";
-                                      }
-                                     
-                                      if (sprice.trim() == "") {
-                                        document.getElementById('price_error').innerHTML="Please Enter price";
-                                        count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById('price_error').innerHTML="";
-                                      }
-                                      
-                                      if (sdesc.trim() == "") {
-                                        document.getElementById('sdesc_error').innerHTML="Please Enter short description";
-                                        count++;
-                                      }
-                                      else
-                                      {
-                                        document.getElementById('sdesc_error').innerHTML="";
-                                      }
-                                     
+                                    }
+                                    else
+                                    {
+                                      document.getElementById('error').innerHTML="";
+                                    }
                                     
                                   if(count>0)
                                    {
@@ -160,22 +157,21 @@ error_reporting(E_ALL);
                                    }
                                    else
                                    {
-                                      var count_id = "edit";
+
+                                        var count_id = "edit";
                                       $.ajax({
-                                           url:"../../Controller/subscription_package/subscription_controller.php",
+                                           url:"../../Controller/subscription_benefits/subscription_controller.php",
                                            method:"POST",
-                                           data : {count_id:count_id,subscription_plan_id:subscription_plan_id,price:sprice,type:stype, desc:sdesc},
+                                           data : {count_id:count_id,benefit_id:benefit_id,title:title,is_main:is_main,sid:sid},
                                            success:function(data)
                                            {
-                                            
-                                            if(data == "#edit")
+                                            if(data == "1")
                                             {
                                                 listsubscription(data);
                                               }
-                                              else
-                                              {
-                                                existssubscription(subscription_plan_id,data);
-                                              }
+                                              else{
+                                              document.getElementById('error').innerHTML="Benefit not updated";
+                                            }
                                            }
                                         })
                                    }

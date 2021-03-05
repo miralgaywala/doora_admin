@@ -1,72 +1,37 @@
 <?php 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-include "../../Model/subscription_benefits/subscription_model.php";
+include "../../Model/subscription_benefits/benefits_model.php";
 if(isset($_POST['count_id']))
 {
 	if($_POST['count_id'] == 'delete')
 	{
-		$subscription_id=$_POST['id'];
+		$benefit_id=$_POST['id'];
 		$subscription_controller=new subscription_controller();
-		$result=$subscription_controller->delete_subscription($subscription_id);
+		$result=$subscription_controller->delete_subscription($benefit_id);
 		echo "#delete";
 
 	}
 	if($_POST['count_id'] == 'add')
 	{
-		// $price =$_POST['price'];
-        // $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
-        // // $free_days =$_POST['free_days'];
-    	// $subscription_controller=new subscription_controller();
-	 	// $result=$subscription_controller->add_subscription($price,$per_deal_redeem_price);
-	 	// if($result == 1)
-	 	// {
-	 	// 	echo "#add";
-	 	// }
-	 	// else
-	 	// {
-	 	// 	echo "#exists";
-	 	// }
-
-
-		$price =$_POST['price'];
-		$type =$_POST['type'];
-		$desc =$_POST['desc'];
-        // $per_deal_redeem_price =$_POST['per_deal_redeem_price'];
-        // $free_days =$_POST['free_days'];
+		$title =$_POST['title'];
+		$is_main =$_POST['is_main'];
+		$s_id =$_POST['sid'];
+		
     	$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->add_subscription($price,$type,$desc);
-	 	if($result == 1)
-	 	{
-	 		echo "#add";
-	 	}
-	 	else
-	 	{
-	 		echo "#exists";
-	 	}
+	 	$result=$subscription_controller->add_subscription($title,$is_main,$s_id);
+		echo $result;
 	}
 	if($_POST['count_id'] == 'edit')
 	{
-		$subscription_plan_id= $_POST['subscription_plan_id'];
-		$price =$_POST['price'];
-		$type =$_POST['type'];
-		$desc =$_POST['desc'];
-
-		// echo "price: "+$price;
-		// echo "type: "+$type;
-		// echo "desc: "+$desc;
-        // $free_days =$_POST['free_days'];
-    	
+		$benefit_id= $_POST['benefit_id'];
+		$title =$_POST['title'];
+		$is_main =$_POST['is_main'];
+		$s_id =$_POST['sid'];
+	
 		$subscription_controller=new subscription_controller();
-	 	$result=$subscription_controller->edit_subscription($subscription_plan_id,$price,$type,$desc);
-	 	if($result == 1)
-	 	{
-	 		echo "#edit";
-	 	}
-	 	else
-	 	{
-	 		echo "#exists";
-	 	}
+	 	$result=$subscription_controller->edit_subscription($benefit_id,$title,$is_main,$s_id);
+	 	echo $result;
 	}
 }
 class subscription_controller
@@ -81,27 +46,32 @@ class subscription_controller
 		include "../../View/subscription_benefits/displaysubscription.php";
 		return $display_subscription;
 	}
-	public function add_subscription($price,$type,$desc)
+	public function addlist_subscription()
 	{
-		
-            $add_subscription=$this->subscription_model->addsubscription_data($price,$type,$desc);
+		$subscription=$this->subscription_model->get_subscription();
+		include "../../View/subscription_benefits/addsubscription.php";
+	}
+	public function add_subscription($title,$is_main,$s_id)
+	{
+            $add_subscription=$this->subscription_model->addsubscription_benefit($title,$is_main,$s_id);
             return $add_subscription;
 	}
-	public function editlist_subscription($subscription_id)
+	public function editlist_subscription($benefit_id)
 	{
-		$edit_subscription=$this->subscription_model->getedits_subscription($subscription_id);
+		$subscription=$this->subscription_model->get_subscription();
+		$edit_subscription=$this->subscription_model->getedits_subscription($benefit_id);
 		include "../../View/subscription_benefits/editsubscription.php";
-		
+
 	}
-	public function edit_subscription($subscription_plan_id,$price,$type,$desc)
+	public function edit_subscription($benefit_id,$title,$is_main,$s_id)
 	{
 		
-            $add_subscription=$this->subscription_model->editsubscription_data($subscription_plan_id,$price,$type,$desc);
+            $add_subscription=$this->subscription_model->editsubscription_data($benefit_id,$title,$is_main,$s_id);
             return $add_subscription;
 	}
-	public function delete_subscription($subscription_id)
+	public function delete_subscription($benefit_id)
 	{
-		$this->subscription_model->delete_subscription($subscription_id);
+		$this->subscription_model->delete_benefit($benefit_id);
 		return true;
 	}
 	public function view_subscription($subscription_id)
