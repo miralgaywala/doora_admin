@@ -99,5 +99,27 @@ class subscription_model
       }
        return $subscription;
   }
+
+  public function getview_benefits($subscription_id)
+  {
+        $con=$this->db->connection();
+       $getsubscription=$con->query("select * from subscription_benefits where is_deleted=0 and subscription_plan_id=".$subscription_id);
+       $benefits = array();
+      while ($row = $getsubscription->fetch_assoc()) {
+        $benefits[] = $row;
+      }
+       return $benefits;
+  }
+
+  public function getview_benefit($benefit_id)
+  {
+        $con=$this->db->connection();
+       $getbenefit=$con->query("select sb.*, sp.subscription_name from subscription_benefits sb left join subscription_plans sp on sb.subscription_plan_id = sp.subscription_plan_id where sb.is_deleted=0 and benefit_id=".$benefit_id);
+       $benefit = array();
+      while ($row = $getbenefit->fetch_assoc()) {
+        $benefit[] = $row;
+      }
+       return $benefit;
+  }
   }
 ?>

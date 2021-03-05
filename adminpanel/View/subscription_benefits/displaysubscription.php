@@ -61,7 +61,7 @@
 <section class="content">
    
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Benefits List</h2></div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Benefit List</h2></div>
     		<div class="col-md-2">
                 <br/>   
     		<button type="button" style="float: right;" class="btn btn-primary" onclick="addsubscription()">+ Add Subscription benefit</button>

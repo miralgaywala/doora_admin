@@ -110,5 +110,17 @@ class subscription_controller
 		include "../../View/subscription_package/viewsubscription.php";
 		return $view_subscription;
 	}
+	public function view_benefits($subscription_id)
+	{
+		$view_benefits=$this->subscription_model->getview_benefits($subscription_id);
+		include "../../View/subscription_package/viewbenefits.php";
+		return $view_benefits;
+	}
+	public function view_benefit($benefit_id)
+	{
+		$view_benefit=$this->subscription_model->getview_benefit($benefit_id);
+		include "../../View/subscription_package/viewbenefit.php";
+		return $view_benefit;
+	}
 }
 ?>

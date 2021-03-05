@@ -11,13 +11,11 @@
   function addsubscription()
       {
             $.ajax({
-                 url:"../../View/subscription_package/addsubscription.php",
+                 url:"../../Controller/subscription_benefits/addsubscription_controller.php",
                  method:"POST",
                  success:function(data)
                  {
                       $('.content-wrapper').html(data);
-                       // pageurl = "../../View/tag/addtag.php";
-                       // window.history.pushState({path:pageurl},'',pageurl);  
                  }
               })
       }
@@ -33,11 +31,10 @@
                  }
               })
       }
-
-      function viewbenefits(id)
+      function viewbenefit(id)
       {
             $.ajax({
-                 url:"../../Controller/subscription_package/viewbenefitsofpackage_controller.php?id="+id,
+                 url:"../../Controller/subscription_package/viewbenefit_controller.php?id="+id,
                  method:"POST",
                  success:function(data)
                  {
@@ -46,24 +43,24 @@
                  }
               })
       }
-
       function editsubscription(id)
       {
+        console.log("Id:"+id);
             $.ajax({
-                 url:"../../Controller/subscription_package/editsubscription_controller.php?id="+id,
+                 url:"../../Controller/subscription_benefits/editsubscription_controller.php?id="+id,
                  method:"POST",
                  success:function(data)
                  {
                       $('.content-wrapper').html(data);
-                      
+                      console.log(data);
                  }
               })
       }
-      function listsubscription(data)
+      function listsubscription(id)
       {
             hash_id = data;
             $.ajax({
-                 url:"../../Controller/subscription_package/displaysubscription_controller.php",
+                 url:"../../Controller/subscription_benefits/viewbenefits_controller.php?id="+id,
                  method:"POST",
                  success:function(data)
                  {
@@ -76,23 +73,19 @@
 <section class="content">
    
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Subscription List</h2></div>
-    		<div class="col-md-2">
-                <br/>   
-    		<button type="button" style="float: right;" class="btn btn-primary" onclick="addsubscription()">+ Add Subscription plan</button>
-    		</div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Benefit List</h2></div>
     	</div> 
        <div class="alert alert-info alert-dismissible" id="delete" style="display: none;">
                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    Subscription Package has been deleted successfully
+                    Subscription Benefit has been deleted successfully
                  </div>
                 <div class="alert alert-info alert-dismissible" id="add" style="display: none">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Subscription Package has been added successfully
+                Subscription Benefit has been added successfully
                 </div>
                 <div class="alert alert-info alert-dismissible" id="edit" style="display: none">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Subscription Package has been edited successfully
+                Subscription Benefit has been edited successfully
                 </div>
         <div class="row">
         	<div class="col-xs-12">
@@ -103,10 +96,9 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="15%">Plan Id</th>
-                        <th style="text-align:center;">Subscription Type</th>
-                        <th style="text-align:center;">Price per month</th>
-                        <th style="text-align:center;">Description</th>
+			                  <th style="text-align:center;" width="15%">Benefit Id</th>
+                        <th style="text-align:center;">Title</th>
+                        <th style="text-align:center;">Is Main?</th>
 			                  
                         
                        
@@ -115,14 +107,13 @@
 							 </thead>
                 <?php
                 $i=0;
-                foreach ($display_subscription as $key => $data) 
+                foreach ($view_benefits as $key => $data) 
                 {                    
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data['subscription_plan_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['subscription_name']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['price']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['description']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['benefit_id']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['title']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['is_main']; ?></td>
                                 
                                 
                                 
@@ -130,18 +121,8 @@
                                 <td style="text-align:center;">
                               
                                     <div >
-                                        <a onclick="editsubscription(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/editsubscription_controller.php?id=".$data['subscription_plan_id']; ?> title="Edit" style="cursor: pointer;" >
-                                          <i class="fa fa-pencil-square-o fa-fw"></i>
-                                        </a>
-                                        <a onclick="JSconfirm(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/deletesubscription_controller.php?id=".$data['subscription_plan_id'];?>  title="Delete" style="cursor: pointer;">
-                                        <i class="fa fa-trash-o fa-fw"></i>
-                                        </a>
-                                        <a onclick="viewsubscription(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/viewsubscription_controller.php?id=".$data['subscription_plan_id'];?> title="View all detail" style="cursor: pointer;">
+                                        <a onclick="viewbenefit(<?php echo $data['benefit_id']; ?>)" <?php //echo "href=../../Controller/subscription_package/editsubscription_controller.php?id=".$data['subscription_plan_id']; ?> title="Edit" style="cursor: pointer;" >
                                           <i class="fa fa-eye"></i>
-                                        </a>
-                                        </br>
-                                        <a onclick="viewbenefits(<?php echo $data['subscription_plan_id']; ?>)" <?php //echo "href=../../Controller/business/viewbusinessbranch_controller.php?id=".$data['user_id'];?> title="View all detail" style="margin-right: 3px;cursor: pointer;">
-                                        	View Benefits
                                         </a>
                                     </div>
                                 </td>
@@ -162,18 +143,19 @@ function JSconfirm(id){
   var bla = id;
   $.confirm({
     title:'Delete',
-    content: 'Are you sure you want to delete this subscription package?',
+    content: 'Are you sure you want to delete this subscription benefit?',
     buttons: {
       Yes: {
             btnClass: 'btn-red any-other-class', 
           action: function(){
              var count_id = "delete";
             $.ajax({
-                   url:"../../Controller/subscription_package/subscription_controller.php",
+                   url:"../../Controller/subscription_benefits/subscription_controller.php",
                  method:"POST",
                  data : {count_id:count_id,id:id},
                  success:function(data)
                  {
+                    console.log("before list");
                       listsubscription(data);
                  }
               })
