@@ -729,7 +729,7 @@ $.ajax({
     <aside class="main-sidebar" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); ">
     <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
+            <ul class="sidebar-menu" data-widget="tree" style="max-height: calc(100vh - 5.2rem); overflow-y: auto;">
                 <li style="padding-top: 10px; ">
                     <a onclick="opendashboard(); topFunction();" rel="tab" style="cursor: pointer;" id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span>
                         <span class="pull-right-container"></span></a>
