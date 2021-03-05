@@ -821,25 +821,25 @@ $.ajax({
                         <span class="pull-right-container"></span></a>
                 </li>
         
-                <li style="padding-top: 10px;">
+                <!-- <li style="padding-top: 10px;">
                     <a onclick="doora_dollor_points(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_points"><i class="fa fa-support"></i><span>Doora dollor points</span>
                         <span class="pull-right-container"></span></a>
-                </li>
+                </li> -->
         
-                <li style="padding-top: 10px;">
+               <!--  <li style="padding-top: 10px;">
                     <a onclick="points_offer(); topFunction();" rel="tab" style="cursor: pointer;" id="points_offer"><i class="fa fa-support"></i><span>Points offer</span>
                         <span class="pull-right-container"></span></a>
-                </li>
+                </li> -->
         
-                <li style="padding-top: 10px;">
+                <!-- <li style="padding-top: 10px;">
                     <a onclick="doora_dollor_value(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_value"><i class="fa fa-support"></i><span>Doora Dollor Value</span>
                         <span class="pull-right-container"></span></a>
-                </li>
+                </li> -->
         
-                <li style="padding-top: 10px;">
+               <!--  <li style="padding-top: 10px;">
                     <a onclick="doora_dollor_terms(); topFunction();" rel="tab" style="cursor: pointer;" id="doora_dollor_terms"><i class="fa fa-support"></i><span>Doora Dollor Terms</span>
                         <span class="pull-right-container"></span></a>
-                </li>
+                </li> -->
 
                 <hr>
                 <li class="treeview" style="padding-top: 10px;">
