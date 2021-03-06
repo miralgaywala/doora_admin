@@ -916,7 +916,7 @@ $.ajax({
                     </a>
                     <ul class="treeview-menu" style="padding-top: 10px;">
                         <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="opensupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Customer Support</a></li>
-                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Web Customer Support</a></li>
+                        <li style="padding-top: 10px;"><a href="javaScript:void(0);" class="btn1" onclick="openwebsupport();"><i class="fa fa-circle" style="font-size: 12px"></i>Merchant Support</a></li>
                     </ul> 
                 </li>
 
