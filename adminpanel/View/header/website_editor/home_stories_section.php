@@ -37,7 +37,7 @@ $row=mysqli_fetch_array($str1);
              else
              {
               ?>
-                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['stories_section_image']; ?>?<?=rand(1,32000)?>" width="100px" height="170px"  class="cimg1">
+                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['stories_section_image']; ?>?<?=rand(1,32000)?>" width="100%" class="cimg1">
               <?php
              }
             ?>

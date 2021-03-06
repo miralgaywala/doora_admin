@@ -8,7 +8,7 @@ class support_model
     public function getdisplay_support()
     {
        $con=$this->db->connection();
-       $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s left join users as user on s.user_id = user.user_id where NOT s.is_deleted=1 order by s.created_at desc");
+       $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s join users as user on s.user_id = user.user_id and user.is_business=0 where s.is_deleted=0 order by s.created_at desc");
       $support = array();
       while ($row = $getsupport->fetch_assoc()) {
         $support[] = $row;
@@ -18,7 +18,7 @@ class support_model
     public function getview_support($support_id)
     {
       $con=$this->db->connection();
-       $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s left join users as user on s.user_id = user.user_id where s.support_id=".$support_id);
+       $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s join users as user on s.user_id = user.user_id and user.is_business=0 where s.support_id=".$support_id);
        $support = array();
       while ($row = $getsupport->fetch_assoc()) {
         $support[] = $row;
@@ -55,15 +55,15 @@ class support_model
       $con=$this->db->connection();
       if($support == "open")
       {
-          $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s left join users as user on s.user_id = user.user_id where s.is_open=1 AND NOT s.is_deleted=1 order by s.created_at desc");
+          $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s join users as user on s.user_id = user.user_id and user.is_business=0 where s.is_open=1 AND NOT s.is_deleted=1 order by s.created_at desc");
       }
       else if($support == "close")
       {
-        $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s left join users as user on s.user_id = user.user_id where s.is_open=0 AND NOT s.is_deleted=1 order by s.created_at desc");
+        $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s  join users as user on s.user_id = user.user_id and user.is_business=0 where s.is_open=0 AND NOT s.is_deleted=1 order by s.created_at desc");
       }
       else
       {
-         $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s left join users as user on s.user_id = user.user_id where NOT s.is_deleted=1 order by s.created_at desc");
+         $getsupport=$con->query("select s.*,user.name,user.business_name,user.is_business from support as s  join users as user on s.user_id = user.user_id and user.is_business=0 where NOT s.is_deleted=1 order by s.created_at desc");
       }
       $support = array();
       while ($row = $getsupport->fetch_assoc()) {

@@ -32,7 +32,7 @@ $row=mysqli_fetch_array($str1);
              else
              {
               ?>
-                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image1']; ?>?<?=rand(1,32000)?>" width="100px" height="170px"  class="cimg1">
+                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image1']; ?>?<?=rand(1,32000)?>" width="60%"  class="cimg1">
               <?php
              }
             ?>
@@ -56,7 +56,7 @@ $row=mysqli_fetch_array($str1);
              else
              {
               ?>
-                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image2']; ?>?<?=rand(1,32000)?>" width="100px" height="170px"  class="cimg2">
+                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image2']; ?>?<?=rand(1,32000)?>" width="60%" class="cimg2">
               <?php
              }
             ?>
@@ -80,7 +80,7 @@ $row=mysqli_fetch_array($str1);
              else
              {
               ?>
-                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image3']; ?>?<?=rand(1,32000)?>" width="100px" height="170px"  class="cimg3">
+                <img src="<?php echo IMAGE_SRC_PATH_NEW.$row['image_section_image3']; ?>?<?=rand(1,32000)?>" width="60%" class="cimg3">
               <?php
              }
             ?>

@@ -63,7 +63,7 @@
 <section class="content">
    
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Merchant Support List</h2></div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Merchant Support</h2></div>
     		<div class="col-md-2">
                 <br/>   
     		</div>
@@ -104,8 +104,9 @@
 			                <thead>
 			                <tr>
 			                  <th style="text-align:center;" width="5%">#</th>
-			                  <th style="text-align:center;" width="10%">Support Id</th>
+			                  <th style="text-align:center;" width="10%">Business Name</th>
                         <th style="text-align:center;" width="10%">First Name</th>
+                        <th style="text-align:center;" width="10%">Last Name</th>
 			                  <th style="text-align:center;">Message</th>
                          <th style="text-align:center;" width="10%">Status</th>
 			                  <th style="text-align:center;" width="10%">Action</th>
@@ -152,8 +153,10 @@ $html = nl2br($html);
 $name = $data['fname'];
                   ?> <tr>
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
-                                <td style="text-align:center;"><?php echo $data['support_id']; ?></td>
-                                <td style="text-align:center;"><?php echo $name; ?></td>
+                                <!-- <td style="text-align:center;"><?php //echo $data['support_id']; ?></td> -->
+                                <td style="text-align:center;"><?php echo $data['business_name']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['fname']; ?></td>
+                                <td style="text-align:center;"><?php echo $data['lname']; ?></td>
                                 <td style="text-align:center;"><?php echo $html; ?></td>
                                 <td style="text-align:center;"><?php $value=$data['is_open']; if($value == 1 ){
                                         echo "Open";

@@ -74,7 +74,7 @@ else
 <section class="content">
    
     	<div class="row">
-    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Web Customer Support List</h2></div>
+    		<div class="col-md-10" style="float: left;margin-bottom: 10px;"> <h2>Merchant Support</h2></div>
     		<div class="col-md-2">
                 <br/>   
     		</div>
