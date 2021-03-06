@@ -121,7 +121,16 @@
                                 <td style="text-align:center;"><?php echo $i=$i+1;?></td>
                                 <td style="text-align:center;"><?php echo $data['subscription_plan_id']; ?></td>
                                 <td style="text-align:center;"><?php echo $data['subscription_name']; ?></td>
-                                <td style="text-align:center;"><?php echo $data['price']; ?></td>
+                                <td style="text-align:center;"><?php 
+                                if ($data['price']==0)
+                                {
+                                   echo "N/A";
+                                }
+                                else
+                                {
+                                   echo $data['price'];
+                                }
+                                 ?></td>
                                 <td style="text-align:center;"><?php echo $data['description']; ?></td>
                                 
                                 
